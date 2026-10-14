@@ -1,0 +1,278 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Limit Fungsi | Kalkulus</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+    MathJax = {
+        tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']]
+        }
+    };
+    </script>
+    <script
+    id="MathJax-script"
+    async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+    </script>
+</head>
+<body>
+    <header class="navbar">
+        <a href="index.html" class="logo">Kalkulus</a>
+        <nav>
+            <a href="index.html">Beranda</a>
+            <a href="materi.html">Materi</a>
+            <a href="game.html">Game Soal</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <a href="materi.html" class="back-link">
+            Kembali ke daftar materi
+        </a>
+
+        <article class="article">
+            <p class="eyebrow">MATERI KALKULUS</p>
+            <h1>Limit Fungsi</h1>
+
+            <p class="intro">
+                Pada halaman ini, kamu dapat mempelajari konsep limit
+                fungsi, sifat-sifat limit, dan metode perhitungan limit.
+            </p>
+
+            <section>
+                <h2>1. Pengertian Limit</h2>
+                <p>
+                    Limit menggambarkan nilai yang didekati oleh suatu
+                    fungsi ketika variabel bebasnya mendekati nilai tertentu.
+                </p>
+
+                <div class="formula">
+                    \[
+                        \lim_{x \to a} f(x) = L
+                    \]
+                </div>
+
+                <p>
+                    Notasi tersebut menyatakan bahwa nilai \(f(x)\) mendekati
+                    \(L\) ketika \(x\) mendekati \(a\).
+                </p>
+            </section>
+
+            <section>
+                <h2>2. Limit Kiri dan Limit Kanan</h2>
+
+                <p>
+                    Limit kiri adalah limit ketika variabel mendekati
+                    suatu titik dari nilai yang lebih kecil.
+                </p>
+
+                <div class="formula">
+                    \[
+                        \lim_{x\to a^-} f(x)
+                    \]
+                </div>
+
+                <p>
+                    Limit kanan adalah limit ketika variabel mendekati
+                    suatu titik dari nilai yang lebih besar.
+                </p>
+
+                <div class="formula">
+                    \[
+                        \lim_{x\to a^+} f(x)
+                    \]
+                </div>
+
+                <p>
+                    Limit dua sisi ada jika limit kiri dan limit kanan
+                    ada serta bernilai sama.
+                </p>
+            </section>
+
+            <section>
+                <h2>3. Sifat-Sifat Limit</h2>
+
+                <p>
+                    Misalkan
+                    \[
+                        \lim_{x \to a} f(x) = L
+                        \quad \text{dan} \quad
+                        \lim_{x \to a} g(x) = M.
+                    \]
+                </p>
+
+                <ul>
+                    <li>
+                        Penjumlahan:
+                        \[
+                            \lim_{x \to a}(f(x)+g(x))=L+M
+                        \]
+                    </li>
+                    <li>
+                        Pengurangan:
+                        \[
+                            \lim_{x \to a}(f(x)-g(x))=L-M
+                        \]
+                    </li>
+                    <li>
+                        Perkalian:
+                        \[
+                            \lim_{x \to a}f(x)g(x)=LM
+                        \]
+                    </li>
+                    <li>
+                        Pembagian:
+                        \[
+                            \lim_{x \to a}\frac{f(x)}{g(x)}
+                            =\frac{L}{M}, \quad M \ne 0
+                        \]
+                    </li>
+                </ul>
+                
+
+                <p>
+                    Dalam daftar sifat di atas, seluruh limit diambil
+                    ketika x mendekati a.
+                </p>
+            </section>
+
+            <section>
+                <h2>4. Metode Menghitung Limit</h2>
+
+                <h3>a. Substitusi Langsung</h3>
+                <p>
+                    Jika fungsi dapat dievaluasi langsung pada titik
+                    yang dituju, substitusikan nilai tersebut ke fungsi.
+                </p>
+
+                <h3>b. Faktorisasi</h3>
+                <p>
+                    Faktorkan pembilang dan penyebut, lalu sederhanakan
+                    faktor yang sama jika memenuhi syarat.
+                </p>
+
+                <h3>c. Merasionalkan Bentuk Akar</h3>
+                <p>
+                    Gunakan bentuk sekawan untuk menyederhanakan
+                    ekspresi yang memuat bentuk akar.
+                </p>
+
+                <h3>d. Membagi dengan Pangkat Tertinggi</h3>
+                <p>
+                    Untuk limit fungsi rasional saat x menuju tak hingga,
+                    bagi pembilang dan penyebut dengan pangkat x tertinggi
+                    yang muncul.
+                </p>
+            </section>
+
+            <section>
+                <h2>5. Bentuk Tak Tentu</h2>
+                <p>
+                    Salah satu bentuk tak tentu yang sering muncul
+                    dalam perhitungan limit adalah:
+                </p>
+
+                <div class="formula">
+                    \[
+                        \frac{0}{0}
+                    \]
+                </div>
+
+                <p>
+                    Bentuk ini tidak langsung menentukan nilai limit.
+                    Diperlukan penyederhanaan atau metode lain yang sesuai.
+                </p>
+            </section>
+
+            <section>
+                <h2>6. Contoh Soal</h2>
+
+                <div class="example">
+                    <h3>Contoh 1</h3>
+                    <p>Tentukan nilai:</p>
+
+                    
+                    <div class="formula">
+                        \[
+                            \lim_{x \to 2}\frac{x^2-4}{x-2}
+                        \]
+                    </div>
+
+                    <p>Faktorkan pembilang:</p>
+
+                    <div class="formula">
+                        \[
+                            x^2-4=(x-2)(x+2)
+                        \]
+                    </div>
+
+                    <p>Untuk \(x \ne 2\), diperoleh:</p>
+
+                    <div class="formula">
+                        \[
+                            \begin{aligned}
+                            \lim_{x \to 2}\frac{x^2-4}{x-2}
+                            &=\lim_{x \to 2}\frac{(x-2)(x+2)}{x-2}\\
+                            &=\lim_{x \to 2}(x+2)\\
+                            &=4
+                            \end{aligned}
+                        \]
+                    </div>
+
+                    <p><strong>Jadi, nilai limitnya adalah 4.</strong></p>
+                </div>
+            </section>
+
+            <section>
+                <h2>7. Latihan Mandiri</h2>
+
+                <div class="example">
+                    <p>
+                        Tentukan nilai limit berikut dengan metode
+                        yang sesuai.
+                    </p>
+
+                    <ol>
+                        <li>
+                            \[
+                                \lim_{x \to 3}(2x+1)
+                            \]
+                        </li>
+                        <li>
+                            \[
+                                \lim_{x \to 1}\frac{x^2-1}{x-1}
+                            \]
+                        </li>
+                        <li>
+                            \[
+                                \lim_{x \to 0}\frac{x^2+3x}{x}
+                            \]
+                        </li>
+                    </ol>
+                
+                    <p class="muted">
+                        Kamu dapat menambahkan pembahasan atau soal
+                        lainnya di bagian ini.
+                    </p>
+                </div>
+            </section>
+        </article>
+
+        <div class="actions article-actions">
+            <a href="materi.html" class="button secondary">
+                Daftar Materi
+            </a>
+            <a href="game.html" class="button primary">
+                Latihan Game
+            </a>
+        </div>
+    </main>
+
+    <footer>Website Pembelajaran Kalkulus</footer>
+</body>
+</html>

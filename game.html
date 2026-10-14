@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Kalkulus</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="navbar">
+        <a href="index.html" class="logo">Kalkulus</a>
+        <nav>
+            <a href="index.html">Beranda</a>
+            <a href="materi.html">Materi</a>
+            <a href="game.html">Game Soal</a>
+        </nav>
+    </header>
+
+    <main class="container game-container">
+        <section class="page-heading">
+            <p class="eyebrow">LATIHAN INTERAKTIF</p>
+            <h1>Game Soal Acak</h1>
+            <p>Atur latihan, lalu mulai mengerjakan soal.</p>
+        </section>
+
+        <section class="panel" id="setup">
+            <label for="topic">Pilih materi</label>
+            <select id="topic">
+                <option value="semua">Semua Materi</option>
+                <option value="fondasi-fungsi-bilangan">Fondasi Fungsi dan Bilangan</option>
+                <option value="limit-fungsi">Limit Fungsi</option>
+            </select>
+
+            <label for="jumlah">Jumlah soal</label>
+            <select id="jumlah">
+                <option value="5">5 soal</option>
+                <option value="10">10 soal</option>
+                <option value="semua">Semua soal</option>
+            </select>
+
+            <button class="button primary full" id="mulai">
+                Mulai Game
+            </button>
+        </section>
+
+        <section class="panel hidden" id="quiz">
+            <div class="quiz-info">
+                <span id="kategori"></span>
+                <span id="nomor"></span>
+            </div>
+
+            <div class="progress">
+                <div id="progress-bar"></div>
+            </div>
+
+            <h2 id="pertanyaan"></h2>
+            <div id="pilihan" class="options"></div>
+            <div id="feedback" class="feedback hidden"></div>
+
+            <button class="button primary" id="berikutnya" disabled>
+                Soal Berikutnya
+            </button>
+        </section>
+
+        <section class="panel hidden" id="hasil">
+            <h2>Latihan Selesai!</h2>
+            <p id="skor" class="score"></p>
+            <p id="pesan"></p>
+            <button class="button primary" id="ulang">
+                Coba Lagi
+            </button>
+        </section>
+    </main>
+
+    <footer>Website Pembelajaran Kalkulus</footer>
+
+    <script src="game-data.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>

@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengertian Limit melalui Grafik dan Tabel | Kalkulus</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)']],
+                displayMath: [['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script
+        id="MathJax-script"
+        async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+    </script>
+</head>
+<body>
+    <header class="navbar">
+        <a href="index.html" class="logo">Kalkulus</a>
+        <nav>
+            <a href="index.html">Beranda</a>
+            <a href="materi.html">Materi</a>
+            <a href="game.html">Game Soal</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <a href="materi.html" class="back-link">
+            Kembali ke daftar materi
+        </a>
+
+        <article class="article">
+            <p class="eyebrow">MATERI KALKULUS</p>
+            <h1>Pengertian Limit melalui Grafik dan Tabel</h1>
+
+            <p class="intro">
+                Limit fungsi menjelaskan nilai yang didekati oleh suatu
+                fungsi ketika variabel bebasnya mendekati nilai tertentu.
+                Konsep ini dapat dipahami melalui tabel nilai fungsi
+                dan pengamatan grafik.
+            </p>
+
+            <section>
+                <h2>1. Pengertian Limit secara Intuitif</h2>
+
+                <p>
+                    Misalkan \(f(x)\) merupakan suatu fungsi. Ketika
+                    variabel \(x\) mendekati suatu nilai \(a\), nilai
+                    \(f(x)\) dapat mendekati suatu nilai \(L\).
+                    Keadaan ini dinyatakan dengan notasi:
+                </p>
+
+                <p>
+                    \[
+                        \lim_{x\to a}f(x)=L.
+                    \]
+                </p>
+
+                <p>
+                    Notasi tersebut menyatakan bahwa nilai \(f(x)\)
+                    mendekati \(L\) ketika \(x\) mendekati \(a\).
+                    Nilai \(x\) tidak harus sama dengan \(a\), sehingga
+                    pembahasan limit berfokus pada perilaku fungsi
+                    di sekitar titik yang dituju.
+                </p>
+            </section>
+
+            <section>
+                <h2>2. Memahami Limit melalui Tabel</h2>
+
+                <p>
+                    Perhatikan fungsi berikut:
+                </p>
+
+                <p>
+                    \[
+                        f(x)=\frac{x^2-1}{x-1},\quad x\ne 1.
+                    \]
+                </p>
+
+                <p>
+                    Untuk \(x\ne 1\), fungsi tersebut dapat
+                    disederhanakan menjadi:
+                </p>
+
+                <p>
+                    \[
+                        f(x)=\frac{(x-1)(x+1)}{x-1}=x+1.
+                    \]
+                </p>
+
+                <p>
+                    Untuk mengetahui nilai yang didekati fungsi
+                    ketika \(x\) mendekati \(1\), perhatikan tabel
+                    berikut.
+                </p>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>\(x\)</th>
+                            <th>\(f(x)\)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>0,9</td>
+                            <td>1,9</td>
+                        </tr>
+                        <tr>
+                            <td>0,99</td>
+                            <td>1,99</td>
+                        </tr>
+                        <tr>
+                            <td>0,999</td>
+                            <td>1,999</td>
+                        </tr>
+                        <tr>
+                            <td>1,001</td>
+                            <td>2,001</td>
+                        </tr>
+                        <tr>
+                            <td>1,01</td>
+                            <td>2,01</td>
+                        </tr>
+                        <tr>
+                            <td>1,1</td>
+                            <td>2,1</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p>
+                    Ketika \(x\) mendekati \(1\) dari kiri, nilai
+                    \(f(x)\) mendekati \(2\). Hal yang sama terjadi
+                    ketika \(x\) mendekati \(1\) dari kanan.
+                    Oleh karena itu:
+                </p>
+
+                <p>
+                    \[
+                        \lim_{x\to 1}\frac{x^2-1}{x-1}=2.
+                    \]
+                </p>
+
+                <p>
+                    Tabel membantu memperkirakan nilai limit dengan
+                    mengamati nilai fungsi pada beberapa nilai
+                    \(x\) yang mendekati titik yang dituju.
+                </p>
+            </section>
+
+            <section>
+                <h2>3. Memahami Limit melalui Grafik</h2>
+
+                <p>
+                    Grafik memberikan gambaran visual mengenai
+                    perilaku fungsi ketika variabel mendekati
+                    suatu nilai tertentu.
+                </p>
+
+                <div class="example">
+                    <h3>Grafik Fungsi</h3>
+
+                    <p>
+                        Grafik fungsi \(f(x)=x+1\), dengan \(x\ne 1\),
+                        merupakan garis lurus dengan titik kosong pada \((1,2)\).
+                    </p>
+
+                    <svg
+                        viewBox="0 0 600 420"
+                        width="100%"
+                        role="img"
+                        aria-label="Grafik garis y sama dengan x tambah satu dengan titik kosong di koordinat satu koma dua"
+                        xmlns="http://www.w3.org/2000/svg">
+
+                        <defs>
+                            <pattern
+                                id="grid"
+                                width="60"
+                                height="40"
+                                patternUnits="userSpaceOnUse"
+                                x="70"
+                                y="30">
+                                <path
+                                    d="M 60 0 L 0 0 0 40"
+                                    fill="none"
+                                    stroke="#e1e6f2"
+                                    stroke-width="1"/>
+                            </pattern>
+                        </defs>
+
+                        <rect
+                            x="70"
+                            y="30"
+                            width="480"
+                            height="320"
+                            fill="url(#grid)"/>
+
+                        <line
+                            x1="70" y1="270"
+                            x2="560" y2="270"
+                            stroke="#1b2340"
+                            stroke-width="1.5"/>
+
+                        <line
+                            x1="250" y1="370"
+                            x2="250" y2="20"
+                            stroke="#1b2340"
+                            stroke-width="1.5"/>
+
+                        <polygon
+                            points="560,270 550,265 550,275"
+                            fill="#1b2340"/>
+
+                        <polygon
+                            points="250,20 245,30 255,30"
+                            fill="#1b2340"/>
+
+                        <g fill="#6e7691" font-size="12" text-anchor="middle">
+                            <text x="130" y="288">−2</text>
+                            <text x="190" y="288">−1</text>
+                            <text x="310" y="288">1</text>
+                            <text x="370" y="288">2</text>
+                            <text x="430" y="288">3</text>
+                            <text x="490" y="288">4</text>
+                        </g>
+
+                        <g fill="#6e7691" font-size="12" text-anchor="end">
+                            <text x="239" y="354">−2</text>
+                            <text x="239" y="314">−1</text>
+                            <text x="239" y="234">1</text>
+                            <text x="239" y="194">2</text>
+                            <text x="239" y="154">3</text>
+                            <text x="239" y="114">4</text>
+                            <text x="239" y="74">5</text>
+                        </g>
+
+                        <g stroke="#4d5fe8" stroke-width="3" fill="none">
+                            <line x1="70" y1="350" x2="310" y2="190"/>
+                            <line x1="310" y1="190" x2="550" y2="30"/>
+                        </g>
+
+                        <circle
+                            cx="310"
+                            cy="190"
+                            r="6"
+                            fill="white"
+                            stroke="#4d5fe8"
+                            stroke-width="3"/>
+
+                        <g fill="#1b2340" font-size="14">
+                            <text x="570" y="275">x</text>
+                            <text x="260" y="18">y</text>
+                            <text x="325" y="180">(1, 2)</text>
+                            <text x="410" y="100" fill="#4d5fe8">y = x + 1</text>
+                        </g>
+                    </svg>
+
+                    <p>
+                        Titik kosong menunjukkan bahwa \(f(1)\) tidak terdefinisi.
+                        Namun, nilai fungsi mendekati \(2\) ketika \(x\) mendekati
+                        \(1\), sehingga
+                        \[
+                            \lim_{x\to 1}(x+1)=2.
+                        \]
+                    </p>
+
+                    <p>
+                        Pada grafik, limit ditentukan berdasarkan
+                        nilai yang didekati kurva di sekitar titik
+                        yang dituju, bukan semata-mata berdasarkan
+                        ada atau tidaknya titik pada koordinat tersebut.
+                    </p>
+                </div>
+            </section>
+
+            <section>
+                <h2>4. Limit dan Nilai Fungsi</h2>
+
+                <p>
+                    Nilai limit berbeda dengan nilai fungsi pada
+                    titik tertentu. Limit menyatakan nilai yang
+                    didekati fungsi, sedangkan \(f(a)\) menyatakan
+                    nilai fungsi ketika \(x=a\), jika fungsi
+                    terdefinisi pada titik tersebut.
+                </p>
+
+                <p>
+                    Pada contoh sebelumnya, diperoleh:
+                </p>
+
+                <p>
+                    \[
+                        \lim_{x\to 1}\frac{x^2-1}{x-1}=2.
+                    \]
+                </p>
+
+                <p>
+                    Namun, nilai \(f(1)\) tidak terdefinisi karena
+                    penyebut fungsi bernilai nol. Hal ini menunjukkan
+                    bahwa suatu limit dapat ada meskipun fungsi
+                    tidak terdefinisi pada titik yang dituju.
+                </p>
+            </section>
+
+            <section>
+                <h2>5. Kesimpulan</h2>
+
+                <p>
+                    Berdasarkan pendekatan melalui tabel dan grafik,
+                    pengertian limit dapat dirangkum sebagai berikut:
+                </p>
+
+                <ul>
+                    <li>
+                        Limit menyatakan nilai yang didekati fungsi
+                        ketika variabel mendekati suatu nilai tertentu.
+                    </li>
+                    <li>
+                        Tabel digunakan untuk mengamati nilai fungsi
+                        dari beberapa nilai di sekitar titik yang dituju.
+                    </li>
+                    <li>
+                        Grafik digunakan untuk melihat perilaku fungsi
+                        dari arah kiri dan kanan.
+                    </li>
+                    <li>
+                        Nilai limit tidak harus sama dengan nilai fungsi
+                        pada titik yang dituju.
+                    </li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>6. Latihan Mandiri</h2>
+
+                <div class="example">
+                    <h3>Soal 1</h3>
+
+                    <p>
+                        Diketahui fungsi \(f(x)=2x+3\).
+                        Perkirakan nilai:
+                    </p>
+
+                    <p>
+                        \[
+                            \lim_{x\to 2}(2x+3).
+                        \]
+                    </p>
+
+                    <details>
+                        <summary>Lihat pembahasan</summary>
+
+                        <p>
+                            Ketika \(x\) mendekati \(2\), nilai
+                            \(2x+3\) mendekati:
+                        </p>
+
+                        <p>
+                            \[
+                                2(2)+3=7.
+                            \]
+                        </p>
+
+                        <p>
+                            Jadi,
+                            \[
+                                \lim_{x\to 2}(2x+3)=7.
+                            \]
+                        </p>
+                    </details>
+                </div>
+
+                <div class="example">
+                    <h3>Soal 2</h3>
+
+                    <p>
+                        Dari suatu grafik diketahui bahwa nilai
+                        \(f(x)\) mendekati \(4\) ketika \(x\)
+                        mendekati \(3\) dari kiri dan kanan.
+                        Tentukan nilai limitnya.
+                    </p>
+
+                    <details>
+                        <summary>Lihat pembahasan</summary>
+
+                        <p>
+                            Karena nilai fungsi dari kedua arah
+                            mendekati \(4\), maka:
+                        </p>
+
+                        <p>
+                            \[
+                                \lim_{x\to 3}f(x)=4.
+                            \]
+                        </p>
+                    </details>
+                </div>
+
+                <div class="example">
+                    <h3>Soal 3</h3>
+
+                    <p>
+                        Apakah limit suatu fungsi dapat ada
+                        ketika fungsi tidak terdefinisi pada
+                        titik yang dituju?
+                    </p>
+
+                    <details>
+                        <summary>Lihat pembahasan</summary>
+
+                        <p>
+                            Ya. Limit ditentukan berdasarkan
+                            perilaku fungsi di sekitar titik
+                            yang dituju. Fungsi tidak harus
+                            terdefinisi tepat pada titik tersebut.
+                        </p>
+                    </details>
+                </div>
+            </section>
+        </article>
+
+        <div class="actions article-actions">
+            <a href="materi.html" class="button secondary">
+                Daftar Materi
+            </a>
+            <a href="game.html" class="button primary">
+                Latihan Game
+            </a>
+        </div>
+    </main>
+
+    <footer>Website Pembelajaran Kalkulus</footer>
+</body>
+</html>
