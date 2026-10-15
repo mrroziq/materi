@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplikasi Integral | Kalkulus</title>
+    <link rel="stylesheet" href="style.css">
+
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)']],
+                displayMath: [['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script
+        id="MathJax-script"
+        async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+    </script>
+</head>
+
+<body>
+    <header class="navbar">
+        <a href="index.html" class="logo">Kalkulus</a>
+        <nav>
+            <a href="index.html">Beranda</a>
+            <a href="materi.html">Materi</a>
+            <a href="game.html">Game Soal</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <a href="materi.html" class="back-link">
+            ← Kembali ke daftar materi
+        </a>
+
+        <article class="article">
+            <p class="eyebrow">BAGIAN VI — APLIKASI INTEGRAL</p>
+
+            <h1>Aplikasi Integral</h1>
+
+            <p class="intro">
+                Integral tidak hanya digunakan untuk menentukan antiturunan
+                dan menghitung akumulasi, tetapi juga untuk menyelesaikan
+                berbagai permasalahan geometri dan fisika. Dengan integral,
+                kita dapat menghitung luas daerah, volume benda putar,
+                panjang kurva, luas permukaan benda putar, kerja, dan
+                nilai rata-rata suatu fungsi. Materi ini membahas bagaimana
+                konsep integral diterapkan pada permasalahan tersebut.
+            </p>
+
+            <section>
+                <h2>1. Luas Daerah</h2>
+
+                <p>
+                    Integral tentu dapat digunakan untuk menghitung luas
+                    daerah yang dibatasi oleh grafik fungsi dan sumbu
+                    horizontal. Jika \(f(x)\geq 0\) pada interval
+                    \([a,b]\), luas daerah di bawah grafik \(y=f(x)\)
+                    adalah
+                </p>
+
+                \[
+                A=\int_a^b f(x)\,dx.
+                \]
+
+                <p>
+                    Jika fungsi bernilai negatif pada sebagian interval,
+                    integral tentu menghasilkan luas bertanda. Untuk
+                    menghitung luas geometris antara grafik dan sumbu
+                    horizontal, gunakan nilai mutlak:
+                </p>
+
+                \[
+                A=\int_a^b |f(x)|\,dx.
+                \]
+
+                <h3>1.1 Luas daerah di antara dua kurva</h3>
+
+                <p>
+                    Misalkan daerah dibatasi oleh kurva atas
+                    \(y=f(x)\) dan kurva bawah \(y=g(x)\), dengan
+                    \(f(x)\geq g(x)\) pada \([a,b]\). Luas daerahnya
+                    adalah
+                </p>
+
+                \[
+                A=\int_a^b [f(x)-g(x)]\,dx.
+                \]
+
+                <p>
+                    Batas integral biasanya ditentukan dari titik
+                    perpotongan kedua kurva atau batas daerah yang
+                    diberikan dalam soal.
+                </p>
+
+                <h3>Contoh 1</h3>
+
+                <p>
+                    Tentukan luas daerah yang dibatasi oleh kurva
+                    \(y=2x\), sumbu-\(x\), garis \(x=0\), dan garis \(x=3\).
+                </p>
+
+                <p><strong>Penyelesaian:</strong></p>
+
+                <p>
+                    Karena \(2x\geq 0\) pada interval \([0,3]\),
+                    luas daerah dapat dihitung dengan
+                </p>
+
+                \[
+                \begin{aligned}
+                A&=\int_0^3 2x\,dx\\
+                 &=\left[x^2\right]_0^3\\
+                 &=9-0\\
+                 &=9.
+                \end{aligned}
+                \]
+
+                <p>
+                    Jadi, luas daerah tersebut adalah \(9\) satuan luas.
+                </p>
+
+                <h3>Contoh 2</h3>
+
+                <p>
+                    Tentukan luas daerah yang dibatasi oleh
+                    \(y=2x\) dan \(y=x^2\).
+                </p>
+
+                <p><strong>Penyelesaian:</strong></p>
+
+                <p>
+                    Titik perpotongan kedua kurva diperoleh dari
+                    \(2x=x^2\), sehingga \(x=0\) atau \(x=2\).
+                    Pada interval \([0,2]\), kurva \(y=2x\) berada
+                    di atas kurva \(y=x^2\). Oleh karena itu,
+                </p>
+
+                \[
+                \begin{aligned}
+                A&=\int_0^2 (2x-x^2)\,dx\\
+                 &=\left[x^2-\frac{x^3}{3}\right]_0^2\\
+                 &=4-\frac83\\
+                 &=\frac43.
+                \end{aligned}
+                \]
+
+                <p>
+                    Jadi, luas daerah tersebut adalah
+                    \(\frac43\) satuan luas.
+                </p>
+
+                <h3>Latihan</h3>
+
+                <ol>
+                    <li>
+                        Hitung luas daerah di bawah kurva
+                        \(y=x+1\) pada interval \([0,2]\).
+                    </li>
+                    <li>
+                        Tentukan luas daerah yang dibatasi oleh
+                        \(y=x\) dan \(y=x^2\).
+                    </li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>2. Volume Benda Putar</h2>
+
+                <p>
+                    Benda putar terbentuk ketika suatu daerah pada bidang
+                    diputar mengelilingi suatu garis yang disebut sumbu
+                    putar. Integral dapat digunakan untuk menghitung
+                    volume benda tersebut dengan menjumlahkan volume
+                    irisan-irisan tipis.
+                </p>
+
+                <p>
+                    Salah satu metode yang digunakan adalah metode cakram,
+                    yaitu ketika irisan tegak lurus terhadap sumbu putar
+                    berbentuk lingkaran penuh.
+                </p>
+
+                <h3>2.1 Volume dengan metode cakram</h3>
+
+                <p>
+                    Jika daerah di bawah \(y=f(x)\), dengan \(f(x)\geq 0\),
+                    diputar mengelilingi sumbu-\(x\) pada interval
+                    \([a,b]\), maka jari-jari cakram adalah \(f(x)\).
+                    Volume benda putar diberikan oleh
+                </p>
+
+                \[
+                V=\pi\int_a^b [f(x)]^2\,dx.
+                \]
+
+                <h3>Contoh 3</h3>
+
+                <p>
+                    Tentukan volume benda yang terbentuk ketika daerah
+                    di bawah kurva \(y=x\), dari \(x=0\) sampai \(x=2\),
+                    diputar mengelilingi sumbu-\(x\).
+                </p>
+
+                <p><strong>Penyelesaian:</strong></p>
+
+                \[
+                \begin{aligned}
+                V&=\pi\int_0^2 x^2\,dx\\
+                 &=\pi\left[\frac{x^3}{3}\right]_0^2\\
+                 &=\frac{8\pi}{3}.
+                \end{aligned}
+                \]
+
+                <p>
+                    Jadi, volume benda putar tersebut adalah
+                    \(\frac{8\pi}{3}\) satuan volume.
+                </p>
+
+                <h3>2.2 Metode cincin</h3>
+
+                <p>
+                    Jika daerah yang diputar memiliki lubang di bagian
+                    tengah, irisan tegak lurus terhadap sumbu putar
+                    berbentuk cincin. Misalkan \(R(x)\) adalah jari-jari
+                    luar dan \(r(x)\) adalah jari-jari dalam, dengan
+                    \(R(x)\geq r(x)\). Volume benda putar adalah
+                </p>
+
+                \[
+                V=\pi\int_a^b
+                \left([R(x)]^2-[r(x)]^2\right)\,dx.
+                \]
+
+                <p>
+                    Luas penampang cincin diperoleh dengan mengurangi
+                    luas lingkaran dalam dari luas lingkaran luar.
+                </p>
+
+                <h3>Contoh 4</h3>
+
+                <p>
+                    Daerah yang dibatasi oleh \(y=2\), \(y=x\),
+                    \(x=0\), dan \(x=2\) diputar mengelilingi
+                    sumbu-\(x\). Tentukan volumenya.
+                </p>
+
+                <p><strong>Penyelesaian:</strong></p>
+
+                <p>
+                    Jari-jari luar adalah \(R(x)=2\), sedangkan
+                    jari-jari dalam adalah \(r(x)=x\). Maka
+                </p>
+
+                \[
+                \begin{aligned}
+                V&=\pi\int_0^2(4-x^2)\,dx\\
+                 &=\pi\left[4x-\frac{x^3}{3}\right]_0^2\\
+                 &=\pi\left(8-\frac83\right)\\
+                 &=\frac{16\pi}{3}.
+                \end{aligned}
+                \]
+
+                <p>
+                    Jadi, volumenya adalah \(\frac{16\pi}{3}\)
+                    satuan volume.
+                </p>
+
+                <h3>Latihan</h3>
+
+                <ol>
+                    <li>
+                        Tentukan volume benda putar yang terbentuk
+                        ketika daerah di bawah \(y=\sqrt{x}\) pada
+                        interval \([0,4]\) diputar mengelilingi
+                        sumbu-\(x\).
+                    </li>
+                    <li>
+                        Tuliskan rumus volume benda putar jika jari-jari
+                        luar \(R(x)\) dan jari-jari dalam \(r(x)\)
+                        diketahui.
+                    </li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>3. Metode Cakram dan Kulit Tabung</h2>
+
+                <p>
+                    Metode cakram dan metode kulit tabung merupakan dua
+                    pendekatan untuk menentukan volume benda putar.
+                    Pemilihan metode bergantung pada bentuk daerah,
+                    sumbu putar, serta kemudahan menyatakan jari-jari
+                    dan batas integral.
+                </p>
+
+                <h3>3.1 Metode cakram</h3>
+
+                <p>
+                    Metode cakram digunakan ketika irisan yang tegak
+                    lurus terhadap sumbu putar menghasilkan cakram.
+                    Untuk putaran mengelilingi sumbu-\(x\),
+                </p>
+
+                \[
+                V=\pi\int_a^b [f(x)]^2\,dx.
+                \]
+
+                <p>
+                    Untuk putaran mengelilingi sumbu-\(y\), jika jari-jari
+                    dinyatakan sebagai fungsi \(y\), rumusnya dapat
+                    ditulis sebagai
+                </p>
+
+                \[
+                V=\pi\int_c^d [g(y)]^2\,dy.
+                \]
+
+                <h3>3.2 Metode kulit tabung</h3>
+
+                <p>
+                    Metode kulit tabung menggunakan irisan sejajar
+                    terhadap sumbu putar. Ketika irisan tipis diputar,
+                    irisan tersebut membentuk kulit tabung.
+                </p>
+
+                <p>
+                    Jika daerah di bawah \(y=f(x)\) diputar mengelilingi
+                    sumbu-\(y\), jari-jari kulit tabung adalah \(x\),
+                    sedangkan tingginya \(f(x)\). Volume diberikan oleh
+                </p>
+
+                \[
+                V=2\pi\int_a^b x f(x)\,dx.
+                \]
+
+                <p>
+                    Secara umum, volume dengan metode kulit tabung
+                    ditentukan oleh
+                </p>
+
+                \[
+                V=2\pi\int_a^b
+                (\text{jari-jari})(\text{tinggi})\,dx.
+                \]
+
+                <h3>Contoh 5</h3>
+
+                <p>
+                    Daerah di bawah kurva \(y=x\), pada interval
+                    \(0\leq x\leq 2\), diputar mengelilingi sumbu-\(y\).
+                    Tentukan volumenya menggunakan metode kulit tabung.
+                </p>
+
+                <p><strong>Penyelesaian:</strong></p>
+
+                <p>
+                    Jari-jari kulit tabung adalah \(x\), sedangkan
+                    tingginya adalah \(x\). Maka
+                </p>
+
+                \[
+                \begin{aligned}
+                V&=2\pi\int_0^2 x(x)\,dx\\
+                 &=2\pi\int_0^2 x^2\,dx\\
+                 &=2\pi\left[\frac{x^3}{3}\right]_0^2\\
+                 &=\frac{16\pi}{3}.
+                \end{aligned}
+                \]
+
+                <p>
+                    Jadi, volumenya adalah \(\frac{16\pi}{3}\)
+                    satuan volume.
+                </p>
+
+                <h3>Contoh 6</h3>
+
+                <p>
+                    Daerah di bawah \(y=x\) pada interval \([0,2]\)
+                    diputar mengelilingi sumbu-\(x\). Hitung volumenya
+                    menggunakan metode cakram.
+                </p>
+
+                <p><strong>Penyelesaian:</strong></p>
+
+                \[
+                \begin{aligned}
+                V&=\pi\int_0^2 x^2\,dx\\
+                 &=\frac{8\pi}{3}.
+                \end{aligned}
+                \]
+
+                <p>
+                    Hasilnya adalah \(\frac{8\pi}{3}\) satuan volume.
+                    Perhatikan bahwa metode dan sumbu putar pada contoh
+                    ini berbeda dari Contoh 5.
+                </p>
+
+                <h3>Perbandingan metode</h3>
+
+                <ul>
+                    <li>
+                        <strong>Metode cakram:</strong> irisan tegak
+                        lurus terhadap sumbu putar dan tidak memiliki
+                        lubang di tengah.
+                    </li>
+                    <li>
+                        <strong>Metode cincin:</strong> irisan tegak
+                        lurus terhadap sumbu putar dan memiliki lubang.
+                    </li>
+                    <li>
+                        <strong>Metode kulit tabung:</strong> irisan
+                        sejajar terhadap sumbu putar.
+                    </li>
+                </ul>
+
+                <h3>Latihan</h3>
+
+                <ol>
+                    <li>
+                        Tentukan volume benda putar daerah di bawah
+                        \(y=x^2\), \(0\leq x\leq 1\), yang diputar
+                        mengelilingi sumbu-\(y\) dengan metode kulit tabung.
+                    </li>
+                    <li>
+                        Tentukan metode yang sesuai untuk menghitung
+                        volume benda putar ketika irisan tegak lurus
+                        sumbu putar memiliki lubang.
+                    </li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>4. Panjang Kurva</h2>
+
+                <p>
+                    Panjang kurva merupakan panjang lintasan yang
+                    mengikuti grafik suatu fungsi. Untuk kurva yang
+                    halus, panjangnya dapat diperoleh dengan
+                    mendekati kurva menggunakan ruas-ruas garis
+                    yang semakin pendek.
+                </p>
+
+                <p>
+                    Jika kurva dinyatakan oleh \(y=f(x)\) dan
+                    \(f\) memiliki turunan kontinu pada \([a,b]\),
+                    panjang kurva adalah
+                </p>
+
+                \[
+                L=\int_a^b\sqrt{1+[f'(x)]^2}\,dx.
+                \]
+
+                <p>
+                    Rumus ini berasal dari teorema Pythagoras:
+                    perubahan kecil pada panjang kurva memenuhi
+                    \(ds^2=dx^2+dy^2\). Karena
+                    \(dy=f'(x)\,dx\), maka
+                </p>
+
+                \[
+                ds=\sqrt{1+[f'(x)]^2}\,dx.
+                \]
+
+                <h3>Contoh 7</h3>
+
+                <p>
+                    Tentukan panjang kurva \(y=2x\) pada interval
+                    \(0\leq x\leq 3\).
+                </p>
+
+                <p><strong>Penyelesaian:</strong></p>
+
+                <p>
+                    Turunan fungsi tersebut adalah \(y'=2\).
+                    Dengan demikian,
+                </p>
+
+                \[
+                \begin{aligned}
+                L&=\int_0^3\sqrt{1+2^2}\,dx\\
+                 &=\int_0^3\sqrt5\,dx\\
+                 &=3\sqrt5.
+                \end{aligned}
+                \]
+
+                <p>
+                    Jadi, panjang kurva tersebut adalah
+                    \(3\sqrt5\) satuan panjang.
+                </p>
+
+                <h3>Contoh 8</h3>
+
+                <p>
+                    Tentukan panjang kurva \(y=x^{3/2}\) pada
+                    interval \(0\leq x\leq 1\).
+                </p>
+
+                <p><strong>Penyelesaian:</strong></p>
+
+                <p>Turunannya adalah</p>
+
+                \[
+                y'=\frac32\sqrt{x}.
+                \]
+
+                <p>Rumus panjang kurva menjadi</p>
+
+                \[
+                L=\int_0^1\sqrt{1+\frac94x}\,dx.
+                \]
+
+                <p>
+                    Dengan substitusi \(u=1+\frac94x\), diperoleh
+                </p>
+
+                \[
+                \begin{aligned}
+                L
+                &=\frac{8}{27}
+                \left[\left(1+\frac94x\right)^{3/2}\right]_0^1\\
+                &=\frac{8}{27}
+                \left(\frac{13\sqrt{13}}{8}-1\right)\\
+                &=\frac{13\sqrt{13}-8}{27}.
+                \end{aligned}
+                \]
+
+                <h3>Latihan</h3>
+
+                <ol>
+                    <li>
+                        Tentukan panjang kurva \(y=3x+1\) pada
+                        interval \([0,2]\).
+                    </li>
+                    <li>
+                        Tuliskan rumus panjang kurva untuk
+                        \(y=f(x)\) pada interval \([a,b]\).
+                    </li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>5. Luas Permukaan Benda Putar</h2>
+
+                <p>
+                    Ketika suatu kurva diputar mengelilingi sumbu,
+                    kurva tersebut membentuk permukaan benda putar.
+                    Luas permukaan dapat dihitung dengan menjumlahkan
+                    luas bagian-bagian kecil permukaan yang terbentuk.
+                </p>
+
+                <h3>5.1 Putaran mengelilingi sumbu-\(x\)</h3>
+
+                <p>
+                    Jika kurva \(y=f(x)\), dengan \(f(x)\geq 0\),
+                    diputar mengelilingi sumbu-\(x\), luas permukaan
+                    yang terbentuk adalah
+                </p>
+
+                \[
+                S=2\pi\int_a^b
+                f(x)\sqrt{1+[f'(x)]^2}\,dx.
+                \]
+
+                <h3>5.2 Putaran mengelilingi sumbu-\(y\)</h3>
+
+                <p>
+                    Jika kurva \(y=f(x)\), dengan \(x\geq 0\),
+                    diputar mengelilingi sumbu-\(y\), luas
+                    permukaannya adalah
+                </p>
+
+                \[
+                S=2\pi\int_a^b
+                x\sqrt{1+[f'(x)]^2}\,dx.
+                \]
+
+                <p>
+                    Kedua rumus tersebut menggunakan faktor
+                    \(2\pi r\), yaitu keliling lingkaran dengan
+                    jari-jari \(r\), dikalikan elemen panjang kurva.
+                </p>
+
+                <h3>Contoh 9</h3>
+
+                <p>
+                    Tentukan luas permukaan yang terbentuk ketika
+                    kurva \(y=x\), pada interval \(0\leq x\leq 2\),
+                    diputar mengelilingi sumbu-\(x\).
+                </p>
+
+                <p><strong>Penyelesaian:</strong></p>
+
+                <p>
+                    Karena \(y'=1\), maka
+                </p>
+
+                \[
+                \begin{aligned}
+                S&=2\pi\int_0^2 x\sqrt{1+1^2}\,dx\\
+                 &=2\pi\sqrt2\int_0^2 x\,dx\\
+                 &=2\pi\sqrt2\left[\frac{x^2}{2}\right]_0^2\\
+                 &=4\pi\sqrt2.
+                \end{aligned}
+                \]
+
+                <p>
+                    Jadi, luas permukaannya adalah
+                    \(4\pi\sqrt2\) satuan luas.
+                </p>
+
+                <h3>Latihan</h3>
+
+                <ol>
+                    <li>
+                        Tuliskan rumus luas permukaan yang terbentuk
+                        ketika kurva \(y=f(x)\) diputar mengelilingi
+                        sumbu-\(x\).
+                    </li>
+                    <li>
+                        Tentukan luas permukaan yang terbentuk ketika
+                        kurva \(y=1\), \(0\leq x\leq 2\), diputar
+                        mengelilingi sumbu-\(x\).
+                    </li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>6. Kerja dan Nilai Rata-Rata Fungsi</h2>
+
+                <h3>6.1 Kerja oleh gaya yang berubah</h3>
+
+                <p>
+                    Dalam fisika, kerja oleh gaya konstan yang searah
+                    perpindahan dihitung sebagai hasil kali gaya dan
+                    perpindahan. Jika gaya berubah terhadap posisi,
+                    kerja dapat dihitung menggunakan integral.
+                </p>
+
+                <p>
+                    Misalkan \(F(x)\) merupakan gaya yang bekerja
+                    sepanjang perpindahan dari \(x=a\) sampai \(x=b\).
+                    Kerja yang dilakukan adalah
+                </p>
+
+                \[
+                W=\int_a^b F(x)\,dx.
+                \]
+
+                <p>
+                    Jika gaya dinyatakan dalam newton dan posisi
+                    dalam meter, satuan kerja adalah joule.
+                </p>
+
+                <h3>Contoh 10</h3>
+
+                <p>
+                    Sebuah benda mengalami gaya \(F(x)=3x^2\) newton
+                    sepanjang perpindahan dari \(x=0\) sampai \(x=2\)
+                    meter. Tentukan kerja yang dilakukan gaya tersebut.
+                </p>
+
+                <p><strong>Penyelesaian:</strong></p>
+
+                \[
+                \begin{aligned}
+                W&=\int_0^2 3x^2\,dx\\
+                 &=\left[x^3\right]_0^2\\
+                 &=8.
+                \end{aligned}
+                \]
+
+                <p>
+                    Jadi, kerja yang dilakukan adalah \(8\) joule.
+                </p>
+
+                <h3>6.2 Kerja untuk meregangkan pegas</h3>
+
+                <p>
+                    Berdasarkan hukum Hooke, besar gaya yang diperlukan
+                    untuk meregangkan atau menekan pegas dari posisi
+                    keseimbangan adalah
+                </p>
+
+                \[
+                F(x)=kx,
+                \]
+
+                <p>
+                    dengan \(k\) merupakan konstanta pegas. Kerja untuk
+                    mengubah posisi pegas dari \(x=a\) ke \(x=b\)
+                    adalah
+                </p>
+
+                \[
+                W=\int_a^b kx\,dx
+                =\frac{k}{2}(b^2-a^2).
+                \]
+
+                <h3>Contoh 11</h3>
+
+                <p>
+                    Pegas memiliki konstanta \(k=10\) N/m.
+                    Tentukan kerja untuk meregangkan pegas dari
+                    \(x=0\) hingga \(x=0{,}2\) meter.
+                </p>
+
+                <p><strong>Penyelesaian:</strong></p>
+
+                \[
+                \begin{aligned}
+                W&=\int_0^{0{,}2}10x\,dx\\
+                 &=\left[5x^2\right]_0^{0{,}2}\\
+                 &=5(0{,}04)\\
+                 &=0{,}2.
+                \end{aligned}
+                \]
+
+                <p>
+                    Jadi, kerja yang diperlukan adalah \(0{,}2\) joule.
+                </p>
+
+                <h3>6.3 Nilai rata-rata fungsi</h3>
+
+                <p>
+                    Nilai rata-rata fungsi kontinu \(f(x)\) pada interval
+                    \([a,b]\) didefinisikan sebagai
+                </p>
+
+                \[
+                f_{\text{rata-rata}}
+                =\frac{1}{b-a}\int_a^b f(x)\,dx.
+                \]
+
+                <p>
+                    Rumus tersebut diperoleh dengan membagi akumulasi
+                    fungsi pada interval dengan panjang interval.
+                    Nilai rata-rata tidak selalu sama dengan
+                    \(f\left(\frac{a+b}{2}\right)\).
+                </p>
+
+                <h3>Contoh 12</h3>
+
+                <p>
+                    Tentukan nilai rata-rata fungsi \(f(x)=x^2\)
+                    pada interval \([0,3]\).
+                </p>
+
+                <p><strong>Penyelesaian:</strong></p>
+
+                \[
+                \begin{aligned}
+                f_{\text{rata-rata}}
+                &=\frac{1}{3-0}\int_0^3 x^2\,dx\\
+                &=\frac13\left[\frac{x^3}{3}\right]_0^3\\
+                &=\frac13(9)\\
+                &=3.
+                \end{aligned}
+                \]
+
+                <p>
+                    Jadi, nilai rata-rata fungsi tersebut adalah \(3\).
+                </p>
+
+                <h3>Latihan</h3>
+
+                <ol>
+                    <li>
+                        Sebuah gaya \(F(x)=4x\) newton bekerja dari
+                        \(x=1\) hingga \(x=3\) meter. Hitung kerja
+                        yang dilakukan.
+                    </li>
+                    <li>
+                        Tentukan nilai rata-rata \(f(x)=2x+1\)
+                        pada interval \([1,4]\).
+                    </li>
+                    <li>
+                        Tuliskan rumus umum nilai rata-rata fungsi
+                        kontinu pada interval \([a,b]\).
+                    </li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>7. Ringkasan Materi</h2>
+
+                <p>
+                    Integral memiliki beragam penerapan dalam geometri
+                    dan fisika. Luas daerah diperoleh dengan mengintegralkan
+                    selisih fungsi atas dan fungsi bawah. Volume benda
+                    putar dapat dihitung menggunakan metode cakram,
+                    cincin, atau kulit tabung.
+                </p>
+
+                <p>
+                    Panjang kurva ditentukan melalui integral elemen
+                    panjang, sedangkan luas permukaan benda putar
+                    diperoleh dari keliling lingkaran dikalikan elemen
+                    panjang kurva. Dalam fisika, integral digunakan
+                    untuk menghitung kerja oleh gaya yang berubah.
+                    Nilai rata-rata fungsi diperoleh dengan membagi
+                    integral tentu dengan panjang interval.
+                </p>
+
+                <ul>
+                    <li>
+                        Luas daerah:
+                        \(\displaystyle A=\int_a^b [f(x)-g(x)]\,dx\),
+                        jika \(f(x)\) merupakan kurva atas.
+                    </li>
+                    <li>
+                        Volume metode cakram:
+                        \(\displaystyle V=\pi\int_a^b [f(x)]^2\,dx\).
+                    </li>
+                    <li>
+                        Volume metode kulit tabung:
+                        \(\displaystyle V=2\pi\int_a^b
+                        (\text{jari-jari})(\text{tinggi})\,dx\).
+                    </li>
+                    <li>
+                        Panjang kurva:
+                        \(\displaystyle L=\int_a^b
+                        \sqrt{1+[f'(x)]^2}\,dx\).
+                    </li>
+                    <li>
+                        Kerja:
+                        \(\displaystyle W=\int_a^b F(x)\,dx\).
+                    </li>
+                    <li>
+                        Nilai rata-rata:
+                        \(\displaystyle f_{\text{rata-rata}}
+                        =\frac{1}{b-a}\int_a^b f(x)\,dx\).
+                    </li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>8. Evaluasi Akhir</h2>
+
+                <ol>
+                    <li>
+                        Tentukan luas daerah yang dibatasi oleh
+                        \(y=3x\), sumbu-\(x\), \(x=0\), dan \(x=2\).
+                    </li>
+                    <li>
+                        Hitung volume benda putar yang terbentuk ketika
+                        daerah di bawah \(y=x\) pada interval \([0,3]\)
+                        diputar mengelilingi sumbu-\(x\).
+                    </li>
+                    <li>
+                        Tentukan volume benda putar daerah di bawah
+                        \(y=x\), \(0\leq x\leq 2\), yang diputar
+                        mengelilingi sumbu-\(y\) menggunakan metode
+                        kulit tabung.
+                    </li>
+                    <li>
+                        Tentukan panjang kurva \(y=4x\) pada interval
+                        \([0,1]\).
+                    </li>
+                    <li>
+                        Tuliskan rumus luas permukaan benda putar
+                        ketika \(y=f(x)\) diputar mengelilingi sumbu-\(x\).
+                    </li>
+                    <li>
+                        Sebuah gaya \(F(x)=2x+1\) newton bekerja dari
+                        \(x=0\) sampai \(x=3\) meter. Hitung kerja
+                        yang dilakukan.
+                    </li>
+                    <li>
+                        Tentukan nilai rata-rata \(f(x)=x^2+1\)
+                        pada interval \([0,2]\).
+                    </li>
+                </ol>
+            </section>
+        </article>
+    </main>
+
+    <footer>Website Pembelajaran Kalkulus</footer>
+</body>
+</html>

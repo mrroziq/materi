@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fondasi Fungsi dan Bilangan | Kalkulus</title>
+    <link rel="stylesheet" href="style.css">
+
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)']],
+                displayMath: [['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script
+        id="MathJax-script"
+        async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+    </script>
+</head>
+<body>
+    <header class="navbar">
+        <a href="index.html" class="logo">Kalkulus</a>
+        <nav>
+            <a href="index.html">Beranda</a>
+            <a href="materi.html">Materi</a>
+            <a href="game.html">Game Soal</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <a href="materi.html" class="back-link">
+            ← Kembali ke daftar materi
+        </a>
+
+        <article class="article">
+            <p class="eyebrow">BAGIAN I — PERSIAPAN KALKULUS</p>
+
+            <h1>Fondasi Fungsi dan Bilangan</h1>
+
+            <p class="intro">
+                Kalkulus mempelajari perubahan, gerak, pendekatan nilai,
+                dan akumulasi suatu besaran. Untuk memahami konsep limit,
+                turunan, dan integral, diperlukan fondasi yang kuat mengenai
+                sistem bilangan real, pertidaksamaan, grafik, dan fungsi.
+                Materi ini membahas konsep-konsep dasar tersebut sebagai
+                persiapan untuk mempelajari kalkulus secara lebih mendalam.
+            </p>
+
+            <section>
+                <h2>1. Sistem Bilangan Real dan Interval</h2>
+
+                <p>
+                    Sistem bilangan real merupakan himpunan bilangan yang
+                    dapat direpresentasikan sebagai titik pada garis bilangan.
+                    Himpunan bilangan real dilambangkan dengan
+                    \(\mathbb{R}\).
+                </p>
+
+                <h3>1.1 Jenis-jenis bilangan</h3>
+
+                <ul>
+                    <li>
+                        <strong>Bilangan asli:</strong>
+                        \(\mathbb{N}=\{1,2,3,\ldots\}\).
+                    </li>
+                    <li>
+                        <strong>Bilangan bulat:</strong>
+                        \(\mathbb{Z}=\{\ldots,-2,-1,0,1,2,\ldots\}\).
+                    </li>
+                    <li>
+                        <strong>Bilangan rasional:</strong>
+                        bilangan yang dapat ditulis dalam bentuk
+                        \(\frac{p}{q}\), dengan \(p,q\in\mathbb{Z}\)
+                        dan \(q\ne0\).
+                    </li>
+                    <li>
+                        <strong>Bilangan irasional:</strong>
+                        bilangan real yang tidak dapat ditulis sebagai
+                        pecahan dua bilangan bulat, misalnya
+                        \(\sqrt{2}\) dan \(\pi\).
+                    </li>
+                    <li>
+                        <strong>Bilangan real:</strong>
+                        gabungan bilangan rasional dan irasional.
+                    </li>
+                </ul>
+
+                <p>Hubungan himpunan bilangan tersebut dapat dituliskan sebagai</p>
+
+                \[
+                \mathbb{N}\subseteq\mathbb{Z}
+                \subseteq\mathbb{Q}\subseteq\mathbb{R}.
+                \]
+
+                <h3>1.2 Interval bilangan real</h3>
+
+                <p>
+                    Interval digunakan untuk menyatakan kumpulan bilangan
+                    real yang terletak di antara batas-batas tertentu.
+                </p>
+
+                <ul>
+                    <li>
+                        Interval terbuka:
+                        \((a,b)=\{x\in\mathbb{R}\mid a &lt; x &lt; b\}\).
+                    </li>
+                    <li>
+                        Interval tertutup:
+                        \([a,b]=\{x\in\mathbb{R}\mid a\le x\le b\}\).
+                    </li>
+                    <li>
+                        Interval setengah terbuka:
+                        \([a,b)=\{x\in\mathbb{R}\mid a\le x &lt; b\}\).
+                    </li>
+                    <li>
+                        Interval tak terbatas:
+                        \((a,\infty)=\{x\in\mathbb{R}\mid x &gt; a\}\).
+                    </li>
+                </ul>
+
+                <p>
+                    Tanda kurung biasa menunjukkan bahwa batas tidak
+                    disertakan, sedangkan tanda kurung siku menunjukkan
+                    bahwa batas disertakan. Simbol tak hingga selalu
+                    menggunakan tanda kurung biasa.
+                </p>
+
+                <h3>Contoh 1</h3>
+
+                <p>
+                    Nyatakan himpunan
+                    \(\{x\in\mathbb{R}\mid -2\le x &lt; 5\}\)
+                    dalam notasi interval.
+                </p>
+
+                <p><strong>Penyelesaian:</strong></p>
+
+                <p>
+                    Karena \(-2\) disertakan dan \(5\) tidak disertakan,
+                    notasi intervalnya adalah
+                </p>
+
+                \[
+                \boxed{[-2,5)}.
+                \]
+
+                <h3>Latihan</h3>
+
+                <ol>
+                    <li>
+                        Tentukan apakah \(\sqrt{3}\), \(\frac{7}{4}\),
+                        dan \(-5\) merupakan bilangan rasional atau irasional.
+                    </li>
+                    <li>
+                        Tuliskan \(\{x\in\mathbb{R}\mid x &gt; -3\}\)
+                        dalam notasi interval.
+                    </li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>2. Pertidaksamaan dan Nilai Mutlak</h2>
+
+                <p>
+                    Pertidaksamaan menyatakan hubungan dua ekspresi
+                    menggunakan simbol \( &lt; \), \( &gt; \), \(\le\), atau
+                    \(\ge\). Penyelesaian pertidaksamaan adalah semua
+                    nilai variabel yang memenuhi hubungan tersebut.
+                </p>
+
+                <h3>2.1 Sifat pertidaksamaan</h3>
+
+                <p>
+                    Jika \(a &lt; b\), penambahan bilangan yang sama pada
+                    kedua ruas mempertahankan arah pertidaksamaan:
+                </p>
+
+                \[
+                a+c &lt; b+c.
+                \]
+
+                <p>
+                    Perkalian dengan bilangan positif juga mempertahankan
+                    arah pertidaksamaan. Namun, perkalian dengan bilangan
+                    negatif membalik arah pertidaksamaan:
+                </p>
+
+                \[
+                a &lt; b,\quad c &lt; 0
+                \implies ac &gt; bc.
+                \]
+
+                <h3>2.2 Nilai mutlak</h3>
+
+                <p>
+                    Nilai mutlak suatu bilangan real menyatakan jarak
+                    bilangan tersebut dari nol pada garis bilangan.
+                    Secara formal,
+                </p>
+
+                \[
+                |x|=
+                \begin{cases}
+                x, & x\ge0,\\
+                -x, & x &lt; 0.
+                \end{cases}
+                \]
+
+                <p>
+                    Sebagai contoh, \(|5|=5\) dan \(|-5|=5\).
+                    Nilai mutlak selalu bernilai tidak negatif.
+                </p>
+
+                <h3>2.3 Pertidaksamaan nilai mutlak</h3>
+
+                <p>Untuk \(a &gt; 0\), berlaku</p>
+
+                \[
+                |x| &lt; a\iff -a &lt; x &lt; a.
+                \]
+
+                <p>Untuk pertidaksamaan dengan tanda lebih besar, berlaku</p>
+
+                \[
+                |x| &gt; a\iff x &lt; -a
+                \quad\text{atau}\quad x &gt; a.
+                \]
+
+                <h3>Contoh 2</h3>
+
+                <p>Tentukan penyelesaian pertidaksamaan berikut.</p>
+
+                \[
+                |2x-1|\le3.
+                \]
+
+                <p><strong>Penyelesaian:</strong></p>
+
+                <p>Berdasarkan sifat nilai mutlak,</p>
+
+                \[
+                -3\le2x-1\le3.
+                \]
+
+                <p>Tambahkan \(1\) pada semua ruas:</p>
+
+                \[
+                -2\le2x\le4.
+                \]
+
+                <p>Bagi semua ruas dengan \(2\):</p>
+
+                \[
+                -1\le x\le2.
+                \]
+
+                <p>
+                    Jadi, himpunan penyelesaiannya adalah
+                    \(\boxed{[-1,2]}\).
+                </p>
+
+                <h3>Latihan</h3>
+
+                <ol>
+                    <li>Tentukan penyelesaian \(3x-4 &gt; 8\).</li>
+                    <li>Tentukan penyelesaian \(|x+2| &lt; 5\).</li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>3. Koordinat Kartesius dan Grafik</h2>
+
+                <p>
+                    Sistem koordinat Kartesius digunakan untuk menyatakan
+                    posisi titik pada bidang. Setiap titik dituliskan
+                    dalam pasangan terurut \((x,y)\), dengan \(x\) sebagai
+                    koordinat horizontal dan \(y\) sebagai koordinat vertikal.
+                </p>
+
+                <h3>3.1 Kuadran</h3>
+
+                <ul>
+                    <li>Kuadran I: \(x &gt; 0\) dan \(y &gt; 0\).</li>
+                    <li>Kuadran II: \(x &lt; 0\) dan \(y &gt; 0\).</li>
+                    <li>Kuadran III: \(x &lt; 0\) dan \(y &lt; 0\).</li>
+                    <li>Kuadran IV: \(x &gt; 0\) dan \(y &lt; 0\).</li>
+                </ul>
+
+                <p>
+                    Sumbu horizontal disebut sumbu-\(x\), sedangkan sumbu
+                    vertikal disebut sumbu-\(y\). Titik potong kedua sumbu
+                    disebut titik asal, yaitu \((0,0)\).
+                </p>
+
+                <h3>3.2 Grafik persamaan</h3>
+
+                <p>
+                    Grafik persamaan merupakan himpunan titik yang
+                    koordinatnya memenuhi persamaan tersebut. Sebagai
+                    contoh, persamaan garis
+                </p>
+
+                \[
+                y=2x+1
+                \]
+
+                <p>
+                    menghasilkan beberapa titik berikut.
+                </p>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>\(x\)</th>
+                            <th>\(y=2x+1\)</th>
+                            <th>Titik</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>\(-1\)</td>
+                            <td>\(-1\)</td>
+                            <td>\((-1,-1)\)</td>
+                        </tr>
+                        <tr>
+                            <td>\(0\)</td>
+                            <td>\(1\)</td>
+                            <td>\((0,1)\)</td>
+                        </tr>
+                        <tr>
+                            <td>\(1\)</td>
+                            <td>\(3\)</td>
+                            <td>\((1,3)\)</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p>
+                    Ketiga titik tersebut dapat digambar pada bidang
+                    koordinat dan dihubungkan menjadi garis lurus.
+                </p>
+
+                <h3>3.3 Uji garis vertikal</h3>
+
+                <p>
+                    Suatu grafik menyatakan fungsi \(y=f(x)\) apabila
+                    setiap nilai \(x\) pada domain mempunyai tepat satu
+                    nilai \(y\). Secara geometris, grafik merupakan
+                    fungsi jika setiap garis vertikal memotong grafik
+                    paling banyak pada satu titik.
+                </p>
+
+                <h3>Latihan</h3>
+
+                <ol>
+                    <li>Tentukan kuadran titik \((-3,4)\).</li>
+                    <li>Tentukan tiga titik yang terletak pada garis \(y=x-2\).</li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>4. Fungsi dan Notasi Fungsi</h2>
+
+                <p>
+                    Fungsi adalah aturan yang memasangkan setiap elemen
+                    dari suatu himpunan domain dengan tepat satu elemen
+                    pada himpunan kodomain. Fungsi \(f\) dapat ditulis
+                    sebagai
+                </p>
+
+                \[
+                f:A\to B.
+                \]
+
+                <p>
+                    Jika \(x\in A\), nilai fungsi pada \(x\) ditulis
+                    \(f(x)\). Variabel \(x\) disebut masukan, sedangkan
+                    \(f(x)\) disebut keluaran.
+                </p>
+
+                <h3>4.1 Notasi fungsi</h3>
+
+                <p>Misalkan fungsi diberikan oleh</p>
+
+                \[
+                f(x)=2x+3.
+                \]
+
+                <p>Nilai fungsi pada \(x=2\) adalah</p>
+
+                \[
+                f(2)=2(2)+3=7.
+                \]
+
+                <p>
+                    Perlu diperhatikan bahwa \(f(x)\) bukan perkalian
+                    antara \(f\) dan \(x\), melainkan notasi untuk nilai
+                    fungsi \(f\) pada masukan \(x\).
+                </p>
+
+                <h3>4.2 Representasi fungsi</h3>
+
+                <p>Fungsi dapat disajikan dalam beberapa bentuk, antara lain:</p>
+
+                <ul>
+                    <li>Rumus aljabar, misalnya \(f(x)=x^2+1\).</li>
+                    <li>Tabel pasangan masukan dan keluaran.</li>
+                    <li>Grafik pada bidang koordinat.</li>
+                    <li>Deskripsi verbal mengenai aturan pemetaan.</li>
+                </ul>
+
+                <h3>Contoh 3</h3>
+
+                <p>
+                    Jika \(f(x)=3x^2-2x+1\), tentukan \(f(-1)\).
+                </p>
+
+                <p><strong>Penyelesaian:</strong></p>
+
+                \[
+                \begin{aligned}
+                f(-1)&=3(-1)^2-2(-1)+1\\
+                     &=3+2+1\\
+                     &=6.
+                \end{aligned}
+                \]
+
+                <p>Jadi, \(f(-1)=6\).</p>
+
+                <h3>Latihan</h3>
+
+                <ol>
+                    <li>Jika \(f(x)=4x-5\), tentukan \(f(3)\).</li>
+                    <li>Jika \(g(x)=x^2+2x\), tentukan \(g(-2)\).</li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>5. Domain, Range, dan Operasi Fungsi</h2>
+
+                <h3>5.1 Domain dan range</h3>
+
+                <p>
+                    <strong>Domain</strong> adalah himpunan seluruh masukan
+                    yang diperbolehkan untuk suatu fungsi. <strong>Range</strong>
+                    adalah himpunan seluruh nilai keluaran yang benar-benar
+                    dihasilkan fungsi.
+                </p>
+
+                <p>
+                    Untuk fungsi real, domain perlu memperhatikan batasan
+                    aljabar. Penyebut tidak boleh bernilai nol, dan
+                    bilangan di dalam akar berderajat genap harus tidak negatif.
+                </p>
+
+                <h3>Contoh 4</h3>
+
+                <p>Tentukan domain fungsi</p>
+
+                \[
+                f(x)=\frac{1}{x-3}.
+                \]
+
+                <p><strong>Penyelesaian:</strong></p>
+
+                <p>
+                    Penyebut tidak boleh nol sehingga \(x-3\ne0\).
+                    Dengan demikian, \(x\ne3\), dan domain fungsi adalah
+                </p>
+
+                \[
+                D_f=\mathbb{R}\setminus\{3\}.
+                \]
+
+                <h3>Contoh 5</h3>
+
+                <p>Tentukan domain fungsi</p>
+
+                \[
+                g(x)=\sqrt{x+4}.
+                \]
+
+                <p><strong>Penyelesaian:</strong></p>
+
+                <p>
+                    Karena ekspresi di dalam akar harus tidak negatif,
+                    diperoleh
+                </p>
+
+                \[
+                x+4\ge0\implies x\ge-4.
+                \]
+
+                <p>Jadi, domainnya adalah \([-4,\infty)\).</p>
+
+                <h3>5.2 Operasi fungsi</h3>
+
+                <p>Untuk dua fungsi \(f\) dan \(g\), operasi fungsi didefinisikan sebagai</p>
+
+                \[
+                \begin{aligned}
+                (f+g)(x)&=f(x)+g(x),\\
+                (f-g)(x)&=f(x)-g(x),\\
+                (fg)(x)&=f(x)g(x),\\
+                \left(\frac{f}{g}\right)(x)&=\frac{f(x)}{g(x)},
+                \quad g(x)\ne0.
+                \end{aligned}
+                \]
+
+                <h3>Contoh 6</h3>
+
+                <p>
+                    Diketahui \(f(x)=x+2\) dan \(g(x)=x^2\).
+                    Tentukan \((f+g)(x)\) dan \((fg)(x)\).
+                </p>
+
+                <p><strong>Penyelesaian:</strong></p>
+
+                \[
+                (f+g)(x)=x+2+x^2=x^2+x+2.
+                \]
+
+                \[
+                (fg)(x)=(x+2)x^2=x^3+2x^2.
+                \]
+
+                <h3>Latihan</h3>
+
+                <ol>
+                    <li>Tentukan domain \(f(x)=\frac{x+1}{x^2-4}\).</li>
+                    <li>
+                        Jika \(f(x)=2x+1\) dan \(g(x)=x-3\), tentukan
+                        \((f+g)(x)\).
+                    </li>
+                    <li>Tentukan range fungsi \(f(x)=x^2\) dengan domain \(\mathbb{R}\).</li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>6. Komposisi dan Fungsi Invers</h2>
+
+                <h3>6.1 Komposisi fungsi</h3>
+
+                <p>
+                    Komposisi fungsi adalah penggabungan dua fungsi,
+                    ketika keluaran fungsi pertama menjadi masukan
+                    fungsi kedua. Komposisi \(f\) dan \(g\) ditulis
+                    sebagai
+                </p>
+
+                \[
+                (f\circ g)(x)=f(g(x)).
+                \]
+
+                <p>
+                    Urutan komposisi perlu diperhatikan karena pada
+                    umumnya \(f\circ g\) tidak sama dengan \(g\circ f\).
+                </p>
+
+                <h3>Contoh 7</h3>
+
+                <p>
+                    Diketahui \(f(x)=2x+1\) dan \(g(x)=x^2\).
+                    Tentukan \((f\circ g)(x)\) dan \((g\circ f)(x)\).
+                </p>
+
+                <p><strong>Penyelesaian:</strong></p>
+
+                \[
+                \begin{aligned}
+                (f\circ g)(x)&=f(g(x))\\
+                &=f(x^2)\\
+                &=2x^2+1.
+                \end{aligned}
+                \]
+
+                \[
+                \begin{aligned}
+                (g\circ f)(x)&=g(f(x))\\
+                &=g(2x+1)\\
+                &=(2x+1)^2.
+                \end{aligned}
+                \]
+
+                <h3>6.2 Fungsi invers</h3>
+
+                <p>
+                    Fungsi invers membalik proses pemetaan suatu fungsi.
+                    Jika \(f\) memiliki invers, invers tersebut ditulis
+                    \(f^{-1}\). Fungsi \(f\) harus bijektif agar inversnya
+                    merupakan fungsi dari kodomain ke domain.
+                </p>
+
+                <p>Fungsi dan inversnya memenuhi hubungan</p>
+
+                \[
+                f^{-1}(f(x))=x
+                \]
+
+                <p>dan</p>
+
+                \[
+                f(f^{-1}(y))=y.
+                \]
+
+                <h3>Contoh 8</h3>
+
+                <p>Tentukan invers dari \(f(x)=3x-6\).</p>
+
+                <p><strong>Penyelesaian:</strong></p>
+
+                <p>Misalkan</p>
+
+                \[
+                y=3x-6.
+                \]
+
+                <p>Tukar \(x\) dan \(y\), kemudian selesaikan terhadap \(y\):</p>
+
+                \[
+                \begin{aligned}
+                x&=3y-6\\
+                x+6&=3y\\
+                y&=\frac{x+6}{3}.
+                \end{aligned}
+                \]
+
+                <p>Jadi, inversnya adalah</p>
+
+                \[
+                \boxed{f^{-1}(x)=\frac{x+6}{3}}.
+                \]
+
+                <h3>Latihan</h3>
+
+                <ol>
+                    <li>
+                        Jika \(f(x)=x+4\) dan \(g(x)=2x\), tentukan
+                        \((f\circ g)(x)\).
+                    </li>
+                    <li>Tentukan invers fungsi \(f(x)=5x+10\).</li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>7. Fungsi Polinomial, Rasional, Eksponensial, dan Logaritma</h2>
+
+                <h3>7.1 Fungsi polinomial</h3>
+
+                <p>
+                    Fungsi polinomial merupakan fungsi yang berbentuk
+                </p>
+
+                \[
+                f(x)=a_nx^n+a_{n-1}x^{n-1}
+                +\cdots+a_1x+a_0,
+                \]
+
+                <p>
+                    dengan koefisien \(a_i\) berupa bilangan real dan
+                    pangkat variabel berupa bilangan bulat tidak negatif.
+                    Contohnya adalah \(f(x)=x^3-2x+1\).
+                </p>
+
+                <h3>7.2 Fungsi rasional</h3>
+
+                <p>
+                    Fungsi rasional merupakan hasil bagi dua fungsi
+                    polinomial:
+                </p>
+
+                \[
+                f(x)=\frac{p(x)}{q(x)},\qquad q(x)\ne0.
+                \]
+
+                <p>
+                    Contohnya adalah \(f(x)=\frac{x+1}{x-2}\),
+                    yang memiliki domain \(\mathbb{R}\setminus\{2\}\).
+                </p>
+
+                <h3>7.3 Fungsi eksponensial</h3>
+
+                <p>Fungsi eksponensial memiliki variabel pada bagian pangkat:</p>
+
+                \[
+                f(x)=a^x,\qquad a &gt; 0,\quad a\ne1.
+                \]
+
+                <p>
+                    Domainnya adalah \(\mathbb{R}\) dan rangenya
+                    \((0,\infty)\). Jika \(a &gt; 1\), fungsi meningkat;
+                    jika \(0 &lt; a &lt; 1\), fungsi menurun.
+                </p>
+
+                <h3>7.4 Fungsi logaritma</h3>
+
+                <p>
+                    Fungsi logaritma merupakan invers dari fungsi
+                    eksponensial:
+                </p>
+
+                \[
+                y=\log_a x\iff a^y=x,
+                \]
+
+                <p>
+                    dengan \(a &gt; 0\), \(a\ne1\), dan \(x &gt; 0\).
+                    Domain fungsi logaritma adalah \((0,\infty)\).
+                </p>
+
+                <p>Sifat-sifat logaritma yang penting antara lain</p>
+
+                \[
+                \begin{aligned}
+                \log_a(xy)&=\log_a x+\log_a y,\\
+                \log_a\left(\frac{x}{y}\right)
+                &=\log_a x-\log_a y,\\
+                \log_a(x^r)&=r\log_a x.
+                \end{aligned}
+                \]
+
+                <p>Rumus tersebut berlaku untuk argumen yang memenuhi syarat logaritma.</p>
+
+                <h3>Contoh 9</h3>
+
+                <p>Selesaikan persamaan \(2^{x+1}=8\).</p>
+
+                <p><strong>Penyelesaian:</strong></p>
+
+                <p>Karena \(8=2^3\), diperoleh</p>
+
+                \[
+                2^{x+1}=2^3.
+                \]
+
+                <p>Dengan menyamakan pangkat,</p>
+
+                \[
+                x+1=3\implies x=2.
+                \]
+
+                <p>Jadi, penyelesaiannya adalah \(x=2\).</p>
+
+                <h3>Latihan</h3>
+
+                <ol>
+                    <li>Tentukan domain \(f(x)=\frac{x+3}{x^2-9}\).</li>
+                    <li>Selesaikan \(3^x=27\).</li>
+                    <li>Hitung \(\log_2 16\).</li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>8. Fungsi Trigonometri dan Fungsi Invers Trigonometri</h2>
+
+                <p>
+                    Fungsi trigonometri menghubungkan sudut dengan
+                    perbandingan sisi segitiga siku-siku. Fungsi ini
+                    juga dapat didefinisikan menggunakan lingkaran
+                    satuan sehingga berlaku untuk sudut real.
+                </p>
+
+                <h3>8.1 Fungsi trigonometri dasar</h3>
+
+                <p>
+                    Enam fungsi trigonometri dasar adalah sinus,
+                    cosinus, tangen, cosecan, secan, dan cotangen.
+                    Hubungan dasarnya meliputi
+                </p>
+
+                \[
+                \tan x=\frac{\sin x}{\cos x},
+                \qquad \cos x\ne0,
+                \]
+
+                \[
+                \sin^2x+\cos^2x=1.
+                \]
+
+                <p>
+                    Fungsi sinus dan cosinus memiliki periode \(2\pi\),
+                    sedangkan fungsi tangen memiliki periode \(\pi\).
+                </p>
+
+                <h3>8.2 Sudut dalam derajat dan radian</h3>
+
+                <p>
+                    Satu putaran penuh setara dengan \(360^\circ\)
+                    atau \(2\pi\) radian. Oleh karena itu,
+                </p>
+
+                \[
+                180^\circ=\pi\text{ radian}.
+                \]
+
+                <p>Konversi dari derajat ke radian menggunakan rumus</p>
+
+                \[
+                \theta_{\text{radian}}
+                =\theta_{\text{derajat}}\frac{\pi}{180^\circ}.
+                \]
+
+                <h3>8.3 Fungsi invers trigonometri</h3>
+
+                <p>
+                    Fungsi invers trigonometri digunakan untuk
+                    menentukan sudut berdasarkan nilai trigonometri.
+                    Fungsi-fungsi tersebut meliputi
+                    \(\arcsin x\), \(\arccos x\), dan \(\arctan x\).
+                </p>
+
+                <p>
+                    Agar fungsi trigonometri mempunyai invers,
+                    domain fungsi asal perlu dibatasi pada interval
+                    tertentu. Konvensi utama yang digunakan adalah
+                </p>
+
+                <ul>
+                    <li>
+                        \(\arcsin x\) memiliki domain \([-1,1]\)
+                        dan range \([-\frac{\pi}{2},\frac{\pi}{2}]\).
+                    </li>
+                    <li>
+                        \(\arccos x\) memiliki domain \([-1,1]\)
+                        dan range \([0,\pi]\).
+                    </li>
+                    <li>
+                        \(\arctan x\) memiliki domain \(\mathbb{R}\)
+                        dan range \((-\frac{\pi}{2},\frac{\pi}{2})\).
+                    </li>
+                </ul>
+
+                <h3>Contoh 10</h3>
+
+                <p>Tentukan nilai \(\arcsin(\frac{1}{2})\).</p>
+
+                <p><strong>Penyelesaian:</strong></p>
+
+                <p>
+                    Kita mencari sudut pada interval
+                    \([-\frac{\pi}{2},\frac{\pi}{2}]\) yang memiliki
+                    nilai sinus \(\frac12\). Sudut tersebut adalah
+                    \(\frac{\pi}{6}\).
+                </p>
+
+                \[
+                \boxed{\arcsin\left(\frac12\right)=\frac{\pi}{6}}.
+                \]
+
+                <h3>Latihan</h3>
+
+                <ol>
+                    <li>Ubah \(150^\circ\) ke dalam radian.</li>
+                    <li>Tentukan \(\cos(\frac{\pi}{3})\).</li>
+                    <li>Tentukan \(\arctan(1)\).</li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>9. Rangkuman</h2>
+
+                <p>
+                    Fondasi fungsi dan bilangan menyediakan konsep
+                    dasar yang digunakan dalam seluruh pembahasan
+                    kalkulus. Sistem bilangan real dan interval
+                    membantu menjelaskan himpunan nilai yang
+                    diperbolehkan. Pertidaksamaan dan nilai mutlak
+                    digunakan untuk menyatakan batas serta jarak.
+                    Koordinat Kartesius membantu merepresentasikan
+                    hubungan secara geometris, sedangkan fungsi
+                    menjelaskan hubungan antara masukan dan keluaran.
+                </p>
+
+                <p>
+                    Domain, range, operasi fungsi, komposisi,
+                    dan invers menjadi dasar untuk mempelajari
+                    perilaku fungsi. Sementara itu, fungsi
+                    polinomial, rasional, eksponensial, logaritma,
+                    dan trigonometri merupakan keluarga fungsi
+                    yang banyak digunakan dalam permasalahan kalkulus.
+                </p>
+
+                <p>
+                    Setelah menguasai materi ini, pembelajaran
+                    dapat dilanjutkan dengan konsep limit fungsi,
+                    yang menjadi dasar definisi turunan dan integral.
+                </p>
+            </section>
+
+            <section>
+                <h2>10. Evaluasi Akhir</h2>
+
+                <ol>
+                    <li>
+                        Nyatakan \(\{x\in\mathbb{R}\mid -4 &lt; x\le2\}\)
+                        dalam notasi interval.
+                    </li>
+                    <li>Selesaikan pertidaksamaan \(|3x-6| &lt; 9\).</li>
+                    <li>Tentukan domain \(f(x)=\sqrt{2x+6}\).</li>
+                    <li>
+                        Jika \(f(x)=x^2+1\) dan \(g(x)=2x-3\),
+                        tentukan \((f\circ g)(x)\).
+                    </li>
+                    <li>Tentukan invers fungsi \(f(x)=4x-8\).</li>
+                    <li>Selesaikan persamaan \(5^x=125\).</li>
+                    <li>Hitung \(\log_3 81\).</li>
+                    <li>Ubah \(\frac{5\pi}{6}\) radian menjadi derajat.</li>
+                    <li>Tentukan nilai \(\arccos(0)\).</li>
+                </ol>
+            </section>
+        </article>
+    </main>
+
+    <footer>Website Pembelajaran Kalkulus</footer>
+</body>
+</html>

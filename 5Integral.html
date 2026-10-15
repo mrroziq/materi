@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Integral | Kalkulus</title>
+    <link rel="stylesheet" href="style.css">
+
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)']],
+                displayMath: [['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script
+        id="MathJax-script"
+        async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+    </script>
+</head>
+
+<body>
+    <header class="navbar">
+        <a href="index.html" class="logo">Kalkulus</a>
+        <nav>
+            <a href="index.html">Beranda</a>
+            <a href="materi.html">Materi</a>
+            <a href="game.html">Game Soal</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <a href="materi.html" class="back-link">
+            ← Kembali ke daftar materi
+        </a>
+
+        <article class="article">
+            <p class="eyebrow">BAGIAN V — INTEGRAL</p>
+
+            <h1>Integral</h1>
+
+            <p class="intro">
+                Integral merupakan salah satu konsep utama dalam kalkulus
+                yang berkaitan dengan antiturunan dan akumulasi suatu besaran.
+                Integral dapat digunakan untuk menghitung luas daerah,
+                perpindahan, volume, dan berbagai besaran lain yang diperoleh
+                melalui proses penjumlahan kontinu. Materi ini membahas
+                konsep dasar integral serta berbagai teknik pengintegralan
+                yang digunakan untuk menyelesaikan integral dengan bentuk
+                yang berbeda.
+            </p>
+
+            <section>
+                <h2>1. Antiturunan dan Integral Tak Tentu</h2>
+
+                <p>
+                    Turunan suatu fungsi menyatakan laju perubahan fungsi
+                    tersebut. Sebaliknya, antiturunan berkaitan dengan
+                    proses mencari fungsi yang turunannya sama dengan
+                    fungsi yang diketahui.
+                </p>
+
+                <p>
+                    Fungsi \(F(x)\) disebut antiturunan dari \(f(x)\)
+                    pada suatu interval jika
+                </p>
+
+                \[
+                F'(x)=f(x).
+                \]
+
+                <p>
+                    Jika \(F'(x)=f(x)\), maka semua antiturunan dari
+                    \(f(x)\) dapat dinyatakan dalam bentuk
+                </p>
+
+                \[
+                \int f(x)\,dx=F(x)+C,
+                \]
+
+                <p>
+                    dengan \(C\) merupakan konstanta integrasi.
+                    Notasi tersebut disebut integral tak tentu.
+                </p>
+
+                <h3>1.1 Aturan dasar integral</h3>
+
+                <p>Beberapa rumus integral dasar adalah sebagai berikut.</p>
+
+                \[
+                \int x^n\,dx=\frac{x^{n+1}}{n+1}+C,
+                \qquad n\ne -1.
+                \]
+
+                \[
+                \int k\,dx=kx+C.
+                \]
+
+                \[
+                \int \left(af(x)+bg(x)\right)\,dx
+                =
+                a\int f(x)\,dx+b\int g(x)\,dx.
+                \]
+
+                <p>
+                    Untuk fungsi \(x^{-1}\), digunakan rumus khusus
+                    karena aturan pangkat tidak berlaku ketika \(n=-1\).
+                </p>
+
+                \[
+                \int \frac{1}{x}\,dx=\ln|x|+C.
+                \]
+
+                <h3>Contoh 1</h3>
+
+                <p>Tentukan integral tak tentu berikut.</p>
+
+                \[
+                \int (3x^2+4x-5)\,dx.
+                \]
+
+                <p><strong>Penyelesaian:</strong></p>
+
+                <p>
+                    Dengan menggunakan aturan pangkat dan linearitas integral,
+                    diperoleh
+                </p>
+
+                \[
+                \begin{aligned}
+                \int (3x^2+4x-5)\,dx
+                & =3\int x^2\,dx+4\int x\,dx-5\int 1\,dx\\
+                & =x^3+2x^2-5x+C.
+                \end{aligned}
+                \]
+
+                <p>
+                    Jadi, hasil integralnya adalah
+                    \(x^3+2x^2-5x+C\).
+                </p>
+
+                <h3>Latihan</h3>
+
+                <ol>
+                    <li>Tentukan \(\int (5x^4-2x+3)\,dx\).</li>
+                    <li>Tentukan \(\int \left(2\sqrt{x}+\frac{1}{x}\right)\,dx\).</li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>2. Jumlah Riemann</h2>
+
+                <p>
+                    Jumlah Riemann merupakan konsep yang digunakan untuk
+                    mendefinisikan integral tentu melalui penjumlahan
+                    luas persegi panjang. Interval \([a,b]\) dibagi
+                    menjadi beberapa subinterval, kemudian nilai fungsi
+                    pada setiap subinterval digunakan untuk menentukan
+                    tinggi persegi panjang.
+                </p>
+
+                <p>
+                    Misalkan interval \([a,b]\) dibagi menjadi \(n\)
+                    subinterval dengan lebar yang sama,
+                </p>
+
+                \[
+                \Delta x=\frac{b-a}{n}.
+                \]
+
+                <p>
+                    Jika \(x_i^*\) merupakan titik sampel pada subinterval
+                    ke-\(i\), jumlah Riemann dinyatakan sebagai
+                </p>
+
+                \[
+                S_n=\sum_{i=1}^{n}f(x_i^*)\Delta x.
+                \]
+
+                <p>
+                    Untuk fungsi yang terintegralkan pada \([a,b]\),
+                    integral tentu dapat diperoleh melalui limit jumlah
+                    Riemann ketika lebar subinterval mendekati nol.
+                </p>
+
+                \[
+                \int_a^b f(x)\,dx
+                =
+                \lim_{n\to\infty}
+                \sum_{i=1}^{n}f(x_i^*)\Delta x.
+                \]
+
+                <h3>2.1 Jumlah Riemann dengan titik ujung kanan</h3>
+
+                <p>
+                    Untuk pembagian sama panjang, titik sampel ujung kanan
+                    pada subinterval ke-\(i\) adalah
+                </p>
+
+                \[
+                x_i=a+i\Delta x.
+                \]
+
+                <p>
+                    Oleh karena itu, jumlah Riemann ujung kanan dapat
+                    ditulis sebagai
+                </p>
+
+                \[
+                S_n=\sum_{i=1}^{n}f(a+i\Delta x)\Delta x.
+                \]
+
+                <h3>Contoh 2</h3>
+
+                <p>
+                    Gunakan jumlah Riemann ujung kanan dengan \(n=4\)
+                    untuk memperkirakan luas bertanda di bawah kurva
+                    \(f(x)=x\) pada interval \([0,2]\).
+                </p>
+
+                <p><strong>Penyelesaian:</strong></p>
+
+                <p>Lebar setiap subinterval adalah</p>
+
+                \[
+                \Delta x=\frac{2-0}{4}=\frac12.
+                \]
+
+                <p>Titik ujung kanannya adalah</p>
+
+                \[
+                \frac12,\quad 1,\quad \frac32,\quad 2.
+                \]
+
+                <p>Maka jumlah Riemannnya adalah</p>
+
+                \[
+                \begin{aligned}
+                S_4
+                &=\frac12\left(
+                \frac12+1+\frac32+2
+                \right)\\
+                &=\frac12(5)\\
+                &=\frac52.
+                \end{aligned}
+                \]
+
+                <p>
+                    Jadi, perkiraan luas bertanda dengan empat persegi
+                    panjang adalah \(\frac52\). Nilai ini merupakan
+                    pendekatan dari integral tentu pada interval tersebut.
+                </p>
+
+                <h3>Latihan</h3>
+
+                <ol>
+                    <li>
+                        Tentukan lebar subinterval jika \([1,5]\) dibagi
+                        menjadi \(8\) bagian sama panjang.
+                    </li>
+                    <li>
+                        Tuliskan jumlah Riemann ujung kanan untuk
+                        \(f(x)=x^2\) pada interval \([0,1]\) dengan
+                        \(n\) subinterval.
+                    </li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>3. Integral Tentu</h2>
+
+                <p>
+                    Integral tentu merupakan nilai yang diperoleh dari
+                    proses akumulasi suatu fungsi pada interval tertentu.
+                    Berbeda dengan integral tak tentu, integral tentu
+                    memiliki batas bawah dan batas atas serta menghasilkan
+                    suatu nilai.
+                </p>
+
+                \[
+                \int_a^b f(x)\,dx.
+                \]
+
+                <p>
+                    Dalam interpretasi geometris, integral tentu menyatakan
+                    luas bertanda. Bagian grafik yang berada di atas sumbu
+                    horizontal memberikan kontribusi positif, sedangkan
+                    bagian yang berada di bawah sumbu horizontal memberikan
+                    kontribusi negatif.
+                </p>
+
+                <h3>3.1 Sifat-sifat integral tentu</h3>
+
+                <p>Beberapa sifat integral tentu yang penting adalah:</p>
+
+                \[
+                \int_a^a f(x)\,dx=0.
+                \]
+
+                \[
+                \int_a^b f(x)\,dx
+                =-\int_b^a f(x)\,dx.
+                \]
+
+                \[
+                \int_a^b [f(x)+g(x)]\,dx
+                =
+                \int_a^b f(x)\,dx+\int_a^b g(x)\,dx.
+                \]
+
+                \[
+                \int_a^b cf(x)\,dx
+                =c\int_a^b f(x)\,dx.
+                \]
+
+                <p>
+                    Jika \(a\le c\le b\), maka integral juga memenuhi
+                    sifat aditif terhadap interval:
+                </p>
+
+                \[
+                \int_a^b f(x)\,dx
+                =
+                \int_a^c f(x)\,dx+\int_c^b f(x)\,dx.
+                \]
+
+                <h3>Contoh 3</h3>
+
+                <p>Hitung integral tentu berikut.</p>
+
+                \[
+                \int_0^2 (x+1)\,dx.
+                \]
+
+                <p><strong>Penyelesaian:</strong></p>
+
+                <p>
+                    Antiturunan dari \(x+1\) adalah
+                    \(\frac{x^2}{2}+x\). Dengan mengevaluasi antiturunan
+                    pada batas-batas integral, diperoleh
+                </p>
+
+                \[
+                \begin{aligned}
+                \int_0^2 (x+1)\,dx
+                &=\left[\frac{x^2}{2}+x\right]_0^2\\
+                &=\left(\frac{2^2}{2}+2\right)
+                -\left(\frac{0^2}{2}+0\right)\\
+                &=4.
+                \end{aligned}
+                \]
+
+                <p>Jadi, nilai integral tentu tersebut adalah \(4\).</p>
+
+                <h3>Latihan</h3>
+
+                <ol>
+                    <li>Hitung \(\int_1^3 2x\,dx\).</li>
+                    <li>Hitung \(\int_0^\pi \sin x\,dx\).</li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>4. Teorema Dasar Kalkulus</h2>
+
+                <p>
+                    Teorema Dasar Kalkulus menghubungkan konsep turunan
+                    dengan integral. Teorema ini memungkinkan integral
+                    tentu dihitung menggunakan antiturunan tanpa harus
+                    menghitung limit jumlah Riemann secara langsung.
+                </p>
+
+                <h3>4.1 Bagian pertama</h3>
+
+                <p>
+                    Misalkan \(f\) kontinu pada interval \([a,b]\).
+                    Didefinisikan fungsi
+                </p>
+
+                \[
+                G(x)=\int_a^x f(t)\,dt.
+                \]
+
+                <p>
+                    Maka \(G\) terdiferensialkan pada interval tersebut
+                    dan memenuhi
+                </p>
+
+                \[
+                G'(x)=f(x).
+                \]
+
+                <p>
+                    Artinya, turunan dari fungsi akumulasi integral
+                    mengembalikan fungsi yang diintegralkan.
+                </p>
+
+                <h3>4.2 Bagian kedua</h3>
+
+                <p>
+                    Jika \(f\) kontinu pada \([a,b]\) dan \(F\) merupakan
+                    antiturunan dari \(f\), sehingga \(F'(x)=f(x)\),
+                    maka
+                </p>
+
+                \[
+                \int_a^b f(x)\,dx=F(b)-F(a).
+                \]
+
+                <p>
+                    Notasi evaluasi batas tersebut juga dapat ditulis
+                    sebagai
+                </p>
+
+                \[
+                \left[F(x)\right]_a^b=F(b)-F(a).
+                \]
+
+                <h3>Contoh 4</h3>
+
+                <p>Hitung integral berikut menggunakan Teorema Dasar Kalkulus.</p>
+
+                \[
+                \int_1^3 (2x+1)\,dx.
+                \]
+
+                <p><strong>Penyelesaian:</strong></p>
+
+                <p>
+                    Antiturunan dari \(2x+1\) adalah \(F(x)=x^2+x\).
+                    Dengan demikian,
+                </p>
+
+                \[
+                \begin{aligned}
+                \int_1^3 (2x+1)\,dx
+                &=\left[x^2+x\right]_1^3\\
+                &=(9+3)-(1+1)\\
+                &=10.
+                \end{aligned}
+                \]
+
+                <p>Jadi, nilai integralnya adalah \(10\).</p>
+
+                <h3>Latihan</h3>
+
+                <ol>
+                    <li>Hitung \(\int_0^2 (3x^2+1)\,dx\).</li>
+                    <li>
+                        Jika \(G(x)=\int_1^x (t^2+2t)\,dt\),
+                        tentukan \(G'(x)\).
+                    </li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>5. Metode Substitusi</h2>
+
+                <p>
+                    Metode substitusi digunakan untuk menyederhanakan
+                    integral dengan mengganti suatu bagian fungsi
+                    menggunakan variabel baru. Metode ini berkaitan
+                    dengan aturan rantai pada diferensiasi.
+                </p>
+
+                <p>
+                    Jika \(u=g(x)\), maka
+                </p>
+
+                \[
+                du=g'(x)\,dx.
+                \]
+
+                <p>
+                    Oleh karena itu, integral yang memuat \(g(x)\)
+                    dan turunannya dapat diubah menjadi integral
+                    terhadap \(u\).
+                </p>
+
+                \[
+                \int f(g(x))g'(x)\,dx
+                =
+                \int f(u)\,du.
+                \]
+
+                <h3>Contoh 5</h3>
+
+                <p>Hitung integral berikut.</p>
+
+                \[
+                \int 2x(x^2+1)^3\,dx.
+                \]
+
+                <p><strong>Penyelesaian:</strong></p>
+
+                <p>
+                    Misalkan \(u=x^2+1\), sehingga \(du=2x\,dx\).
+                    Integral berubah menjadi
+                </p>
+
+                \[
+                \begin{aligned}
+                \int 2x(x^2+1)^3\,dx
+                &=\int u^3\,du\\
+                &=\frac{u^4}{4}+C\\
+                &=\frac{(x^2+1)^4}{4}+C.
+                \end{aligned}
+                \]
+
+                <p>
+                    Jadi, hasil integralnya adalah
+                    \(\frac{(x^2+1)^4}{4}+C\).
+                </p>
+
+                <h3>5.1 Substitusi pada integral tentu</h3>
+
+                <p>
+                    Untuk integral tentu, batas integral juga harus
+                    disesuaikan dengan variabel baru. Jika \(u=g(x)\),
+                    batas \(x=a\) menjadi \(u=g(a)\), sedangkan batas
+                    \(x=b\) menjadi \(u=g(b)\).
+                </p>
+
+                <h3>Contoh 6</h3>
+
+                <p>Hitung integral berikut.</p>
+
+                \[
+                \int_0^1 2x(x^2+1)^2\,dx.
+                \]
+
+                <p><strong>Penyelesaian:</strong></p>
+
+                <p>
+                    Ambil \(u=x^2+1\), sehingga \(du=2x\,dx\).
+                    Batas baru adalah \(u=1\) ketika \(x=0\), dan
+                    \(u=2\) ketika \(x=1\). Maka
+                </p>
+
+                \[
+                \begin{aligned}
+                \int_0^1 2x(x^2+1)^2\,dx
+                &=\int_1^2 u^2\,du\\
+                &=\left[\frac{u^3}{3}\right]_1^2\\
+                &=\frac{8-1}{3}\\
+                &=\frac73.
+                \end{aligned}
+                \]
+
+                <h3>Latihan</h3>
+
+                <ol>
+                    <li>Hitung \(\int 3x^2(x^3+4)^5\,dx\).</li>
+                    <li>Hitung \(\int_0^1 x\sqrt{x^2+1}\,dx\).</li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>6. Integrasi Parsial</h2>
+
+                <p>
+                    Integrasi parsial digunakan untuk mengintegralkan
+                    hasil kali dua fungsi ketika metode substitusi
+                    langsung tidak cukup membantu. Rumus ini diturunkan
+                    dari aturan turunan hasil kali.
+                </p>
+
+                <p>
+                    Rumus integrasi parsial adalah
+                </p>
+
+                \[
+                \int u\,dv=uv-\int v\,du.
+                \]
+
+                <p>
+                    Pemilihan \(u\) dan \(dv\) sangat penting. Umumnya,
+                    \(u\) dipilih sebagai fungsi yang turunannya lebih
+                    sederhana, sedangkan \(dv\) dipilih sebagai bagian
+                    yang mudah diintegralkan.
+                </p>
+
+                <h3>Contoh 7</h3>
+
+                <p>Hitung integral berikut.</p>
+
+                \[
+                \int xe^x\,dx.
+                \]
+
+                <p><strong>Penyelesaian:</strong></p>
+
+                <p>Pilih</p>
+
+                \[
+                u=x,\qquad dv=e^x\,dx.
+                \]
+
+                <p>Dengan demikian,</p>
+
+                \[
+                du=dx,\qquad v=e^x.
+                \]
+
+                <p>Menggunakan rumus integrasi parsial, diperoleh</p>
+
+                \[
+                \begin{aligned}
+                \int xe^x\,dx
+                &=xe^x-\int e^x\,dx\\
+                &=xe^x-e^x+C\\
+                &=e^x(x-1)+C.
+                \end{aligned}
+                \]
+
+                <h3>Contoh 8</h3>
+
+                <p>Hitung integral berikut.</p>
+
+                \[
+                \int \ln x\,dx,\qquad x>0.
+                \]
+
+                <p><strong>Penyelesaian:</strong></p>
+
+                <p>
+                    Pilih \(u=\ln x\) dan \(dv=dx\), sehingga
+                    \(du=\frac1x\,dx\) dan \(v=x\). Maka
+                </p>
+
+                \[
+                \begin{aligned}
+                \int \ln x\,dx
+                &=x\ln x-\int x\frac1x\,dx\\
+                &=x\ln x-x+C.
+                \end{aligned}
+                \]
+
+                <h3>Latihan</h3>
+
+                <ol>
+                    <li>Hitung \(\int x\cos x\,dx\).</li>
+                    <li>Hitung \(\int x\ln x\,dx\).</li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>7. Integral Trigonometri</h2>
+
+                <p>
+                    Integral trigonometri melibatkan fungsi seperti
+                    \(\sin x\), \(\cos x\), \(\tan x\), dan bentuk
+                    pangkatnya. Penyelesaiannya sering memanfaatkan
+                    identitas trigonometri serta hubungan turunan
+                    antarfungsi trigonometri.
+                </p>
+
+                <h3>7.1 Rumus dasar</h3>
+
+                \[
+                \int \sin x\,dx=-\cos x+C.
+                \]
+
+                \[
+                \int \cos x\,dx=\sin x+C.
+                \]
+
+                \[
+                \int \sec^2x\,dx=\tan x+C.
+                \]
+
+                \[
+                \int \sec x\tan x\,dx=\sec x+C.
+                \]
+
+                <h3>7.2 Identitas trigonometri</h3>
+
+                <p>
+                    Untuk integral yang memuat pangkat fungsi sinus
+                    dan kosinus, identitas berikut sering digunakan.
+                </p>
+
+                \[
+                \sin^2x+\cos^2x=1.
+                \]
+
+                \[
+                \sin^2x=\frac{1-\cos 2x}{2}.
+                \]
+
+                \[
+                \cos^2x=\frac{1+\cos 2x}{2}.
+                \]
+
+                <p>
+                    Jika pangkat sinus ganjil, satu faktor sinus dapat
+                    dipisahkan dan sisanya diubah menggunakan identitas
+                    \(\sin^2x=1-\cos^2x\). Strategi serupa dapat
+                    digunakan jika pangkat kosinus ganjil.
+                </p>
+
+                <h3>Contoh 9</h3>
+
+                <p>Hitung integral berikut.</p>
+
+                \[
+                \int \sin^3x\cos x\,dx.
+                \]
+
+                <p><strong>Penyelesaian:</strong></p>
+
+                <p>
+                    Misalkan \(u=\sin x\), sehingga \(du=\cos x\,dx\).
+                    Dengan substitusi, diperoleh
+                </p>
+
+                \[
+                \begin{aligned}
+                \int \sin^3x\cos x\,dx
+                &=\int u^3\,du\\
+                &=\frac{u^4}{4}+C\\
+                &=\frac{\sin^4x}{4}+C.
+                \end{aligned}
+                \]
+
+                <h3>Contoh 10</h3>
+
+                <p>Hitung integral berikut.</p>
+
+                \[
+                \int \cos^2x\,dx.
+                \]
+
+                <p><strong>Penyelesaian:</strong></p>
+
+                <p>
+                    Gunakan identitas
+                    \(\cos^2x=\frac{1+\cos 2x}{2}\). Maka
+                </p>
+
+                \[
+                \begin{aligned}
+                \int \cos^2x\,dx
+                &=\int\frac{1+\cos 2x}{2}\,dx\\
+                &=\frac{x}{2}+\frac{\sin 2x}{4}+C.
+                \end{aligned}
+                \]
+
+                <h3>Latihan</h3>
+
+                <ol>
+                    <li>Hitung \(\int \sin x\cos x\,dx\).</li>
+                    <li>Hitung \(\int \sin^2x\,dx\).</li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>8. Substitusi Trigonometri</h2>
+
+                <p>
+                    Substitusi trigonometri digunakan untuk menyederhanakan
+                    integral yang memuat bentuk akar kuadrat tertentu.
+                    Dengan memilih substitusi yang sesuai, identitas
+                    trigonometri dapat menghilangkan sebagian bentuk akar.
+                </p>
+
+                <h3>8.1 Bentuk substitusi yang umum</h3>
+
+                <ul>
+                    <li>
+                        Untuk \(\sqrt{a^2-x^2}\), gunakan
+                        \(x=a\sin\theta\).
+                    </li>
+                    <li>
+                        Untuk \(\sqrt{a^2+x^2}\), gunakan
+                        \(x=a\tan\theta\).
+                    </li>
+                    <li>
+                        Untuk \(\sqrt{x^2-a^2}\), gunakan
+                        \(x=a\sec\theta\), dengan domain yang sesuai.
+                    </li>
+                </ul>
+
+                <p>
+                    Pemilihan tersebut memanfaatkan identitas
+                </p>
+
+                \[
+                1-\sin^2\theta=\cos^2\theta,
+                \]
+
+                \[
+                1+\tan^2\theta=\sec^2\theta,
+                \]
+
+                \[
+                \sec^2\theta-1=\tan^2\theta.
+                \]
+
+                <h3>Contoh 11</h3>
+
+                <p>Hitung integral berikut.</p>
+
+                \[
+                \int \frac{1}{\sqrt{9-x^2}}\,dx.
+                \]
+
+                <p><strong>Penyelesaian:</strong></p>
+
+                <p>
+                    Gunakan substitusi \(x=3\sin\theta\), sehingga
+                </p>
+
+                \[
+                dx=3\cos\theta\,d\theta.
+                \]
+
+                <p>
+                    Pada interval sudut yang sesuai,
+                    \(\sqrt{9-x^2}=3\cos\theta\). Oleh karena itu,
+                </p>
+
+                \[
+                \begin{aligned}
+                \int \frac{1}{\sqrt{9-x^2}}\,dx
+                &=\int
+                \frac{3\cos\theta}{3\cos\theta}\,d\theta\\
+                &=\int 1\,d\theta\\
+                &=\theta+C.
+                \end{aligned}
+                \]
+
+                <p>
+                    Karena \(x=3\sin\theta\), maka
+                    \(\theta=\arcsin\left(\frac{x}{3}\right)\).
+                    Jadi,
+                </p>
+
+                \[
+                \int \frac{1}{\sqrt{9-x^2}}\,dx
+                =
+                \arcsin\left(\frac{x}{3}\right)+C.
+                \]
+
+                <h3>Latihan</h3>
+
+                <ol>
+                    <li>Hitung \(\int \frac{1}{\sqrt{16-x^2}}\,dx\).</li>
+                    <li>
+                        Tentukan substitusi trigonometri yang sesuai
+                        untuk \(\sqrt{x^2+25}\).
+                    </li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>9. Pecahan Parsial</h2>
+
+                <p>
+                    Metode pecahan parsial digunakan untuk mengintegralkan
+                    fungsi rasional, yaitu fungsi berbentuk
+                    \(\frac{P(x)}{Q(x)}\), dengan \(P(x)\) dan \(Q(x)\)
+                    berupa polinomial.
+                </p>
+
+                <p>
+                    Jika derajat pembilang lebih besar atau sama dengan
+                    derajat penyebut, lakukan pembagian polinomial terlebih
+                    dahulu. Setelah itu, pecahan yang tersisa dapat
+                    diuraikan menjadi pecahan parsial.
+                </p>
+
+                <h3>9.1 Faktor linear berbeda</h3>
+
+                <p>
+                    Jika penyebut dapat difaktorkan menjadi faktor linear
+                    berbeda, misalnya \((x-a)(x-b)\), maka bentuk
+                    penguraiannya adalah
+                </p>
+
+                \[
+                \frac{P(x)}{(x-a)(x-b)}
+                =
+                \frac{A}{x-a}+\frac{B}{x-b}.
+                \]
+
+                <h3>Contoh 12</h3>
+
+                <p>Hitung integral berikut.</p>
+
+                \[
+                \int \frac{1}{x^2-1}\,dx.
+                \]
+
+                <p><strong>Penyelesaian:</strong></p>
+
+                <p>
+                    Faktorkan penyebut menjadi
+                    \(x^2-1=(x-1)(x+1)\). Kemudian tuliskan
+                </p>
+
+                \[
+                \frac{1}{x^2-1}
+                =
+                \frac{A}{x-1}+\frac{B}{x+1}.
+                \]
+
+                <p>
+                    Dengan menyamakan pembilang, diperoleh
+                    \(1=A(x+1)+B(x-1)\). Untuk \(x=1\), diperoleh
+                    \(A=\frac12\), sedangkan untuk \(x=-1\),
+                    diperoleh \(B=-\frac12\). Jadi,
+                </p>
+
+                \[
+                \frac{1}{x^2-1}
+                =
+                \frac{1}{2(x-1)}-\frac{1}{2(x+1)}.
+                \]
+
+                <p>Integralkan setiap suku:</p>
+
+                \[
+                \begin{aligned}
+                \int\frac{1}{x^2-1}\,dx
+                &=\frac12\ln|x-1|
+                -\frac12\ln|x+1|+C\\
+                &=\frac12\ln\left|
+                \frac{x-1}{x+1}
+                \right|+C.
+                \end{aligned}
+                \]
+
+                <h3>9.2 Faktor linear berulang</h3>
+
+                <p>
+                    Jika penyebut memiliki faktor berulang, seperti
+                    \((x-a)^2\), bentuk penguraiannya harus memuat
+                    setiap pangkat faktor tersebut:
+                </p>
+
+                \[
+                \frac{P(x)}{(x-a)^2}
+                =
+                \frac{A}{x-a}+\frac{B}{(x-a)^2}.
+                \]
+
+                <h3>Latihan</h3>
+
+                <ol>
+                    <li>Hitung \(\int \frac{1}{x^2-4}\,dx\).</li>
+                    <li>
+                        Uraikan \(\frac{3x+5}{(x+1)(x+2)}\)
+                        menjadi pecahan parsial.
+                    </li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>10. Integral Tak Wajar</h2>
+
+                <p>
+                    Integral tak wajar merupakan integral tentu yang
+                    memiliki batas integrasi tak hingga atau integran
+                    yang tidak terbatas pada interval integrasi.
+                    Integral ini didefinisikan menggunakan limit.
+                </p>
+
+                <h3>10.1 Batas integrasi tak hingga</h3>
+
+                <p>
+                    Jika batas atasnya tak hingga, integral didefinisikan
+                    sebagai
+                </p>
+
+                \[
+                \int_a^\infty f(x)\,dx
+                =
+                \lim_{b\to\infty}\int_a^b f(x)\,dx.
+                \]
+
+                <p>
+                    Integral disebut konvergen jika limit tersebut
+                    ada dan bernilai hingga. Jika limit tidak ada
+                    atau tidak hingga, integral disebut divergen.
+                </p>
+
+                <h3>Contoh 13</h3>
+
+                <p>Tentukan apakah integral berikut konvergen.</p>
+
+                \[
+                \int_1^\infty \frac{1}{x^2}\,dx.
+                \]
+
+                <p><strong>Penyelesaian:</strong></p>
+
+                <p>Gunakan definisi limit integral tak wajar.</p>
+
+                \[
+                \begin{aligned}
+                \int_1^\infty \frac{1}{x^2}\,dx
+                &=\lim_{b\to\infty}\int_1^b x^{-2}\,dx\\
+                &=\lim_{b\to\infty}
+                \left[-\frac1x\right]_1^b\\
+                &=\lim_{b\to\infty}\left(1-\frac1b\right)\\
+                &=1.
+                \end{aligned}
+                \]
+
+                <p>
+                    Karena limitnya bernilai hingga, integral tersebut
+                    konvergen dengan nilai \(1\).
+                </p>
+
+                <h3>10.2 Integran tidak terbatas</h3>
+
+                <p>
+                    Jika fungsi tidak terbatas pada salah satu batas
+                    integrasi, integral dapat didefinisikan melalui
+                    limit dari dalam interval. Sebagai contoh,
+                </p>
+
+                \[
+                \int_0^1 \frac{1}{\sqrt{x}}\,dx
+                =
+                \lim_{a\to0^+}\int_a^1\frac{1}{\sqrt{x}}\,dx.
+                \]
+
+                <p>Evaluasi integral tersebut memberikan</p>
+
+                \[
+                \begin{aligned}
+                \int_0^1\frac{1}{\sqrt{x}}\,dx
+                &=\lim_{a\to0^+}\left[2\sqrt{x}\right]_a^1\\
+                &=\lim_{a\to0^+}(2-2\sqrt{a})\\
+                &=2.
+                \end{aligned}
+                \]
+
+                <p>
+                    Jadi, meskipun integrannya tidak terbatas di
+                    \(x=0\), integral tersebut tetap konvergen.
+                </p>
+
+                <h3>10.3 Uji integral \(p\)</h3>
+
+                <p>
+                    Salah satu bentuk penting integral tak wajar adalah
+                    \(\int_1^\infty \frac{1}{x^p}\,dx\). Untuk \(p\ne1\),
+                </p>
+
+                \[
+                \int_1^b x^{-p}\,dx
+                =
+                \frac{b^{1-p}-1}{1-p}.
+                \]
+
+                <p>
+                    Dengan mengambil limit ketika \(b\to\infty\),
+                    diperoleh kriteria berikut:
+                </p>
+
+                <ul>
+                    <li>
+                        Jika \(p>1\), integral konvergen dengan nilai
+                        \(\frac{1}{p-1}\).
+                    </li>
+                    <li>
+                        Jika \(p\le1\), integral divergen.
+                    </li>
+                </ul>
+
+                <h3>Latihan</h3>
+
+                <ol>
+                    <li>
+                        Tentukan apakah
+                        \(\int_1^\infty \frac{1}{x^3}\,dx\)
+                        konvergen atau divergen.
+                    </li>
+                    <li>
+                        Tentukan apakah
+                        \(\int_1^\infty \frac{1}{x}\,dx\)
+                        konvergen atau divergen.
+                    </li>
+                    <li>
+                        Hitung
+                        \(\int_0^4 \frac{1}{\sqrt{x}}\,dx\)
+                        menggunakan definisi integral tak wajar.
+                    </li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>11. Ringkasan Materi</h2>
+
+                <p>
+                    Integral tak tentu digunakan untuk mencari antiturunan,
+                    sedangkan integral tentu digunakan untuk menghitung
+                    akumulasi pada interval tertentu. Teorema Dasar Kalkulus
+                    menghubungkan kedua konsep tersebut.
+                </p>
+
+                <p>
+                    Pemilihan teknik pengintegralan bergantung pada bentuk
+                    integran. Metode substitusi cocok untuk bentuk fungsi
+                    komposisi, integrasi parsial digunakan untuk hasil kali
+                    fungsi, sedangkan identitas trigonometri, substitusi
+                    trigonometri, dan pecahan parsial membantu menyelesaikan
+                    bentuk yang lebih khusus.
+                </p>
+
+                <p>
+                    Untuk integral tak wajar, konvergensi harus diperiksa
+                    menggunakan limit. Keberadaan bentuk integral tidak
+                    menjamin bahwa nilainya hingga.
+                </p>
+            </section>
+
+            <section>
+                <h2>12. Evaluasi Akhir</h2>
+
+                <ol>
+                    <li>
+                        Hitung
+                        \(\int (4x^3-3x^2+2)\,dx\).
+                    </li>
+                    <li>
+                        Hitung
+                        \(\int_0^2 (x^2+1)\,dx\).
+                    </li>
+                    <li>
+                        Hitung
+                        \(\int 2x(x^2+3)^4\,dx\).
+                    </li>
+                    <li>
+                        Hitung
+                        \(\int xe^x\,dx\).
+                    </li>
+                    <li>
+                        Hitung
+                        \(\int \sin^2x\,dx\).
+                    </li>
+                    <li>
+                        Hitung
+                        \(\int \frac{1}{\sqrt{25-x^2}}\,dx\).
+                    </li>
+                    <li>
+                        Uraikan
+                        \(\frac{1}{x^2-4}\)
+                        menjadi pecahan parsial.
+                    </li>
+                    <li>
+                        Tentukan apakah
+                        \(\int_1^\infty \frac{1}{x^2}\,dx\)
+                        konvergen atau divergen.
+                    </li>
+                </ol>
+            </section>
+        </article>
+    </main>
+
+    <footer>Website Pembelajaran Kalkulus</footer>
+</body>
+</html>

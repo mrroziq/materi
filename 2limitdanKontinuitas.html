@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Limit dan Kontinuitas | Kalkulus</title>
+    <link rel="stylesheet" href="style.css">
+
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)']],
+                displayMath: [['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script
+        id="MathJax-script"
+        async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+    </script>
+</head>
+<body>
+    <header class="navbar">
+        <a href="index.html" class="logo">Kalkulus</a>
+        <nav>
+            <a href="index.html">Beranda</a>
+            <a href="materi.html">Materi</a>
+            <a href="game.html">Game Soal</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <a href="materi.html" class="back-link">
+            ← Kembali ke daftar materi
+        </a>
+
+        <article class="article">
+            <p class="eyebrow">BAGIAN II — LIMIT DAN KONTINUITAS</p>
+
+            <h1>Limit dan Kontinuitas</h1>
+
+            <p class="intro">
+                Limit dan kontinuitas merupakan konsep fundamental dalam
+                kalkulus. Limit menjelaskan perilaku nilai fungsi ketika
+                variabel mendekati suatu titik, sedangkan kontinuitas
+                menjelaskan apakah fungsi dapat digambarkan tanpa
+                terputus pada suatu titik atau interval. Kedua konsep
+                ini menjadi dasar untuk memahami turunan dan integral.
+            </p>
+
+            <section>
+                <h2>1. Pengertian Limit melalui Grafik dan Tabel</h2>
+
+                <p>
+                    Limit fungsi menjelaskan nilai yang didekati oleh
+                    \(f(x)\) ketika \(x\) mendekati suatu bilangan \(a\).
+                    Nilai limit tidak harus sama dengan nilai fungsi
+                    tepat di \(x=a\).
+                </p>
+
+                <p>Notasi limit ditulis sebagai</p>
+
+                \[
+                \lim_{x\to a}f(x)=L.
+                \]
+
+                <p>
+                    Notasi tersebut berarti bahwa nilai \(f(x)\)
+                    mendekati \(L\) ketika \(x\) mendekati \(a\).
+                    Dalam pembahasan limit, perhatian utama diberikan
+                    pada perilaku fungsi di sekitar \(a\), bukan hanya
+                    nilai fungsi di titik tersebut.
+                </p>
+
+                <h3>1.1 Memahami limit melalui grafik</h3>
+
+                <p>
+                    Perhatikan fungsi
+                </p>
+
+                \[
+                f(x)=\frac{x^2-1}{x-1},\qquad x\ne1.
+                \]
+
+                <p>
+                    Untuk \(x\ne1\), bentuk fungsi tersebut dapat
+                    disederhanakan menjadi
+                </p>
+
+                \[
+                f(x)=\frac{(x-1)(x+1)}{x-1}=x+1.
+                \]
+
+                <p>
+                    Ketika \(x\) mendekati \(1\), nilai \(f(x)\)
+                    mendekati \(2\). Meskipun fungsi awal tidak
+                    terdefinisi pada \(x=1\), limitnya tetap ada.
+                </p>
+
+                <Graph
+                    expressions={[
+                        {
+                            latex: "y=x+1",
+                            restrictions: ["x<1"]
+                        },
+                        {
+                            latex: "y=x+1",
+                            restrictions: ["x>1"]
+                        }
+                    ]}
+                    points={[[1, 2]]}
+                    locale_override="id-ID"
+                />
+
+                <p>
+                    Grafik menunjukkan bahwa nilai fungsi di sekitar
+                    \(x=1\) mendekati \(2\). Titik pada grafik yang
+                    didekati tidak harus menjadi bagian dari grafik
+                    fungsi asal.
+                </p>
+
+                <h3>1.2 Memahami limit melalui tabel</h3>
+
+                <p>
+                    Nilai fungsi untuk beberapa nilai \(x\) di sekitar
+                    \(1\) dapat disajikan sebagai berikut.
+                </p>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>\(x\)</th>
+                            <th>\(f(x)=\frac{x^2-1}{x-1}\)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>0,9</td>
+                            <td>1,9</td>
+                        </tr>
+                        <tr>
+                            <td>0,99</td>
+                            <td>1,99</td>
+                        </tr>
+                        <tr>
+                            <td>0,999</td>
+                            <td>1,999</td>
+                        </tr>
+                        <tr>
+                            <td>1,001</td>
+                            <td>2,001</td>
+                        </tr>
+                        <tr>
+                            <td>1,01</td>
+                            <td>2,01</td>
+                        </tr>
+                        <tr>
+                            <td>1,1</td>
+                            <td>2,1</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p>
+                    Ketika \(x\) mendekati \(1\) dari kiri maupun
+                    kanan, nilai \(f(x)\) mendekati \(2\). Dengan
+                    demikian,
+                </p>
+
+                \[
+                \boxed{\lim_{x\to1}\frac{x^2-1}{x-1}=2}.
+                \]
+
+                <h3>Contoh 1</h3>
+
+                <p>
+                    Tentukan
+                    \(\displaystyle\lim_{x\to2}(3x+4)\).
+                </p>
+
+                <p><strong>Penyelesaian:</strong></p>
+
+                <p>
+                    Ketika \(x\) mendekati \(2\), nilai \(3x+4\)
+                    mendekati
+                </p>
+
+                \[
+                3(2)+4=10.
+                \]
+
+                <p>Jadi,</p>
+
+                \[
+                \boxed{\lim_{x\to2}(3x+4)=10}.
+                \]
+
+                <h3>Latihan</h3>
+
+                <ol>
+                    <li>
+                        Buat tabel nilai \(f(x)=x^2+1\) untuk nilai
+                        \(x\) yang mendekati \(2\).
+                    </li>
+                    <li>
+                        Berdasarkan tabel tersebut, perkirakan
+                        \(\displaystyle\lim_{x\to2}(x^2+1)\).
+                    </li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>2. Definisi Limit Fungsi</h2>
+
+                <p>
+                    Secara intuitif, limit menjelaskan nilai yang
+                    didekati oleh fungsi. Dalam matematika, pengertian
+                    limit dapat dirumuskan secara formal menggunakan
+                    definisi epsilon-delta.
+                </p>
+
+                <h3>2.1 Definisi epsilon-delta</h3>
+
+                <p>
+                    Misalkan \(f\) terdefinisi pada suatu lingkungan
+                    dari \(a\), kecuali mungkin di \(a\) itu sendiri.
+                    Dikatakan bahwa
+                </p>
+
+                \[
+                \lim_{x\to a}f(x)=L
+                \]
+
+                <p>jika untuk setiap \(\varepsilon>0\), terdapat \(\delta>0\) sehingga</p>
+
+                \[
+                0<|x-a|<\delta
+                \implies |f(x)-L|<\varepsilon.
+                \]
+
+                <p>
+                    Makna definisi tersebut adalah sebagai berikut.
+                </p>
+
+                <ul>
+                    <li>
+                        \(\varepsilon\) menyatakan toleransi jarak
+                        nilai \(f(x)\) terhadap limit \(L\).
+                    </li>
+                    <li>
+                        \(\delta\) menyatakan jarak maksimum nilai
+                        \(x\) terhadap \(a\).
+                    </li>
+                    <li>
+                        Syarat \(0&lt;|x-a|\) berarti \(x\) mendekati
+                        \(a\), tetapi tidak sama dengan \(a\).
+                    </li>
+                </ul>
+
+                <h3>2.2 Contoh pembuktian limit</h3>
+
+                <p>Buktikan bahwa</p>
+
+                \[
+                \lim_{x\to2}(3x+1)=7.
+                \]
+
+                <p><strong>Pembuktian:</strong></p>
+
+                <p>
+                    Kita perlu menunjukkan bahwa untuk setiap
+                    \(\varepsilon>0\), terdapat \(\delta>0\)
+                    sehingga
+                </p>
+
+                \[
+                0<|x-2|<\delta
+                \implies |(3x+1)-7|<\varepsilon.
+                \]
+
+                <p>Sederhanakan ekspresi nilai mutlak:</p>
+
+                \[
+                |(3x+1)-7|=|3x-6|=3|x-2|.
+                \]
+
+                <p>
+                    Agar \(3|x-2|<\varepsilon\), cukup memilih
+                </p>
+
+                \[
+                \delta=\frac{\varepsilon}{3}.
+                \]
+
+                <p>
+                    Jika \(0&lt;|x-2|<\delta\), maka
+                </p>
+
+                \[
+                |(3x+1)-7|
+                =3|x-2|
+                <3\delta
+                =\varepsilon.
+                \]
+
+                <p>
+                    Dengan demikian, berdasarkan definisi
+                    epsilon-delta,
+                </p>
+
+                \[
+                \boxed{\lim_{x\to2}(3x+1)=7}.
+                \]
+
+                <h3>Latihan</h3>
+
+                <ol>
+                    <li>
+                        Jelaskan makna \(\varepsilon\) dan \(\delta\)
+                        dalam definisi limit.
+                    </li>
+                    <li>
+                        Buktikan menggunakan definisi epsilon-delta
+                        bahwa \(\displaystyle\lim_{x\to1}(2x+3)=5\).
+                    </li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>3. Limit Kiri dan Limit Kanan</h2>
+
+                <p>
+                    Limit kiri dan limit kanan digunakan untuk
+                    mempelajari perilaku fungsi ketika variabel
+                    mendekati suatu titik dari arah tertentu.
+                </p>
+
+                <h3>3.1 Limit kiri</h3>
+
+                <p>
+                    Limit kiri adalah nilai yang didekati fungsi
+                    ketika \(x\) mendekati \(a\) dari nilai-nilai
+                    yang lebih kecil daripada \(a\).
+                </p>
+
+                \[
+                \lim_{x\to a^-}f(x)=L.
+                \]
+
+                <h3>3.2 Limit kanan</h3>
+
+                <p>
+                    Limit kanan adalah nilai yang didekati fungsi
+                    ketika \(x\) mendekati \(a\) dari nilai-nilai
+                    yang lebih besar daripada \(a\).
+                </p>
+
+                \[
+                \lim_{x\to a^+}f(x)=L.
+                \]
+
+                <h3>3.3 Hubungan limit kiri dan kanan</h3>
+
+                <p>
+                    Limit dua sisi \(\displaystyle\lim_{x\to a}f(x)\)
+                    ada jika dan hanya jika limit kiri dan limit
+                    kanan ada serta memiliki nilai yang sama.
+                </p>
+
+                \[
+                \lim_{x\to a^-}f(x)
+                =
+                \lim_{x\to a^+}f(x)
+                =L.
+                \]
+
+                <h3>Contoh 2</h3>
+
+                <p>Misalkan fungsi didefinisikan sebagai</p>
+
+                \[
+                f(x)=
+                \begin{cases}
+                x+1, & x<2,\\
+                5, & x=2,\\
+                2x-1, & x>2.
+                \end{cases}
+                \]
+
+                <p>Tentukan limit kiri, limit kanan, dan limit dua sisinya pada \(x=2\).</p>
+
+                <p><strong>Penyelesaian:</strong></p>
+
+                <p>Dari sebelah kiri, gunakan \(f(x)=x+1\):</p>
+
+                \[
+                \lim_{x\to2^-}f(x)=2+1=3.
+                \]
+
+                <p>Dari sebelah kanan, gunakan \(f(x)=2x-1\):</p>
+
+                \[
+                \lim_{x\to2^+}f(x)=2(2)-1=3.
+                \]
+
+                <p>
+                    Karena kedua limit satu sisi sama, limit dua sisi
+                    ada dan bernilai \(3\), meskipun \(f(2)=5\).
+                </p>
+
+                \[
+                \boxed{\lim_{x\to2}f(x)=3}.
+                \]
+
+                <h3>Contoh 3</h3>
+
+                <p>Misalkan</p>
+
+                \[
+                g(x)=
+                \begin{cases}
+                x+1, & x<0,\\
+                x+3, & x\ge0.
+                \end{cases}
+                \]
+
+                <p>Pada \(x=0\), diperoleh</p>
+
+                \[
+                \lim_{x\to0^-}g(x)=1,
+                \qquad
+                \lim_{x\to0^+}g(x)=3.
+                \]
+
+                <p>
+                    Karena limit kiri dan limit kanan berbeda,
+                    \(\displaystyle\lim_{x\to0}g(x)\) tidak ada.
+                </p>
+
+                <h3>Latihan</h3>
+
+                <ol>
+                    <li>
+                        Tentukan limit kiri dan kanan fungsi
+                        \(f(x)=|x|\) pada \(x=0\).
+                    </li>
+                    <li>
+                        Jelaskan mengapa limit dua sisi tidak ada
+                        jika limit kiri dan limit kanan berbeda.
+                    </li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>4. Sifat-sifat Limit</h2>
+
+                <p>
+                    Sifat-sifat limit memungkinkan perhitungan limit
+                    fungsi yang lebih kompleks dengan memanfaatkan
+                    limit fungsi-fungsi penyusunnya.
+                </p>
+
+                <p>
+                    Misalkan
+                    \(\displaystyle\lim_{x\to a}f(x)=L\) dan
+                    \(\displaystyle\lim_{x\to a}g(x)=M\).
+                    Sifat-sifat berikut berlaku dengan syarat
+                    operasi yang bersangkutan terdefinisi.
+                </p>
+
+                <h3>4.1 Limit konstanta</h3>
+
+                \[
+                \lim_{x\to a}c=c.
+                \]
+
+                <h3>4.2 Limit identitas</h3>
+
+                \[
+                \lim_{x\to a}x=a.
+                \]
+
+                <h3>4.3 Limit penjumlahan dan pengurangan</h3>
+
+                \[
+                \lim_{x\to a}[f(x)\pm g(x)]=L\pm M.
+                \]
+
+                <h3>4.4 Limit perkalian</h3>
+
+                \[
+                \lim_{x\to a}[f(x)g(x)]=LM.
+                \]
+
+                <h3>4.5 Limit pembagian</h3>
+
+                \[
+                \lim_{x\to a}\frac{f(x)}{g(x)}
+                =\frac{L}{M},\qquad M\ne0.
+                \]
+
+                <h3>4.6 Limit pangkat dan akar</h3>
+
+                \[
+                \lim_{x\to a}[f(x)]^n=L^n.
+                \]
+
+                <p>
+                    Untuk akar berderajat genap, nilai di dalam akar
+                    harus memenuhi syarat domain dan limit yang
+                    bersangkutan harus terdefinisi.
+                </p>
+
+                <h3>Contoh 4</h3>
+
+                <p>Hitung</p>
+
+                \[
+                \lim_{x\to2}(x^2+3x-1).
+                \]
+
+                <p><strong>Penyelesaian:</strong></p>
+
+                <p>Dengan menggunakan sifat-sifat limit,</p>
+
+                \[
+                \begin{aligned}
+                \lim_{x\to2}(x^2+3x-1)
+                &=
+                \lim_{x\to2}x^2
+                +3\lim_{x\to2}x
+                -\lim_{x\to2}1\\
+                &=2^2+3(2)-1\\
+                &=7.
+                \end{aligned}
+                \]
+
+                <h3>Latihan</h3>
+
+                <ol>
+                    <li>
+                        Hitung \(\displaystyle\lim_{x\to3}(2x^2-x+4)\).
+                    </li>
+                    <li>
+                        Hitung
+                        \(\displaystyle\lim_{x\to1}\frac{x+2}{x+3}\).
+                    </li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>5. Teknik Menghitung Limit</h2>
+
+                <p>
+                    Teknik menghitung limit dipilih berdasarkan bentuk
+                    fungsi dan hasil substitusi langsung. Beberapa
+                    teknik yang sering digunakan adalah substitusi
+                    langsung, pemfaktoran, perkalian dengan bentuk
+                    sekawan, dan pembagian dengan pangkat tertinggi.
+                </p>
+
+                <h3>5.1 Substitusi langsung</h3>
+
+                <p>
+                    Jika fungsi kontinu di titik yang dituju, limit
+                    dapat dihitung dengan langsung mengganti \(x\)
+                    dengan nilai yang didekati.
+                </p>
+
+                <h3>Contoh 5</h3>
+
+                \[
+                \lim_{x\to2}(x^2+4x)=2^2+4(2)=12.
+                \]
+
+                <h3>5.2 Pemfaktoran</h3>
+
+                <p>
+                    Pemfaktoran berguna ketika substitusi langsung
+                    menghasilkan bentuk \(\frac00\).
+                </p>
+
+                <h3>Contoh 6</h3>
+
+                <p>Hitung</p>
+
+                \[
+                \lim_{x\to3}\frac{x^2-9}{x-3}.
+                \]
+
+                <p><strong>Penyelesaian:</strong></p>
+
+                <p>Substitusi langsung menghasilkan bentuk \(\frac00\).</p>
+
+                <p>Faktorkan pembilang:</p>
+
+                \[
+                \frac{x^2-9}{x-3}
+                =\frac{(x-3)(x+3)}{x-3}.
+                \]
+
+                <p>Untuk \(x\ne3\), faktor \(x-3\) dapat dicoret:</p>
+
+                \[
+                \lim_{x\to3}(x+3)=6.
+                \]
+
+                <h3>5.3 Perkalian dengan bentuk sekawan</h3>
+
+                <p>
+                    Teknik bentuk sekawan digunakan terutama pada
+                    limit yang mengandung akar.
+                </p>
+
+                <h3>Contoh 7</h3>
+
+                <p>Hitung</p>
+
+                \[
+                \lim_{x\to4}\frac{\sqrt{x}-2}{x-4}.
+                \]
+
+                <p><strong>Penyelesaian:</strong></p>
+
+                <p>
+                    Kalikan pembilang dan penyebut dengan bentuk
+                    sekawan \(\sqrt{x}+2\):
+                </p>
+
+                \[
+                \begin{aligned}
+                \frac{\sqrt{x}-2}{x-4}
+                &=
+                \frac{(\sqrt{x}-2)(\sqrt{x}+2)}
+                {(x-4)(\sqrt{x}+2)}\\
+                &=
+                \frac{x-4}{(x-4)(\sqrt{x}+2)}\\
+                &=
+                \frac{1}{\sqrt{x}+2}.
+                \end{aligned}
+                \]
+
+                <p>Dengan demikian,</p>
+
+                \[
+                \lim_{x\to4}\frac{1}{\sqrt{x}+2}
+                =\frac14.
+                \]
+
+                <h3>5.4 Pembagian dengan pangkat tertinggi</h3>
+
+                <p>
+                    Untuk limit fungsi rasional ketika
+                    \(x\to\infty\) atau \(x\to-\infty\), pembilang
+                    dan penyebut dapat dibagi dengan pangkat
+                    \(x\) tertinggi pada penyebut atau pembilang
+                    sesuai kebutuhan.
+                </p>
+
+                <h3>Contoh 8</h3>
+
+                <p>Hitung</p>
+
+                \[
+                \lim_{x\to\infty}\frac{2x^2+3}{x^2-1}.
+                \]
+
+                <p><strong>Penyelesaian:</strong></p>
+
+                <p>Bagi pembilang dan penyebut dengan \(x^2\):</p>
+
+                \[
+                \lim_{x\to\infty}
+                \frac{2+\frac{3}{x^2}}
+                {1-\frac{1}{x^2}}.
+                \]
+
+                <p>Karena \(\frac{1}{x^2}\to0\), diperoleh</p>
+
+                \[
+                \boxed{2}.
+                \]
+
+                <h3>Latihan</h3>
+
+                <ol>
+                    <li>
+                        Hitung
+                        \(\displaystyle\lim_{x\to2}\frac{x^2-4}{x-2}\).
+                    </li>
+                    <li>
+                        Hitung
+                        \(\displaystyle\lim_{x\to9}\frac{\sqrt{x}-3}{x-9}\).
+                    </li>
+                    <li>
+                        Hitung
+                        \(\displaystyle\lim_{x\to\infty}\frac{5x^2+1}{2x^2+3}\).
+                    </li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>6. Bentuk Tak Tentu</h2>
+
+                <p>
+                    Bentuk tak tentu adalah bentuk yang belum
+                    memungkinkan kita menentukan nilai limit hanya
+                    dari bentuk aljabarnya. Bentuk tak tentu yang
+                    umum meliputi
+                </p>
+
+                \[
+                \frac00,\quad
+                \frac{\infty}{\infty},\quad
+                0\cdot\infty,\quad
+                \infty-\infty,\quad
+                1^\infty,\quad
+                0^0,\quad
+                \infty^0.
+                \]
+
+                <p>
+                    Bentuk tersebut tidak berarti limitnya pasti
+                    tidak ada. Diperlukan teknik tambahan untuk
+                    menentukan nilai limitnya.
+                </p>
+
+                <h3>6.1 Bentuk \(\frac00\)</h3>
+
+                <p>
+                    Bentuk \(\frac00\) sering diselesaikan dengan
+                    pemfaktoran atau bentuk sekawan.
+                </p>
+
+                <h3>Contoh 9</h3>
+
+                \[
+                \lim_{x\to2}\frac{x^2-4}{x-2}.
+                \]
+
+                <p>Substitusi langsung menghasilkan \(\frac00\). Dengan pemfaktoran,</p>
+
+                \[
+                \frac{x^2-4}{x-2}
+                =\frac{(x-2)(x+2)}{x-2}
+                =x+2.
+                \]
+
+                <p>Oleh karena itu, limitnya adalah</p>
+
+                \[
+                \boxed{4}.
+                \]
+
+                <h3>6.2 Bentuk \(\infty-\infty\)</h3>
+
+                <p>
+                    Bentuk ini dapat diselesaikan dengan menyamakan
+                    penyebut atau menggunakan bentuk sekawan.
+                </p>
+
+                <h3>Contoh 10</h3>
+
+                <p>Hitung</p>
+
+                \[
+                \lim_{x\to\infty}
+                \left(\sqrt{x^2+x}-x\right).
+                \]
+
+                <p><strong>Penyelesaian:</strong></p>
+
+                <p>Kalikan dengan bentuk sekawan:</p>
+
+                \[
+                \begin{aligned}
+                &\sqrt{x^2+x}-x\\
+                &=
+                \frac{(\sqrt{x^2+x}-x)(\sqrt{x^2+x}+x)}
+                {\sqrt{x^2+x}+x}\\
+                &=
+                \frac{x}{\sqrt{x^2+x}+x}.
+                \end{aligned}
+                \]
+
+                <p>Untuk \(x\to\infty\), bagi pembilang dan penyebut dengan \(x\):</p>
+
+                \[
+                \frac{1}{\sqrt{1+\frac1x}+1}
+                \longrightarrow\frac12.
+                \]
+
+                <p>Jadi, limitnya adalah \(\frac12\).</p>
+
+                <h3>Latihan</h3>
+
+                <ol>
+                    <li>
+                        Jelaskan mengapa bentuk \(\frac00\) belum
+                        menentukan nilai limit.
+                    </li>
+                    <li>
+                        Hitung
+                        \(\displaystyle\lim_{x\to1}\frac{x^2-1}{x-1}\).
+                    </li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>7. Limit di Tak Hingga</h2>
+
+                <p>
+                    Limit di tak hingga mempelajari perilaku fungsi
+                    ketika \(x\) bertambah besar tanpa batas atau
+                    ketika \(x\) menurun tanpa batas.
+                </p>
+
+                <p>Notasinya adalah</p>
+
+                \[
+                \lim_{x\to\infty}f(x)
+                \qquad\text{dan}\qquad
+                \lim_{x\to-\infty}f(x).
+                \]
+
+                <h3>7.1 Limit fungsi rasional</h3>
+
+                <p>
+                    Untuk fungsi rasional
+                    \(\frac{p(x)}{q(x)}\), perilaku limit di tak
+                    hingga bergantung pada derajat polinomial
+                    pembilang dan penyebut.
+                </p>
+
+                <ul>
+                    <li>
+                        Jika derajat pembilang lebih kecil daripada
+                        derajat penyebut, limitnya \(0\).
+                    </li>
+                    <li>
+                        Jika derajat pembilang sama dengan derajat
+                        penyebut, limitnya adalah perbandingan
+                        koefisien pangkat tertinggi.
+                    </li>
+                    <li>
+                        Jika derajat pembilang lebih besar daripada
+                        derajat penyebut, limit dapat menuju
+                        tak hingga, negatif tak hingga, atau
+                        memiliki perilaku lain bergantung pada
+                        bentuk fungsi.
+                    </li>
+                </ul>
+
+                <h3>Contoh 11</h3>
+
+                <p>Hitung</p>
+
+                \[
+                \lim_{x\to\infty}\frac{3x+1}{x^2+2}.
+                \]
+
+                <p><strong>Penyelesaian:</strong></p>
+
+                <p>Bagi pembilang dan penyebut dengan \(x^2\):</p>
+
+                \[
+                \lim_{x\to\infty}
+                \frac{\frac3x+\frac1{x^2}}
+                {1+\frac2{x^2}}=0.
+                \]
+
+                <p>Jadi, limitnya adalah \(0\).</p>
+
+                <h3>7.2 Limit fungsi akar</h3>
+
+                <p>
+                    Untuk fungsi yang mengandung akar, perhatian
+                    perlu diberikan pada tanda \(x\) ketika
+                    mengeluarkan faktor dari akar.
+                </p>
+
+                <p>Misalnya,</p>
+
+                \[
+                \sqrt{x^2}=|x|.
+                \]
+
+                <p>
+                    Jika \(x\to\infty\), maka \(|x|=x\).
+                    Namun, jika \(x\to-\infty\), maka \(|x|=-x\).
+                    Perbedaan ini penting saat menghitung limit.
+                </p>
+
+                <h3>Latihan</h3>
+
+                <ol>
+                    <li>
+                        Hitung
+                        \(\displaystyle\lim_{x\to\infty}\frac{4x^2+1}{2x^2-3}\).
+                    </li>
+                    <li>
+                        Hitung
+                        \(\displaystyle\lim_{x\to\infty}\frac{2x+1}{x^2+1}\).
+                    </li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>8. Limit Tak Hingga dan Asimtot</h2>
+
+                <p>
+                    Limit tak hingga menggambarkan keadaan ketika
+                    nilai fungsi membesar atau mengecil tanpa batas
+                    ketika variabel mendekati suatu titik tertentu.
+                </p>
+
+                <p>Contohnya adalah</p>
+
+                \[
+                \lim_{x\to0^+}\frac1x=+\infty,
+                \qquad
+                \lim_{x\to0^-}\frac1x=-\infty.
+                \]
+
+                <h3>8.1 Asimtot vertikal</h3>
+
+                <p>
+                    Garis \(x=a\) disebut asimtot vertikal jika
+                    setidaknya salah satu limit satu sisi fungsi
+                    ketika \(x\to a\) bernilai \(+\infty\)
+                    atau \(-\infty\).
+                </p>
+
+                <h3>Contoh 12</h3>
+
+                <p>Perhatikan fungsi</p>
+
+                \[
+                f(x)=\frac1{x-2}.
+                \]
+
+                <p>Ketika \(x\to2^+\), nilai fungsi menuju \(+\infty\), sedangkan</p>
+
+                \[
+                \lim_{x\to2^-}\frac1{x-2}=-\infty.
+                \]
+
+                <p>
+                    Dengan demikian, garis \(x=2\) merupakan
+                    asimtot vertikal.
+                </p>
+
+                <h3>8.2 Asimtot horizontal</h3>
+
+                <p>
+                    Garis \(y=L\) disebut asimtot horizontal jika
+                    fungsi mendekati \(L\) ketika \(x\to\infty\)
+                    atau \(x\to-\infty\).
+                </p>
+
+                <h3>Contoh 13</h3>
+
+                <p>Misalkan</p>
+
+                \[
+                f(x)=\frac{2x+1}{x+3}.
+                \]
+
+                <p>Dengan membagi pembilang dan penyebut dengan \(x\), diperoleh</p>
+
+                \[
+                \lim_{x\to\infty}\frac{2x+1}{x+3}
+                =
+                \lim_{x\to\infty}
+                \frac{2+\frac1x}{1+\frac3x}
+                =2.
+                \]
+
+                <p>
+                    Jadi, garis \(y=2\) adalah asimtot horizontal
+                    fungsi tersebut.
+                </p>
+
+                <h3>Latihan</h3>
+
+                <ol>
+                    <li>
+                        Tentukan asimtot vertikal fungsi
+                        \(f(x)=\frac1{x+4}\).
+                    </li>
+                    <li>
+                        Tentukan asimtot horizontal fungsi
+                        \(g(x)=\frac{3x-2}{x+1}\).
+                    </li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>9. Kontinuitas Fungsi</h2>
+
+                <p>
+                    Fungsi kontinu pada suatu titik jika nilai
+                    fungsi di titik tersebut sama dengan limit
+                    fungsi ketika variabel mendekati titik tersebut.
+                </p>
+
+                <h3>9.1 Syarat kontinuitas</h3>
+
+                <p>
+                    Fungsi \(f\) kontinu di \(x=a\) jika ketiga
+                    syarat berikut terpenuhi:
+                </p>
+
+                <ol>
+                    <li>\(f(a)\) terdefinisi.</li>
+                    <li>\(\displaystyle\lim_{x\to a}f(x)\) ada.</li>
+                    <li>\(\displaystyle\lim_{x\to a}f(x)=f(a)\).</li>
+                </ol>
+
+                <h3>Contoh 14</h3>
+
+                <p>Tentukan apakah fungsi \(f(x)=x^2+1\) kontinu di \(x=2\).</p>
+
+                <p><strong>Penyelesaian:</strong></p>
+
+                <p>Nilai fungsi di \(x=2\) adalah</p>
+
+                \[
+                f(2)=2^2+1=5.
+                \]
+
+                <p>Limitnya juga bernilai</p>
+
+                \[
+                \lim_{x\to2}(x^2+1)=5.
+                \]
+
+                <p>
+                    Karena nilai fungsi dan limitnya sama, fungsi
+                    tersebut kontinu di \(x=2\).
+                </p>
+
+                <h3>9.2 Jenis diskontinuitas</h3>
+
+                <p>
+                    Fungsi yang tidak kontinu pada suatu titik
+                    disebut diskontinu di titik tersebut.
+                    Beberapa bentuk diskontinuitas yang umum adalah:
+                </p>
+
+                <ul>
+                    <li>
+                        <strong>Diskontinuitas yang dapat dihilangkan:</strong>
+                        limit ada, tetapi nilai fungsi tidak terdefinisi
+                        atau tidak sama dengan limitnya.
+                    </li>
+                    <li>
+                        <strong>Diskontinuitas loncat:</strong>
+                        limit kiri dan limit kanan ada, tetapi
+                        nilainya berbeda.
+                    </li>
+                    <li>
+                        <strong>Diskontinuitas tak hingga:</strong>
+                        nilai fungsi membesar tanpa batas di sekitar
+                        titik tertentu.
+                    </li>
+                </ul>
+
+                <h3>Contoh 15</h3>
+
+                <p>Misalkan</p>
+
+                \[
+                f(x)=
+                \begin{cases}
+                x^2, & x\ne1,\\
+                5, & x=1.
+                \end{cases}
+                \]
+
+                <p>Limit ketika \(x\to1\) adalah</p>
+
+                \[
+                \lim_{x\to1}f(x)=1.
+                \]
+
+                <p>
+                    Namun, \(f(1)=5\). Karena limitnya tidak sama
+                    dengan nilai fungsi, fungsi tersebut tidak
+                    kontinu di \(x=1\).
+                </p>
+
+                <h3>Latihan</h3>
+
+                <ol>
+                    <li>
+                        Periksa kontinuitas \(f(x)=3x^2-2x+1\)
+                        di \(x=1\).
+                    </li>
+                    <li>
+                        Jelaskan ketiga syarat kontinuitas fungsi
+                        di suatu titik.
+                    </li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>10. Teorema Nilai Antara dan Sifat Fungsi Kontinu</h2>
+
+                <h3>10.1 Teorema Nilai Antara</h3>
+
+                <p>
+                    Teorema Nilai Antara menyatakan bahwa jika
+                    fungsi \(f\) kontinu pada interval tertutup
+                    \([a,b]\), maka fungsi mengambil setiap nilai
+                    di antara \(f(a)\) dan \(f(b)\).
+                </p>
+
+                <p>
+                    Secara formal, jika \(N\) berada di antara
+                    \(f(a)\) dan \(f(b)\), terdapat \(c\in[a,b]\)
+                    sehingga
+                </p>
+
+                \[
+                f(c)=N.
+                \]
+
+                <p>
+                    Teorema ini berguna untuk menunjukkan keberadaan
+                    solusi suatu persamaan tanpa harus menentukan
+                    solusi tersebut secara eksplisit.
+                </p>
+
+                <h3>Contoh 16</h3>
+
+                <p>
+                    Tunjukkan bahwa persamaan \(x^2-2=0\) memiliki
+                    akar di interval \([1,2]\).
+                </p>
+
+                <p><strong>Penyelesaian:</strong></p>
+
+                <p>Misalkan \(f(x)=x^2-2\). Fungsi ini kontinu pada \([1,2]\).</p>
+
+                <p>Nilai fungsi pada kedua ujung interval adalah</p>
+
+                \[
+                f(1)=-1,\qquad f(2)=2.
+                \]
+
+                <p>
+                    Karena \(0\) berada di antara \(-1\) dan \(2\),
+                    berdasarkan Teorema Nilai Antara terdapat
+                    \(c\in[1,2]\) sehingga
+                </p>
+
+                \[
+                f(c)=0.
+                \]
+
+                <p>
+                    Jadi, persamaan \(x^2-2=0\) memiliki setidaknya
+                    satu akar pada interval \([1,2]\).
+                </p>
+
+                <h3>10.2 Sifat fungsi kontinu</h3>
+
+                <p>
+                    Fungsi kontinu memiliki beberapa sifat penting
+                    yang membantu dalam analisis fungsi.
+                </p>
+
+                <ul>
+                    <li>
+                        Penjumlahan dan pengurangan fungsi kontinu
+                        menghasilkan fungsi kontinu.
+                    </li>
+                    <li>
+                        Perkalian fungsi kontinu menghasilkan fungsi kontinu.
+                    </li>
+                    <li>
+                        Hasil bagi dua fungsi kontinu kontinu pada
+                        titik-titik ketika fungsi penyebut tidak nol.
+                    </li>
+                    <li>
+                        Komposisi fungsi kontinu juga kontinu
+                        apabila komposisi tersebut terdefinisi.
+                    </li>
+                    <li>
+                        Fungsi kontinu pada interval tertutup dan
+                        terbatas mencapai nilai maksimum dan minimum.
+                    </li>
+                </ul>
+
+                <h3>10.3 Teorema nilai ekstrem</h3>
+
+                <p>
+                    Jika fungsi \(f\) kontinu pada interval tertutup
+                    dan terbatas \([a,b]\), maka terdapat titik
+                    \(c,d\in[a,b]\) sehingga
+                </p>
+
+                \[
+                f(c)\le f(x)\le f(d)
+                \]
+
+                <p>
+                    untuk setiap \(x\in[a,b]\). Dengan kata lain,
+                    fungsi mencapai nilai minimum dan maksimum
+                    absolut pada interval tersebut.
+                </p>
+
+                <h3>Latihan</h3>
+
+                <ol>
+                    <li>
+                        Gunakan Teorema Nilai Antara untuk menjelaskan
+                        mengapa \(x^3+x-1=0\) memiliki solusi pada
+                        interval \([0,1]\).
+                    </li>
+                    <li>
+                        Mengapa syarat interval tertutup dan terbatas
+                        penting dalam teorema nilai ekstrem?
+                    </li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>11. Rangkuman</h2>
+
+                <p>
+                    Limit menggambarkan perilaku nilai fungsi ketika
+                    variabel mendekati suatu titik. Limit dapat
+                    dipelajari melalui grafik, tabel, maupun definisi
+                    formal epsilon-delta. Limit kiri dan kanan
+                    menentukan keberadaan limit dua sisi, sedangkan
+                    sifat-sifat limit dan teknik aljabar membantu
+                    menyelesaikan perhitungan.
+                </p>
+
+                <p>
+                    Bentuk tak tentu membutuhkan teknik khusus,
+                    seperti pemfaktoran dan penggunaan bentuk sekawan.
+                    Limit di tak hingga digunakan untuk memahami
+                    perilaku fungsi pada nilai variabel yang semakin
+                    besar, sedangkan limit tak hingga membantu
+                    mengidentifikasi asimtot vertikal.
+                </p>
+
+                <p>
+                    Kontinuitas menghubungkan nilai fungsi dengan
+                    limitnya. Teorema Nilai Antara menjamin keberadaan
+                    nilai tertentu yang berada di antara dua nilai
+                    keluaran fungsi kontinu. Sementara itu, teorema
+                    nilai ekstrem menjamin keberadaan nilai minimum
+                    dan maksimum absolut untuk fungsi kontinu pada
+                    interval tertutup dan terbatas.
+                </p>
+            </section>
+
+            <section>
+                <h2>12. Evaluasi Akhir</h2>
+
+                <ol>
+                    <li>
+                        Hitung
+                        \(\displaystyle\lim_{x\to3}(2x^2-5x+1)\).
+                    </li>
+                    <li>
+                        Hitung
+                        \(\displaystyle\lim_{x\to2}\frac{x^2-4}{x-2}\).
+                    </li>
+                    <li>
+                        Tentukan limit kiri dan kanan
+                        \(f(x)=\frac1x\) ketika \(x\to0\).
+                    </li>
+                    <li>
+                        Hitung
+                        \(\displaystyle\lim_{x\to4}\frac{\sqrt{x}-2}{x-4}\).
+                    </li>
+                    <li>
+                        Hitung
+                        \(\displaystyle\lim_{x\to\infty}\frac{5x^2+2}{2x^2-1}\).
+                    </li>
+                    <li>
+                        Tentukan asimtot vertikal fungsi
+                        \(f(x)=\frac{2}{x+3}\).
+                    </li>
+                    <li>
+                        Tentukan asimtot horizontal fungsi
+                        \(g(x)=\frac{4x+1}{2x-5}\).
+                    </li>
+                    <li>
+                        Periksa kontinuitas fungsi
+                        \(f(x)=x^2-3x+2\) di \(x=1\).
+                    </li>
+                    <li>
+                        Jelaskan perbedaan limit fungsi dan nilai
+                        fungsi di suatu titik.
+                    </li>
+                    <li>
+                        Jelaskan kegunaan Teorema Nilai Antara
+                        dalam menunjukkan keberadaan akar persamaan.
+                    </li>
+                </ol>
+            </section>
+        </article>
+    </main>
+
+    <footer>Website Pembelajaran Kalkulus</footer>
+</body>
+</html>

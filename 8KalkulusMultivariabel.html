@@ -1,0 +1,788 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulus Multivariabel | Kalkulus</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)']],
+                displayMath: [['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+    <header class="navbar">
+        <a href="index.html" class="logo">Kalkulus</a>
+        <nav>
+            <a href="index.html">Beranda</a>
+            <a href="materi.html">Materi</a>
+            <a href="game.html">Game Soal</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <a href="materi.html" class="back-link">← Kembali ke daftar materi</a>
+
+        <article class="article">
+            <p class="eyebrow">BAGIAN VIII — KALKULUS MULTIVARIABEL</p>
+            <h1>Kalkulus Multivariabel</h1>
+            <p class="intro">
+                Kalkulus multivariabel mempelajari fungsi yang bergantung pada dua
+                atau lebih variabel. Materi ini mencakup geometri ruang, turunan
+                parsial, optimisasi, integral lipat, serta hubungan antara integral
+                dan medan vektor melalui teorema Green, Stokes, dan Divergensi.
+            </p>
+
+            <section>
+                <h2>1. Geometri Ruang dan Vektor</h2>
+                <p>
+                    Geometri ruang mempelajari titik, garis, bidang, dan objek
+                    geometris dalam ruang tiga dimensi. Posisi suatu titik
+                    dinyatakan menggunakan koordinat \((x,y,z)\).
+                </p>
+
+                <p>
+                    Vektor adalah besaran yang memiliki besar dan arah. Vektor
+                    dalam ruang tiga dimensi dapat ditulis sebagai
+                </p>
+
+                \[
+                \mathbf{v}=\langle a,b,c\rangle.
+                \]
+
+                <p>Panjang atau norma vektor tersebut adalah</p>
+
+                \[
+                \|\mathbf{v}\|=\sqrt{a^2+b^2+c^2}.
+                \]
+
+                <p>
+                    Dua operasi penting pada vektor adalah perkalian titik
+                    (\textit{dot product}) dan perkalian silang
+                    (\textit{cross product}).
+                </p>
+
+                \[
+                \mathbf{u}\cdot\mathbf{v}
+                =u_1v_1+u_2v_2+u_3v_3.
+                \]
+
+                \[
+                \mathbf{u}\times\mathbf{v}
+                =
+                \begin{vmatrix}
+                \mathbf{i}&\mathbf{j}&\mathbf{k}\\
+                u_1&u_2&u_3\\
+                v_1&v_2&v_3
+                \end{vmatrix}.
+                \]
+
+                <p>
+                    Perkalian titik dapat digunakan untuk menentukan sudut
+                    antara dua vektor, sedangkan perkalian silang menghasilkan
+                    vektor yang tegak lurus terhadap kedua vektor semula.
+                </p>
+
+                <h3>Contoh</h3>
+                <p>Diberikan \(\mathbf{u}=\langle1,2,2\rangle\). Panjang vektor tersebut adalah</p>
+
+                \[
+                \|\mathbf{u}\|=\sqrt{1^2+2^2+2^2}=3.
+                \]
+
+                <p>
+                    Persamaan bidang dengan vektor normal
+                    \(\mathbf{n}=\langle a,b,c\rangle\) yang melalui titik
+                    \((x_0,y_0,z_0)\) adalah
+                </p>
+
+                \[
+                a(x-x_0)+b(y-y_0)+c(z-z_0)=0.
+                \]
+            </section>
+
+            <section>
+                <h2>2. Fungsi Beberapa Variabel</h2>
+                <p>
+                    Fungsi beberapa variabel merupakan fungsi yang nilai
+                    keluarannya bergantung pada dua atau lebih variabel bebas.
+                    Fungsi dua variabel ditulis sebagai
+                </p>
+
+                \[
+                z=f(x,y).
+                \]
+
+                <p>
+                    Fungsi tersebut memetakan setiap pasangan \((x,y)\) dalam
+                    domainnya ke suatu nilai \(z\). Grafiknya dapat dipandang
+                    sebagai permukaan dalam ruang tiga dimensi.
+                </p>
+
+                <h3>Contoh</h3>
+                <p>Diberikan fungsi</p>
+
+                \[
+                f(x,y)=x^2+y^2.
+                \]
+
+                <p>Jika \(x=1\) dan \(y=2\), maka</p>
+
+                \[
+                f(1,2)=1^2+2^2=5.
+                \]
+
+                <p>
+                    Grafik fungsi tersebut adalah paraboloid yang terbuka ke
+                    atas. Kurva levelnya diperoleh dengan menetapkan
+                    \(f(x,y)=k\), sehingga
+                </p>
+
+                \[
+                x^2+y^2=k.
+                \]
+
+                <p>
+                    Untuk \(k>0\), persamaan tersebut menyatakan lingkaran
+                    berpusat di titik asal dengan jari-jari \(\sqrt{k}\).
+                </p>
+            </section>
+
+            <section>
+                <h2>3. Limit dan Kontinuitas Multivariabel</h2>
+                <p>
+                    Limit fungsi dua variabel menyatakan nilai yang didekati
+                    fungsi ketika titik \((x,y)\) mendekati titik tertentu.
+                    Notasinya adalah
+                </p>
+
+                \[
+                \lim_{(x,y)\to(a,b)}f(x,y)=L.
+                \]
+
+                <p>
+                    Berbeda dengan fungsi satu variabel, titik pendekatan dalam
+                    bidang dapat dicapai melalui banyak lintasan. Jika limit
+                    memiliki nilai yang berbeda pada dua lintasan, limit
+                    tersebut tidak ada.
+                </p>
+
+                <h3>Contoh limit yang tidak ada</h3>
+                <p>Diberikan fungsi</p>
+
+                \[
+                f(x,y)=\frac{x^2-y^2}{x^2+y^2}.
+                \]
+
+                <p>
+                    Ketika \((x,y)\to(0,0)\), sepanjang lintasan \(y=0\)
+                    diperoleh
+                </p>
+
+                \[
+                f(x,0)=\frac{x^2}{x^2}=1.
+                \]
+
+                <p>Sementara itu, sepanjang lintasan \(x=0\) diperoleh</p>
+
+                \[
+                f(0,y)=\frac{-y^2}{y^2}=-1.
+                \]
+
+                <p>
+                    Karena hasilnya berbeda, limit fungsi tersebut di
+                    \((0,0)\) tidak ada.
+                </p>
+
+                <p>
+                    Fungsi \(f\) kontinu di \((a,b)\) jika fungsi terdefinisi
+                    di titik tersebut dan memenuhi
+                </p>
+
+                \[
+                \lim_{(x,y)\to(a,b)}f(x,y)=f(a,b).
+                \]
+            </section>
+
+            <section>
+                <h2>4. Turunan Parsial</h2>
+                <p>
+                    Turunan parsial mengukur perubahan fungsi terhadap satu
+                    variabel dengan menganggap variabel lainnya konstan.
+                    Untuk fungsi \(z=f(x,y)\), turunan parsialnya adalah
+                </p>
+
+                \[
+                \frac{\partial f}{\partial x}
+                =f_x(x,y),
+                \qquad
+                \frac{\partial f}{\partial y}
+                =f_y(x,y).
+                \]
+
+                <p>Definisi turunan parsial terhadap \(x\) adalah</p>
+
+                \[
+                f_x(x,y)=
+                \lim_{h\to0}
+                \frac{f(x+h,y)-f(x,y)}{h}.
+                \]
+
+                <h3>Contoh</h3>
+                <p>Diberikan</p>
+
+                \[
+                f(x,y)=x^2y+3xy^2.
+                \]
+
+                <p>Turunan parsial terhadap \(x\):</p>
+
+                \[
+                f_x(x,y)=2xy+3y^2.
+                \]
+
+                <p>Turunan parsial terhadap \(y\):</p>
+
+                \[
+                f_y(x,y)=x^2+6xy.
+                \]
+
+                <p>
+                    Turunan parsial tingkat dua meliputi
+                    \(f_{xx}\), \(f_{yy}\), \(f_{xy}\), dan \(f_{yx}\).
+                    Jika syarat keteraturan tertentu terpenuhi, turunan
+                    campuran memenuhi \(f_{xy}=f_{yx}\).
+                </p>
+            </section>
+
+            <section>
+                <h2>5. Diferensial Total dan Bidang Singgung</h2>
+                <p>
+                    Diferensial total memberikan pendekatan perubahan fungsi
+                    akibat perubahan kecil pada variabel bebas. Untuk
+                    \(z=f(x,y)\), diferensial totalnya adalah
+                </p>
+
+                \[
+                dz=f_x(x,y)\,dx+f_y(x,y)\,dy.
+                \]
+
+                <p>
+                    Jika fungsi terdiferensialkan di sekitar titik
+                    \((a,b)\), pendekatan perubahan nilainya adalah
+                </p>
+
+                \[
+                \Delta z\approx
+                f_x(a,b)\Delta x+f_y(a,b)\Delta y.
+                \]
+
+                <p>
+                    Bidang singgung grafik \(z=f(x,y)\) di titik
+                    \((a,b,f(a,b))\) memiliki persamaan
+                </p>
+
+                \[
+                z-f(a,b)=
+                f_x(a,b)(x-a)+f_y(a,b)(y-b).
+                \]
+
+                <h3>Contoh</h3>
+                <p>Diberikan \(f(x,y)=x^2+y^2\). Tentukan bidang singgung di \((1,2,5)\).</p>
+
+                <p>Diperoleh</p>
+
+                \[
+                f_x=2x,\qquad f_y=2y.
+                \]
+
+                <p>Pada titik \((1,2)\), diperoleh \(f_x=2\) dan \(f_y=4\). Jadi, bidang singgungnya adalah</p>
+
+                \[
+                z-5=2(x-1)+4(y-2).
+                \]
+
+                <p>atau</p>
+
+                \[
+                z=2x+4y-5.
+                \]
+            </section>
+
+            <section>
+                <h2>6. Aturan Rantai Multivariabel</h2>
+                <p>
+                    Aturan rantai digunakan ketika suatu variabel bergantung
+                    pada variabel lain melalui fungsi perantara.
+                </p>
+
+                <p>
+                    Misalkan \(z=f(x,y)\), dengan \(x=x(t)\) dan \(y=y(t)\).
+                    Turunan \(z\) terhadap \(t\) adalah
+                </p>
+
+                \[
+                \frac{dz}{dt}
+                =
+                \frac{\partial f}{\partial x}\frac{dx}{dt}
+                +
+                \frac{\partial f}{\partial y}\frac{dy}{dt}.
+                \]
+
+                <p>
+                    Jika \(x=x(s,t)\) dan \(y=y(s,t)\), maka
+                </p>
+
+                \[
+                \frac{\partial z}{\partial s}
+                =
+                \frac{\partial f}{\partial x}\frac{\partial x}{\partial s}
+                +
+                \frac{\partial f}{\partial y}\frac{\partial y}{\partial s}.
+                \]
+
+                <h3>Contoh</h3>
+                <p>Misalkan \(z=x^2+y^2\), \(x=t\), dan \(y=2t\). Dengan substitusi,</p>
+
+                \[
+                z=t^2+4t^2=5t^2.
+                \]
+
+                <p>Oleh karena itu,</p>
+
+                \[
+                \frac{dz}{dt}=10t.
+                \]
+
+                <p>Hasil yang sama diperoleh dengan aturan rantai:</p>
+
+                \[
+                \frac{dz}{dt}
+                =2x\frac{dx}{dt}+2y\frac{dy}{dt}
+                =2t+2(2t)(2)=10t.
+                \]
+            </section>
+
+            <section>
+                <h2>7. Gradien dan Turunan Berarah</h2>
+                <p>
+                    Gradien adalah vektor yang dibentuk dari turunan parsial
+                    pertama suatu fungsi skalar. Untuk fungsi dua variabel,
+                </p>
+
+                \[
+                \nabla f(x,y)=
+                \left\langle f_x(x,y),f_y(x,y)\right\rangle.
+                \]
+
+                <p>
+                    Gradien menunjukkan arah kenaikan tercepat fungsi pada
+                    titik tertentu. Besar gradien menyatakan laju kenaikan
+                    maksimum pada titik tersebut.
+                </p>
+
+                <p>
+                    Turunan berarah fungsi \(f\) pada arah vektor satuan
+                    \(\mathbf{u}\) diberikan oleh
+                </p>
+
+                \[
+                D_{\mathbf{u}}f=\nabla f\cdot\mathbf{u}.
+                \]
+
+                <h3>Contoh</h3>
+                <p>Diberikan \(f(x,y)=x^2+y^2\). Tentukan gradien di \((1,2)\).</p>
+
+                \[
+                \nabla f(x,y)=\langle2x,2y\rangle.
+                \]
+
+                \[
+                \nabla f(1,2)=\langle2,4\rangle.
+                \]
+
+                <p>
+                    Jika arah yang digunakan adalah
+                    \(\mathbf{v}=\langle3,4\rangle\), vektor satuannya ialah
+                </p>
+
+                \[
+                \mathbf{u}=\left\langle\frac35,\frac45\right\rangle.
+                \]
+
+                <p>Turunan berarahnya adalah</p>
+
+                \[
+                D_{\mathbf{u}}f
+                =\langle2,4\rangle\cdot
+                \left\langle\frac35,\frac45\right\rangle
+                =\frac{22}{5}.
+                \]
+            </section>
+
+            <section>
+                <h2>8. Maksimum dan Minimum Multivariabel</h2>
+                <p>
+                    Optimisasi multivariabel bertujuan menentukan nilai maksimum
+                    atau minimum suatu fungsi yang bergantung pada beberapa
+                    variabel.
+                </p>
+
+                <p>
+                    Titik kritis fungsi dua variabel dapat dicari dengan
+                    menyelesaikan sistem
+                </p>
+
+                \[
+                f_x(x,y)=0,\qquad f_y(x,y)=0.
+                \]
+
+                <p>
+                    Untuk mengklasifikasikan titik kritis, digunakan diskriminan
+                    turunan kedua
+                </p>
+
+                \[
+                D=f_{xx}f_{yy}-(f_{xy})^2.
+                \]
+
+                <ul>
+                    <li>Jika \(D>0\) dan \(f_{xx}>0\), titik tersebut merupakan minimum lokal.</li>
+                    <li>Jika \(D>0\) dan \(f_{xx}<0\), titik tersebut merupakan maksimum lokal.</li>
+                    <li>Jika \(D<0\), titik tersebut merupakan titik pelana.</li>
+                    <li>Jika \(D=0\), uji ini tidak memberikan kesimpulan.</li>
+                </ul>
+
+                <h3>Contoh</h3>
+                <p>Diberikan fungsi</p>
+
+                \[
+                f(x,y)=x^2+y^2-4x-6y.
+                \]
+
+                <p>Turunan parsial pertamanya adalah</p>
+
+                \[
+                f_x=2x-4,\qquad f_y=2y-6.
+                \]
+
+                <p>
+                    Dengan menyamakan keduanya dengan nol, diperoleh titik
+                    kritis \((2,3)\). Karena
+                </p>
+
+                \[
+                f_{xx}=2,\quad f_{yy}=2,\quad f_{xy}=0,
+                \]
+
+                \[
+                D=(2)(2)-0^2=4>0,
+                \]
+
+                <p>
+                    dan \(f_{xx}>0\), titik \((2,3)\) merupakan minimum lokal.
+                    Bahkan, karena fungsi ini berupa kuadrat yang terbuka ke
+                    atas, titik tersebut merupakan minimum global dengan nilai
+                    \(f(2,3)=-13\).
+                </p>
+            </section>
+
+            <section>
+                <h2>9. Pengali Lagrange</h2>
+                <p>
+                    Metode pengali Lagrange digunakan untuk mencari maksimum
+                    atau minimum fungsi dengan kendala berupa persamaan.
+                    Misalkan ingin mengoptimalkan \(f(x,y)\) dengan kendala
+                    \(g(x,y)=c\). Syarat kandidatnya adalah
+                </p>
+
+                \[
+                \nabla f=\lambda\nabla g,
+                \qquad g(x,y)=c.
+                \]
+
+                <p>
+                    Nilai \(\lambda\) disebut pengali Lagrange. Sistem persamaan
+                    tersebut digunakan untuk mencari kandidat titik optimum
+                    yang memenuhi kendala.
+                </p>
+
+                <h3>Contoh</h3>
+                <p>
+                    Tentukan nilai maksimum dan minimum
+                    \(f(x,y)=xy\) dengan kendala \(x^2+y^2=1\).
+                </p>
+
+                <p>Persamaan Lagrange memberikan</p>
+
+                \[
+                y=2\lambda x,\qquad
+                x=2\lambda y,\qquad
+                x^2+y^2=1.
+                \]
+
+                <p>
+                    Dari persamaan tersebut diperoleh kandidat
+                    \(x=y=\pm\frac{1}{\sqrt2}\) untuk nilai maksimum, serta
+                    \(x=-y=\pm\frac{1}{\sqrt2}\) untuk nilai minimum.
+                </p>
+
+                \[
+                f_{\max}=\frac12,\qquad
+                f_{\min}=-\frac12.
+                \]
+            </section>
+
+            <section>
+                <h2>10. Integral Lipat Dua dan Lipat Tiga</h2>
+                <p>
+                    Integral lipat digunakan untuk mengintegralkan fungsi pada
+                    daerah dua atau tiga dimensi. Integral lipat dua dapat
+                    digunakan untuk menghitung volume di bawah permukaan,
+                    sedangkan integral lipat tiga dapat digunakan untuk
+                    menghitung volume benda atau massa dengan kerapatan tertentu.
+                </p>
+
+                <p>Integral lipat dua pada daerah persegi panjang dapat ditulis</p>
+
+                \[
+                \iint_R f(x,y)\,dA
+                =
+                \int_a^b\int_c^d f(x,y)\,dy\,dx.
+                \]
+
+                <p>Integral lipat tiga pada daerah \(E\) ditulis</p>
+
+                \[
+                \iiint_E f(x,y,z)\,dV.
+                \]
+
+                <h3>Contoh integral lipat dua</h3>
+                <p>Hitung integral berikut:</p>
+
+                \[
+                \int_0^1\int_0^2(x+y)\,dy\,dx.
+                \]
+
+                <p>Integralkan terlebih dahulu terhadap \(y\):</p>
+
+                \[
+                \int_0^2(x+y)\,dy
+                =2x+2.
+                \]
+
+                <p>Kemudian, integralkan terhadap \(x\):</p>
+
+                \[
+                \int_0^1(2x+2)\,dx
+                =[x^2+2x]_0^1=3.
+                \]
+
+                <p>
+                    Jadi, nilai integral tersebut adalah \(3\).
+                </p>
+
+                <p>
+                    Untuk mengubah variabel integrasi, dapat digunakan
+                    transformasi koordinat. Pada koordinat polar berlaku
+                </p>
+
+                \[
+                x=r\cos\theta,\qquad
+                y=r\sin\theta,\qquad
+                dA=r\,dr\,d\theta.
+                \]
+
+                <p>
+                    Pada koordinat silinder, \(dV=r\,dr\,d\theta\,dz\),
+                    sedangkan pada koordinat bola,
+                </p>
+
+                \[
+                dV=\rho^2\sin\phi\,d\rho\,d\phi\,d\theta.
+                \]
+            </section>
+
+            <section>
+                <h2>11. Integral Garis dan Integral Permukaan</h2>
+                <p>
+                    Integral garis menghitung akumulasi suatu fungsi sepanjang
+                    kurva. Untuk fungsi skalar \(f\) pada kurva \(C\),
+                </p>
+
+                \[
+                \int_C f\,ds.
+                \]
+
+                <p>
+                    Jika kurva diparameterkan oleh \(\mathbf{r}(t)\), dengan
+                    \(a\leq t\leq b\), maka
+                </p>
+
+                \[
+                \int_C f\,ds
+                =
+                \int_a^b f(\mathbf{r}(t))
+                \|\mathbf{r}'(t)\|\,dt.
+                \]
+
+                <p>
+                    Untuk medan vektor \(\mathbf{F}\), integral garis yang
+                    berorientasi ditulis
+                </p>
+
+                \[
+                \int_C\mathbf{F}\cdot d\mathbf{r}.
+                \]
+
+                <p>
+                    Integral permukaan menghitung akumulasi fungsi pada suatu
+                    permukaan. Untuk fungsi skalar \(f\),
+                </p>
+
+                \[
+                \iint_S f\,dS.
+                \]
+
+                <p>
+                    Sementara itu, fluks medan vektor \(\mathbf{F}\) melalui
+                    permukaan berorientasi \(S\) dinyatakan sebagai
+                </p>
+
+                \[
+                \iint_S\mathbf{F}\cdot\mathbf{n}\,dS,
+                \]
+
+                <p>
+                    dengan \(\mathbf{n}\) merupakan vektor normal satuan
+                    terhadap permukaan. Orientasi permukaan memengaruhi tanda
+                    nilai fluks.
+                </p>
+            </section>
+
+            <section>
+                <h2>12. Teorema Green, Stokes, dan Divergensi</h2>
+                <p>
+                    Ketiga teorema ini menghubungkan integral pada suatu daerah
+                    atau permukaan dengan integral pada batasnya. Teorema
+                    tersebut membantu menyederhanakan perhitungan integral
+                    dalam kalkulus vektor.
+                </p>
+
+                <h3>12.1 Teorema Green</h3>
+                <p>
+                    Teorema Green menghubungkan integral garis pada kurva
+                    tertutup sederhana \(C\) dengan integral lipat dua pada
+                    daerah \(D\) yang dibatasinya. Untuk orientasi positif,
+                </p>
+
+                \[
+                \oint_C P\,dx+Q\,dy
+                =
+                \iint_D
+                \left(
+                \frac{\partial Q}{\partial x}
+                -
+                \frac{\partial P}{\partial y}
+                \right)dA.
+                \]
+
+                <p>
+                    Teorema ini berlaku jika \(P\) dan \(Q\) memiliki turunan
+                    parsial yang kontinu pada daerah yang sesuai.
+                </p>
+
+                <h3>12.2 Teorema Stokes</h3>
+                <p>
+                    Teorema Stokes menghubungkan integral garis medan vektor
+                    pada kurva batas \(C\) dengan integral permukaan rotasi
+                    medan pada permukaan \(S\):
+                </p>
+
+                \[
+                \oint_C\mathbf{F}\cdot d\mathbf{r}
+                =
+                \iint_S
+                (\nabla\times\mathbf{F})\cdot\mathbf{n}\,dS.
+                \]
+
+                <p>
+                    Kurva \(C\) merupakan batas permukaan \(S\), dengan orientasi
+                    kurva dan normal permukaan yang saling bersesuaian.
+                </p>
+
+                <h3>12.3 Teorema Divergensi</h3>
+                <p>
+                    Teorema Divergensi, atau Teorema Gauss, menghubungkan fluks
+                    medan vektor melalui permukaan tertutup \(S\) dengan
+                    integral lipat tiga divergensi medan pada volume \(E\)
+                    yang dibatasi permukaan tersebut:
+                </p>
+
+                \[
+                \iint_S\mathbf{F}\cdot\mathbf{n}\,dS
+                =
+                \iiint_E(\nabla\cdot\mathbf{F})\,dV.
+                \]
+
+                <p>
+                    Permukaan \(S\) harus berorientasi ke luar. Divergensi
+                    medan vektor \(\mathbf{F}=\langle P,Q,R\rangle\) adalah
+                </p>
+
+                \[
+                \nabla\cdot\mathbf{F}
+                =
+                \frac{\partial P}{\partial x}
+                +\frac{\partial Q}{\partial y}
+                +\frac{\partial R}{\partial z}.
+                \]
+
+                <p>
+                    Secara ringkas, Teorema Green menghubungkan integral garis
+                    dan integral lipat dua, Teorema Stokes menghubungkan
+                    integral garis dan integral permukaan rotasi, sedangkan
+                    Teorema Divergensi menghubungkan fluks permukaan tertutup
+                    dan integral volume divergensi.
+                </p>
+            </section>
+
+            <section>
+                <h2>Ringkasan Materi</h2>
+                <ul>
+                    <li>Vektor dan geometri ruang menjadi dasar untuk memahami objek dalam tiga dimensi.</li>
+                    <li>Fungsi beberapa variabel mempelajari hubungan antara beberapa variabel bebas dan nilai fungsi.</li>
+                    <li>Limit dan kontinuitas multivariabel mempertimbangkan pendekatan dari berbagai lintasan.</li>
+                    <li>Turunan parsial, diferensial total, dan aturan rantai digunakan untuk menganalisis perubahan fungsi.</li>
+                    <li>Gradien dan turunan berarah menjelaskan laju perubahan fungsi dalam arah tertentu.</li>
+                    <li>Optimisasi multivariabel dan pengali Lagrange digunakan untuk menentukan titik optimum, termasuk dengan kendala.</li>
+                    <li>Integral lipat, integral garis, dan integral permukaan digunakan untuk menghitung akumulasi pada berbagai dimensi.</li>
+                    <li>Teorema Green, Stokes, dan Divergensi menghubungkan integral pada batas dengan integral pada daerah atau volume.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Evaluasi Akhir</h2>
+                <ol>
+                    <li>Tentukan panjang vektor \(\mathbf{v}=\langle2,-3,6\rangle\).</li>
+                    <li>Tentukan turunan parsial pertama fungsi \(f(x,y)=x^3y+2xy^2\).</li>
+                    <li>Tentukan gradien fungsi \(f(x,y)=x^2+3y^2\) di titik \((1,-1)\).</li>
+                    <li>Tentukan titik kritis fungsi \(f(x,y)=x^2+y^2-6x+4y\) dan klasifikasikan titik tersebut.</li>
+                    <li>Hitung integral \(\displaystyle\int_0^1\int_0^1(x+y)\,dy\,dx\).</li>
+                    <li>Jelaskan perbedaan penggunaan Teorema Green, Teorema Stokes, dan Teorema Divergensi.</li>
+                </ol>
+            </section>
+        </article>
+    </main>
+
+    <footer>
+        Website Pembelajaran Kalkulus
+    </footer>
+</body>
+</html>
