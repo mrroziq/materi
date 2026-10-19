@@ -1,0 +1,506 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Persamaan Diferensial Dasar | Kalkulus</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)']],
+                displayMath: [['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+    <header class="navbar">
+        <a href="index.html" class="logo">Kalkulus</a>
+        <nav>
+            <a href="index.html">Beranda</a>
+            <a href="MateriMath.html">Materi Math</a>
+            <a href="game.html">Game Soal</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <article class="article">
+            <p class="eyebrow">BAGIAN IX — PERSAMAAN DIFERENSIAL DASAR</p>
+            <h1>Persamaan Diferensial Dasar</h1>
+            <p class="intro">
+                Persamaan diferensial merupakan persamaan matematika yang
+                melibatkan suatu fungsi dan turunannya. Persamaan ini digunakan
+                untuk memodelkan berbagai fenomena, seperti pertumbuhan populasi,
+                peluruhan zat radioaktif, gerak benda, dan perubahan suhu.
+                Pada bagian ini, pembahasan difokuskan pada persamaan diferensial
+                orde satu dan orde dua beserta penerapannya.
+            </p>
+
+            <section>
+                <h2>1. Pengertian Persamaan Diferensial</h2>
+                <p>
+                    Persamaan diferensial adalah persamaan yang memuat fungsi
+                    yang tidak diketahui beserta satu atau lebih turunannya.
+                    Persamaan diferensial dibedakan menjadi persamaan diferensial
+                    biasa dan persamaan diferensial parsial.
+                </p>
+
+                <p>
+                    Persamaan diferensial biasa (PDB) melibatkan turunan terhadap
+                    satu variabel bebas, sedangkan persamaan diferensial parsial
+                    melibatkan turunan parsial terhadap dua atau lebih variabel
+                    bebas.
+                </p>
+
+                <h3>Contoh persamaan diferensial biasa</h3>
+
+                \[
+                \frac{dy}{dx}=3x^2.
+                \]
+
+                <p>
+                    Persamaan tersebut melibatkan fungsi \(y\) dan turunan
+                    pertamanya terhadap \(x\).
+                </p>
+
+                <h3>Orde persamaan diferensial</h3>
+                <p>
+                    Orde persamaan diferensial ditentukan oleh turunan tertinggi
+                    yang muncul dalam persamaan.
+                </p>
+
+                <ul>
+                    <li>Orde satu: \(\displaystyle \frac{dy}{dx}=x+y\).</li>
+                    <li>Orde dua: \(\displaystyle \frac{d^2y}{dx^2}+y=0\).</li>
+                    <li>Orde tiga: \(\displaystyle \frac{d^3y}{dx^3}-y=0\).</li>
+                </ul>
+
+                <h3>Solusi persamaan diferensial</h3>
+                <p>
+                    Solusi persamaan diferensial adalah fungsi yang memenuhi
+                    persamaan tersebut. Solusi umum biasanya memuat konstanta
+                    sembarang, sedangkan solusi khusus diperoleh setelah
+                    diberikan kondisi awal atau kondisi batas.
+                </p>
+
+                <p>Contohnya, untuk persamaan</p>
+
+                \[
+                \frac{dy}{dx}=2x,
+                \]
+
+                <p>integrasi terhadap \(x\) menghasilkan solusi umum</p>
+
+                \[
+                y=x^2+C.
+                \]
+
+                <p>
+                    Jika diketahui \(y(0)=3\), maka \(C=3\), sehingga solusi
+                    khususnya adalah
+                </p>
+
+                \[
+                y=x^2+3.
+                \]
+            </section>
+
+            <section>
+                <h2>2. Persamaan Diferensial Orde Satu</h2>
+                <p>
+                    Persamaan diferensial orde satu merupakan persamaan yang
+                    turunan tertingginya adalah turunan pertama. Bentuk umumnya
+                    dapat ditulis sebagai
+                </p>
+
+                \[
+                \frac{dy}{dx}=f(x,y).
+                \]
+
+                <p>
+                    Salah satu bentuk yang sering digunakan adalah persamaan
+                    diferensial linear orde satu:
+                </p>
+
+                \[
+                \frac{dy}{dx}+P(x)y=Q(x).
+                \]
+
+                <p>
+                    Persamaan orde satu dapat diselesaikan dengan berbagai
+                    metode, bergantung pada bentuk persamaannya. Dua metode
+                    dasar yang dibahas adalah metode pemisahan variabel dan
+                    metode faktor integrasi.
+                </p>
+
+                <h3>Contoh</h3>
+                <p>Selesaikan persamaan diferensial berikut:</p>
+
+                \[
+                \frac{dy}{dx}=2x.
+                \]
+
+                <p>Dengan mengintegralkan kedua ruas, diperoleh</p>
+
+                \[
+                y=\int 2x\,dx=x^2+C.
+                \]
+
+                <p>
+                    Jadi, solusi umumnya adalah \(y=x^2+C\), dengan \(C\)
+                    konstanta sembarang.
+                </p>
+            </section>
+
+            <section>
+                <h2>3. Persamaan Diferensial Separabel</h2>
+                <p>
+                    Persamaan diferensial separabel adalah persamaan yang dapat
+                    ditulis sehingga semua suku yang memuat \(y\) berada pada
+                    satu ruas bersama \(dy\), sedangkan semua suku yang memuat
+                    \(x\) berada pada ruas lainnya bersama \(dx\).
+                </p>
+
+                <p>Bentuk umumnya adalah</p>
+
+                \[
+                \frac{dy}{dx}=g(x)h(y).
+                \]
+
+                <p>Jika \(h(y)\ne 0\), variabel dapat dipisahkan menjadi</p>
+
+                \[
+                \frac{1}{h(y)}\,dy=g(x)\,dx.
+                \]
+
+                <p>Kedua ruas kemudian diintegralkan:</p>
+
+                \[
+                \int\frac{1}{h(y)}\,dy=\int g(x)\,dx.
+                \]
+
+                <h3>Contoh</h3>
+                <p>Selesaikan persamaan diferensial</p>
+
+                \[
+                \frac{dy}{dx}=xy.
+                \]
+
+                <p>Pisahkan variabel:</p>
+
+                \[
+                \frac{1}{y}\,dy=x\,dx.
+                \]
+
+                <p>Integralkan kedua ruas:</p>
+
+                \[
+                \int\frac{1}{y}\,dy=\int x\,dx.
+                \]
+
+                \[
+                \ln|y|=\frac{x^2}{2}+C.
+                \]
+
+                <p>Dengan menuliskan konstanta dalam bentuk eksponensial, diperoleh</p>
+
+                \[
+                y=Ce^{x^2/2}.
+                \]
+
+                <p>
+                    Bentuk tersebut juga mencakup solusi \(y=0\) ketika
+                    \(C=0\).
+                </p>
+            </section>
+
+            <section>
+                <h2>4. Persamaan Linear Orde Satu</h2>
+                <p>
+                    Persamaan diferensial linear orde satu memiliki bentuk
+                </p>
+
+                \[
+                \frac{dy}{dx}+P(x)y=Q(x).
+                \]
+
+                <p>
+                    Salah satu metode penyelesaiannya adalah menggunakan faktor
+                    integrasi. Faktor integrasi didefinisikan sebagai
+                </p>
+
+                \[
+                \mu(x)=e^{\int P(x)\,dx}.
+                \]
+
+                <p>
+                    Setelah persamaan dikalikan dengan faktor integrasi,
+                    ruas kiri dapat dinyatakan sebagai turunan hasil kali:
+                </p>
+
+                \[
+                \frac{d}{dx}\bigl(\mu(x)y\bigr)=\mu(x)Q(x).
+                \]
+
+                <p>Dengan mengintegralkan kedua ruas, diperoleh</p>
+
+                \[
+                \mu(x)y=\int\mu(x)Q(x)\,dx+C.
+                \]
+
+                <p>Oleh karena itu, solusi umumnya adalah</p>
+
+                \[
+                y=\frac{1}{\mu(x)}
+                \left(\int\mu(x)Q(x)\,dx+C\right).
+                \]
+
+                <h3>Contoh</h3>
+                <p>Selesaikan persamaan</p>
+
+                \[
+                \frac{dy}{dx}+y=e^x.
+                \]
+
+                <p>Dalam persamaan ini, \(P(x)=1\) dan \(Q(x)=e^x\). Faktor integrasinya adalah</p>
+
+                \[
+                \mu(x)=e^{\int 1\,dx}=e^x.
+                \]
+
+                <p>Kalikan seluruh persamaan dengan \(e^x\):</p>
+
+                \[
+                e^x\frac{dy}{dx}+e^xy=e^{2x}.
+                \]
+
+                <p>Ruas kiri merupakan turunan dari \(e^xy\), sehingga</p>
+
+                \[
+                \frac{d}{dx}(e^xy)=e^{2x}.
+                \]
+
+                <p>Integralkan kedua ruas:</p>
+
+                \[
+                e^xy=\frac12e^{2x}+C.
+                \]
+
+                <p>Dengan demikian, solusi umumnya adalah</p>
+
+                \[
+                y=\frac12e^x+Ce^{-x}.
+                \]
+            </section>
+
+            <section>
+                <h2>5. Persamaan Diferensial Orde Dua</h2>
+                <p>
+                    Persamaan diferensial orde dua merupakan persamaan yang
+                    melibatkan turunan kedua sebagai turunan tertinggi.
+                    Salah satu bentuk yang penting adalah persamaan diferensial
+                    linear homogen dengan koefisien konstan:
+                </p>
+
+                \[
+                ay''+by'+cy=0,\qquad a\ne0.
+                \]
+
+                <p>
+                    Penyelesaian persamaan ini dapat dilakukan dengan
+                    menggunakan persamaan karakteristik
+                </p>
+
+                \[
+                ar^2+br+c=0.
+                \]
+
+                <p>Bentuk solusi bergantung pada akar persamaan karakteristik.</p>
+
+                <ul>
+                    <li>
+                        Dua akar real berbeda \(r_1\) dan \(r_2\):
+                        \[
+                        y=C_1e^{r_1x}+C_2e^{r_2x}.
+                        \]
+                    </li>
+                    <li>
+                        Akar real kembar \(r\):
+                        \[
+                        y=(C_1+C_2x)e^{rx}.
+                        \]
+                    </li>
+                    <li>
+                        Akar kompleks \(\alpha\pm\beta i\):
+                        \[
+                        y=e^{\alpha x}
+                        (C_1\cos\beta x+C_2\sin\beta x).
+                        \]
+                    </li>
+                </ul>
+
+                <h3>Contoh</h3>
+                <p>Selesaikan persamaan diferensial</p>
+
+                \[
+                y''-3y'+2y=0.
+                \]
+
+                <p>Persamaan karakteristiknya adalah</p>
+
+                \[
+                r^2-3r+2=0.
+                \]
+
+                <p>Faktorkan persamaan tersebut:</p>
+
+                \[
+                (r-1)(r-2)=0.
+                \]
+
+                <p>Diperoleh akar \(r_1=1\) dan \(r_2=2\). Jadi, solusi umumnya adalah</p>
+
+                \[
+                y=C_1e^x+C_2e^{2x}.
+                \]
+
+                <p>
+                    Jika diberikan dua kondisi awal, misalnya nilai \(y\) dan
+                    \(y'\) pada satu titik, konstanta \(C_1\) dan \(C_2\)
+                    dapat ditentukan untuk memperoleh solusi khusus.
+                </p>
+            </section>
+
+            <section>
+                <h2>6. Aplikasi Persamaan Diferensial</h2>
+                <p>
+                    Persamaan diferensial digunakan untuk menggambarkan
+                    perubahan suatu besaran terhadap waktu atau variabel lain.
+                    Berikut beberapa contoh penerapannya.
+                </p>
+
+                <h3>6.1 Pertumbuhan dan Peluruhan Eksponensial</h3>
+                <p>
+                    Jika laju perubahan suatu populasi sebanding dengan jumlah
+                    populasi saat itu, modelnya adalah
+                </p>
+
+                \[
+                \frac{dP}{dt}=kP.
+                \]
+
+                <p>Solusi umumnya adalah</p>
+
+                \[
+                P(t)=P_0e^{kt},
+                \]
+
+                <p>
+                    dengan \(P_0\) sebagai populasi awal. Jika \(k>0\), model
+                    menggambarkan pertumbuhan eksponensial. Jika \(k<0\),
+                    model menggambarkan peluruhan eksponensial.
+                </p>
+
+                <h3>Contoh</h3>
+                <p>
+                    Suatu populasi awal berjumlah 100 individu dan tumbuh dengan
+                    laju relatif \(k=0{,}2\) per satuan waktu. Modelnya adalah
+                </p>
+
+                \[
+                P(t)=100e^{0{,}2t}.
+                \]
+
+                <p>
+                    Pada \(t=5\), model memberikan
+                </p>
+
+                \[
+                P(5)=100e^1\approx271{,}83.
+                \]
+
+                <p>
+                    Karena populasi merupakan besaran diskret, hasil ini
+                    merupakan perkiraan kontinu.
+                </p>
+
+                <h3>6.2 Hukum Pendinginan Newton</h3>
+                <p>
+                    Hukum pendinginan Newton menyatakan bahwa laju perubahan
+                    suhu benda sebanding dengan selisih suhu benda dan suhu
+                    lingkungan. Modelnya adalah
+                </p>
+
+                \[
+                \frac{dT}{dt}=-k(T-T_a),\qquad k>0.
+                \]
+
+                <p>Solusi umumnya adalah</p>
+
+                \[
+                T(t)=T_a+(T_0-T_a)e^{-kt},
+                \]
+
+                <p>
+                    dengan \(T_a\) sebagai suhu lingkungan dan \(T_0\) sebagai
+                    suhu awal benda. Model ini menunjukkan bahwa suhu benda
+                    mendekati suhu lingkungan seiring berjalannya waktu.
+                </p>
+
+                <h3>6.3 Gerak Harmonik Sederhana</h3>
+                <p>
+                    Gerak harmonik sederhana, misalnya pada sistem pegas ideal,
+                    dapat dimodelkan dengan persamaan diferensial orde dua
+                </p>
+
+                \[
+                \frac{d^2x}{dt^2}+\omega^2x=0.
+                \]
+
+                <p>Solusi umumnya adalah</p>
+
+                \[
+                x(t)=C_1\cos(\omega t)+C_2\sin(\omega t).
+                \]
+
+                <p>
+                    Di sini, \(x(t)\) adalah simpangan dan \(\omega\) adalah
+                    frekuensi sudut. Konstanta ditentukan berdasarkan kondisi
+                    awal sistem.
+                </p>
+            </section>
+
+            <section>
+                <h2>Ringkasan Materi</h2>
+                <ul>
+                    <li>Persamaan diferensial melibatkan fungsi yang tidak diketahui dan turunannya.</li>
+                    <li>Orde persamaan diferensial ditentukan oleh turunan tertinggi yang muncul.</li>
+                    <li>Persamaan separabel diselesaikan dengan memisahkan variabel sebelum mengintegralkan kedua ruas.</li>
+                    <li>Persamaan linear orde satu dapat diselesaikan menggunakan faktor integrasi.</li>
+                    <li>Persamaan linear homogen orde dua dengan koefisien konstan dapat diselesaikan melalui persamaan karakteristik.</li>
+                    <li>Persamaan diferensial dapat memodelkan pertumbuhan populasi, pendinginan, dan gerak harmonik.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Evaluasi Akhir</h2>
+                <ol>
+                    <li>Tentukan orde persamaan diferensial \(\displaystyle y''+4y'+4y=0\).</li>
+                    <li>Selesaikan persamaan separabel \(\displaystyle \frac{dy}{dx}=3xy\).</li>
+                    <li>Selesaikan persamaan linear orde satu \(\displaystyle \frac{dy}{dx}+2y=4\).</li>
+                    <li>Selesaikan persamaan orde dua \(\displaystyle y''-5y'+6y=0\).</li>
+                    <li>Suatu populasi memenuhi model \(\displaystyle \frac{dP}{dt}=0{,}1P\), dengan populasi awal \(P(0)=200\). Tentukan fungsi populasinya.</li>
+                    <li>Jelaskan bagaimana persamaan diferensial digunakan untuk memodelkan suhu benda yang mendingin.</li>
+                </ol>
+            </section>
+        </article>
+    </main>
+
+    <footer>
+        Website Pembelajaran Kalkulus
+    </footer>
+</body>
+</html>

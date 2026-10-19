@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feature Engineering | Data Science</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+    MathJax = {
+        tex: {
+            inlineMath: [['\\(', '\\)']],
+            displayMath: [['\\[', '\\]']]
+        }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+    <header class="navbar">
+        <a href="index.html" class="logo">ShadowLab</a>
+        <nav>
+            <a href="index.html">Beranda</a>
+            <a href="MateriDataScience.html">Materi Data Science</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <article class="article">
+            <p class="eyebrow">BAGIAN XII / DATA SCIENCE</p>
+            <h1>Feature Engineering</h1>
+            <p class="intro">
+                Feature engineering adalah proses memilih, membentuk, dan mentransformasikan
+                variabel agar data dapat digunakan secara lebih efektif oleh model machine learning.
+                Fitur yang tepat dapat membantu model mengenali pola dan meningkatkan kualitas prediksi.
+            </p>
+
+            <section>
+                <h2>1. Seleksi Fitur</h2>
+                <p>
+                    Seleksi fitur (<em>feature selection</em>) adalah proses memilih variabel yang
+                    relevan untuk memprediksi target. Tujuannya adalah mengurangi fitur yang tidak
+                    diperlukan, menyederhanakan model, dan berpotensi mengurangi overfitting.
+                </p>
+
+                <p>Secara umum, seleksi fitur dapat dilakukan melalui tiga pendekatan.</p>
+                <ul>
+                    <li><strong>Filter method:</strong> memilih fitur berdasarkan ukuran statistik, seperti korelasi atau chi-square.</li>
+                    <li><strong>Wrapper method:</strong> menguji kombinasi fitur berdasarkan performa model, misalnya Recursive Feature Elimination (RFE).</li>
+                    <li><strong>Embedded method:</strong> memilih fitur ketika proses pelatihan berlangsung, misalnya melalui Lasso atau model berbasis pohon.</li>
+                </ul>
+
+                <p>Contoh seleksi fitur berdasarkan korelasi numerik:</p>
+                <pre><code>import pandas as pd
+
+df = pd.DataFrame({
+    "usia": [20, 25, 30, 35, 40],
+    "pendapatan": [3, 4, 5, 6, 7],
+    "lama_belajar": [1, 2, 3, 4, 5],
+    "nilai": [60, 65, 75, 80, 90]
+})
+
+korelasi = df.corr(numeric_only=True)
+print(korelasi["nilai"].sort_values(ascending=False))</code></pre>
+
+                <p>
+                    Korelasi dapat menjadi petunjuk awal, tetapi tidak selalu menunjukkan hubungan
+                    sebab-akibat atau kemampuan prediksi yang sebenarnya. Hubungan nonlinier juga
+                    dapat terlewat oleh korelasi Pearson.
+                </p>
+            </section>
+
+            <section>
+                <h2>2. Pembuatan Fitur Baru</h2>
+                <p>
+                    Pembuatan fitur baru (<em>feature creation</em>) dilakukan dengan menggabungkan
+                    atau mengolah fitur yang sudah tersedia agar menghasilkan informasi yang lebih
+                    berguna.
+                </p>
+
+                <p>Misalnya, dari data harga dan jumlah barang, kita dapat membuat fitur total belanja:</p>
+
+                \[
+                \text{total\_belanja}=\text{harga}\times\text{jumlah}
+                \]
+
+                <pre><code>import pandas as pd
+
+df = pd.DataFrame({
+    "harga": [10000, 15000, 20000],
+    "jumlah": [2, 3, 1]
+})
+
+df["total_belanja"] = df["harga"] * df["jumlah"]
+
+print(df)</code></pre>
+
+                <p>Fitur baru lainnya dapat berupa:</p>
+                <ul>
+                    <li>Rasio pengeluaran terhadap pendapatan.</li>
+                    <li>Rata-rata nilai dari beberapa mata pelajaran.</li>
+                    <li>Jumlah transaksi pelanggan dalam suatu periode.</li>
+                    <li>Persentase keterlambatan pembayaran.</li>
+                </ul>
+
+                <p>
+                    Pembuatan fitur harus didasarkan pada konteks masalah. Fitur yang terlihat
+                    informatif belum tentu berguna jika tidak berkaitan dengan target.
+                </p>
+            </section>
+
+            <section>
+                <h2>3. Transformasi Fitur</h2>
+                <p>
+                    Transformasi fitur mengubah representasi atau skala variabel agar lebih sesuai
+                    untuk algoritma tertentu. Transformasi dapat membantu menangani perbedaan skala,
+                    distribusi yang menceng, atau hubungan yang tidak linear.
+                </p>
+
+                <h3>Standardisasi</h3>
+                <p>Standardisasi mengubah fitur sehingga memiliki rata-rata nol dan simpangan baku satu:</p>
+                \[
+                z=\frac{x-\mu}{\sigma}
+                \]
+                <p>
+                    Di sini, \(x\) adalah nilai awal, \(\mu\) adalah rata-rata, dan \(\sigma\)
+                    adalah simpangan baku.
+                </p>
+
+                <h3>Normalisasi Min-Max</h3>
+                <p>Normalisasi Min-Max memetakan nilai ke rentang tertentu, biasanya 0 sampai 1:</p>
+                \[
+                x'=\frac{x-x_{\min}}{x_{\max}-x_{\min}}
+                \]
+
+                <h3>Contoh dengan Scikit-learn</h3>
+                <pre><code>from sklearn.preprocessing import StandardScaler, MinMaxScaler
+
+X = [[10], [20], [30], [40], [50]]
+
+standardizer = StandardScaler()
+X_standard = standardizer.fit_transform(X)
+
+normalizer = MinMaxScaler()
+X_normalized = normalizer.fit_transform(X)
+
+print("Standardisasi:")
+print(X_standard)
+
+print("Normalisasi Min-Max:")
+print(X_normalized)</code></pre>
+
+                <p>
+                    Parameter transformasi harus dipelajari hanya dari data latih. Setelah itu,
+                    transformasi yang sama diterapkan pada data validasi dan data uji.
+                </p>
+            </section>
+
+            <section>
+                <h2>4. Encoding Fitur Kategorikal</h2>
+                <p>
+                    Banyak algoritma machine learning memerlukan input numerik. Karena itu, fitur
+                    kategorikal seperti jenis kelamin, kota, atau jenis produk perlu direpresentasikan
+                    dalam bentuk angka yang sesuai.
+                </p>
+
+                <h3>Label Encoding</h3>
+                <p>
+                    Setiap kategori dipetakan ke sebuah bilangan. Cara ini sesuai untuk kategori
+                    berurutan atau untuk algoritma yang memang menangani kode kategori secara tepat.
+                    Pada kategori nominal, angka tersebut dapat menimbulkan kesan urutan yang sebenarnya tidak ada.
+                </p>
+
+                <h3>One-Hot Encoding</h3>
+                <p>
+                    Setiap kategori dibuat menjadi kolom indikator yang bernilai 0 atau 1.
+                    Pendekatan ini umum digunakan untuk kategori nominal.
+                </p>
+
+                <pre><code>import pandas as pd
+
+df = pd.DataFrame({
+    "kota": ["Semarang", "Yogyakarta", "Semarang", "Solo"]
+})
+
+hasil = pd.get_dummies(df, columns=["kota"], dtype=int)
+
+print(hasil)</code></pre>
+
+                <p>
+                    Jika sebuah fitur memiliki sangat banyak kategori, one-hot encoding dapat
+                    menghasilkan banyak kolom. Dalam kondisi tersebut, pertimbangkan metode lain
+                    sesuai kebutuhan dan jenis model.
+                </p>
+            </section>
+
+            <section>
+                <h2>5. Agregasi Data Historis</h2>
+                <p>
+                    Agregasi historis merangkum sekumpulan catatan menjadi fitur yang mewakili
+                    perilaku suatu entitas, misalnya pelanggan, produk, atau rekening.
+                </p>
+
+                <p>Beberapa contoh agregasi adalah:</p>
+                <ul>
+                    <li>Total transaksi pelanggan.</li>
+                    <li>Rata-rata nilai pembelian.</li>
+                    <li>Jumlah transaksi dalam 30 hari terakhir.</li>
+                    <li>Nilai transaksi maksimum atau minimum.</li>
+                </ul>
+
+                <pre><code>import pandas as pd
+
+transaksi = pd.DataFrame({
+    "pelanggan": ["A", "A", "B", "B", "B"],
+    "nilai": [100000, 150000, 50000, 75000, 125000]
+})
+
+fitur = transaksi.groupby("pelanggan").agg(
+    total_transaksi=("nilai", "count"),
+    total_belanja=("nilai", "sum"),
+    rata_rata_belanja=("nilai", "mean"),
+    belanja_terbesar=("nilai", "max")
+).reset_index()
+
+print(fitur)</code></pre>
+
+                <p>
+                    Untuk data historis, waktu sangat penting. Jika prediksi dibuat pada tanggal
+                    tertentu, agregasi hanya boleh memakai catatan yang sudah tersedia pada tanggal
+                    prediksi tersebut.
+                </p>
+            </section>
+
+            <section>
+                <h2>6. Fitur Berbasis Tanggal</h2>
+                <p>
+                    Kolom tanggal dapat diubah menjadi fitur numerik atau kategorikal yang
+                    menggambarkan pola waktu, seperti tahun, bulan, hari, hari dalam minggu,
+                    atau selisih waktu dari kejadian sebelumnya.
+                </p>
+
+                <pre><code>import pandas as pd
+
+df = pd.DataFrame({
+    "tanggal": [
+        "2026-01-05",
+        "2026-02-14",
+        "2026-03-21"
+    ]
+})
+
+df["tanggal"] = pd.to_datetime(df["tanggal"])
+
+df["tahun"] = df["tanggal"].dt.year
+df["bulan"] = df["tanggal"].dt.month
+df["hari"] = df["tanggal"].dt.day
+df["hari_dalam_minggu"] = df["tanggal"].dt.dayofweek
+df["akhir_pekan"] = (
+    df["hari_dalam_minggu"] >= 5
+).astype(int)
+
+print(df)</code></pre>
+
+                <p>
+                    Indeks hari dalam minggu pada Pandas dimulai dari 0 untuk Senin hingga 6
+                    untuk Minggu. Fitur tanggal dapat berguna untuk mendeteksi pola musiman,
+                    perbedaan hari kerja dan akhir pekan, serta tren bulanan.
+                </p>
+
+                <p>
+                    Hindari menggunakan informasi tanggal yang belum tersedia saat prediksi
+                    dilakukan. Untuk model prediksi waktu, pembagian data latih dan uji juga
+                    sebaiknya mengikuti urutan waktu.
+                </p>
+            </section>
+
+            <section>
+                <h2>7. Feature Importance</h2>
+                <p>
+                    Feature importance adalah ukuran yang digunakan untuk memperkirakan seberapa
+                    penting sebuah fitur bagi model. Salah satu pendekatan yang umum adalah
+                    importance berbasis penurunan impurity pada model pohon keputusan.
+                </p>
+
+                <pre><code>from sklearn.datasets import load_breast_cancer
+from sklearn.ensemble import RandomForestClassifier
+import pandas as pd
+
+data = load_breast_cancer(as_frame=True)
+X = data.data
+y = data.target
+
+model = RandomForestClassifier(
+    n_estimators=200,
+    random_state=42
+)
+model.fit(X, y)
+
+importance = pd.Series(
+    model.feature_importances_,
+    index=X.columns
+).sort_values(ascending=False)
+
+print(importance.head(10))</code></pre>
+
+                <p>
+                    Nilai importance yang tinggi menunjukkan bahwa fitur berkontribusi besar
+                    menurut metode pengukuran yang digunakan. Namun, nilai ini tidak otomatis
+                    membuktikan hubungan sebab-akibat. Fitur yang berkorelasi satu sama lain
+                    juga dapat membagi atau memengaruhi nilai importance.
+                </p>
+            </section>
+
+            <section>
+                <h2>8. Permutation Importance</h2>
+                <p>
+                    Permutation importance mengukur perubahan performa model ketika nilai pada
+                    satu fitur diacak. Jika performa turun secara signifikan setelah pengacakan,
+                    fitur tersebut kemungkinan memiliki peran penting bagi prediksi model.
+                </p>
+
+                <p>Secara sederhana, importance dapat dinyatakan sebagai:</p>
+                \[
+                I_j=S_{\text{asli}}-S_{\text{acak},j}
+                \]
+
+                <p>
+                    Di sini, \(S_{\text{asli}}\) adalah skor model sebelum pengacakan, sedangkan
+                    \(S_{\text{acak},j}\) adalah skor setelah fitur ke-\(j\) diacak.
+                    Rumus ini mengasumsikan bahwa skor yang lebih tinggi menunjukkan performa
+                    yang lebih baik.
+                </p>
+
+                <pre><code>from sklearn.datasets import load_breast_cancer
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.inspection import permutation_importance
+from sklearn.model_selection import train_test_split
+import pandas as pd
+
+data = load_breast_cancer(as_frame=True)
+X = data.data
+y = data.target
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y,
+    test_size=0.2,
+    random_state=42,
+    stratify=y
+)
+
+model = RandomForestClassifier(
+    n_estimators=200,
+    random_state=42
+)
+model.fit(X_train, y_train)
+
+hasil = permutation_importance(
+    model,
+    X_test,
+    y_test,
+    scoring="accuracy",
+    n_repeats=10,
+    random_state=42
+)
+
+importance = pd.Series(
+    hasil.importances_mean,
+    index=X.columns
+).sort_values(ascending=False)
+
+print(importance.head(10))</code></pre>
+
+                <p>
+                    Permutation importance dapat dihitung pada data validasi atau data uji
+                    yang sesuai. Jika fitur saling berkorelasi kuat, mengacak satu fitur saja
+                    mungkin menghasilkan penurunan performa yang kecil karena fitur lain masih
+                    membawa informasi serupa.
+                </p>
+            </section>
+
+            <section>
+                <h2>9. Regularisasi</h2>
+                <p>
+                    Regularisasi adalah teknik untuk membatasi kompleksitas model agar tidak
+                    terlalu menyesuaikan diri terhadap data latih. Pada model regresi, regularisasi
+                    biasanya menambahkan penalti pada fungsi kerugian.
+                </p>
+
+                <h3>L1 Regularization (Lasso)</h3>
+                \[
+                J(\boldsymbol{\beta})=
+                \text{Loss}(\boldsymbol{\beta})
+                +\lambda\sum_{j=1}^{p}|\beta_j|
+                \]
+
+                <p>
+                    Penalti L1 dapat membuat sebagian koefisien tepat bernilai nol. Oleh karena itu,
+                    Lasso dapat membantu seleksi fitur pada model linear.
+                </p>
+
+                <h3>L2 Regularization (Ridge)</h3>
+                \[
+                J(\boldsymbol{\beta})=
+                \text{Loss}(\boldsymbol{\beta})
+                +\lambda\sum_{j=1}^{p}\beta_j^2
+                \]
+
+                <p>
+                    Penalti L2 mengecilkan koefisien, tetapi umumnya tidak membuatnya tepat
+                    bernilai nol. Parameter \(\lambda\) mengatur kekuatan penalti: semakin besar
+                    nilainya, semakin kuat pembatasan terhadap koefisien.
+                </p>
+
+                <pre><code>from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import Lasso, Ridge
+
+lasso = make_pipeline(
+    StandardScaler(),
+    Lasso(alpha=0.1)
+)
+
+ridge = make_pipeline(
+    StandardScaler(),
+    Ridge(alpha=1.0)
+)
+
+lasso.fit(X_train, y_train)
+ridge.fit(X_train, y_train)</code></pre>
+
+                <p>
+                    Contoh kode tersebut mengasumsikan bahwa <code>X_train</code> dan
+                    <code>y_train</code> merupakan data regresi numerik yang sudah disiapkan.
+                    Standardisasi biasanya penting bagi regularisasi karena penalti koefisien
+                    sensitif terhadap skala fitur.
+                </p>
+            </section>
+
+            <section>
+                <h2>10. Pencegahan Data Leakage pada Fitur</h2>
+                <p>
+                    Data leakage terjadi ketika informasi yang seharusnya tidak tersedia pada saat
+                    prediksi ikut digunakan untuk melatih atau mengevaluasi model. Kebocoran data
+                    dapat menghasilkan performa evaluasi yang tampak sangat baik, tetapi tidak
+                    realistis ketika model diterapkan.
+                </p>
+
+                <h3>Contoh data leakage</h3>
+                <ul>
+                    <li>Menggunakan status pembayaran akhir untuk memprediksi risiko gagal bayar sebelum jatuh tempo.</li>
+                    <li>Menghitung rata-rata seluruh dataset sebelum memisahkan data latih dan uji.</li>
+                    <li>Menggunakan data transaksi setelah tanggal prediksi untuk membuat fitur historis.</li>
+                    <li>Memasukkan kolom yang secara langsung mengungkap nilai target.</li>
+                </ul>
+
+                <h3>Prinsip pencegahan</h3>
+                <ol>
+                    <li>Pisahkan data latih, validasi, dan uji sebelum mempelajari parameter preprocessing.</li>
+                    <li>Pelajari parameter transformasi hanya dari data latih.</li>
+                    <li>Gunakan pipeline agar preprocessing dan pelatihan dilakukan secara konsisten.</li>
+                    <li>Pastikan setiap fitur tersedia pada waktu prediksi yang sebenarnya.</li>
+                    <li>Untuk data berurutan waktu, gunakan pembagian data berdasarkan waktu.</li>
+                </ol>
+
+                <pre><code>from sklearn.model_selection import train_test_split
+from sklearn.pipeline import make_pipeline
+from sklearn.impute import SimpleImputer
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y,
+    test_size=0.2,
+    random_state=42,
+    stratify=y
+)
+
+pipeline = make_pipeline(
+    SimpleImputer(strategy="median"),
+    StandardScaler(),
+    LogisticRegression(max_iter=1000)
+)
+
+pipeline.fit(X_train, y_train)
+
+print("Akurasi data uji:", pipeline.score(X_test, y_test))</code></pre>
+
+                <p>
+                    Pipeline mencegah parameter imputasi dan standardisasi dipelajari dari data uji.
+                    Namun, pipeline saja tidak cukup untuk menghilangkan semua kebocoran: fitur
+                    yang mengandung informasi masa depan atau target tetap harus diidentifikasi
+                    dan dihapus secara tepat.
+                </p>
+            </section>
+
+            <section>
+                <h2>Ringkasan</h2>
+                <ul>
+                    <li>Seleksi fitur memilih variabel yang relevan.</li>
+                    <li>Pembuatan fitur menghasilkan informasi baru dari data yang tersedia.</li>
+                    <li>Transformasi dan encoding mengubah representasi fitur agar sesuai dengan model.</li>
+                    <li>Agregasi historis dan fitur tanggal membantu menangkap pola perilaku serta waktu.</li>
+                    <li>Feature importance dan permutation importance membantu memahami kontribusi fitur terhadap prediksi.</li>
+                    <li>Regularisasi membatasi kompleksitas model dan dapat membantu mengurangi overfitting.</li>
+                    <li>Pencegahan data leakage memastikan evaluasi model lebih realistis.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Latihan Mandiri</h2>
+                <ol>
+                    <li>Apa perbedaan filter method, wrapper method, dan embedded method dalam seleksi fitur?</li>
+                    <li>Buat fitur <code>total_harga</code> dari kolom <code>harga</code> dan <code>jumlah</code>.</li>
+                    <li>Apa perbedaan standardisasi dan normalisasi Min-Max?</li>
+                    <li>Kapan one-hot encoding lebih sesuai dibandingkan label encoding?</li>
+                    <li>Mengapa data historis untuk prediksi harus dibatasi sampai waktu prediksi?</li>
+                    <li>Apa perbedaan feature importance berbasis pohon dan permutation importance?</li>
+                    <li>Jelaskan perbedaan regularisasi L1 dan L2.</li>
+                    <li>Mengapa menghitung rata-rata seluruh dataset sebelum pembagian data dapat menyebabkan data leakage?</li>
+                </ol>
+            </section>
+        </article>
+    </main>
+
+    <footer>ShadowLab — Belajar Tanpa Batas</footer>
+</body>
+</html>

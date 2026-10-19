@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengantar Data Science | Data Science</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+    MathJax = {
+        tex: {
+            inlineMath: [['\\(', '\\)']],
+            displayMath: [['\\[', '\\]']]
+        }
+    };
+    </script>
+    <script
+        id="MathJax-script"
+        async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+    </script>
+</head>
+<body>
+    <header class="navbar">
+        <a href="index.html" class="logo">Data Science</a>
+        <nav>
+            <a href="index.html">Beranda</a>
+            <a href="MateriDataScience.html">Materi Data Science</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <article class="article">
+            <p class="eyebrow">BAGIAN I — PENGANTAR DATA SCIENCE</p>
+            <h1>Pengantar Data Science</h1>
+            <p class="intro">
+                Data Science atau ilmu data merupakan bidang multidisiplin
+                yang menggabungkan matematika, statistika, pemrograman, dan
+                pemahaman terhadap suatu permasalahan untuk memperoleh
+                informasi, membangun model, serta mendukung pengambilan
+                keputusan berdasarkan data.
+            </p>
+
+            <section>
+                <h2>1. Pengertian Data Science</h2>
+
+                <p>
+                    Data Science adalah bidang ilmu yang mempelajari cara
+                    mengumpulkan, mengolah, menganalisis, dan memodelkan data
+                    untuk menemukan pola, menghasilkan informasi, serta
+                    membantu menyelesaikan permasalahan.
+                </p>
+
+                <p>
+                    Data dapat berasal dari berbagai sumber, seperti survei,
+                    transaksi keuangan, sensor, media sosial, aplikasi,
+                    gambar, rekaman suara, dan sistem informasi perusahaan.
+                    Data tersebut tidak selalu langsung memberikan informasi
+                    yang berguna. Oleh karena itu, diperlukan serangkaian
+                    proses untuk mengubah data mentah menjadi pengetahuan
+                    yang dapat digunakan.
+                </p>
+
+                <h3>Komponen utama Data Science</h3>
+
+                <ul>
+                    <li>
+                        <strong>Matematika dan statistika:</strong>
+                        digunakan untuk memahami pola, ketidakpastian,
+                        hubungan antarvariabel, dan membangun model matematis.
+                    </li>
+                    <li>
+                        <strong>Pemrograman:</strong>
+                        digunakan untuk mengolah data, melakukan perhitungan,
+                        membuat visualisasi, dan mengimplementasikan algoritma.
+                    </li>
+                    <li>
+                        <strong>Pengetahuan domain:</strong>
+                        membantu memahami konteks permasalahan, karakteristik
+                        data, dan makna hasil analisis.
+                    </li>
+                    <li>
+                        <strong>Komunikasi:</strong>
+                        digunakan untuk menyampaikan hasil analisis kepada
+                        pihak yang membutuhkan.
+                    </li>
+                </ul>
+
+                <h3>Contoh penerapan Data Science</h3>
+
+                <p>
+                    Sebuah perusahaan ingin mengetahui pelanggan yang
+                    berpotensi berhenti menggunakan layanannya. Perusahaan
+                    dapat mengumpulkan data riwayat transaksi, frekuensi
+                    penggunaan layanan, dan keluhan pelanggan. Data tersebut
+                    kemudian dianalisis untuk menemukan karakteristik
+                    pelanggan yang berpotensi berhenti.
+                </p>
+
+                <p>
+                    Hasilnya dapat digunakan untuk menyusun strategi
+                    mempertahankan pelanggan. Dengan demikian, Data Science
+                    tidak hanya berfokus pada pengolahan data, tetapi juga
+                    pada pemanfaatan hasil analisis untuk menyelesaikan
+                    permasalahan nyata.
+                </p>
+
+                <div class="placeholder">
+                    <strong>Inti konsep:</strong>
+                    Data Science mengubah data menjadi informasi dan
+                    pengetahuan yang dapat digunakan untuk mendukung
+                    pengambilan keputusan.
+                </div>
+            </section>
+
+            <section>
+                <h2>2. Perbedaan Data Science, Data Analytics, Data Engineering, dan AI</h2>
+
+                <p>
+                    Data Science, Data Analytics, Data Engineering, dan
+                    Artificial Intelligence (AI) merupakan bidang yang saling
+                    berkaitan, tetapi memiliki fokus yang berbeda.
+                </p>
+
+                <div style="overflow-x: auto;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Bidang</th>
+                                <th>Fokus Utama</th>
+                                <th>Contoh Kegiatan</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Data Science</td>
+                                <td>
+                                    Menemukan pola, membangun model, dan
+                                    menghasilkan prediksi atau wawasan.
+                                </td>
+                                <td>
+                                    Membuat model prediksi risiko kredit.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Data Analytics</td>
+                                <td>
+                                    Menganalisis data untuk menjawab
+                                    pertanyaan dan mendukung keputusan.
+                                </td>
+                                <td>
+                                    Menganalisis penjualan bulanan.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Data Engineering</td>
+                                <td>
+                                    Membangun dan memelihara infrastruktur
+                                    serta alur pengolahan data.
+                                </td>
+                                <td>
+                                    Membuat pipeline untuk menggabungkan
+                                    data dari berbagai sistem.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Artificial Intelligence (AI)</td>
+                                <td>
+                                    Mengembangkan sistem yang dapat
+                                    melakukan tugas yang membutuhkan
+                                    kemampuan cerdas.
+                                </td>
+                                <td>
+                                    Membuat sistem pengenalan gambar
+                                    atau chatbot.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Penjelasan hubungan antarbidang</h3>
+
+                <p>
+                    Data Engineering menyediakan infrastruktur dan aliran
+                    data yang dapat digunakan oleh Data Analytics maupun
+                    Data Science. Data Analytics membantu menjelaskan
+                    kondisi berdasarkan data, sedangkan Data Science juga
+                    dapat digunakan untuk membangun model prediktif.
+                    AI memiliki cakupan yang lebih luas dalam pengembangan
+                    sistem cerdas, dan Machine Learning merupakan salah satu
+                    pendekatan yang digunakan dalam AI.
+                </p>
+
+                <p>
+                    Keempat bidang tersebut tidak sepenuhnya terpisah.
+                    Dalam sebuah proyek, seorang praktisi dapat melakukan
+                    beberapa tugas sekaligus, bergantung pada kebutuhan
+                    organisasi dan skala proyek.
+                </p>
+
+                <div class="placeholder">
+                    <strong>Contoh sederhana:</strong>
+                    <ul>
+                        <li>
+                            Data Engineering menyiapkan data transaksi
+                            pelanggan.
+                        </li>
+                        <li>
+                            Data Analytics menjelaskan perubahan penjualan
+                            dari bulan ke bulan.
+                        </li>
+                        <li>
+                            Data Science membangun model untuk memprediksi
+                            penjualan bulan berikutnya.
+                        </li>
+                        <li>
+                            AI dapat digunakan untuk mengembangkan sistem
+                            rekomendasi produk secara otomatis.
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <section>
+                <h2>3. Jenis Data: Numerik, Kategorikal, Ordinal, dan Nominal</h2>
+
+                <p>
+                    Data merupakan hasil pengamatan terhadap objek,
+                    individu, atau fenomena. Jenis data perlu dikenali
+                    sebelum analisis dilakukan karena jenis data
+                    memengaruhi metode statistik, visualisasi, dan
+                    pemodelan yang sesuai.
+                </p>
+
+                <h3>3.1. Data numerik</h3>
+
+                <p>
+                    Data numerik adalah data berbentuk angka yang
+                    merepresentasikan jumlah atau hasil pengukuran.
+                    Data numerik dapat dibedakan menjadi dua jenis.
+                </p>
+
+                <ul>
+                    <li>
+                        <strong>Diskrit:</strong> diperoleh melalui proses
+                        menghitung dan umumnya berupa bilangan bulat.
+                        Contoh: jumlah mahasiswa dalam suatu kelas.
+                    </li>
+                    <li>
+                        <strong>Kontinu:</strong> diperoleh melalui proses
+                        pengukuran dan dapat mengambil berbagai nilai
+                        dalam suatu interval.
+                        Contoh: tinggi badan, waktu, dan suhu.
+                    </li>
+                </ul>
+
+                <p>
+                    Misalnya, jumlah buku yang dimiliki seseorang merupakan
+                    data diskrit, sedangkan berat buku yang diukur dalam
+                    gram merupakan data kontinu.
+                </p>
+
+                <h3>3.2. Data kategorikal</h3>
+
+                <p>
+                    Data kategorikal menyatakan kelompok atau kategori
+                    tertentu. Data ini umumnya digunakan untuk membedakan
+                    objek berdasarkan karakteristiknya.
+                </p>
+
+                <p>
+                    Contohnya adalah jenis kendaraan, program studi,
+                    warna barang, dan status pelanggan.
+                </p>
+
+                <h3>3.3. Data nominal</h3>
+
+                <p>
+                    Data nominal merupakan data kategorikal yang tidak
+                    memiliki urutan atau tingkatan alami.
+                </p>
+
+                <p>Contoh:</p>
+                <ul>
+                    <li>Jenis kelamin yang dicatat dalam suatu dataset.</li>
+                    <li>Warna: merah, biru, dan hijau.</li>
+                    <li>Program studi: Matematika, Statistika, dan Informatika.</li>
+                </ul>
+
+                <p>
+                    Tidak ada makna bahwa kategori merah lebih tinggi
+                    daripada biru. Jika kategori dikodekan dengan angka,
+                    angka tersebut tidak otomatis menunjukkan besaran
+                    atau urutan.
+                </p>
+
+                <h3>3.4. Data ordinal</h3>
+
+                <p>
+                    Data ordinal merupakan data kategorikal yang memiliki
+                    urutan atau tingkatan, tetapi jarak antara tingkat
+                    yang berurutan belum tentu sama.
+                </p>
+
+                <p>Contoh tingkat kepuasan pelanggan:</p>
+
+                <ol>
+                    <li>Sangat tidak puas</li>
+                    <li>Tidak puas</li>
+                    <li>Netral</li>
+                    <li>Puas</li>
+                    <li>Sangat puas</li>
+                </ol>
+
+                <p>
+                    Kita dapat menyatakan bahwa tingkat puas lebih tinggi
+                    daripada netral. Namun, kita tidak dapat langsung
+                    menyimpulkan bahwa jarak antara puas dan sangat puas
+                    sama dengan jarak antara netral dan puas.
+                </p>
+
+                <h3>Ringkasan jenis data</h3>
+
+                <div style="overflow-x: auto;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Jenis Data</th>
+                                <th>Karakteristik</th>
+                                <th>Contoh</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Numerik diskrit</td>
+                                <td>Hasil menghitung</td>
+                                <td>Jumlah anak</td>
+                            </tr>
+                            <tr>
+                                <td>Numerik kontinu</td>
+                                <td>Hasil pengukuran</td>
+                                <td>Tinggi badan</td>
+                            </tr>
+                            <tr>
+                                <td>Nominal</td>
+                                <td>Kategori tanpa urutan</td>
+                                <td>Warna kendaraan</td>
+                            </tr>
+                            <tr>
+                                <td>Ordinal</td>
+                                <td>Kategori dengan urutan</td>
+                                <td>Tingkat kepuasan</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p>
+                    Perlu diperhatikan bahwa data kategorikal merupakan
+                    kelompok umum yang mencakup data nominal dan ordinal.
+                    Dengan demikian, nominal dan ordinal bukan kategori
+                    yang sepenuhnya terpisah dari data kategorikal.
+                </p>
+            </section>
+
+            <section>
+                <h2>4. Populasi, Sampel, Observasi, dan Variabel</h2>
+
+                <p>
+                    Dalam statistika dan Data Science, populasi, sampel,
+                    observasi, dan variabel merupakan konsep dasar yang
+                    digunakan untuk menjelaskan data yang dianalisis.
+                </p>
+
+                <h3>4.1. Populasi</h3>
+
+                <p>
+                    Populasi adalah seluruh objek atau individu yang
+                    menjadi sasaran penelitian atau analisis.
+                </p>
+
+                <p>
+                    Contoh: seluruh mahasiswa aktif Universitas Diponegoro
+                    pada tahun tertentu.
+                </p>
+
+                <h3>4.2. Sampel</h3>
+
+                <p>
+                    Sampel adalah sebagian anggota populasi yang dipilih
+                    untuk diamati. Sampel digunakan ketika pengumpulan
+                    data terhadap seluruh populasi sulit dilakukan,
+                    membutuhkan biaya besar, atau memerlukan waktu lama.
+                </p>
+
+                <p>
+                    Contoh: 500 mahasiswa yang dipilih dari seluruh
+                    mahasiswa aktif untuk mengikuti survei kepuasan
+                    fasilitas kampus.
+                </p>
+
+                <p>
+                    Agar hasil analisis dapat mewakili populasi, pemilihan
+                    sampel harus memperhatikan metode pengambilan sampel
+                    dan potensi bias.
+                </p>
+
+                <h3>4.3. Observasi</h3>
+
+                <p>
+                    Observasi adalah satu unit pengamatan dalam dataset.
+                    Observasi dapat berupa seseorang, suatu transaksi,
+                    sebuah produk, satu hari pengukuran, atau objek lain
+                    yang diteliti.
+                </p>
+
+                <h3>4.4. Variabel</h3>
+
+                <p>
+                    Variabel adalah karakteristik atau atribut yang
+                    nilainya dapat berbeda antarobservasi.
+                </p>
+
+                <p>
+                    Contohnya adalah usia, tinggi badan, program studi,
+                    nilai ujian, dan jumlah transaksi.
+                </p>
+
+                <h3>Contoh dataset mahasiswa</h3>
+
+                <div style="overflow-x: auto;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Usia</th>
+                                <th>Program Studi</th>
+                                <th>Nilai</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>001</td>
+                                <td>19</td>
+                                <td>Matematika</td>
+                                <td>85</td>
+                            </tr>
+                            <tr>
+                                <td>002</td>
+                                <td>20</td>
+                                <td>Statistika</td>
+                                <td>90</td>
+                            </tr>
+                            <tr>
+                                <td>003</td>
+                                <td>19</td>
+                                <td>Informatika</td>
+                                <td>78</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <ul>
+                    <li>
+                        <strong>Populasi:</strong> seluruh mahasiswa
+                        yang menjadi sasaran penelitian.
+                    </li>
+                    <li>
+                        <strong>Sampel:</strong> mahasiswa yang dipilih
+                        untuk dianalisis.
+                    </li>
+                    <li>
+                        <strong>Observasi:</strong> setiap baris yang
+                        merepresentasikan satu mahasiswa.
+                    </li>
+                    <li>
+                        <strong>Variabel:</strong> usia, program studi,
+                        dan nilai.
+                    </li>
+                </ul>
+
+                <p>
+                    Jika penelitian ingin mengetahui rata-rata nilai
+                    seluruh mahasiswa, sampel dapat digunakan untuk
+                    memperkirakan rata-rata populasi.
+                </p>
+
+                <p>
+                    Secara matematis, rata-rata sampel untuk data
+                    \(x_1,x_2,\ldots,x_n\) dihitung menggunakan:
+                </p>
+
+                \[
+                \bar{x}=\frac{1}{n}\sum_{i=1}^{n}x_i
+                \]
+
+                <p>Keterangan:</p>
+                <ul>
+                    <li>\(\bar{x}\): rata-rata sampel.</li>
+                    <li>\(x_i\): nilai observasi ke-\(i\).</li>
+                    <li>\(n\): jumlah observasi dalam sampel.</li>
+                </ul>
+
+                <h3>Contoh perhitungan</h3>
+
+                <p>
+                    Diketahui nilai ujian lima mahasiswa adalah
+                    70, 80, 85, 90, dan 75. Rata-rata sampel adalah:
+                </p>
+
+                \[
+                \begin{aligned}
+                \bar{x}
+                &=\frac{70+80+85+90+75}{5}\\
+                &=\frac{400}{5}\\
+                &=80
+                \end{aligned}
+                \]
+
+                <p>
+                    Jadi, rata-rata nilai kelima mahasiswa tersebut
+                    adalah 80.
+                </p>
+            </section>
+
+            <section>
+                <h2>5. Alur Kerja Proyek Data Science</h2>
+
+                <p>
+                    Proyek Data Science umumnya dilakukan melalui
+                    serangkaian tahapan yang sistematis. Tahapan tersebut
+                    dapat berulang karena hasil evaluasi mungkin
+                    menunjukkan bahwa data, fitur, atau model perlu
+                    diperbaiki.
+                </p>
+
+                <h3>5.1. Memahami permasalahan</h3>
+
+                <p>
+                    Tahap pertama adalah memahami permasalahan yang ingin
+                    diselesaikan. Tujuan harus dirumuskan secara jelas
+                    agar analisis tidak hanya menghasilkan perhitungan
+                    tanpa manfaat yang nyata.
+                </p>
+
+                <p>
+                    Contoh: memprediksi pelanggan yang berpotensi
+                    berhenti berlangganan dalam tiga bulan mendatang.
+                </p>
+
+                <h3>5.2. Mengumpulkan data</h3>
+
+                <p>
+                    Data dikumpulkan dari sumber yang relevan, misalnya
+                    database, file CSV, survei, API, sensor, atau sumber
+                    data lain yang penggunaannya diizinkan.
+                </p>
+
+                <h3>5.3. Membersihkan dan menyiapkan data</h3>
+
+                <p>
+                    Data mentah dapat mengandung nilai kosong, data
+                    duplikat, kesalahan pencatatan, format yang tidak
+                    konsisten, atau nilai yang tidak masuk akal.
+                    Tahap persiapan data bertujuan memperbaiki masalah
+                    tersebut sesuai kebutuhan analisis.
+                </p>
+
+                <p>
+                    Contoh: menyamakan format tanggal, menangani nilai
+                    kosong, dan memastikan kolom usia berisi nilai yang
+                    valid.
+                </p>
+
+                <h3>5.4. Melakukan eksplorasi data</h3>
+
+                <p>
+                    Exploratory Data Analysis (EDA) digunakan untuk
+                    memahami karakteristik data melalui statistik
+                    deskriptif dan visualisasi.
+                </p>
+
+                <p>Beberapa metode yang dapat digunakan:</p>
+                <ul>
+                    <li>Rata-rata, median, minimum, dan maksimum.</li>
+                    <li>Tabel frekuensi dan distribusi data.</li>
+                    <li>Histogram, diagram batang, dan boxplot.</li>
+                    <li>Analisis hubungan antarvariabel.</li>
+                </ul>
+
+                <h3>5.5. Rekayasa fitur</h3>
+
+                <p>
+                    Feature engineering adalah proses membuat,
+                    mengubah, atau memilih variabel agar lebih berguna
+                    bagi model. Sebagai contoh, tanggal transaksi dapat
+                    digunakan untuk menghasilkan fitur bulan transaksi
+                    atau jumlah hari sejak transaksi terakhir.
+                </p>
+
+                <h3>5.6. Membangun model</h3>
+
+                <p>
+                    Model dipilih berdasarkan tujuan proyek. Regresi
+                    dapat digunakan untuk memprediksi nilai numerik,
+                    klasifikasi untuk memprediksi kategori, dan
+                    clustering untuk mengelompokkan objek berdasarkan
+                    kemiripan karakteristik.
+                </p>
+
+                <h3>5.7. Mengevaluasi model</h3>
+
+                <p>
+                    Kinerja model perlu dievaluasi menggunakan data
+                    pengujian atau prosedur validasi yang sesuai.
+                    Metrik evaluasi harus dipilih berdasarkan tujuan
+                    analisis.
+                </p>
+
+                <p>Contoh metrik evaluasi:</p>
+                <ul>
+                    <li>
+                        <strong>MAE atau RMSE:</strong> untuk berbagai
+                        masalah regresi.
+                    </li>
+                    <li>
+                        <strong>Accuracy, precision, recall, dan F1-score:</strong>
+                        untuk klasifikasi.
+                    </li>
+                    <li>
+                        <strong>Silhouette score:</strong> salah satu
+                        metrik untuk mengevaluasi hasil clustering.
+                    </li>
+                </ul>
+
+                <h3>5.8. Mengomunikasikan dan menerapkan hasil</h3>
+
+                <p>
+                    Hasil analisis disampaikan melalui laporan,
+                    visualisasi, dashboard, aplikasi, atau sistem
+                    prediksi. Jika model diterapkan dalam penggunaan
+                    nyata, kinerjanya juga perlu dipantau karena
+                    karakteristik data dapat berubah dari waktu ke waktu.
+                </p>
+
+                <h3>Ringkasan alur kerja</h3>
+
+                <ol>
+                    <li>Memahami permasalahan.</li>
+                    <li>Mengumpulkan data.</li>
+                    <li>Membersihkan dan menyiapkan data.</li>
+                    <li>Melakukan eksplorasi data.</li>
+                    <li>Melakukan rekayasa fitur.</li>
+                    <li>Membangun model.</li>
+                    <li>Mengevaluasi model.</li>
+                    <li>Mengomunikasikan, menerapkan, dan memantau hasil.</li>
+                </ol>
+
+                <div class="placeholder">
+                    <strong>Catatan:</strong>
+                    Alur kerja Data Science tidak selalu linear. Jika
+                    evaluasi menunjukkan hasil yang kurang baik, praktisi
+                    dapat kembali ke tahap sebelumnya untuk memperbaiki
+                    kualitas data, fitur, pemilihan model, atau perumusan
+                    permasalahan.
+                </div>
+            </section>
+
+            <section>
+                <h2>6. Etika Data dan Privasi</h2>
+
+                <p>
+                    Etika data adalah prinsip yang mengarahkan
+                    pengumpulan, pengolahan, analisis, penyimpanan,
+                    dan pemanfaatan data agar dilakukan secara
+                    bertanggung jawab. Privasi berkaitan dengan
+                    perlindungan informasi pribadi dan hak individu
+                    atas penggunaan informasi tersebut.
+                </p>
+
+                <p>
+                    Data Science dapat menghasilkan manfaat besar,
+                    tetapi penggunaan data yang tidak tepat dapat
+                    menimbulkan risiko, seperti kebocoran informasi,
+                    diskriminasi, manipulasi, atau keputusan yang
+                    merugikan individu.
+                </p>
+
+                <h3>6.1. Privasi dan kerahasiaan</h3>
+
+                <p>
+                    Informasi pribadi harus dikumpulkan dan digunakan
+                    sesuai tujuan yang sah serta dasar pemrosesan yang
+                    berlaku. Data yang tidak diperlukan sebaiknya
+                    tidak dikumpulkan.
+                </p>
+
+                <p>
+                    Contoh: jika penelitian hanya memerlukan usia dan
+                    nilai ujian, nama lengkap serta nomor identitas
+                    mahasiswa mungkin tidak perlu disertakan dalam
+                    dataset analisis.
+                </p>
+
+                <h3>6.2. Persetujuan dan transparansi</h3>
+
+                <p>
+                    Individu perlu memperoleh informasi yang memadai
+                    mengenai tujuan pengumpulan data, cara data
+                    digunakan, serta pihak yang dapat mengaksesnya.
+                    Jika persetujuan diperlukan, persetujuan harus
+                    diperoleh secara tepat.
+                </p>
+
+                <h3>6.3. Keamanan data</h3>
+
+                <p>
+                    Data harus dilindungi dari akses, perubahan,
+                    pengungkapan, atau penghapusan yang tidak sah.
+                    Praktik yang dapat diterapkan meliputi pengaturan
+                    hak akses, enkripsi, pencadangan, dan pengelolaan
+                    kredensial secara aman.
+                </p>
+
+                <h3>6.4. Bias dan keadilan</h3>
+
+                <p>
+                    Dataset dapat tidak mewakili seluruh kelompok
+                    populasi. Akibatnya, model dapat menghasilkan
+                    prediksi yang kurang akurat atau keputusan yang
+                    tidak adil bagi kelompok tertentu.
+                </p>
+
+                <p>
+                    Contoh: model seleksi beasiswa yang dilatih
+                    menggunakan data historis yang tidak representatif
+                    dapat menghasilkan rekomendasi yang merugikan
+                    kelompok mahasiswa tertentu.
+                </p>
+
+                <p>
+                    Oleh karena itu, kualitas data, keterwakilan
+                    kelompok, dan dampak keputusan model perlu
+                    dievaluasi.
+                </p>
+
+                <h3>6.5. Anonimisasi dan minimisasi data</h3>
+
+                <p>
+                    Minimisasi data berarti hanya mengumpulkan data
+                    yang relevan dan diperlukan untuk tujuan tertentu.
+                    Anonimisasi bertujuan menghilangkan hubungan yang
+                    dapat mengidentifikasi seseorang.
+                </p>
+
+                <p>
+                    Menghapus nama saja belum tentu cukup untuk
+                    menjamin anonimitas. Kombinasi atribut lain,
+                    seperti tanggal lahir dan lokasi, masih dapat
+                    memungkinkan identifikasi ulang.
+                </p>
+
+                <h3>6.6. Akuntabilitas</h3>
+
+                <p>
+                    Pengembang dan organisasi perlu bertanggung jawab
+                    atas cara data dan model digunakan. Keputusan yang
+                    berdampak besar terhadap individu tidak seharusnya
+                    bergantung sepenuhnya pada model tanpa pengawasan
+                    dan mekanisme peninjauan yang sesuai.
+                </p>
+
+                <div class="placeholder">
+                    <strong>Prinsip utama etika data:</strong>
+                    <ul>
+                        <li>Gunakan data sesuai tujuan yang sah.</li>
+                        <li>Lindungi privasi dan keamanan informasi.</li>
+                        <li>Kurangi pengumpulan data yang tidak diperlukan.</li>
+                        <li>Periksa bias dan dampak model.</li>
+                        <li>Jelaskan keterbatasan analisis secara jujur.</li>
+                        <li>Pastikan penggunaan data dapat dipertanggungjawabkan.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section>
+                <h2>7. Contoh Studi Kasus</h2>
+
+                <p>
+                    Sebuah universitas ingin menganalisis faktor-faktor
+                    yang berkaitan dengan prestasi akademik mahasiswa.
+                    Tim peneliti memperoleh data dari survei dan
+                    catatan akademik dengan prosedur akses yang sesuai.
+                </p>
+
+                <p>Dataset yang digunakan memiliki variabel berikut:</p>
+
+                <div style="overflow-x: auto;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Variabel</th>
+                                <th>Contoh Nilai</th>
+                                <th>Jenis Data</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Usia</td>
+                                <td>20</td>
+                                <td>Numerik diskrit</td>
+                            </tr>
+                            <tr>
+                                <td>Jam belajar per minggu</td>
+                                <td>12,5</td>
+                                <td>Numerik kontinu</td>
+                            </tr>
+                            <tr>
+                                <td>Program studi</td>
+                                <td>Matematika</td>
+                                <td>Nominal</td>
+                            </tr>
+                            <tr>
+                                <td>Kepuasan belajar</td>
+                                <td>Puas</td>
+                                <td>Ordinal</td>
+                            </tr>
+                            <tr>
+                                <td>Nilai akhir</td>
+                                <td>85</td>
+                                <td>Numerik</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p>
+                    Langkah analisis dapat dimulai dengan memeriksa
+                    jumlah observasi, nilai kosong, dan distribusi
+                    setiap variabel. Selanjutnya, tim dapat
+                    mengeksplorasi hubungan antara jam belajar
+                    dan nilai akhir.
+                </p>
+
+                <p>
+                    Jika tujuannya memprediksi nilai akhir, tim dapat
+                    mencoba model regresi dan mengevaluasi kesalahan
+                    prediksi. Namun, hubungan antara jam belajar dan
+                    nilai akhir tidak otomatis membuktikan bahwa
+                    peningkatan jam belajar menyebabkan peningkatan
+                    nilai.
+                </p>
+
+                <p>
+                    Sepanjang proses, identitas mahasiswa perlu
+                    dilindungi, akses data dibatasi, dan hasil
+                    analisis disampaikan dengan memperhatikan
+                    keterbatasan data.
+                </p>
+            </section>
+
+            <section>
+                <h2>8. Latihan Mandiri</h2>
+
+                <p>
+                    Kerjakan soal berikut untuk menguji pemahaman
+                    mengenai konsep dasar Data Science.
+                </p>
+
+                <h3>A. Pemahaman konsep</h3>
+
+                <ol>
+                    <li>
+                        Jelaskan pengertian Data Science menggunakan
+                        bahasamu sendiri.
+                    </li>
+                    <li>
+                        Jelaskan perbedaan Data Science, Data Analytics,
+                        Data Engineering, dan Artificial Intelligence.
+                    </li>
+                    <li>
+                        Berikan masing-masing dua contoh data numerik,
+                        nominal, dan ordinal.
+                    </li>
+                    <li>
+                        Jelaskan perbedaan populasi dan sampel serta
+                        berikan satu contoh penerapannya.
+                    </li>
+                    <li>
+                        Apa yang dimaksud dengan observasi dan variabel
+                        dalam sebuah dataset?
+                    </li>
+                </ol>
+
+                <h3>B. Analisis jenis data</h3>
+
+                <p>
+                    Tentukan jenis data dari setiap variabel berikut.
+                    Untuk data numerik, tentukan apakah termasuk
+                    diskrit atau kontinu jika sesuai.
+                </p>
+
+                <ol>
+                    <li>Jumlah mahasiswa dalam kelas.</li>
+                    <li>Berat badan mahasiswa dalam kilogram.</li>
+                    <li>Warna kendaraan.</li>
+                    <li>Tingkat kepuasan pelanggan: rendah, sedang, tinggi.</li>
+                    <li>Waktu yang dibutuhkan untuk menyelesaikan ujian.</li>
+                    <li>Nomor induk mahasiswa.</li>
+                </ol>
+
+                <h3>C. Studi kasus</h3>
+
+                <p>
+                    Sebuah toko daring ingin mengetahui karakteristik
+                    pelanggan yang melakukan pembelian berulang.
+                    Toko memiliki data usia pelanggan, kategori produk,
+                    jumlah transaksi, total pengeluaran, dan tingkat
+                    kepuasan pelanggan.
+                </p>
+
+                <ol>
+                    <li>
+                        Tentukan kemungkinan populasi dan sampel
+                        penelitian.
+                    </li>
+                    <li>
+                        Identifikasi observasi dan seluruh variabel
+                        dalam kasus tersebut.
+                    </li>
+                    <li>
+                        Kelompokkan variabel berdasarkan jenis datanya.
+                    </li>
+                    <li>
+                        Susun alur kerja Data Science yang sesuai
+                        untuk menyelesaikan permasalahan.
+                    </li>
+                    <li>
+                        Sebutkan tiga risiko etika data yang mungkin
+                        muncul dan cara menguranginya.
+                    </li>
+                </ol>
+
+                <h3>D. Perhitungan sederhana</h3>
+
+                <p>
+                    Seorang peneliti memperoleh sampel nilai ujian
+                    enam mahasiswa sebagai berikut:
+                </p>
+
+                \[
+                65,\ 75,\ 80,\ 85,\ 90,\ 85
+                \]
+
+                <ol>
+                    <li>Hitung rata-rata sampel.</li>
+                    <li>Tentukan nilai minimum dan maksimum.</li>
+                    <li>Jelaskan apa yang dapat dan tidak dapat disimpulkan
+                        dari rata-rata tersebut mengenai seluruh mahasiswa.</li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>9. Rangkuman</h2>
+
+                <ul>
+                    <li>
+                        Data Science menggunakan matematika, statistika,
+                        pemrograman, dan pengetahuan domain untuk
+                        memperoleh informasi dari data.
+                    </li>
+                    <li>
+                        Data Science, Data Analytics, Data Engineering,
+                        dan AI memiliki fokus berbeda, tetapi dapat
+                        bekerja sama dalam suatu proyek.
+                    </li>
+                    <li>
+                        Data dapat berupa numerik atau kategorikal.
+                        Data numerik dapat berupa diskrit atau kontinu,
+                        sedangkan data kategorikal dapat berupa nominal
+                        atau ordinal.
+                    </li>
+                    <li>
+                        Populasi adalah keseluruhan sasaran penelitian,
+                        sampel adalah sebagian populasi, observasi
+                        merupakan unit pengamatan, dan variabel
+                        merupakan karakteristik yang diamati.
+                    </li>
+                    <li>
+                        Proyek Data Science mencakup pemahaman masalah,
+                        pengumpulan dan persiapan data, eksplorasi,
+                        pemodelan, evaluasi, serta penerapan hasil.
+                    </li>
+                    <li>
+                        Etika data mencakup privasi, keamanan,
+                        transparansi, keadilan, minimisasi data,
+                        dan akuntabilitas.
+                    </li>
+                </ul>
+
+                <p>
+                    Penguasaan konsep-konsep tersebut merupakan fondasi
+                    untuk mempelajari tahap berikutnya, yaitu pengenalan
+                    Python, pengolahan data menggunakan NumPy dan pandas,
+                    statistika deskriptif, serta visualisasi data.
+                </p>
+            </section>
+        </article>
+    </main>
+
+    <footer>Website Pembelajaran Data Science</footer>
+</body>
+</html>

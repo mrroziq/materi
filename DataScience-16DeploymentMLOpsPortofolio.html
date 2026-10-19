@@ -1,0 +1,486 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deployment, MLOps, dan Portofolio | Data Science</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+    MathJax = {
+        tex: {
+            inlineMath: [['\\(', '\\)']],
+            displayMath: [['\\[', '\\]']]
+        }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+    <header class="navbar">
+        <a href="index.html" class="logo">ShadowLab</a>
+        <nav>
+            <a href="index.html">Beranda</a>
+            <a href="MateriDataScience.html">Materi Data Science</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <article class="article">
+            <p class="eyebrow">BAGIAN XVI / DATA SCIENCE</p>
+            <h1>Deployment, MLOps, dan Portofolio</h1>
+            <p class="intro">
+                Model machine learning tidak hanya digunakan untuk menghasilkan prediksi
+                di notebook. Model juga perlu disimpan, diintegrasikan ke aplikasi,
+                diterapkan pada lingkungan produksi, dipantau, dan diperbarui ketika
+                performanya menurun. Proses tersebut berkaitan dengan deployment dan MLOps.
+            </p>
+
+            <section>
+                <h2>1. Menyimpan dan Memuat Model</h2>
+                <p>
+                    Setelah model dilatih dan dievaluasi, model dapat disimpan agar
+                    digunakan kembali tanpa harus menjalankan proses pelatihan dari awal.
+                    Model beserta preprocessing yang diperlukan sebaiknya dikelola secara
+                    konsisten.
+                </p>
+
+                <h3>Menggunakan Joblib</h3>
+                <p>
+                    <code>joblib</code> sering digunakan untuk menyimpan model scikit-learn,
+                    terutama model yang melibatkan array NumPy.
+                </p>
+
+                <pre><code>import joblib
+from sklearn.ensemble import RandomForestClassifier
+
+model = RandomForestClassifier(random_state=42)
+model.fit(X_train, y_train)
+
+joblib.dump(model, "model.pkl")
+
+model_loaded = joblib.load("model.pkl")
+predictions = model_loaded.predict(X_test)</code></pre>
+
+                <h3>Menyimpan preprocessing dan model</h3>
+                <p>
+                    Jika model menggunakan imputasi, encoding, atau standardisasi,
+                    preprocessing tersebut harus diterapkan dengan cara yang sama ketika
+                    model digunakan pada data baru. Salah satu pendekatannya adalah
+                    menggabungkan preprocessing dan model ke dalam sebuah pipeline.
+                </p>
+
+                <pre><code>import joblib
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression
+
+pipeline = Pipeline([
+    ("scaler", StandardScaler()),
+    ("model", LogisticRegression())
+])
+
+pipeline.fit(X_train, y_train)
+
+joblib.dump(pipeline, "pipeline_model.pkl")
+
+pipeline_loaded = joblib.load("pipeline_model.pkl")
+predictions = pipeline_loaded.predict(X_test)</code></pre>
+
+                <p>
+                    File model dari sumber yang tidak tepercaya tidak boleh dimuat
+                    sembarangan karena format serialisasi tertentu dapat menjalankan
+                    kode berbahaya. Versi library dan dependensi model juga perlu dicatat.
+                </p>
+            </section>
+
+            <section>
+                <h2>2. Membuat API dengan Flask atau FastAPI</h2>
+                <p>
+                    API memungkinkan aplikasi lain mengirim data ke model dan menerima
+                    hasil prediksi melalui jaringan. Flask dan FastAPI merupakan dua
+                    framework Python yang dapat digunakan untuk membangun layanan tersebut.
+                </p>
+
+                <h3>Contoh API menggunakan Flask</h3>
+                <p>
+                    Misalkan model klasifikasi telah disimpan pada file
+                    <code>model.pkl</code>. API berikut menerima dua fitur numerik
+                    dan mengembalikan hasil prediksi.
+                </p>
+
+                <pre><code>from flask import Flask, request, jsonify
+import joblib
+import numpy as np
+
+app = Flask(__name__)
+model = joblib.load("model.pkl")
+
+@app.route("/predict", methods=["POST"])
+def predict():
+    data = request.get_json()
+
+    features = np.array([
+        data["features"]
+    ])
+
+    prediction = model.predict(features)
+
+    return jsonify({
+        "prediction": prediction.tolist()
+    })
+
+if __name__ == "__main__":
+    app.run(debug=True)</code></pre>
+
+                <p>Contoh data JSON yang dikirim ke endpoint:</p>
+
+                <pre><code>{
+    "features": [5.2, 3.1]
+}</code></pre>
+
+                <p>
+                    Jumlah, urutan, dan tipe fitur harus sesuai dengan yang digunakan
+                    ketika model dilatih. Dalam aplikasi nyata, tambahkan validasi input,
+                    penanganan kesalahan, autentikasi bila diperlukan, serta konfigurasi
+                    produksi yang aman.
+                </p>
+
+                <h3>Flask dan FastAPI</h3>
+                <ul>
+                    <li><strong>Flask:</strong> framework ringan dengan struktur sederhana.</li>
+                    <li><strong>FastAPI:</strong> mendukung validasi data berbasis tipe Python dan dokumentasi API otomatis.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>3. Membuat Aplikasi dengan Streamlit</h2>
+                <p>
+                    Streamlit memungkinkan pembuatan aplikasi data science interaktif
+                    menggunakan Python tanpa harus membangun antarmuka web dari awal.
+                    Pengguna dapat memasukkan data, memilih parameter, dan melihat hasil
+                    prediksi melalui browser.
+                </p>
+
+                <h3>Contoh aplikasi prediksi</h3>
+                <pre><code>import streamlit as st
+import joblib
+import numpy as np
+
+model = joblib.load("model.pkl")
+
+st.title("Aplikasi Prediksi")
+st.write("Masukkan nilai fitur untuk menghasilkan prediksi.")
+
+fitur_1 = st.number_input("Fitur 1", value=0.0)
+fitur_2 = st.number_input("Fitur 2", value=0.0)
+
+if st.button("Prediksi"):
+    data = np.array([[fitur_1, fitur_2]])
+    hasil = model.predict(data)
+
+    st.success(f"Hasil prediksi: {hasil[0]}")</code></pre>
+
+                <p>Simpan kode tersebut sebagai <code>app.py</code>, kemudian jalankan:</p>
+                <pre><code>streamlit run app.py</code></pre>
+
+                <p>
+                    Aplikasi ini dapat dikembangkan dengan fitur unggah CSV, visualisasi
+                    data, perbandingan model, dan unduhan hasil prediksi.
+                </p>
+            </section>
+
+            <section>
+                <h2>4. Deployment Aplikasi</h2>
+                <p>
+                    Deployment adalah proses menempatkan aplikasi agar dapat dijalankan
+                    oleh pengguna di lingkungan yang dituju. Aplikasi dapat dijalankan
+                    secara lokal, pada server, atau melalui layanan cloud.
+                </p>
+
+                <h3>Alur deployment</h3>
+                <ol>
+                    <li>Pastikan model telah dievaluasi dan siap digunakan.</li>
+                    <li>Siapkan kode aplikasi dan file dependensi.</li>
+                    <li>Uji aplikasi di lingkungan lokal.</li>
+                    <li>Konfigurasikan server atau platform hosting.</li>
+                    <li>Jalankan aplikasi dan uji endpoint atau antarmukanya.</li>
+                    <li>Pantau log, penggunaan sumber daya, dan kesalahan aplikasi.</li>
+                </ol>
+
+                <h3>Mencatat dependensi</h3>
+                <p>
+                    File <code>requirements.txt</code> mencatat library Python yang
+                    diperlukan oleh aplikasi. Contohnya:
+                </p>
+
+                <pre><code>flask
+streamlit
+scikit-learn
+pandas
+numpy
+joblib</code></pre>
+
+                <p>
+                    Untuk proyek yang dikelola secara serius, gunakan versi dependensi
+                    yang teruji agar lingkungan pengembangan dan produksi tetap konsisten.
+                    Rahasia seperti API key dan kata sandi tidak boleh ditulis langsung
+                    di dalam kode yang dipublikasikan.
+                </p>
+            </section>
+
+            <section>
+                <h2>5. Git dan GitHub</h2>
+                <p>
+                    Git adalah sistem pengendalian versi yang mencatat perubahan kode
+                    dari waktu ke waktu. GitHub merupakan platform untuk menyimpan dan
+                    mengelola repositori Git secara daring.
+                </p>
+
+                <h3>Perintah dasar Git</h3>
+                <pre><code># Inisialisasi repositori
+git init
+
+# Melihat perubahan
+git status
+
+# Memasukkan perubahan ke staging area
+git add .
+
+# Membuat commit
+git commit -m "Membuat model prediksi"
+
+# Mengatur branch utama
+git branch -M main
+
+# Menambahkan repositori remote
+git remote add origin URL_REPOSITORI
+
+# Mengirim perubahan ke GitHub
+git push -u origin main</code></pre>
+
+                <p>
+                    Ganti <code>URL_REPOSITORI</code> dengan alamat repositori milik
+                    sendiri. Untuk proyek data science, gunakan
+                    <code>.gitignore</code> agar file sementara, lingkungan virtual,
+                    data sensitif, dan file berukuran besar yang tidak perlu tidak ikut
+                    dimasukkan ke repositori.
+                </p>
+
+                <h3>Contoh struktur repositori</h3>
+                <pre><code>proyek-data-science/
+├── data/
+├── notebooks/
+├── src/
+│   ├── preprocessing.py
+│   └── train.py
+├── models/
+├── app.py
+├── requirements.txt
+├── README.md
+└── .gitignore</code></pre>
+            </section>
+
+            <section>
+                <h2>6. Experiment Tracking</h2>
+                <p>
+                    Experiment tracking adalah proses mencatat eksperimen pelatihan
+                    model agar hasil dari berbagai konfigurasi dapat dibandingkan.
+                    Informasi yang dicatat dapat meliputi parameter, metrik evaluasi,
+                    versi kode, dataset, dan artefak model.
+                </p>
+
+                <h3>Contoh pencatatan sederhana</h3>
+                <pre><code>import pandas as pd
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score
+
+hasil_eksperimen = []
+
+for jumlah_pohon in [50, 100, 200]:
+    model = RandomForestClassifier(
+        n_estimators=jumlah_pohon,
+        random_state=42
+    )
+
+    model.fit(X_train, y_train)
+    prediksi = model.predict(X_valid)
+
+    akurasi = accuracy_score(y_valid, prediksi)
+
+    hasil_eksperimen.append({
+        "n_estimators": jumlah_pohon,
+        "accuracy": akurasi
+    })
+
+tabel_hasil = pd.DataFrame(hasil_eksperimen)
+print(tabel_hasil.sort_values("accuracy", ascending=False))</code></pre>
+
+                <p>
+                    Untuk eksperimen yang lebih kompleks, alat seperti MLflow dapat
+                    membantu mencatat parameter, metrik, artefak, dan versi model
+                    secara terstruktur.
+                </p>
+
+                <p>
+                    Pemilihan model sebaiknya didasarkan pada metrik yang sesuai dengan
+                    tujuan masalah, bukan hanya akurasi. Data validasi digunakan untuk
+                    membandingkan konfigurasi, sedangkan data uji sebaiknya tetap menjadi
+                    evaluasi akhir yang tidak dipakai berulang kali untuk memilih model.
+                </p>
+            </section>
+
+            <section>
+                <h2>7. Versioning Dataset dan Model</h2>
+                <p>
+                    Versioning adalah pengelolaan versi data dan model sehingga setiap
+                    hasil eksperimen dapat ditelusuri kembali. Model yang berbeda
+                    mungkin berasal dari dataset, fitur, parameter, atau kode yang berbeda.
+                </p>
+
+                <h3>Informasi yang perlu dicatat</h3>
+                <ul>
+                    <li>Versi atau identitas dataset yang digunakan.</li>
+                    <li>Tanggal pelatihan dan sumber data.</li>
+                    <li>Daftar fitur dan langkah preprocessing.</li>
+                    <li>Algoritma, hyperparameter, dan random seed.</li>
+                    <li>Metrik evaluasi pada data validasi dan data uji.</li>
+                    <li>Versi kode serta dependensi.</li>
+                </ul>
+
+                <p>
+                    Dataset berukuran besar dapat dikelola menggunakan alat versioning
+                    data seperti DVC. Model juga dapat disimpan dengan identitas versi,
+                    misalnya <code>model_v1</code> dan <code>model_v2</code>, disertai
+                    metadata yang menjelaskan proses pembuatannya.
+                </p>
+
+                <p>
+                    Hindari mengandalkan nama file saja. Catatan metadata diperlukan
+                    agar kita mengetahui model mana yang dibuat dari data dan konfigurasi
+                    tertentu.
+                </p>
+            </section>
+
+            <section>
+                <h2>8. Monitoring Performa Model</h2>
+                <p>
+                    Performa model setelah deployment dapat berbeda dari hasil evaluasi
+                    saat pengembangan. Perubahan pola data atau perilaku pengguna dapat
+                    menyebabkan penurunan kualitas prediksi.
+                </p>
+
+                <h3>Hal yang dipantau</h3>
+                <ul>
+                    <li><strong>Performa prediksi:</strong> precision, recall, F1, MAE, atau metrik yang relevan setelah label tersedia.</li>
+                    <li><strong>Data drift:</strong> perubahan distribusi fitur masukan dibandingkan data pelatihan.</li>
+                    <li><strong>Prediction drift:</strong> perubahan distribusi keluaran prediksi.</li>
+                    <li><strong>Kesehatan layanan:</strong> waktu respons, jumlah permintaan, tingkat kesalahan, dan penggunaan sumber daya.</li>
+                    <li><strong>Kualitas data:</strong> nilai hilang, rentang yang tidak valid, dan perubahan skema.</li>
+                </ul>
+
+                <p>
+                    Data drift tidak selalu berarti performa model menurun. Sebaliknya,
+                    perubahan performa juga perlu dianalisis bersama kualitas label,
+                    perubahan proses bisnis, dan kondisi data.
+                </p>
+            </section>
+
+            <section>
+                <h2>9. Retraining Model</h2>
+                <p>
+                    Retraining adalah proses melatih ulang model menggunakan data terbaru
+                    atau data yang telah diperbarui. Retraining dapat diperlukan ketika
+                    model tidak lagi memenuhi target performa atau karakteristik data
+                    mengalami perubahan yang berarti.
+                </p>
+
+                <h3>Alur retraining</h3>
+                <ol>
+                    <li>Kumpulkan data terbaru yang relevan dan berkualitas.</li>
+                    <li>Validasi data serta periksa potensi data leakage.</li>
+                    <li>Latih model baru dengan prosedur yang terdokumentasi.</li>
+                    <li>Evaluasi model baru menggunakan data validasi yang tepat.</li>
+                    <li>Bandingkan hasilnya dengan model yang sedang digunakan.</li>
+                    <li>Deploy model baru jika memenuhi kriteria penerimaan.</li>
+                    <li>Pantau model setelah pergantian dan siapkan mekanisme rollback.</li>
+                </ol>
+
+                <p>
+                    Retraining tidak harus dilakukan hanya karena data baru tersedia.
+                    Jadwal dan pemicunya perlu disesuaikan dengan karakteristik masalah,
+                    ketersediaan label, biaya pelatihan, dan risiko kesalahan prediksi.
+                    Model baru sebaiknya tidak menggantikan model lama sebelum lolos evaluasi.
+                </p>
+            </section>
+
+            <section>
+                <h2>10. Dokumentasi Proyek dan Presentasi Hasil</h2>
+                <p>
+                    Dokumentasi membantu orang lain memahami tujuan, proses, hasil,
+                    keterbatasan, dan cara menjalankan proyek. Dokumentasi yang baik juga
+                    menjadi bagian penting dari portofolio data science.
+                </p>
+
+                <h3>Struktur README</h3>
+                <ol>
+                    <li><strong>Judul:</strong> nama dan gambaran singkat proyek.</li>
+                    <li><strong>Latar belakang:</strong> masalah yang ingin diselesaikan.</li>
+                    <li><strong>Tujuan:</strong> pertanyaan atau target analisis.</li>
+                    <li><strong>Dataset:</strong> sumber, jumlah data, fitur, dan target.</li>
+                    <li><strong>Metodologi:</strong> preprocessing, analisis, dan pemodelan.</li>
+                    <li><strong>Evaluasi:</strong> metrik, hasil, dan pembanding model.</li>
+                    <li><strong>Deployment:</strong> cara menjalankan aplikasi atau API.</li>
+                    <li><strong>Keterbatasan:</strong> asumsi, risiko, dan hal yang belum ditangani.</li>
+                    <li><strong>Kesimpulan:</strong> temuan dan rencana pengembangan.</li>
+                </ol>
+
+                <h3>Kerangka presentasi</h3>
+                <ul>
+                    <li>Masalah dan alasan proyek dilakukan.</li>
+                    <li>Data yang digunakan dan proses pengolahannya.</li>
+                    <li>Metode yang dipilih beserta alasannya.</li>
+                    <li>Hasil evaluasi menggunakan tabel atau visualisasi.</li>
+                    <li>Demo aplikasi atau contoh prediksi.</li>
+                    <li>Kesimpulan, keterbatasan, dan pengembangan berikutnya.</li>
+                </ul>
+
+                <p>
+                    Portofolio yang kuat tidak harus menggunakan model paling rumit.
+                    Proyek yang menjelaskan masalah dengan jelas, memiliki proses yang
+                    dapat direproduksi, mengevaluasi model secara benar, dan menyampaikan
+                    hasil secara jujur dapat menunjukkan kemampuan data science dengan baik.
+                </p>
+            </section>
+
+            <section>
+                <h2>Latihan Mandiri</h2>
+                <ol>
+                    <li>Latih model klasifikasi sederhana, kemudian simpan dan muat kembali model tersebut.</li>
+                    <li>Buat API dengan endpoint <code>/predict</code> yang menerima data JSON dan mengembalikan prediksi.</li>
+                    <li>Buat aplikasi Streamlit yang menerima input pengguna dan menampilkan hasil prediksi.</li>
+                    <li>Unggah kode proyek ke GitHub dengan README dan <code>requirements.txt</code>.</li>
+                    <li>Bandingkan tiga konfigurasi model dan catat metrik validasinya.</li>
+                    <li>Susun rencana monitoring dan kriteria yang akan digunakan untuk retraining.</li>
+                    <li>Buat presentasi singkat yang menjelaskan masalah, metode, evaluasi, dan keterbatasan proyek.</li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>Ringkasan</h2>
+                <p>
+                    Deployment membuat model dapat digunakan oleh pengguna, sedangkan
+                    MLOps membantu mengelola siklus hidup model secara sistematis.
+                    Penyimpanan model, API, aplikasi interaktif, versioning, experiment
+                    tracking, monitoring, retraining, dan dokumentasi saling melengkapi
+                    untuk menghasilkan solusi machine learning yang dapat dipelihara.
+                </p>
+            </section>
+        </article>
+    </main>
+
+    <footer>
+        ShadowLab — Belajar Tanpa Batas
+    </footer>
+</body>
+</html>

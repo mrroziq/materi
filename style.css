@@ -348,3 +348,22 @@ footer {
 .article tbody tr:nth-child(even) {
     background: #f8f9ff;
 }
+
+.card .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    margin-bottom: 16px;
+    background-color: #eef2ff;
+    border-radius: 12px;
+    color: #4d5fe8;
+}
+
+.card .icon svg {
+    width: 24px;
+    height: 24px;
+    stroke-width: 2;
+    color: #4d5fe8;
+}

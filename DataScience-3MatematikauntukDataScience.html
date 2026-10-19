@@ -1,0 +1,1617 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matematika untuk Data Science | Kalkulus</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+    MathJax = {
+        tex: {
+            inlineMath: [['\\(', '\\)']],
+            displayMath: [['\\[', '\\]']]
+        }
+    };
+    </script>
+    <script
+        id="MathJax-script"
+        async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+    </script>
+</head>
+<body>
+    <header class="navbar">
+        <a href="index.html" class="logo">Kalkulus</a>
+        <nav>
+            <a href="index.html">Beranda</a>
+            <a href="MateriDataScience.html">Materi Data Science</a>
+        </nav>
+    </header>
+
+    <main class="container">
+
+        <article class="article">
+            <p class="eyebrow">BAGIAN III · MATEMATIKA</p>
+            <h1>Matematika untuk Data Science</h1>
+            <p class="intro">
+                Matematika merupakan fondasi penting dalam data science.
+                Aljabar digunakan untuk merepresentasikan hubungan antarvariabel,
+                kalkulus membantu memahami perubahan dan optimisasi, sedangkan
+                aljabar linear menjadi dasar representasi data, reduksi dimensi,
+                dan berbagai algoritma machine learning. Materi ini membahas
+                konsep matematika yang diperlukan untuk memahami analisis data
+                dan membangun model prediktif.
+            </p>
+
+            <section>
+                <h2>Tujuan Pembelajaran</h2>
+                <p>Setelah mempelajari materi ini, mahasiswa diharapkan mampu:</p>
+                <ul>
+                    <li>Memahami fungsi, persamaan, pertidaksamaan, eksponensial, dan logaritma.</li>
+                    <li>Menggunakan konsep limit, turunan, dan integral dasar.</li>
+                    <li>Melakukan operasi vektor dan matriks.</li>
+                    <li>Menyelesaikan sistem persamaan linear.</li>
+                    <li>Memahami nilai eigen dan vektor eigen.</li>
+                    <li>Menghitung turunan multivariabel dan gradien.</li>
+                    <li>Memahami optimisasi fungsi dalam pembelajaran mesin.</li>
+                    <li>Menghitung norma, jarak, dan ukuran similaritas data.</li>
+                    <li>Mengimplementasikan konsep matematika menggunakan Python.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>1. Aljabar dan Fungsi</h2>
+
+                <h3>1.1 Variabel dan Konstanta</h3>
+                <p>
+                    Variabel adalah simbol yang nilainya dapat berubah,
+                    sedangkan konstanta merupakan nilai yang dianggap tetap
+                    dalam suatu konteks. Dalam matematika, variabel digunakan
+                    untuk menyatakan hubungan antarbesaran.
+                </p>
+
+                <p>Contoh ekspresi aljabar:</p>
+                <p>\[
+                    3x+5,\qquad 2x^2-4x+7.
+                \]</p>
+
+                <p>
+                    Jika \(x=2\), maka nilai \(3x+5\) adalah
+                    \(3(2)+5=11\).
+                </p>
+
+                <h3>1.2 Operasi Aljabar</h3>
+                <p>
+                    Operasi aljabar meliputi penjumlahan, pengurangan,
+                    perkalian, pembagian, dan perpangkatan. Operasi ini
+                    mengikuti sifat komutatif, asosiatif, dan distributif
+                    sesuai dengan jenis operasinya.
+                </p>
+
+                <p>Sifat distributif:</p>
+                <p>\[
+                    a(b+c)=ab+ac.
+                \]</p>
+
+                <p>Contoh:</p>
+                <p>\[
+                    3(x+4)=3x+12.
+                \]</p>
+
+                <h3>1.3 Pengertian Fungsi</h3>
+                <p>
+                    Fungsi adalah aturan yang memasangkan setiap elemen
+                    domain dengan tepat satu elemen kodomain. Fungsi
+                    dinyatakan dengan notasi \(f:X\to Y\).
+                </p>
+
+                <p>Contoh fungsi linear:</p>
+                <p>\[
+                    f(x)=2x+3.
+                \]</p>
+
+                <p>
+                    Untuk \(x=4\), diperoleh
+                    \(f(4)=2(4)+3=11\).
+                </p>
+
+                <h3>1.4 Domain dan Range</h3>
+                <p>
+                    Domain adalah himpunan masukan yang diperbolehkan,
+                    sedangkan range adalah himpunan nilai keluaran yang
+                    benar-benar dihasilkan fungsi.
+                </p>
+
+                <p>Contoh:</p>
+                <p>\[
+                    f(x)=\frac{1}{x-2}.
+                \]</p>
+
+                <p>
+                    Penyebut tidak boleh nol sehingga domainnya adalah
+                    semua bilangan real kecuali \(x=2\).
+                    Range-nya juga semua bilangan real kecuali nol.
+                </p>
+
+                <h3>1.5 Jenis Fungsi</h3>
+                <ul>
+                    <li>Fungsi linear: \(f(x)=ax+b\).</li>
+                    <li>Fungsi kuadrat: \(f(x)=ax^2+bx+c\).</li>
+                    <li>Fungsi polinomial: \(f(x)=a_nx^n+\cdots+a_1x+a_0\).</li>
+                    <li>Fungsi rasional: \(f(x)=p(x)/q(x)\), dengan \(q(x)\neq0\).</li>
+                    <li>Fungsi potongan: aturan fungsi berbeda pada interval yang berbeda.</li>
+                </ul>
+
+                <h3>1.6 Komposisi Fungsi</h3>
+                <p>
+                    Komposisi fungsi menggabungkan dua fungsi sehingga
+                    keluaran fungsi pertama menjadi masukan fungsi kedua.
+                </p>
+
+                <p>\[
+                    (f\circ g)(x)=f(g(x)).
+                \]</p>
+
+                <p>Jika \(f(x)=2x+1\) dan \(g(x)=x^2\), maka</p>
+                <p>\[
+                    (f\circ g)(x)=2x^2+1.
+                \]</p>
+
+                <h3>1.7 Penerapan dalam Data Science</h3>
+                <p>
+                    Fungsi digunakan untuk merepresentasikan hubungan
+                    antara fitur dan keluaran. Contohnya, fungsi linear
+                    dapat digunakan untuk memperkirakan harga rumah
+                    berdasarkan luas bangunan.
+                </p>
+
+                <pre><code>def prediksi_harga(luas):
+    return 2_000_000 * luas + 100_000_000
+
+print(prediksi_harga(100))</code></pre>
+
+                <div class="example">
+                    <h3>Contoh Soal</h3>
+                    <p>Diberikan fungsi \(f(x)=3x^2-2x+1\). Tentukan \(f(2)\).</p>
+                    <p><strong>Penyelesaian:</strong></p>
+                    <p>\[
+                        f(2)=3(2)^2-2(2)+1=12-4+1=9.
+                    \]</p>
+                    <p>Jadi, \(f(2)=9\).</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>2. Persamaan dan Pertidaksamaan</h2>
+
+                <h3>2.1 Persamaan Linear</h3>
+                <p>
+                    Persamaan linear satu variabel dapat ditulis dalam
+                    bentuk \(ax+b=0\), dengan \(a\neq0\).
+                </p>
+
+                <p>\[
+                    ax+b=0
+                    \quad\Longrightarrow\quad
+                    x=-\frac{b}{a}.
+                \]</p>
+
+                <p>Contoh:</p>
+                <p>\[
+                    3x+6=0
+                    \quad\Longrightarrow\quad x=-2.
+                \]</p>
+
+                <h3>2.2 Persamaan Kuadrat</h3>
+                <p>
+                    Persamaan kuadrat berbentuk
+                    \(ax^2+bx+c=0\), dengan \(a\neq0\).
+                    Penyelesaiannya dapat diperoleh menggunakan pemfaktoran
+                    atau rumus kuadrat.
+                </p>
+
+                <p>\[
+                    x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}.
+                \]</p>
+
+                <p>
+                    Diskriminan \(D=b^2-4ac\) menentukan jenis akar
+                    real: dua akar berbeda jika \(D>0\), satu akar
+                    real kembar jika \(D=0\), dan tidak ada akar real
+                    jika \(D<0\).
+                </p>
+
+                <h3>2.3 Pertidaksamaan</h3>
+                <p>
+                    Pertidaksamaan menyatakan hubungan lebih besar,
+                    lebih kecil, atau hubungan inklusif antara dua
+                    ekspresi.
+                </p>
+
+                <p>\[
+                    2x+4>10
+                    \quad\Longrightarrow\quad x>3.
+                \]</p>
+
+                <p>
+                    Ketika kedua ruas pertidaksamaan dikalikan atau
+                    dibagi dengan bilangan negatif, arah tanda
+                    pertidaksamaan harus dibalik.
+                </p>
+
+                <p>\[
+                    -2x>6
+                    \quad\Longrightarrow\quad x<-3.
+                \]</p>
+
+                <h3>2.4 Nilai Mutlak</h3>
+                <p>
+                    Nilai mutlak menyatakan jarak suatu bilangan dari nol.
+                </p>
+
+                <p>\[
+                    |x|=
+                    \begin{cases}
+                    x, & x\geq0,\\
+                    -x, & x<0.
+                    \end{cases}
+                \]</p>
+
+                <p>
+                    Untuk \(a\geq0\), pertidaksamaan \(|x|<a\)
+                    setara dengan \(-a<x<a\).
+                </p>
+
+                <h3>2.5 Penerapan dalam Data Science</h3>
+                <p>
+                    Pertidaksamaan dapat digunakan untuk menentukan batas
+                    nilai, menyaring data, dan menetapkan kondisi kelayakan
+                    suatu observasi.
+                </p>
+
+                <pre><code>import numpy as np
+
+nilai = np.array([45, 60, 75, 88, 95])
+lulus = nilai >= 70
+
+print(nilai[lulus])</code></pre>
+
+                <div class="example">
+                    <h3>Contoh Soal</h3>
+                    <p>Selesaikan pertidaksamaan \(3x-5\leq10\).</p>
+                    <p><strong>Penyelesaian:</strong></p>
+                    <p>\[
+                        3x\leq15
+                        \quad\Longrightarrow\quad x\leq5.
+                    \]</p>
+                    <p>Himpunan penyelesaiannya adalah \((-\infty,5]\).</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>3. Fungsi Eksponensial dan Logaritma</h2>
+
+                <h3>3.1 Fungsi Eksponensial</h3>
+                <p>
+                    Fungsi eksponensial memiliki variabel pada bagian
+                    pangkat dan dapat ditulis sebagai
+                </p>
+
+                <p>\[
+                    f(x)=a^x,\qquad a>0,\ a\neq1.
+                \]</p>
+
+                <p>
+                    Jika \(a>1\), fungsi meningkat. Jika \(0<a<1\),
+                    fungsi menurun.
+                </p>
+
+                <h3>3.2 Sifat Eksponen</h3>
+                <p>\[
+                    a^m a^n=a^{m+n},
+                    \qquad
+                    \frac{a^m}{a^n}=a^{m-n},
+                \]</p>
+                <p>\[
+                    (a^m)^n=a^{mn},
+                    \qquad
+                    a^0=1.
+                \]</p>
+
+                <h3>3.3 Fungsi Logaritma</h3>
+                <p>
+                    Logaritma merupakan operasi invers dari eksponensial.
+                </p>
+
+                <p>\[
+                    y=\log_a x
+                    \quad\Longleftrightarrow\quad
+                    a^y=x.
+                \]</p>
+
+                <p>
+                    Syaratnya adalah \(a>0\), \(a\neq1\), dan \(x>0\).
+                    Logaritma natural ditulis \(\ln x\) dan memiliki
+                    basis \(e\).
+                </p>
+
+                <h3>3.4 Sifat Logaritma</h3>
+                <p>\[
+                    \log_a(xy)=\log_a x+\log_a y,
+                \]</p>
+                <p>\[
+                    \log_a\left(\frac{x}{y}\right)
+                    =\log_a x-\log_a y,
+                \]</p>
+                <p>\[
+                    \log_a(x^r)=r\log_a x.
+                \]</p>
+
+                <h3>3.5 Penerapan dalam Data Science</h3>
+                <p>
+                    Transformasi logaritma sering digunakan untuk
+                    mengurangi kemencengan distribusi, mengubah rentang
+                    data, dan mengatasi hubungan multiplikatif.
+                    Dalam machine learning, fungsi eksponensial juga
+                    muncul pada sigmoid dan softmax.
+                </p>
+
+                <p>Fungsi sigmoid:</p>
+                <p>\[
+                    \sigma(x)=\frac{1}{1+e^{-x}}.
+                \]</p>
+
+                <pre><code>import numpy as np
+
+def sigmoid(x):
+    return 1 / (1 + np.exp(-x))
+
+print(sigmoid(0))
+print(np.log(10))
+print(np.log10(1000))</code></pre>
+
+                <div class="example">
+                    <h3>Contoh Soal</h3>
+                    <p>Selesaikan \(2^{x+1}=16\).</p>
+                    <p><strong>Penyelesaian:</strong></p>
+                    <p>\[
+                        2^{x+1}=2^4
+                        \quad\Longrightarrow\quad x+1=4.
+                    \]</p>
+                    <p>Dengan demikian, \(x=3\).</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>4. Limit dan Turunan</h2>
+
+                <h3>4.1 Konsep Limit</h3>
+                <p>
+                    Limit menggambarkan nilai yang didekati suatu fungsi
+                    ketika variabel mendekati nilai tertentu.
+                </p>
+
+                <p>\[
+                    \lim_{x\to a}f(x)=L.
+                \]</p>
+
+                <p>
+                    Limit tidak selalu sama dengan nilai fungsi di titik
+                    tersebut. Limit dapat tetap ada meskipun fungsi tidak
+                    terdefinisi pada titik yang dituju.
+                </p>
+
+                <h3>4.2 Sifat Limit</h3>
+                <p>Jika limit-limit berikut ada, maka</p>
+
+                <p>\[
+                    \lim_{x\to a}[f(x)+g(x)]
+                    =
+                    \lim_{x\to a}f(x)+\lim_{x\to a}g(x).
+                \]</p>
+
+                <p>\[
+                    \lim_{x\to a}[f(x)g(x)]
+                    =
+                    \left(\lim_{x\to a}f(x)\right)
+                    \left(\lim_{x\to a}g(x)\right).
+                \]</p>
+
+                <h3>4.3 Definisi Turunan</h3>
+                <p>
+                    Turunan mengukur laju perubahan sesaat suatu fungsi.
+                    Turunan juga menyatakan kemiringan garis singgung
+                    grafik pada suatu titik.
+                </p>
+
+                <p>\[
+                    f'(x)=
+                    \lim_{h\to0}
+                    \frac{f(x+h)-f(x)}{h}.
+                \]</p>
+
+                <h3>4.4 Aturan Turunan</h3>
+                <p>\[
+                    \frac{d}{dx}x^n=nx^{n-1}.
+                \]</p>
+                <p>\[
+                    \frac{d}{dx}[af(x)+bg(x)]
+                    =af'(x)+bg'(x).
+                \]</p>
+                <p>\[
+                    \frac{d}{dx}[f(x)g(x)]
+                    =f'(x)g(x)+f(x)g'(x).
+                \]</p>
+                <p>\[
+                    \frac{d}{dx}\left(\frac{f(x)}{g(x)}\right)
+                    =
+                    \frac{f'(x)g(x)-f(x)g'(x)}{g(x)^2}.
+                \]</p>
+
+                <h3>4.5 Aturan Rantai</h3>
+                <p>
+                    Jika \(y=f(g(x))\), maka
+                </p>
+                <p>\[
+                    \frac{dy}{dx}=f'(g(x))g'(x).
+                \]</p>
+
+                <h3>4.6 Penerapan Turunan</h3>
+                <p>
+                    Turunan digunakan untuk menentukan laju perubahan,
+                    mencari titik kritis, dan memecahkan masalah optimisasi.
+                    Dalam machine learning, turunan menjadi dasar
+                    pembaruan parameter model.
+                </p>
+
+                <pre><code>import sympy as sp
+
+x = sp.symbols("x")
+f = x**3 - 3*x**2 + 2
+
+turunan = sp.diff(f, x)
+
+print(turunan)
+print(turunan.subs(x, 2))</code></pre>
+
+                <p>
+                    Contoh tersebut menggunakan SymPy untuk menghitung
+                    turunan simbolik. Library dapat dipasang dengan
+                    <code>python -m pip install sympy</code>.
+                </p>
+
+                <div class="example">
+                    <h3>Contoh Soal</h3>
+                    <p>Tentukan turunan \(f(x)=x^3+2x^2-5x+1\).</p>
+                    <p><strong>Penyelesaian:</strong></p>
+                    <p>\[
+                        f'(x)=3x^2+4x-5.
+                    \]</p>
+                    <p>
+                        Pada \(x=2\), diperoleh
+                        \(f'(2)=12+8-5=15\).
+                    </p>
+                </div>
+            </section>
+
+            <section>
+                <h2>5. Integral Dasar</h2>
+
+                <h3>5.1 Pengertian Integral</h3>
+                <p>
+                    Integral tak tentu berkaitan dengan pencarian
+                    antiturunan. Jika \(F'(x)=f(x)\), maka
+                </p>
+
+                <p>\[
+                    \int f(x)\,dx=F(x)+C,
+                \]</p>
+
+                <p>
+                    dengan \(C\) sebagai konstanta integrasi.
+                </p>
+
+                <h3>5.2 Aturan Integral Dasar</h3>
+                <p>\[
+                    \int x^n\,dx
+                    =\frac{x^{n+1}}{n+1}+C,
+                    \qquad n\neq-1.
+                \]</p>
+
+                <p>\[
+                    \int \frac{1}{x}\,dx=\ln|x|+C.
+                \]</p>
+
+                <p>\[
+                    \int e^x\,dx=e^x+C.
+                \]</p>
+
+                <p>\[
+                    \int \cos x\,dx=\sin x+C.
+                \]</p>
+
+                <h3>5.3 Integral Tentu</h3>
+                <p>
+                    Integral tentu menghitung akumulasi bertanda suatu
+                    fungsi pada interval tertentu. Berdasarkan Teorema
+                    Dasar Kalkulus,
+                </p>
+
+                <p>\[
+                    \int_a^b f(x)\,dx=F(b)-F(a),
+                \]</p>
+
+                <p>
+                    dengan \(F'(x)=f(x)\), jika fungsi memenuhi syarat
+                    yang diperlukan.
+                </p>
+
+                <h3>5.4 Penerapan Integral</h3>
+                <p>
+                    Integral digunakan dalam penghitungan luas, akumulasi,
+                    nilai harapan untuk variabel acak kontinu, dan
+                    interpretasi fungsi kepadatan probabilitas.
+                </p>
+
+                <pre><code>import sympy as sp
+
+x = sp.symbols("x")
+f = x**2
+
+integral_tak_tentu = sp.integrate(f, x)
+integral_tentu = sp.integrate(f, (x, 0, 3))
+
+print(integral_tak_tentu)
+print(integral_tentu)</code></pre>
+
+                <div class="example">
+                    <h3>Contoh Soal</h3>
+                    <p>Hitung \(\int_0^2 (3x^2+1)\,dx\).</p>
+                    <p><strong>Penyelesaian:</strong></p>
+                    <p>\[
+                        \int (3x^2+1)\,dx=x^3+x+C.
+                    \]</p>
+                    <p>\[
+                        \int_0^2(3x^2+1)\,dx
+                        =[x^3+x]_0^2=8+2=10.
+                    \]</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>6. Vektor dan Matriks</h2>
+
+                <h3>6.1 Pengertian Vektor</h3>
+                <p>
+                    Vektor adalah objek matematika yang memiliki komponen
+                    dan dapat merepresentasikan posisi, arah, atau kumpulan
+                    fitur numerik.
+                </p>
+
+                <p>\[
+                    \mathbf{x}=
+                    \begin{bmatrix}
+                    x_1\\x_2\\ \vdots\\x_n
+                    \end{bmatrix}.
+                \]</p>
+
+                <p>
+                    Dalam data science, satu observasi sering direpresentasikan
+                    sebagai vektor fitur. Misalnya, sebuah rumah dapat
+                    direpresentasikan oleh luas bangunan, jumlah kamar,
+                    dan usia bangunan.
+                </p>
+
+                <h3>6.2 Operasi Vektor</h3>
+                <p>
+                    Dua vektor dengan dimensi sama dapat dijumlahkan
+                    berdasarkan komponennya.
+                </p>
+
+                <p>\[
+                    \mathbf{a}+\mathbf{b}
+                    =
+                    \begin{bmatrix}
+                    a_1+b_1\\a_2+b_2
+                    \end{bmatrix}.
+                \]</p>
+
+                <p>
+                    Perkalian titik atau dot product didefinisikan sebagai
+                </p>
+
+                <p>\[
+                    \mathbf{a}\cdot\mathbf{b}
+                    =\sum_{i=1}^{n}a_ib_i.
+                \]</p>
+
+                <h3>6.3 Pengertian Matriks</h3>
+                <p>
+                    Matriks adalah susunan elemen dalam baris dan kolom.
+                    Matriks berukuran \(m\times n\) memiliki \(m\) baris
+                    dan \(n\) kolom.
+                </p>
+
+                <p>\[
+                    A=
+                    \begin{bmatrix}
+                    1&2&3\\
+                    4&5&6
+                    \end{bmatrix}.
+                \]</p>
+
+                <p>
+                    Matriks tersebut berukuran \(2\times3\). Dalam data
+                    science, dataset tabular dapat direpresentasikan
+                    sebagai matriks dengan baris sebagai observasi
+                    dan kolom sebagai fitur numerik.
+                </p>
+
+                <h3>6.4 Transpos Matriks</h3>
+                <p>
+                    Transpos matriks menukar baris dan kolom.
+                </p>
+
+                <p>\[
+                    A=
+                    \begin{bmatrix}1&2\\3&4\end{bmatrix},
+                    \qquad
+                    A^T=
+                    \begin{bmatrix}1&3\\2&4\end{bmatrix}.
+                \]</p>
+
+                <h3>6.5 Implementasi dengan NumPy</h3>
+                <pre><code>import numpy as np
+
+v = np.array([1, 2, 3])
+w = np.array([4, 5, 6])
+
+A = np.array([
+    [1, 2],
+    [3, 4]
+])
+
+print(v + w)
+print(np.dot(v, w))
+print(A.T)
+print(A.shape)</code></pre>
+
+                <div class="example">
+                    <h3>Contoh Soal</h3>
+                    <p>Diberikan</p>
+                    <p>\[
+                        \mathbf{a}=(1,2,3),\qquad
+                        \mathbf{b}=(4,0,-1).
+                    \]</p>
+                    <p>Hitung \(\mathbf{a}\cdot\mathbf{b}\).</p>
+                    <p><strong>Penyelesaian:</strong></p>
+                    <p>\[
+                        \mathbf{a}\cdot\mathbf{b}
+                        =1(4)+2(0)+3(-1)=1.
+                    \]</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>7. Operasi Matriks dan Invers</h2>
+
+                <h3>7.1 Penjumlahan Matriks</h3>
+                <p>
+                    Dua matriks dapat dijumlahkan jika ukurannya sama.
+                    Penjumlahan dilakukan pada elemen yang bersesuaian.
+                </p>
+
+                <p>\[
+                    \begin{bmatrix}1&2\\3&4\end{bmatrix}
+                    +
+                    \begin{bmatrix}5&6\\7&8\end{bmatrix}
+                    =
+                    \begin{bmatrix}6&8\\10&12\end{bmatrix}.
+                \]</p>
+
+                <h3>7.2 Perkalian Skalar dan Matriks</h3>
+                <p>
+                    Perkalian skalar mengalikan setiap elemen matriks
+                    dengan suatu bilangan.
+                </p>
+
+                <p>\[
+                    2\begin{bmatrix}1&2\\3&4\end{bmatrix}
+                    =
+                    \begin{bmatrix}2&4\\6&8\end{bmatrix}.
+                \]</p>
+
+                <h3>7.3 Perkalian Matriks</h3>
+                <p>
+                    Jika \(A\) berukuran \(m\times n\) dan \(B\)
+                    berukuran \(n\times p\), maka \(AB\) terdefinisi
+                    dan berukuran \(m\times p\).
+                </p>
+
+                <p>\[
+                    (AB)_{ij}=\sum_{k=1}^{n}a_{ik}b_{kj}.
+                \]</p>
+
+                <p>
+                    Perkalian matriks pada umumnya tidak komutatif:
+                    \(AB\neq BA\).
+                </p>
+
+                <h3>7.4 Determinan</h3>
+                <p>
+                    Determinan adalah nilai skalar yang terkait dengan
+                    matriks persegi. Untuk matriks berukuran \(2\times2\),
+                </p>
+
+                <p>\[
+                    A=\begin{bmatrix}a&b\\c&d\end{bmatrix},
+                    \qquad
+                    \det(A)=ad-bc.
+                \]</p>
+
+                <h3>7.5 Invers Matriks</h3>
+                <p>
+                    Invers matriks \(A\), ditulis \(A^{-1}\), memenuhi
+                </p>
+
+                <p>\[
+                    AA^{-1}=A^{-1}A=I.
+                \]</p>
+
+                <p>
+                    Invers hanya ada untuk matriks persegi yang
+                    nonsingular, yaitu matriks dengan determinan tidak nol.
+                    Untuk matriks berukuran \(2\times2\),
+                </p>
+
+                <p>\[
+                    A^{-1}=
+                    \frac{1}{ad-bc}
+                    \begin{bmatrix}d&-b\\-c&a\end{bmatrix},
+                    \qquad ad-bc\neq0.
+                \]</p>
+
+                <h3>7.6 Implementasi dengan NumPy</h3>
+                <pre><code>import numpy as np
+
+A = np.array([
+    [2, 1],
+    [1, 3]
+])
+
+print("Determinan:", np.linalg.det(A))
+print("Invers:")
+print(np.linalg.inv(A))
+
+B = np.array([
+    [1, 2],
+    [3, 4]
+])
+
+print("Perkalian matriks:")
+print(A @ B)</code></pre>
+
+                <p>
+                    Untuk komputasi numerik, gunakan fungsi pada
+                    <code>numpy.linalg</code>. Pada persoalan sistem linear,
+                    menyelesaikan sistem secara langsung umumnya lebih baik
+                    daripada menghitung invers secara eksplisit.
+                </p>
+
+                <div class="example">
+                    <h3>Contoh Soal</h3>
+                    <p>Tentukan invers matriks</p>
+                    <p>\[
+                        A=\begin{bmatrix}2&1\\1&3\end{bmatrix}.
+                    \]</p>
+                    <p><strong>Penyelesaian:</strong></p>
+                    <p>\[
+                        \det(A)=2(3)-1(1)=5.
+                    \]</p>
+                    <p>Karena determinannya tidak nol, invers ada.</p>
+                    <p>\[
+                        A^{-1}=\frac15
+                        \begin{bmatrix}3&-1\\-1&2\end{bmatrix}.
+                    \]</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>8. Sistem Persamaan Linear</h2>
+
+                <h3>8.1 Bentuk Matriks</h3>
+                <p>
+                    Sistem persamaan linear merupakan sekumpulan
+                    persamaan yang memiliki variabel-variabel bersama.
+                    Sistem tersebut dapat ditulis dalam bentuk
+                </p>
+
+                <p>\[
+                    A\mathbf{x}=\mathbf{b},
+                \]</p>
+
+                <p>
+                    dengan \(A\) sebagai matriks koefisien,
+                    \(\mathbf{x}\) sebagai vektor variabel, dan
+                    \(\mathbf{b}\) sebagai vektor konstanta.
+                </p>
+
+                <h3>8.2 Contoh Sistem Dua Variabel</h3>
+                <p>\[
+                    \begin{aligned}
+                    2x+y&=5,\\
+                    x-y&=1.
+                    \end{aligned}
+                \]</p>
+
+                <p>
+                    Dalam bentuk matriks:
+                </p>
+
+                <p>\[
+                    \begin{bmatrix}2&1\\1&-1\end{bmatrix}
+                    \begin{bmatrix}x\\y\end{bmatrix}
+                    =
+                    \begin{bmatrix}5\\1\end{bmatrix}.
+                \]</p>
+
+                <h3>8.3 Metode Penyelesaian</h3>
+                <ul>
+                    <li>Substitusi dan eliminasi.</li>
+                    <li>Eliminasi Gauss.</li>
+                    <li>Eliminasi Gauss-Jordan.</li>
+                    <li>Metode invers, jika matriks koefisien invertibel.</li>
+                    <li>Metode numerik untuk sistem berukuran besar.</li>
+                </ul>
+
+                <h3>8.4 Jenis Solusi</h3>
+                <p>Sistem linear dapat memiliki:</p>
+                <ul>
+                    <li>Satu solusi, jika sistem konsisten dengan solusi tunggal.</li>
+                    <li>Tak hingga banyak solusi, jika persamaan tidak menentukan semua variabel secara unik.</li>
+                    <li>Tidak ada solusi, jika persamaan saling bertentangan.</li>
+                </ul>
+
+                <h3>8.5 Implementasi Python</h3>
+                <pre><code>import numpy as np
+
+A = np.array([
+    [2, 1],
+    [1, -1]
+], dtype=float)
+
+b = np.array([5, 1], dtype=float)
+
+solusi = np.linalg.solve(A, b)
+
+print("x =", solusi[0])
+print("y =", solusi[1])</code></pre>
+
+                <div class="example">
+                    <h3>Contoh Soal</h3>
+                    <p>Selesaikan sistem:</p>
+                    <p>\[
+                        \begin{aligned}
+                        2x+y&=5,\\
+                        x-y&=1.
+                        \end{aligned}
+                    \]</p>
+                    <p><strong>Penyelesaian:</strong></p>
+                    <p>
+                        Dari persamaan kedua, \(y=x-1\).
+                        Substitusi ke persamaan pertama menghasilkan
+                    </p>
+                    <p>\[
+                        2x+(x-1)=5
+                        \Longrightarrow 3x=6
+                        \Longrightarrow x=2.
+                    \]</p>
+                    <p>
+                        Oleh karena itu, \(y=2-1=1\).
+                        Solusinya adalah \((x,y)=(2,1)\).
+                    </p>
+                </div>
+            </section>
+
+            <section>
+                <h2>9. Nilai Eigen dan Vektor Eigen</h2>
+
+                <h3>9.1 Definisi</h3>
+                <p>
+                    Nilai eigen dan vektor eigen menggambarkan arah khusus
+                    suatu transformasi linear. Untuk matriks persegi \(A\),
+                    vektor tak nol \(\mathbf{v}\) merupakan vektor eigen
+                    jika
+                </p>
+
+                <p>\[
+                    A\mathbf{v}=\lambda\mathbf{v},
+                \]</p>
+
+                <p>
+                    dengan \(\lambda\) sebagai nilai eigen yang bersesuaian.
+                </p>
+
+                <h3>9.2 Persamaan Karakteristik</h3>
+                <p>
+                    Nilai eigen diperoleh dari persamaan karakteristik
+                </p>
+
+                <p>\[
+                    \det(A-\lambda I)=0.
+                \]</p>
+
+                <p>
+                    Setelah nilai eigen ditemukan, vektor eigennya
+                    diperoleh dengan menyelesaikan
+                </p>
+
+                <p>\[
+                    (A-\lambda I)\mathbf{v}=\mathbf{0}.
+                \]</p>
+
+                <h3>9.3 Contoh Perhitungan</h3>
+                <p>Diberikan matriks</p>
+                <p>\[
+                    A=\begin{bmatrix}2&0\\0&3\end{bmatrix}.
+                \]</p>
+
+                <p>Persamaan karakteristiknya adalah</p>
+                <p>\[
+                    \det(A-\lambda I)
+                    =(2-\lambda)(3-\lambda)=0.
+                \]</p>
+
+                <p>
+                    Jadi, nilai eigennya adalah \(\lambda_1=2\)
+                    dan \(\lambda_2=3\). Vektor eigen yang bersesuaian
+                    dapat dipilih sebagai
+                </p>
+
+                <p>\[
+                    \mathbf{v}_1=\begin{bmatrix}1\\0\end{bmatrix},
+                    \qquad
+                    \mathbf{v}_2=\begin{bmatrix}0\\1\end{bmatrix}.
+                \]</p>
+
+                <h3>9.4 Penerapan dalam Data Science</h3>
+                <p>
+                    Nilai eigen dan vektor eigen digunakan dalam analisis
+                    komponen utama (Principal Component Analysis atau PCA),
+                    analisis struktur matriks, sistem dinamis, dan reduksi
+                    dimensi.
+                </p>
+
+                <p>
+                    Pada PCA, vektor eigen dari matriks kovarians
+                    mengidentifikasi arah komponen utama, sedangkan
+                    nilai eigen menunjukkan besarnya varians yang
+                    terkait dengan masing-masing arah tersebut.
+                </p>
+
+                <pre><code>import numpy as np
+
+A = np.array([
+    [2, 0],
+    [0, 3]
+], dtype=float)
+
+nilai_eigen, vektor_eigen = np.linalg.eig(A)
+
+print("Nilai eigen:")
+print(nilai_eigen)
+
+print("Vektor eigen:")
+print(vektor_eigen)</code></pre>
+
+                <div class="example">
+                    <h3>Contoh Soal</h3>
+                    <p>
+                        Tunjukkan bahwa \(\mathbf{v}=(1,0)^T\)
+                        merupakan vektor eigen matriks
+                        \(A=\begin{bmatrix}4&0\\0&2\end{bmatrix}\).
+                    </p>
+
+                    <p><strong>Penyelesaian:</strong></p>
+                    <p>\[
+                        A\mathbf{v}
+                        =
+                        \begin{bmatrix}4&0\\0&2\end{bmatrix}
+                        \begin{bmatrix}1\\0\end{bmatrix}
+                        =
+                        \begin{bmatrix}4\\0\end{bmatrix}
+                        =4\mathbf{v}.
+                    \]</p>
+                    <p>
+                        Dengan demikian, \(\mathbf{v}\) adalah vektor
+                        eigen dengan nilai eigen \(\lambda=4\).
+                    </p>
+                </div>
+            </section>
+
+            <section>
+                <h2>10. Kalkulus Multivariabel</h2>
+
+                <h3>10.1 Fungsi Banyak Variabel</h3>
+                <p>
+                    Fungsi multivariabel memiliki lebih dari satu variabel
+                    bebas. Contohnya adalah fungsi
+                </p>
+
+                <p>\[
+                    f(x,y)=x^2+3xy+y^2.
+                \]</p>
+
+                <p>
+                    Nilai fungsi bergantung pada pasangan masukan
+                    \((x,y)\). Fungsi semacam ini dapat digunakan untuk
+                    menggambarkan hubungan antara beberapa fitur dan
+                    suatu nilai keluaran.
+                </p>
+
+                <h3>10.2 Turunan Parsial</h3>
+                <p>
+                    Turunan parsial mengukur laju perubahan fungsi
+                    terhadap satu variabel dengan variabel lainnya
+                    diperlakukan konstan.
+                </p>
+
+                <p>\[
+                    \frac{\partial f}{\partial x},
+                    \qquad
+                    \frac{\partial f}{\partial y}.
+                \]</p>
+
+                <p>Untuk \(f(x,y)=x^2+3xy+y^2\), diperoleh</p>
+                <p>\[
+                    \frac{\partial f}{\partial x}=2x+3y,
+                \]</p>
+                <p>\[
+                    \frac{\partial f}{\partial y}=3x+2y.
+                \]</p>
+
+                <h3>10.3 Turunan Parsial Tingkat Dua</h3>
+                <p>
+                    Turunan parsial dapat dihitung kembali untuk
+                    mempelajari perubahan laju perubahan.
+                </p>
+
+                <p>\[
+                    f_{xx}=\frac{\partial^2 f}{\partial x^2},
+                    \qquad
+                    f_{yy}=\frac{\partial^2 f}{\partial y^2}.
+                \]</p>
+
+                <p>
+                    Turunan campuran dinyatakan dengan
+                    \(f_{xy}\) dan \(f_{yx}\). Jika turunan campuran
+                    kontinu di sekitar titik yang ditinjau, keduanya
+                    sama.
+                </p>
+
+                <h3>10.4 Diferensial Total</h3>
+                <p>
+                    Untuk fungsi \(z=f(x,y)\), diferensial total
+                    diberikan oleh
+                </p>
+
+                <p>\[
+                    dz=f_x\,dx+f_y\,dy.
+                \]</p>
+
+                <p>
+                    Diferensial total dapat digunakan untuk mendekati
+                    perubahan fungsi akibat perubahan kecil pada
+                    beberapa variabel.
+                </p>
+
+                <h3>10.5 Implementasi Python</h3>
+                <pre><code>import sympy as sp
+
+x, y = sp.symbols("x y")
+f = x**2 + 3*x*y + y**2
+
+fx = sp.diff(f, x)
+fy = sp.diff(f, y)
+
+print("Turunan terhadap x:", fx)
+print("Turunan terhadap y:", fy)
+
+print("Nilai fx di (1, 2):", fx.subs({x: 1, y: 2}))
+print("Nilai fy di (1, 2):", fy.subs({x: 1, y: 2}))</code></pre>
+
+                <div class="example">
+                    <h3>Contoh Soal</h3>
+                    <p>
+                        Diberikan \(f(x,y)=x^2y+4y^3\).
+                        Tentukan turunan parsial terhadap \(x\) dan \(y\).
+                    </p>
+
+                    <p><strong>Penyelesaian:</strong></p>
+                    <p>\[
+                        \frac{\partial f}{\partial x}=2xy,
+                    \]</p>
+                    <p>\[
+                        \frac{\partial f}{\partial y}=x^2+12y^2.
+                    \]</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>11. Gradien dan Optimisasi</h2>
+
+                <h3>11.1 Pengertian Gradien</h3>
+                <p>
+                    Gradien merupakan vektor yang memuat turunan parsial
+                    pertama dari suatu fungsi multivariabel.
+                </p>
+
+                <p>\[
+                    \nabla f=
+                    \begin{bmatrix}
+                    \frac{\partial f}{\partial x_1}\\
+                    \frac{\partial f}{\partial x_2}\\
+                    \vdots\\
+                    \frac{\partial f}{\partial x_n}
+                    \end{bmatrix}.
+                \]</p>
+
+                <p>
+                    Gradien menunjukkan arah kenaikan tercepat fungsi
+                    pada titik tertentu. Arah negatif gradien menunjukkan
+                    arah penurunan tercepat untuk perubahan infinitesimal
+                    dalam geometri Euclidean.
+                </p>
+
+                <h3>11.2 Titik Kritis</h3>
+                <p>
+                    Titik kritis fungsi terdiferensialkan dapat ditemukan
+                    dengan mencari titik ketika gradien nol.
+                </p>
+
+                <p>\[
+                    \nabla f(\mathbf{x})=\mathbf{0}.
+                \]</p>
+
+                <p>
+                    Titik kritis dapat berupa minimum lokal, maksimum lokal,
+                    atau titik pelana. Oleh karena itu, gradien nol saja
+                    belum menjamin bahwa suatu titik merupakan minimum.
+                </p>
+
+                <h3>11.3 Optimisasi</h3>
+                <p>
+                    Optimisasi adalah proses mencari nilai variabel
+                    yang meminimalkan atau memaksimalkan suatu fungsi
+                    tujuan. Dalam machine learning, fungsi tujuan
+                    biasanya menyatakan kerugian atau kesalahan prediksi.
+                </p>
+
+                <p>Contoh fungsi kuadrat:</p>
+                <p>\[
+                    f(x)=(x-3)^2+2.
+                \]</p>
+
+                <p>Turunannya adalah</p>
+                <p>\[
+                    f'(x)=2(x-3).
+                \]</p>
+
+                <p>
+                    Dengan menetapkan \(f'(x)=0\), diperoleh \(x=3\).
+                    Karena koefisien kuadratnya positif, titik tersebut
+                    merupakan minimum global dengan \(f(3)=2\).
+                </p>
+
+                <h3>11.4 Gradient Descent</h3>
+                <p>
+                    Gradient descent merupakan algoritma iteratif untuk
+                    mencari minimum fungsi dengan memperbarui parameter
+                    ke arah negatif gradien.
+                </p>
+
+                <p>\[
+                    \boldsymbol{\theta}_{t+1}
+                    =
+                    \boldsymbol{\theta}_t
+                    -\eta\nabla J(\boldsymbol{\theta}_t),
+                \]</p>
+
+                <p>
+                    dengan \(\eta\) sebagai learning rate dan
+                    \(J\) sebagai fungsi kerugian.
+                </p>
+
+                <h3>11.5 Implementasi Gradient Descent</h3>
+                <pre><code>def f(x):
+    return (x - 3)**2 + 2
+
+def grad_f(x):
+    return 2 * (x - 3)
+
+x = 0.0
+learning_rate = 0.1
+
+for _ in range(100):
+    x = x - learning_rate * grad_f(x)
+
+print("Titik minimum hampiran:", x)
+print("Nilai fungsi:", f(x))</code></pre>
+
+                <p>
+                    Dengan learning rate yang sesuai, iterasi bergerak
+                    mendekati \(x=3\). Kecepatan konvergensi bergantung
+                    pada bentuk fungsi, nilai learning rate, dan titik awal.
+                </p>
+
+                <h3>11.6 Peran Optimisasi dalam Machine Learning</h3>
+                <ul>
+                    <li>Regresi linear: meminimalkan kesalahan prediksi.</li>
+                    <li>Regresi logistik: meminimalkan fungsi kerugian klasifikasi.</li>
+                    <li>Jaringan saraf: memperbarui bobot dan bias melalui gradien.</li>
+                    <li>Regularisasi: mengendalikan kompleksitas model melalui tambahan penalti.</li>
+                </ul>
+
+                <div class="example">
+                    <h3>Contoh Soal</h3>
+                    <p>
+                        Tentukan titik minimum fungsi
+                        \(f(x,y)=x^2+2y^2-4x+8y+10\).
+                    </p>
+
+                    <p><strong>Penyelesaian:</strong></p>
+                    <p>\[
+                        \frac{\partial f}{\partial x}=2x-4=0
+                        \Longrightarrow x=2.
+                    \]</p>
+                    <p>\[
+                        \frac{\partial f}{\partial y}=4y+8=0
+                        \Longrightarrow y=-2.
+                    \]</p>
+                    <p>
+                        Kedua koefisien kuadrat positif sehingga fungsi
+                        mencapai minimum global pada \((2,-2)\).
+                        Nilai minimumnya adalah
+                    </p>
+                    <p>\[
+                        f(2,-2)=4+8-8-16+10=-2.
+                    \]</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>12. Norm, Jarak, dan Similaritas</h2>
+
+                <h3>12.1 Norma Vektor</h3>
+                <p>
+                    Norma adalah ukuran besar atau panjang suatu vektor.
+                    Norma sering digunakan untuk mengukur besar parameter,
+                    menghitung jarak, dan membentuk penalti regularisasi.
+                </p>
+
+                <h3>12.2 Norma L1</h3>
+                <p>
+                    Norma L1 adalah jumlah nilai mutlak seluruh komponen.
+                </p>
+
+                <p>\[
+                    \|\mathbf{x}\|_1=\sum_{i=1}^{n}|x_i|.
+                \]</p>
+
+                <h3>12.3 Norma L2</h3>
+                <p>
+                    Norma L2 merupakan akar dari jumlah kuadrat komponen.
+                </p>
+
+                <p>\[
+                    \|\mathbf{x}\|_2=
+                    \sqrt{\sum_{i=1}^{n}x_i^2}.
+                \]</p>
+
+                <h3>12.4 Jarak Euclidean</h3>
+                <p>
+                    Jarak Euclidean antara dua vektor mengukur panjang
+                    garis lurus yang menghubungkan kedua titik.
+                </p>
+
+                <p>\[
+                    d(\mathbf{x},\mathbf{y})
+                    =
+                    \sqrt{\sum_{i=1}^{n}(x_i-y_i)^2}.
+                \]</p>
+
+                <h3>12.5 Jarak Manhattan</h3>
+                <p>
+                    Jarak Manhattan menjumlahkan selisih absolut
+                    masing-masing komponen.
+                </p>
+
+                <p>\[
+                    d_1(\mathbf{x},\mathbf{y})
+                    =\sum_{i=1}^{n}|x_i-y_i|.
+                \]</p>
+
+                <h3>12.6 Cosine Similarity</h3>
+                <p>
+                    Cosine similarity mengukur kesamaan arah dua vektor
+                    melalui kosinus sudut di antara keduanya.
+                </p>
+
+                <p>\[
+                    \operatorname{cos}(\mathbf{x},\mathbf{y})
+                    =
+                    \frac{\mathbf{x}\cdot\mathbf{y}}
+                    {\|\mathbf{x}\|_2\|\mathbf{y}\|_2}.
+                \]</p>
+
+                <p>
+                    Jika kedua vektor tak nol, nilainya berada pada
+                    interval \([-1,1]\). Nilai mendekati 1 menunjukkan
+                    arah yang mirip, nilai 0 menunjukkan ortogonal,
+                    dan nilai mendekati -1 menunjukkan arah berlawanan.
+                    Pada data fitur nonnegatif, nilai cosine similarity
+                    umumnya berada pada interval \([0,1]\).
+                </p>
+
+                <p>
+                    Cosine similarity tidak terdefinisi jika salah satu
+                    vektor adalah vektor nol karena normanya nol.
+                </p>
+
+                <h3>12.7 Contoh Perhitungan</h3>
+                <p>Diberikan vektor</p>
+
+                <p>\[
+                    \mathbf{x}=(1,2),\qquad
+                    \mathbf{y}=(4,6).
+                \]</p>
+
+                <p>Norma L1 dari \(\mathbf{x}\):</p>
+                <p>\[
+                    \|\mathbf{x}\|_1=|1|+|2|=3.
+                \]</p>
+
+                <p>Norma L2 dari \(\mathbf{x}\):</p>
+                <p>\[
+                    \|\mathbf{x}\|_2=\sqrt{1^2+2^2}=\sqrt5.
+                \]</p>
+
+                <p>Jarak Euclidean:</p>
+                <p>\[
+                    d(\mathbf{x},\mathbf{y})
+                    =\sqrt{(1-4)^2+(2-6)^2}=5.
+                \]</p>
+
+                <p>Jarak Manhattan:</p>
+                <p>\[
+                    d_1(\mathbf{x},\mathbf{y})=3+4=7.
+                \]</p>
+
+                <p>Cosine similarity:</p>
+                <p>\[
+                    \frac{1(4)+2(6)}
+                    {\sqrt5\sqrt{52}}
+                    =\frac{16}{\sqrt{260}}
+                    \approx0.9923.
+                \]</p>
+
+                <h3>12.8 Implementasi Python</h3>
+                <pre><code>import numpy as np
+
+x = np.array([1, 2], dtype=float)
+y = np.array([4, 6], dtype=float)
+
+norm_l1 = np.linalg.norm(x, ord=1)
+norm_l2 = np.linalg.norm(x)
+
+jarak_euclidean = np.linalg.norm(x - y)
+jarak_manhattan = np.sum(np.abs(x - y))
+
+penyebut = np.linalg.norm(x) * np.linalg.norm(y)
+cosine_similarity = np.dot(x, y) / penyebut
+
+print("Norma L1:", norm_l1)
+print("Norma L2:", norm_l2)
+print("Jarak Euclidean:", jarak_euclidean)
+print("Jarak Manhattan:", jarak_manhattan)
+print("Cosine similarity:", cosine_similarity)</code></pre>
+
+                <h3>12.9 Penerapan dalam Data Science</h3>
+                <ul>
+                    <li><strong>K-Nearest Neighbors:</strong> menggunakan jarak untuk mencari observasi terdekat.</li>
+                    <li><strong>Clustering:</strong> menggunakan ukuran jarak untuk mengelompokkan data.</li>
+                    <li><strong>Sistem rekomendasi:</strong> menggunakan cosine similarity untuk membandingkan profil atau preferensi.</li>
+                    <li><strong>Regularisasi:</strong> norma L1 dan L2 digunakan untuk mengendalikan besarnya parameter model.</li>
+                    <li><strong>Pencarian dokumen:</strong> cosine similarity dapat membandingkan representasi vektor dokumen.</li>
+                </ul>
+
+                <p>
+                    Sebelum menghitung jarak pada fitur dengan satuan atau
+                    rentang yang berbeda, pertimbangkan standardisasi atau
+                    normalisasi. Tanpa penyesuaian, fitur berskala besar
+                    dapat mendominasi ukuran jarak.
+                </p>
+
+                <div class="example">
+                    <h3>Contoh Soal</h3>
+                    <p>
+                        Hitung jarak Euclidean dan Manhattan antara
+                        \(\mathbf{a}=(2,3,4)\) dan
+                        \(\mathbf{b}=(5,1,4)\).
+                    </p>
+
+                    <p><strong>Penyelesaian:</strong></p>
+                    <p>\[
+                        d_E=\sqrt{(2-5)^2+(3-1)^2+(4-4)^2}
+                        =\sqrt{13}.
+                    \]</p>
+                    <p>\[
+                        d_M=|2-5|+|3-1|+|4-4|=5.
+                    \]</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>Rangkuman</h2>
+                <ul>
+                    <li>Aljabar dan fungsi digunakan untuk menyatakan hubungan matematis antarvariabel.</li>
+                    <li>Persamaan dan pertidaksamaan digunakan untuk menentukan nilai atau batas yang memenuhi kondisi tertentu.</li>
+                    <li>Eksponensial dan logaritma banyak digunakan dalam transformasi data dan fungsi probabilitas.</li>
+                    <li>Limit dan turunan menjelaskan perilaku fungsi serta laju perubahan.</li>
+                    <li>Integral digunakan untuk menghitung akumulasi dan luas bertanda.</li>
+                    <li>Vektor dan matriks merepresentasikan fitur, observasi, serta transformasi linear.</li>
+                    <li>Operasi matriks dan sistem linear merupakan dasar banyak algoritma numerik.</li>
+                    <li>Nilai eigen dan vektor eigen berperan dalam analisis struktur matriks dan PCA.</li>
+                    <li>Kalkulus multivariabel dan gradien menjadi fondasi optimisasi model.</li>
+                    <li>Norma, jarak, dan similaritas digunakan dalam klasifikasi, clustering, serta sistem rekomendasi.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Latihan Mandiri</h2>
+
+                <h3>Latihan 1 — Aljabar dan Fungsi</h3>
+                <ol>
+                    <li>Diberikan \(f(x)=2x^2-3x+4\). Hitung \(f(-2)\).</li>
+                    <li>Tentukan domain fungsi \(f(x)=\frac{1}{x^2-9}\).</li>
+                    <li>Jika \(f(x)=3x-1\) dan \(g(x)=x^2+2\), tentukan \((f\circ g)(x)\).</li>
+                </ol>
+
+                <h3>Latihan 2 — Persamaan dan Pertidaksamaan</h3>
+                <ol>
+                    <li>Selesaikan \(4x-7=13\).</li>
+                    <li>Selesaikan \(x^2-5x+6=0\).</li>
+                    <li>Tentukan himpunan penyelesaian \(2x+3<11\).</li>
+                </ol>
+
+                <h3>Latihan 3 — Eksponensial dan Logaritma</h3>
+                <ol>
+                    <li>Selesaikan \(3^{x}=81\).</li>
+                    <li>Selesaikan \(\log_2(x)=5\).</li>
+                    <li>Sederhanakan \(\log_{10}(100)+\log_{10}(1000)\).</li>
+                </ol>
+
+                <h3>Latihan 4 — Limit dan Turunan</h3>
+                <ol>
+                    <li>Hitung \(\lim_{x\to2}(x^2+3x-1)\).</li>
+                    <li>Tentukan turunan \(f(x)=4x^3-2x^2+5x-1\).</li>
+                    <li>Tentukan persamaan garis singgung \(f(x)=x^2\) pada \(x=3\).</li>
+                </ol>
+
+                <h3>Latihan 5 — Integral Dasar</h3>
+                <ol>
+                    <li>Hitung \(\int(4x^3-2x+1)\,dx\).</li>
+                    <li>Hitung \(\int_0^2(2x+3)\,dx\).</li>
+                    <li>Jelaskan hubungan turunan dan integral berdasarkan Teorema Dasar Kalkulus.</li>
+                </ol>
+
+                <h3>Latihan 6 — Vektor dan Matriks</h3>
+                <ol>
+                    <li>Hitung hasil penjumlahan vektor \((1,2,3)\) dan \((4,5,6)\).</li>
+                    <li>Hitung dot product kedua vektor tersebut.</li>
+                    <li>Tentukan transpos matriks \(\begin{bmatrix}1&2&3\\4&5&6\end{bmatrix}\).</li>
+                </ol>
+
+                <h3>Latihan 7 — Operasi Matriks dan Invers</h3>
+                <ol>
+                    <li>Hitung determinan matriks \(\begin{bmatrix}3&2\\1&4\end{bmatrix}\).</li>
+                    <li>Tentukan invers matriks tersebut.</li>
+                    <li>Implementasikan operasi perkalian dua matriks menggunakan NumPy.</li>
+                </ol>
+
+                <h3>Latihan 8 — Sistem Persamaan Linear</h3>
+                <ol>
+                    <li>Selesaikan \(x+y=7\) dan \(2x-y=2\).</li>
+                    <li>Tulis sistem tersebut dalam bentuk \(A\mathbf{x}=\mathbf{b}\).</li>
+                    <li>Selesaikan sistem menggunakan <code>numpy.linalg.solve()</code>.</li>
+                </ol>
+
+                <h3>Latihan 9 — Nilai Eigen dan Vektor Eigen</h3>
+                <ol>
+                    <li>Tentukan nilai eigen matriks diagonal \(\begin{bmatrix}4&0\\0&7\end{bmatrix}\).</li>
+                    <li>Tentukan vektor eigen yang bersesuaian dengan setiap nilai eigen.</li>
+                    <li>Verifikasi hasil menggunakan NumPy.</li>
+                </ol>
+
+                <h3>Latihan 10 — Kalkulus Multivariabel</h3>
+                <ol>
+                    <li>Tentukan turunan parsial \(f(x,y)=x^2+xy+3y^2\) terhadap \(x\) dan \(y\).</li>
+                    <li>Hitung nilai kedua turunan parsial pada titik \((1,2)\).</li>
+                    <li>Gunakan SymPy untuk memverifikasi jawaban.</li>
+                </ol>
+
+                <h3>Latihan 11 — Gradien dan Optimisasi</h3>
+                <ol>
+                    <li>Tentukan gradien \(f(x,y)=x^2+y^2-4x+6y\).</li>
+                    <li>Tentukan titik kritis fungsi tersebut.</li>
+                    <li>Buat implementasi gradient descent sederhana untuk mendekati titik minimum.</li>
+                </ol>
+
+                <h3>Latihan 12 — Norm, Jarak, dan Similaritas</h3>
+                <ol>
+                    <li>Hitung norma L1 dan L2 vektor \((3,4)\).</li>
+                    <li>Hitung jarak Euclidean antara \((1,2)\) dan \((4,6)\).</li>
+                    <li>Hitung jarak Manhattan kedua titik tersebut.</li>
+                    <li>Hitung cosine similarity dan jelaskan makna hasilnya.</li>
+                </ol>
+
+                <h3>Mini Proyek — Analisis Data Numerik</h3>
+                <p>
+                    Buat program Python untuk menganalisis dataset numerik
+                    dengan ketentuan berikut:
+                </p>
+                <ol>
+                    <li>Buat atau baca dataset yang memiliki minimal tiga fitur numerik.</li>
+                    <li>Representasikan data dalam bentuk matriks menggunakan NumPy.</li>
+                    <li>Hitung rata-rata dan standar deviasi setiap fitur.</li>
+                    <li>Gunakan operasi vektor untuk menghitung jarak antarobservasi.</li>
+                    <li>Gunakan cosine similarity untuk membandingkan dua observasi.</li>
+                    <li>Buat fungsi objektif sederhana dan minimalkan menggunakan gradient descent.</li>
+                    <li>Jelaskan bagaimana skala fitur dapat memengaruhi perhitungan jarak.</li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>Referensi Belajar</h2>
+                <ul>
+                    <li>
+                        <a href="https://numpy.org/doc/"
+                           target="_blank" rel="noopener noreferrer">
+                            NumPy — Dokumentasi Resmi
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://docs.sympy.org/latest/"
+                           target="_blank" rel="noopener noreferrer">
+                            SymPy — Komputasi Simbolik
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://docs.scipy.org/doc/scipy/tutorial/"
+                           target="_blank" rel="noopener noreferrer">
+                            SciPy — Tutorial Komputasi Ilmiah
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://scikit-learn.org/stable/"
+                           target="_blank" rel="noopener noreferrer">
+                            scikit-learn — Machine Learning
+                        </a>
+                    </li>
+                    <li>
+                        James Stewart, Calculus: Early Transcendentals.
+                    </li>
+                    <li>
+                        Gilbert Strang, Introduction to Linear Algebra.
+                    </li>
+                    <li>
+                        Deisenroth, Faisal, dan Ong, Mathematics for Machine Learning.
+                    </li>
+                </ul>
+            </section>
+        </article>
+    </main>
+
+    <footer>Website Pembelajaran Kalkulus</footer>
+</body>
+</html>

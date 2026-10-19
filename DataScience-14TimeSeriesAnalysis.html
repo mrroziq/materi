@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Series Analysis | Data Science</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+    MathJax = {
+        tex: {
+            inlineMath: [['\\(', '\\)']],
+            displayMath: [['\\[', '\\]']]
+        }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+    <header class="navbar">
+        <a href="index.html" class="logo">ShadowLab</a>
+        <nav>
+            <a href="index.html">Beranda</a>
+            <a href="MateriDataScience.html">Materi Data Science</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <article class="article">
+            <p class="eyebrow">BAGIAN XIV / DATA SCIENCE</p>
+            <h1>Time Series Analysis</h1>
+            <p class="intro">
+                Time series analysis atau analisis runtun waktu adalah metode untuk memahami
+                data yang diamati secara berurutan berdasarkan waktu. Analisis ini digunakan
+                untuk menemukan pola historis dan memperkirakan nilai pada masa depan, seperti
+                penjualan, harga, permintaan barang, curah hujan, dan jumlah pelanggan.
+            </p>
+
+            <section>
+                <h2>1. Konsep Data Runtun Waktu</h2>
+                <p>
+                    Data runtun waktu (<em>time series</em>) merupakan kumpulan observasi yang
+                    diurutkan berdasarkan waktu. Setiap observasi memiliki waktu pengamatan dan
+                    nilai yang dicatat.
+                </p>
+
+                <p>Contoh data penjualan harian:</p>
+
+                <pre><code>import pandas as pd
+
+df = pd.DataFrame({
+    "tanggal": [
+        "2026-01-01",
+        "2026-01-02",
+        "2026-01-03",
+        "2026-01-04",
+        "2026-01-05"
+    ],
+    "penjualan": [120, 135, 128, 150, 160]
+})
+
+df["tanggal"] = pd.to_datetime(df["tanggal"])
+df = df.sort_values("tanggal")
+df = df.set_index("tanggal")
+
+print(df)</code></pre>
+
+                <p>
+                    Indeks waktu membantu kita mengakses observasi berdasarkan tanggal dan
+                    melakukan operasi temporal, seperti menghitung rata-rata bergerak atau
+                    mengelompokkan data berdasarkan bulan.
+                </p>
+
+                <p>Data runtun waktu dapat memiliki frekuensi pengamatan yang berbeda:</p>
+                <ul>
+                    <li>Per detik atau per menit, misalnya data sensor.</li>
+                    <li>Per jam, misalnya konsumsi listrik.</li>
+                    <li>Per hari, misalnya penjualan harian.</li>
+                    <li>Per bulan atau per tahun, misalnya inflasi dan pertumbuhan ekonomi.</li>
+                </ul>
+
+                <p>
+                    Frekuensi dan keteraturan pengamatan perlu diperhatikan. Data harian yang
+                    memiliki tanggal hilang tidak selalu dapat langsung diperlakukan sebagai
+                    data dengan jarak waktu seragam.
+                </p>
+            </section>
+
+            <section>
+                <h2>2. Trend, Seasonality, dan Residual</h2>
+                <p>
+                    Data runtun waktu sering terdiri atas beberapa pola yang dapat membantu
+                    menjelaskan perubahan nilai dari waktu ke waktu.
+                </p>
+
+                <ul>
+                    <li><strong>Trend:</strong> kecenderungan jangka panjang, seperti kenaikan penjualan selama beberapa tahun.</li>
+                    <li><strong>Seasonality:</strong> pola yang berulang pada periode tetap, seperti peningkatan penjualan menjelang hari raya.</li>
+                    <li><strong>Residual:</strong> bagian yang tersisa setelah komponen pola yang dimodelkan diperhitungkan.</li>
+                </ul>
+
+                <h3>Dekomposisi Aditif</h3>
+                <p>Dalam model aditif, data dinyatakan sebagai:</p>
+
+                \[
+                Y_t=T_t+S_t+R_t
+                \]
+
+                <p>
+                    Di sini, \(Y_t\) adalah observasi, \(T_t\) adalah trend, \(S_t\) adalah
+                    komponen musiman, dan \(R_t\) adalah residual.
+                </p>
+
+                <h3>Dekomposisi Multiplikatif</h3>
+                <p>Jika besarnya fluktuasi musiman bergantung pada tingkat trend, model multiplikatif dapat digunakan:</p>
+
+                \[
+                Y_t=T_tS_tR_t
+                \]
+
+                <p>
+                    Model multiplikatif biasanya memerlukan nilai positif dan sesuai ketika
+                    perubahan musiman cenderung proporsional terhadap tingkat data.
+                </p>
+
+                <h3>Contoh dekomposisi dengan Python</h3>
+                <pre><code>import pandas as pd
+from statsmodels.tsa.seasonal import seasonal_decompose
+
+data = pd.Series(
+    [10, 12, 15, 18, 14, 16, 20, 23,
+     17, 19, 24, 27, 21, 23, 28, 31],
+    index=pd.date_range(
+        "2025-01-01",
+        periods=16,
+        freq="MS"
+    )
+)
+
+hasil = seasonal_decompose(
+    data,
+    model="additive",
+    period=4
+)
+
+print("Trend:")
+print(hasil.trend)
+
+print("Seasonality:")
+print(hasil.seasonal)
+
+print("Residual:")
+print(hasil.resid)</code></pre>
+
+                <p>
+                    Parameter <code>period=4</code> menyatakan bahwa satu siklus terdiri atas
+                    empat observasi. Nilai ini hanya contoh untuk data dengan pola empat
+                    langkah; untuk data bulanan dengan pola tahunan, periode yang lazim adalah 12.
+                    Dekomposisi klasik umumnya memerlukan setidaknya dua siklus lengkap.
+                </p>
+            </section>
+
+            <section>
+                <h2>3. Stationarity</h2>
+                <p>
+                    Stasioneritas (<em>stationarity</em>) adalah sifat suatu proses runtun waktu
+                    yang karakteristik statistiknya tidak berubah terhadap waktu. Dalam
+                    stasioneritas lemah, rata-rata dan varians konstan, serta kovarians antara
+                    dua observasi hanya bergantung pada jarak waktu keduanya.
+                </p>
+
+                <p>Secara sederhana, syarat stasioneritas lemah mencakup:</p>
+
+                \[
+                E(Y_t)=\mu
+                \]
+
+                \[
+                \operatorname{Var}(Y_t)=\sigma^2
+                \]
+
+                \[
+                \operatorname{Cov}(Y_t,Y_{t-k})=\gamma_k
+                \]
+
+                <p>
+                    Trend yang kuat atau perubahan varians dapat menunjukkan bahwa data tidak
+                    stasioner. Banyak model klasik, seperti ARMA, mengasumsikan proses yang
+                    stasioner, sedangkan ARIMA menggunakan differencing untuk membantu
+                    menangani nonstasioneritas tertentu.
+                </p>
+
+                <h3>Differencing</h3>
+                <p>
+                    Differencing pertama menghitung selisih antara observasi saat ini dan
+                    observasi sebelumnya:
+                </p>
+
+                \[
+                \Delta Y_t=Y_t-Y_{t-1}
+                \]
+
+                <pre><code>import pandas as pd
+
+data = pd.Series([100, 105, 111, 118, 126])
+
+selisih = data.diff()
+
+print("Data awal:")
+print(data)
+
+print("Differencing pertama:")
+print(selisih)</code></pre>
+
+                <p>
+                    Differencing dapat membantu menghilangkan trend tertentu, tetapi tidak
+                    menjamin data menjadi stasioner. Terlalu banyak differencing juga dapat
+                    menghilangkan informasi atau menambah kompleksitas model.
+                </p>
+
+                <h3>Uji Augmented Dickey-Fuller (ADF)</h3>
+                <pre><code>from statsmodels.tsa.stattools import adfuller
+
+hasil = adfuller(data.dropna())
+
+print("ADF statistic:", hasil[0])
+print("p-value:", hasil[1])
+
+if hasil[1] < 0.05:
+    print("Tolak hipotesis unit root pada taraf 5%")
+else:
+    print("Belum cukup bukti untuk menolak hipotesis unit root")</code></pre>
+
+                <p>
+                    Hipotesis nol pada uji ADF menyatakan adanya unit root dalam spesifikasi
+                    pengujian. Nilai p yang kecil memberikan bukti untuk menolak hipotesis nol,
+                    tetapi interpretasinya tetap bergantung pada spesifikasi uji dan karakteristik
+                    data.
+                </p>
+            </section>
+
+            <section>
+                <h2>4. Autocorrelation dan Partial Autocorrelation</h2>
+                <p>
+                    Autocorrelation mengukur hubungan antara suatu observasi dan nilai masa
+                    lalunya. Partial autocorrelation mengukur hubungan pada lag tertentu setelah
+                    pengaruh lag di antaranya diperhitungkan.
+                </p>
+
+                <h3>Autocorrelation Function (ACF)</h3>
+                <p>
+                    ACF pada lag \(k\) mengukur korelasi antara \(Y_t\) dan \(Y_{t-k}\).
+                    Secara konseptual:
+                </p>
+
+                \[
+                \rho_k=\operatorname{Corr}(Y_t,Y_{t-k})
+                \]
+
+                <h3>Partial Autocorrelation Function (PACF)</h3>
+                <p>
+                    PACF mengukur hubungan langsung antara \(Y_t\) dan \(Y_{t-k}\) setelah
+                    hubungan linear melalui lag 1 hingga \(k-1\) diperhitungkan.
+                </p>
+
+                <p>
+                    ACF dan PACF membantu memahami struktur ketergantungan temporal dan
+                    menentukan kandidat orde model ARIMA. Keduanya bukan aturan otomatis:
+                    pemilihan model tetap perlu mempertimbangkan diagnostik residual dan
+                    performa prediksi di luar sampel.
+                </p>
+
+                <pre><code>import matplotlib.pyplot as plt
+from statsmodels.graphics.tsaplots import (
+    plot_acf,
+    plot_pacf
+)
+
+fig, axes = plt.subplots(2, 1, figsize=(10, 7))
+
+plot_acf(data, lags=10, ax=axes[0])
+axes[0].set_title("Autocorrelation Function (ACF)")
+
+plot_pacf(data, lags=6, ax=axes[1], method="ywm")
+axes[1].set_title("Partial Autocorrelation Function (PACF)")
+
+plt.tight_layout()
+plt.show()</code></pre>
+
+                <p>
+                    Gunakan jumlah lag yang sesuai dengan panjang data. Untuk PACF, jumlah lag
+                    juga harus cukup kecil agar estimasi tetap layak.
+                </p>
+            </section>
+
+            <section>
+                <h2>5. Moving Average</h2>
+                <p>
+                    Moving average atau rata-rata bergerak menghitung rata-rata dari sejumlah
+                    observasi terakhir. Teknik ini membantu menghaluskan fluktuasi jangka pendek
+                    dan memperlihatkan pola umum.
+                </p>
+
+                <p>Rata-rata bergerak dengan jendela \(m\) dapat ditulis sebagai:</p>
+
+                \[
+                MA_t=\frac{1}{m}\sum_{i=0}^{m-1}Y_{t-i}
+                \]
+
+                <p>
+                    Misalnya, moving average tiga hari menggunakan nilai hari ini dan dua hari
+                    sebelumnya untuk menghitung rata-rata.
+                </p>
+
+                <pre><code>import pandas as pd
+
+df = pd.DataFrame({
+    "penjualan": [100, 120, 110, 140, 150, 130, 160]
+})
+
+df["MA_3"] = df["penjualan"].rolling(
+    window=3
+).mean()
+
+print(df)</code></pre>
+
+                <p>
+                    Secara default, hasil moving average baru tersedia setelah jendela berisi
+                    tiga observasi lengkap. Moving average biasa digunakan untuk smoothing dan
+                    analisis trend; ia tidak otomatis merupakan model forecasting yang memprediksi
+                    nilai masa depan.
+                </p>
+            </section>
+
+            <section>
+                <h2>6. Exponential Smoothing</h2>
+                <p>
+                    Exponential smoothing memberikan bobot lebih besar pada observasi terbaru
+                    dan bobot yang semakin kecil pada observasi lama. Metode ini berguna untuk
+                    membuat prediksi berdasarkan pola historis.
+                </p>
+
+                <h3>Simple Exponential Smoothing</h3>
+
+                \[
+                \ell_t=\alpha Y_t+(1-\alpha)\ell_{t-1}
+                \]
+
+                <p>
+                    Di sini, \(\ell_t\) merupakan estimasi level, sedangkan \(\alpha\) adalah
+                    parameter smoothing dengan nilai antara 0 dan 1. Nilai \(\alpha\) yang lebih
+                    besar memberi bobot lebih tinggi pada observasi terbaru.
+                </p>
+
+                <h3>Holt dan Holt-Winters</h3>
+                <ul>
+                    <li><strong>Holt's method:</strong> memperhitungkan level dan trend.</li>
+                    <li><strong>Holt-Winters:</strong> memperhitungkan level, trend, dan seasonality.</li>
+                </ul>
+
+                <pre><code>from statsmodels.tsa.holtwinters import (
+    SimpleExpSmoothing,
+    ExponentialSmoothing
+)
+import pandas as pd
+
+data = pd.Series(
+    [100, 105, 110, 108, 115, 120, 125, 123, 130, 135],
+    index=pd.date_range(
+        "2026-01-01",
+        periods=10,
+        freq="D"
+    )
+)
+
+model = SimpleExpSmoothing(
+    data,
+    initialization_method="estimated"
+).fit()
+
+prediksi = model.forecast(steps=3)
+
+print("Prediksi tiga hari berikutnya:")
+print(prediksi)</code></pre>
+
+                <p>
+                    Simple exponential smoothing cocok untuk data yang terutama memiliki level
+                    tanpa trend atau pola musiman yang jelas. Untuk data dengan trend atau
+                    seasonality, pertimbangkan metode Holt atau Holt-Winters.
+                </p>
+            </section>
+
+            <section>
+                <h2>7. ARIMA dan SARIMA</h2>
+                <p>
+                    ARIMA merupakan singkatan dari <em>Autoregressive Integrated Moving Average</em>.
+                    Model ini menggabungkan ketergantungan pada nilai masa lalu, differencing,
+                    dan struktur error masa lalu.
+                </p>
+
+                <p>Model ARIMA ditandai dengan tiga parameter:</p>
+                <ul>
+                    <li><strong>p:</strong> orde autoregressive (AR).</li>
+                    <li><strong>d:</strong> jumlah differencing nonmusiman.</li>
+                    <li><strong>q:</strong> orde moving average (MA) dalam struktur model error.</li>
+                </ul>
+
+                <p>Notasi modelnya adalah:</p>
+
+                \[
+                ARIMA(p,d,q)
+                \]
+
+                <p>
+                    SARIMA memperluas ARIMA dengan komponen musiman. Notasinya dapat ditulis:
+                </p>
+
+                \[
+                SARIMA(p,d,q)(P,D,Q)_s
+                \]
+
+                <p>
+                    Parameter \(P,D,Q\) merupakan orde komponen musiman dan \(s\) adalah panjang
+                    periode musiman, misalnya 12 untuk data bulanan dengan pola tahunan.
+                </p>
+
+                <h3>Contoh ARIMA</h3>
+                <pre><code>import pandas as pd
+from statsmodels.tsa.arima.model import ARIMA
+
+data = pd.Series(
+    [100, 105, 103, 110, 115, 112, 120, 125, 123, 130,
+     135, 133, 140, 145, 143, 150, 155, 153, 160, 165],
+    index=pd.date_range(
+        "2025-01-01",
+        periods=20,
+        freq="D"
+    )
+)
+
+train = data.iloc[:-4]
+test = data.iloc[-4:]
+
+model = ARIMA(
+    train,
+    order=(1, 1, 1)
+).fit()
+
+prediksi = model.forecast(steps=len(test))
+
+hasil = pd.DataFrame({
+    "aktual": test,
+    "prediksi": prediksi
+})
+
+print(hasil)</code></pre>
+
+                <h3>Contoh SARIMA</h3>
+                <pre><code>from statsmodels.tsa.statespace.sarimax import SARIMAX
+
+model = SARIMAX(
+    train,
+    order=(1, 1, 1),
+    seasonal_order=(1, 1, 1, 7),
+    enforce_stationarity=False,
+    enforce_invertibility=False
+).fit(disp=False)
+
+prediksi = model.forecast(steps=len(test))
+
+print(prediksi)</code></pre>
+
+                <p>
+                    Contoh SARIMA menggunakan periode musiman 7, yang dapat relevan untuk pola
+                    mingguan pada data harian. Orde dan periode tersebut hanya contoh; pemilihan
+                    model harus disesuaikan dengan frekuensi, panjang data, pola musiman, serta
+                    evaluasi pada data yang tidak digunakan untuk melatih model.
+                </p>
+            </section>
+
+            <section>
+                <h2>8. Forecasting dengan Machine Learning</h2>
+                <p>
+                    Forecasting tidak hanya dapat dilakukan dengan model statistik. Algoritma
+                    machine learning seperti regresi, Random Forest, dan gradient boosting juga
+                    dapat digunakan dengan mengubah data runtun waktu menjadi fitur prediktif.
+                </p>
+
+                <p>Contoh fitur untuk memprediksi penjualan berikutnya:</p>
+                <ul>
+                    <li><strong>Lag features:</strong> penjualan satu, dua, atau tujuh hari sebelumnya.</li>
+                    <li><strong>Rolling statistics:</strong> rata-rata atau standar deviasi beberapa hari terakhir.</li>
+                    <li><strong>Calendar features:</strong> hari dalam minggu, bulan, dan penanda hari libur.</li>
+                </ul>
+
+                <p>
+                    Jika target adalah penjualan hari \(t\), fitur lag satu hari adalah \(Y_{t-1}\).
+                    Fitur ini hanya valid jika nilainya sudah tersedia saat prediksi dibuat.
+                </p>
+
+                <pre><code>import pandas as pd
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.metrics import mean_absolute_error
+
+df = pd.DataFrame({
+    "tanggal": pd.date_range(
+        "2025-01-01",
+        periods=100,
+        freq="D"
+    ),
+    "penjualan": [
+        100 + i * 2 + (i % 7) * 5
+        for i in range(100)
+    ]
+})
+
+df = df.sort_values("tanggal").copy()
+
+df["lag_1"] = df["penjualan"].shift(1)
+df["lag_7"] = df["penjualan"].shift(7)
+df["rolling_mean_7"] = (
+    df["penjualan"]
+    .shift(1)
+    .rolling(window=7)
+    .mean()
+)
+df["hari_dalam_minggu"] = df["tanggal"].dt.dayofweek
+
+data_model = df.dropna().copy()
+
+fitur = [
+    "lag_1",
+    "lag_7",
+    "rolling_mean_7",
+    "hari_dalam_minggu"
+]
+
+X = data_model[fitur]
+y = data_model["penjualan"]
+
+batas = int(len(data_model) * 0.8)
+
+X_train = X.iloc[:batas]
+X_test = X.iloc[batas:]
+y_train = y.iloc[:batas]
+y_test = y.iloc[batas:]
+
+model = RandomForestRegressor(
+    n_estimators=200,
+    random_state=42
+)
+
+model.fit(X_train, y_train)
+prediksi = model.predict(X_test)
+
+print("MAE:", mean_absolute_error(y_test, prediksi))</code></pre>
+
+                <p>
+                    Contoh tersebut memakai pembagian berdasarkan waktu, bukan pengacakan.
+                    Rolling mean dihitung menggunakan observasi sebelumnya karena data digeser
+                    dengan <code>shift(1)</code> sebelum perhitungan jendela.
+                </p>
+
+                <p>
+                    Perlu diperhatikan bahwa kode ini mengevaluasi prediksi satu langkah ke depan
+                    dengan nilai aktual sebelumnya tersedia untuk membentuk fitur pada setiap
+                    baris pengujian. Untuk meramalkan banyak langkah ke depan tanpa observasi
+                    aktual baru, fitur lag harus diperbarui secara rekursif menggunakan prediksi
+                    sebelumnya atau memakai strategi multi-step lain.
+                </p>
+            </section>
+
+            <section>
+                <h2>9. Evaluasi Prediksi Temporal</h2>
+                <p>
+                    Model forecasting perlu dievaluasi menggunakan data yang berada setelah
+                    periode pelatihan. Pembagian acak biasa dapat memberikan hasil yang menyesatkan
+                    karena informasi masa depan berpotensi masuk ke data latih.
+                </p>
+
+                <h3>Mean Absolute Error (MAE)</h3>
+
+                \[
+                MAE=\frac{1}{n}\sum_{t=1}^{n}|y_t-\hat{y}_t|
+                \]
+
+                <p>MAE mengukur rata-rata selisih absolut antara nilai aktual dan prediksi.</p>
+
+                <h3>Root Mean Squared Error (RMSE)</h3>
+
+                \[
+                RMSE=
+                \sqrt{\frac{1}{n}\sum_{t=1}^{n}(y_t-\hat{y}_t)^2}
+                \]
+
+                <p>
+                    RMSE memberi penalti lebih besar pada kesalahan yang besar dibandingkan MAE.
+                    Keduanya memiliki satuan yang sama dengan target.
+                </p>
+
+                <h3>Mean Absolute Percentage Error (MAPE)</h3>
+
+                \[
+                MAPE=\frac{100\%}{n}
+                \sum_{t=1}^{n}
+                \left|\frac{y_t-\hat{y}_t}{y_t}\right|
+                \]
+
+                <p>
+                    MAPE bermasalah ketika nilai aktual nol atau sangat dekat dengan nol.
+                    Untuk data seperti itu, pertimbangkan metrik alternatif.
+                </p>
+
+                <pre><code>from sklearn.metrics import (
+    mean_absolute_error,
+    mean_squared_error
+)
+import numpy as np
+
+aktual = np.array([100, 120, 130, 125, 150])
+prediksi = np.array([110, 115, 128, 130, 145])
+
+mae = mean_absolute_error(aktual, prediksi)
+rmse = np.sqrt(mean_squared_error(aktual, prediksi))
+
+print("MAE:", mae)
+print("RMSE:", rmse)</code></pre>
+
+                <h3>Walk-forward validation</h3>
+                <p>
+                    Walk-forward validation mengevaluasi model secara berurutan. Model dilatih
+                    pada data yang tersedia, memprediksi periode berikutnya, lalu jendela pelatihan
+                    diperluas atau digeser sesuai rancangan evaluasi.
+                </p>
+
+                <p>
+                    Metode ini meniru penggunaan model di dunia nyata dengan lebih baik daripada
+                    pembagian data acak untuk forecasting temporal.
+                </p>
+            </section>
+
+            <section>
+                <h2>10. Pencegahan Kebocoran Data Masa Depan</h2>
+                <p>
+                    Data leakage temporal terjadi ketika model menggunakan informasi yang belum
+                    tersedia pada saat prediksi dilakukan. Kebocoran ini dapat membuat hasil
+                    evaluasi terlihat bagus, tetapi gagal ketika diterapkan pada data masa depan.
+                </p>
+
+                <h3>Contoh kebocoran temporal</h3>
+                <ul>
+                    <li>Menggunakan penjualan hari berikutnya sebagai fitur untuk memprediksi hari ini.</li>
+                    <li>Menghitung rata-rata seluruh periode, termasuk periode uji, sebelum membentuk fitur.</li>
+                    <li>Mengacak data waktu sebelum memisahkan data latih dan uji.</li>
+                    <li>Menggunakan nilai akhir suatu periode yang belum diketahui pada saat prediksi.</li>
+                    <li>Mengisi nilai yang hilang dengan informasi masa depan pada skenario prediksi real-time.</li>
+                </ul>
+
+                <h3>Prinsip pencegahan</h3>
+                <ol>
+                    <li>Urutkan data berdasarkan waktu.</li>
+                    <li>Pisahkan data latih dan uji berdasarkan batas waktu yang jelas.</li>
+                    <li>Gunakan hanya fitur yang sudah tersedia pada waktu prediksi.</li>
+                    <li>Hitung rolling feature dari masa lalu, bukan dari observasi masa depan.</li>
+                    <li>Lakukan tuning model dengan validasi temporal, bukan menggunakan data uji akhir.</li>
+                    <li>Untuk forecasting banyak langkah, pastikan strategi pembentukan fitur sesuai dengan informasi yang akan tersedia pada setiap horizon.</li>
+                </ol>
+
+                <p>
+                    Contoh pemisahan data berdasarkan waktu:
+                </p>
+
+                <pre><code>import pandas as pd
+
+df = df.sort_values("tanggal").reset_index(drop=True)
+
+batas_train = "2025-10-31"
+batas_validasi = "2025-11-30"
+
+train = df[df["tanggal"] <= batas_train]
+
+validasi = df[
+    (df["tanggal"] > batas_train) &
+    (df["tanggal"] <= batas_validasi)
+]
+
+test = df[df["tanggal"] > batas_validasi]
+
+print("Data train:", len(train))
+print("Data validasi:", len(validasi))
+print("Data test:", len(test))</code></pre>
+
+                <p>
+                    Pastikan kolom <code>tanggal</code> bertipe datetime sebelum menjalankan
+                    perbandingan tanggal. Batas waktu di atas hanya contoh dan harus disesuaikan
+                    dengan cakupan dataset.
+                </p>
+            </section>
+
+            <section>
+                <h2>Ringkasan</h2>
+                <ul>
+                    <li>Data runtun waktu terdiri atas observasi yang diurutkan berdasarkan waktu.</li>
+                    <li>Trend, seasonality, dan residual membantu menjelaskan pola data.</li>
+                    <li>Stasioneritas berkaitan dengan kestabilan karakteristik statistik suatu proses.</li>
+                    <li>ACF dan PACF membantu memahami hubungan antarobservasi pada lag yang berbeda.</li>
+                    <li>Moving average menghaluskan data, sedangkan exponential smoothing menggunakan bobot yang menurun untuk observasi lama.</li>
+                    <li>ARIMA dan SARIMA merupakan model statistik untuk pola temporal nonmusiman dan musiman.</li>
+                    <li>Machine learning dapat melakukan forecasting menggunakan lag, rolling statistics, dan fitur kalender.</li>
+                    <li>Evaluasi temporal harus mempertahankan urutan waktu dan meniru kondisi prediksi nyata.</li>
+                    <li>Data leakage masa depan harus dicegah sejak tahap pembentukan fitur hingga evaluasi.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Latihan Mandiri</h2>
+                <ol>
+                    <li>Apa perbedaan data runtun waktu dengan data cross-sectional?</li>
+                    <li>Jelaskan perbedaan trend, seasonality, dan residual.</li>
+                    <li>Apa yang dimaksud dengan stasioneritas lemah?</li>
+                    <li>Jelaskan perbedaan ACF dan PACF.</li>
+                    <li>Hitung moving average tiga periode untuk data 10, 12, 14, 16, dan 18.</li>
+                    <li>Apa perbedaan Simple Exponential Smoothing dan Holt-Winters?</li>
+                    <li>Jelaskan makna parameter \(p\), \(d\), dan \(q\) dalam ARIMA.</li>
+                    <li>Mengapa pembagian data berdasarkan waktu lebih sesuai untuk forecasting?</li>
+                    <li>Kapan MAE lebih mudah diinterpretasikan daripada RMSE?</li>
+                    <li>Berikan contoh fitur yang menyebabkan data leakage masa depan.</li>
+                </ol>
+            </section>
+        </article>
+    </main>
+
+    <footer>ShadowLab — Belajar Tanpa Batas</footer>
+</body>
+</html>

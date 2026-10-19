@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQL dan Database | Data Science</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)']],
+                displayMath: [['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+    <header class="navbar">
+        <a href="index.html" class="logo">ShadowLab</a>
+        <nav>
+            <a href="index.html">Beranda</a>
+            <a href="MateriDataScience.html">Materi Data Science</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <article class="article">
+            <p class="eyebrow">BAGIAN IX / DATA SCIENCE</p>
+            <h1>SQL dan Database</h1>
+            <p class="intro">
+                SQL (Structured Query Language) adalah bahasa yang digunakan untuk
+                mengelola dan mengambil data dari database relasional. Dalam Data Science,
+                SQL membantu mengumpulkan, memfilter, menggabungkan, dan meringkas data
+                sebelum dianalisis menggunakan Python atau perangkat lainnya.
+            </p>
+
+            <section>
+                <h2>1. Konsep Database Relasional</h2>
+                <p>
+                    Database adalah kumpulan data yang disimpan secara terorganisasi.
+                    Database relasional menyimpan data dalam bentuk tabel yang terdiri
+                    atas baris dan kolom. Hubungan antartabel dibangun menggunakan
+                    atribut atau kolom yang saling berkaitan.
+                </p>
+
+                <p>Contoh tabel <code>pelanggan</code>:</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>id_pelanggan</th>
+                            <th>nama</th>
+                            <th>kota</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Andi</td>
+                            <td>Semarang</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Budi</td>
+                            <td>Yogyakarta</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Citra</td>
+                            <td>Semarang</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p>
+                    Setiap baris merepresentasikan satu pelanggan, sedangkan setiap kolom
+                    menyimpan atribut tertentu. Contoh sistem database relasional antara
+                    lain PostgreSQL, MySQL, SQLite, dan Microsoft SQL Server.
+                </p>
+
+                <h3>Istilah penting</h3>
+                <ul>
+                    <li><strong>Database:</strong> kumpulan data yang terorganisasi.</li>
+                    <li><strong>Tabel:</strong> struktur data yang terdiri atas baris dan kolom.</li>
+                    <li><strong>Record:</strong> satu baris data dalam tabel.</li>
+                    <li><strong>Field:</strong> atribut atau kolom dalam tabel.</li>
+                    <li><strong>Schema:</strong> struktur yang mendefinisikan tabel, kolom, tipe data, dan relasi.</li>
+                </ul>
+
+                <p>
+                    Dalam Data Science, database relasional sering digunakan untuk menyimpan
+                    transaksi penjualan, informasi pelanggan, data keuangan, dan catatan aktivitas.
+                </p>
+            </section>
+
+            <section>
+                <h2>2. Tabel, Primary Key, dan Foreign Key</h2>
+                <p>
+                    Primary key adalah kolom atau kombinasi kolom yang mengidentifikasi
+                    setiap baris secara unik. Nilainya tidak boleh duplikat dan tidak boleh
+                    <code>NULL</code>.
+                </p>
+
+                <p>
+                    Foreign key adalah kolom yang merujuk pada primary key atau kandidat
+                    kunci yang memenuhi syarat pada tabel lain. Foreign key digunakan
+                    untuk menjaga konsistensi hubungan antartabel.
+                </p>
+
+                <h3>Tabel pelanggan</h3>
+                <pre><code>CREATE TABLE pelanggan (
+    id_pelanggan INTEGER PRIMARY KEY,
+    nama VARCHAR(100),
+    kota VARCHAR(100)
+);</code></pre>
+
+                <h3>Tabel transaksi</h3>
+                <pre><code>CREATE TABLE transaksi (
+    id_transaksi INTEGER PRIMARY KEY,
+    id_pelanggan INTEGER,
+    tanggal DATE,
+    total DECIMAL(12, 2),
+    FOREIGN KEY (id_pelanggan)
+        REFERENCES pelanggan(id_pelanggan)
+);</code></pre>
+
+                <p>
+                    Pada contoh tersebut, <code>id_pelanggan</code> menjadi primary key
+                    di tabel <code>pelanggan</code> dan foreign key di tabel
+                    <code>transaksi</code>. Dengan demikian, transaksi dapat dihubungkan
+                    dengan pelanggan yang sesuai.
+                </p>
+
+                <p>
+                    Hubungan satu-ke-banyak (one-to-many) terjadi ketika satu pelanggan
+                    dapat memiliki banyak transaksi, tetapi setiap transaksi merujuk pada
+                    satu pelanggan.
+                </p>
+            </section>
+
+            <section>
+                <h2>3. SELECT, WHERE, dan ORDER BY</h2>
+                <p>
+                    Perintah <code>SELECT</code> digunakan untuk mengambil kolom dari tabel.
+                    <code>WHERE</code> menyaring baris berdasarkan kondisi, sedangkan
+                    <code>ORDER BY</code> mengurutkan hasil query.
+                </p>
+
+                <h3>Mengambil semua kolom</h3>
+                <pre><code>SELECT *
+FROM pelanggan;</code></pre>
+
+                <h3>Memilih kolom tertentu</h3>
+                <pre><code>SELECT nama, kota
+FROM pelanggan;</code></pre>
+
+                <h3>Menyaring data</h3>
+                <pre><code>SELECT *
+FROM pelanggan
+WHERE kota = 'Semarang';</code></pre>
+
+                <p>Operator yang sering digunakan dalam kondisi <code>WHERE</code>:</p>
+                <ul>
+                    <li><code>=</code>, <code>&lt;&gt;</code>: sama dengan dan tidak sama dengan.</li>
+                    <li><code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code>: perbandingan numerik.</li>
+                    <li><code>AND</code>, <code>OR</code>, <code>NOT</code>: menggabungkan atau membalik kondisi.</li>
+                    <li><code>IN</code>: memeriksa keanggotaan dalam sekumpulan nilai.</li>
+                    <li><code>BETWEEN</code>: memeriksa rentang nilai.</li>
+                    <li><code>LIKE</code>: mencocokkan pola teks.</li>
+                    <li><code>IS NULL</code>: memeriksa nilai yang tidak tersedia.</li>
+                </ul>
+
+                <h3>Menggabungkan kondisi dan pengurutan</h3>
+                <pre><code>SELECT nama, kota
+FROM pelanggan
+WHERE kota IN ('Semarang', 'Yogyakarta')
+ORDER BY nama ASC;</code></pre>
+
+                <p>
+                    <code>ASC</code> berarti urutan menaik, sedangkan <code>DESC</code>
+                    berarti urutan menurun.
+                </p>
+
+                <h3>Membatasi jumlah hasil</h3>
+                <pre><code>SELECT *
+FROM transaksi
+ORDER BY total DESC
+LIMIT 5;</code></pre>
+
+                <p>
+                    Query tersebut mengambil lima transaksi dengan nilai total terbesar.
+                    <code>LIMIT</code> tersedia di beberapa sistem seperti PostgreSQL,
+                    MySQL, dan SQLite; sistem database lain dapat menggunakan sintaks berbeda.
+                </p>
+            </section>
+
+            <section>
+                <h2>4. Agregasi dengan GROUP BY</h2>
+                <p>
+                    Agregasi digunakan untuk meringkas banyak baris menjadi informasi
+                    statistik. SQL menyediakan fungsi agregasi seperti:
+                </p>
+
+                <ul>
+                    <li><code>COUNT()</code>: menghitung jumlah baris atau nilai yang tidak NULL.</li>
+                    <li><code>SUM()</code>: menjumlahkan nilai.</li>
+                    <li><code>AVG()</code>: menghitung rata-rata.</li>
+                    <li><code>MIN()</code>: mencari nilai minimum.</li>
+                    <li><code>MAX()</code>: mencari nilai maksimum.</li>
+                </ul>
+
+                <h3>Menghitung jumlah transaksi setiap pelanggan</h3>
+                <pre><code>SELECT
+    id_pelanggan,
+    COUNT(*) AS jumlah_transaksi,
+    SUM(total) AS total_belanja,
+    AVG(total) AS rata_rata_transaksi
+FROM transaksi
+GROUP BY id_pelanggan;</code></pre>
+
+                <p>
+                    <code>GROUP BY</code> mengelompokkan baris berdasarkan
+                    <code>id_pelanggan</code>. Fungsi agregasi kemudian dihitung untuk
+                    setiap kelompok.
+                </p>
+
+                <h3>Menggunakan HAVING</h3>
+                <pre><code>SELECT
+    id_pelanggan,
+    SUM(total) AS total_belanja
+FROM transaksi
+GROUP BY id_pelanggan
+HAVING SUM(total) > 1000000;</code></pre>
+
+                <p>
+                    <code>HAVING</code> menyaring hasil pengelompokan. Perbedaannya,
+                    <code>WHERE</code> menyaring baris sebelum agregasi, sedangkan
+                    <code>HAVING</code> menyaring kelompok setelah agregasi.
+                </p>
+
+                <p>Urutan logis pemrosesan query secara umum adalah:</p>
+                <pre><code>FROM / JOIN
+WHERE
+GROUP BY
+HAVING
+SELECT
+ORDER BY
+LIMIT</code></pre>
+            </section>
+
+            <section>
+                <h2>5. JOIN dan Subquery</h2>
+                <p>
+                    <code>JOIN</code> menggabungkan data dari beberapa tabel berdasarkan
+                    kondisi hubungan tertentu.
+                </p>
+
+                <h3>INNER JOIN</h3>
+                <p>
+                    Mengambil baris yang memiliki pasangan pada kedua tabel.
+                </p>
+                <pre><code>SELECT
+    p.nama,
+    t.id_transaksi,
+    t.total
+FROM pelanggan AS p
+INNER JOIN transaksi AS t
+    ON p.id_pelanggan = t.id_pelanggan;</code></pre>
+
+                <h3>LEFT JOIN</h3>
+                <p>
+                    Mengambil seluruh baris dari tabel kiri dan data pasangan dari tabel
+                    kanan jika tersedia. Jika tidak ada pasangan, kolom dari tabel kanan
+                    akan bernilai <code>NULL</code>.
+                </p>
+                <pre><code>SELECT
+    p.nama,
+    t.id_transaksi,
+    t.total
+FROM pelanggan AS p
+LEFT JOIN transaksi AS t
+    ON p.id_pelanggan = t.id_pelanggan;</code></pre>
+
+                <p>
+                    Jenis JOIN lain meliputi <code>RIGHT JOIN</code> dan
+                    <code>FULL OUTER JOIN</code>. Dukungan sintaks bergantung pada sistem
+                    database yang digunakan.
+                </p>
+
+                <h3>Subquery</h3>
+                <p>
+                    Subquery adalah query yang berada di dalam query lain. Subquery
+                    berguna ketika analisis membutuhkan hasil perhitungan atau pemilihan
+                    data dari query sebelumnya.
+                </p>
+
+                <pre><code>SELECT *
+FROM transaksi
+WHERE total > (
+    SELECT AVG(total)
+    FROM transaksi
+);</code></pre>
+
+                <p>
+                    Query tersebut mengambil transaksi dengan nilai di atas rata-rata
+                    seluruh transaksi.
+                </p>
+
+                <h3>Subquery dengan IN</h3>
+                <pre><code>SELECT nama
+FROM pelanggan
+WHERE id_pelanggan IN (
+    SELECT id_pelanggan
+    FROM transaksi
+    GROUP BY id_pelanggan
+    HAVING SUM(total) > 1000000
+);</code></pre>
+
+                <p>
+                    Query tersebut mencari pelanggan yang total belanjanya melebihi
+                    satu juta.
+                </p>
+            </section>
+
+            <section>
+                <h2>6. Common Table Expressions (CTE)</h2>
+                <p>
+                    Common Table Expression atau CTE adalah hasil query sementara yang
+                    diberi nama menggunakan kata kunci <code>WITH</code>. CTE membantu
+                    membuat query kompleks lebih mudah dibaca dan disusun menjadi beberapa tahap.
+                </p>
+
+                <h3>Contoh CTE</h3>
+                <pre><code>WITH ringkasan_pelanggan AS (
+    SELECT
+        id_pelanggan,
+        COUNT(*) AS jumlah_transaksi,
+        SUM(total) AS total_belanja
+    FROM transaksi
+    GROUP BY id_pelanggan
+)
+SELECT *
+FROM ringkasan_pelanggan
+WHERE total_belanja > 1000000
+ORDER BY total_belanja DESC;</code></pre>
+
+                <p>
+                    Tahap pertama menghasilkan ringkasan transaksi per pelanggan.
+                    Tahap kedua menyaring pelanggan berdasarkan total belanja dan
+                    mengurutkan hasilnya.
+                </p>
+
+                <h3>CTE dibandingkan subquery</h3>
+                <ul>
+                    <li><strong>Subquery:</strong> cocok untuk perhitungan bersarang yang relatif sederhana.</li>
+                    <li><strong>CTE:</strong> membantu memisahkan query panjang menjadi tahap-tahap bernama.</li>
+                    <li><strong>CTE rekursif:</strong> dapat digunakan untuk struktur bertingkat atau relasi hierarkis pada database yang mendukungnya.</li>
+                </ul>
+
+                <p>
+                    CTE bukan berarti data selalu disimpan secara permanen. Umumnya,
+                    CTE hanya berlaku selama satu pernyataan SQL.
+                </p>
+            </section>
+
+            <section>
+                <h2>7. Window Functions</h2>
+                <p>
+                    Window function melakukan perhitungan pada sekumpulan baris yang
+                    berhubungan dengan baris saat ini, tanpa menggabungkan semua baris
+                    menjadi satu baris seperti agregasi biasa dengan <code>GROUP BY</code>.
+                </p>
+
+                <p>
+                    Klausa <code>OVER()</code> mendefinisikan jendela perhitungan.
+                    <code>PARTITION BY</code> membagi data menjadi kelompok, sedangkan
+                    <code>ORDER BY</code> menentukan urutan baris dalam kelompok.
+                </p>
+
+                <h3>Memberi peringkat transaksi</h3>
+                <pre><code>SELECT
+    id_pelanggan,
+    id_transaksi,
+    total,
+    ROW_NUMBER() OVER (
+        PARTITION BY id_pelanggan
+        ORDER BY total DESC
+    ) AS peringkat_transaksi
+FROM transaksi;</code></pre>
+
+                <p>
+                    <code>ROW_NUMBER()</code> memberi nomor urut transaksi untuk setiap
+                    pelanggan berdasarkan nilai total terbesar.
+                </p>
+
+                <h3>RANK dan DENSE_RANK</h3>
+                <pre><code>SELECT
+    id_transaksi,
+    total,
+    RANK() OVER (
+        ORDER BY total DESC
+    ) AS peringkat,
+    DENSE_RANK() OVER (
+        ORDER BY total DESC
+    ) AS peringkat_padat
+FROM transaksi;</code></pre>
+
+                <p>
+                    Jika beberapa transaksi memiliki nilai yang sama, <code>RANK()</code>
+                    memberikan peringkat yang sama dan dapat melewati nomor peringkat
+                    berikutnya. <code>DENSE_RANK()</code> memberikan peringkat yang sama
+                    tanpa melewati nomor berikutnya.
+                </p>
+
+                <h3>Menghitung total kumulatif</h3>
+                <pre><code>SELECT
+    tanggal,
+    total,
+    SUM(total) OVER (
+        ORDER BY tanggal
+        ROWS BETWEEN UNBOUNDED PRECEDING
+        AND CURRENT ROW
+    ) AS total_kumulatif
+FROM transaksi;</code></pre>
+
+                <p>
+                    Total kumulatif membantu melihat perkembangan nilai transaksi dari
+                    waktu ke waktu. Jika terdapat beberapa transaksi pada tanggal yang
+                    sama, tambahkan kolom pengurutan unik seperti
+                    <code>id_transaksi</code> untuk membuat urutan lebih konsisten.
+                </p>
+
+                <h3>Fungsi window yang umum</h3>
+                <ul>
+                    <li><code>ROW_NUMBER()</code>: memberi nomor urut setiap baris.</li>
+                    <li><code>RANK()</code> dan <code>DENSE_RANK()</code>: menentukan peringkat.</li>
+                    <li><code>LAG()</code>: mengambil nilai dari baris sebelumnya.</li>
+                    <li><code>LEAD()</code>: mengambil nilai dari baris berikutnya.</li>
+                    <li><code>SUM() OVER()</code>: menghitung jumlah dalam jendela.</li>
+                    <li><code>AVG() OVER()</code>: menghitung rata-rata dalam jendela.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>8. Query untuk Analisis Data</h2>
+                <p>
+                    SQL bukan hanya digunakan untuk mengambil data. SQL juga dapat
+                    melakukan analisis awal untuk memahami perilaku pelanggan, tren
+                    penjualan, performa produk, dan pola transaksi.
+                </p>
+
+                <h3>A. Total penjualan per kota</h3>
+                <pre><code>SELECT
+    p.kota,
+    COUNT(t.id_transaksi) AS jumlah_transaksi,
+    SUM(t.total) AS total_penjualan,
+    AVG(t.total) AS rata_rata_transaksi
+FROM pelanggan AS p
+JOIN transaksi AS t
+    ON p.id_pelanggan = t.id_pelanggan
+GROUP BY p.kota
+ORDER BY total_penjualan DESC;</code></pre>
+
+                <p>
+                    Analisis ini membandingkan jumlah transaksi dan nilai penjualan
+                    berdasarkan kota pelanggan.
+                </p>
+
+                <h3>B. Tren penjualan bulanan</h3>
+                <pre><code>SELECT
+    EXTRACT(YEAR FROM tanggal) AS tahun,
+    EXTRACT(MONTH FROM tanggal) AS bulan,
+    COUNT(*) AS jumlah_transaksi,
+    SUM(total) AS total_penjualan
+FROM transaksi
+GROUP BY
+    EXTRACT(YEAR FROM tanggal),
+    EXTRACT(MONTH FROM tanggal)
+ORDER BY tahun, bulan;</code></pre>
+
+                <p>
+                    Query ini menggunakan sintaks PostgreSQL. Fungsi ekstraksi tanggal
+                    dapat berbeda pada MySQL, SQLite, dan sistem database lainnya.
+                    Hasilnya dapat digunakan untuk membuat grafik tren penjualan.
+                </p>
+
+                <h3>C. Pelanggan dengan nilai transaksi terbesar</h3>
+                <pre><code>SELECT
+    p.id_pelanggan,
+    p.nama,
+    SUM(t.total) AS total_belanja
+FROM pelanggan AS p
+JOIN transaksi AS t
+    ON p.id_pelanggan = t.id_pelanggan
+GROUP BY p.id_pelanggan, p.nama
+ORDER BY total_belanja DESC
+LIMIT 10;</code></pre>
+
+                <p>
+                    Hasilnya dapat digunakan untuk mengenali pelanggan bernilai tinggi.
+                </p>
+
+                <h3>D. Membandingkan transaksi dengan rata-rata</h3>
+                <pre><code>SELECT
+    id_transaksi,
+    tanggal,
+    total,
+    ROUND(
+        total - (SELECT AVG(total) FROM transaksi),
+        2
+    ) AS selisih_dari_rata_rata
+FROM transaksi
+ORDER BY selisih_dari_rata_rata DESC;</code></pre>
+
+                <p>
+                    Nilai selisih positif menunjukkan transaksi berada di atas rata-rata,
+                    sedangkan nilai negatif menunjukkan transaksi berada di bawah rata-rata.
+                </p>
+
+                <h3>E. Menghitung pertumbuhan penjualan bulanan</h3>
+                <pre><code>WITH penjualan_bulanan AS (
+    SELECT
+        DATE_TRUNC('month', tanggal) AS bulan,
+        SUM(total) AS penjualan
+    FROM transaksi
+    GROUP BY DATE_TRUNC('month', tanggal)
+),
+perbandingan AS (
+    SELECT
+        bulan,
+        penjualan,
+        LAG(penjualan) OVER (
+            ORDER BY bulan
+        ) AS penjualan_bulan_lalu
+    FROM penjualan_bulanan
+)
+SELECT
+    bulan,
+    penjualan,
+    penjualan_bulan_lalu,
+    ROUND(
+        100.0 * (penjualan - penjualan_bulan_lalu)
+        / NULLIF(penjualan_bulan_lalu, 0),
+        2
+    ) AS pertumbuhan_persen
+FROM perbandingan
+ORDER BY bulan;</code></pre>
+
+                <p>
+                    Contoh ini menggunakan PostgreSQL. <code>DATE_TRUNC()</code> membuat
+                    tanggal awal bulan, <code>LAG()</code> mengambil penjualan bulan
+                    sebelumnya, dan <code>NULLIF()</code> mencegah pembagian dengan nol.
+                </p>
+
+                <p>
+                    Pertumbuhan dihitung dengan rumus:
+                </p>
+
+                \[
+                \text{Pertumbuhan} =
+                \frac{\text{Penjualan sekarang} -
+                \text{Penjualan sebelumnya}}
+                {\text{Penjualan sebelumnya}}
+                \times 100\%
+                \]
+
+                <p>
+                    Jika penjualan bulan sebelumnya bernilai nol atau tidak tersedia,
+                    pertumbuhan persentase tidak dapat dihitung secara langsung.
+                </p>
+            </section>
+
+            <section>
+                <h2>9. Integrasi SQL dengan Python</h2>
+                <p>
+                    SQL digunakan untuk mengambil dan meringkas data dari database,
+                    sedangkan Python digunakan untuk analisis lanjutan, visualisasi,
+                    statistik, dan pemodelan Machine Learning.
+                </p>
+
+                <p>
+                    Untuk database SQLite, Python menyediakan modul bawaan
+                    <code>sqlite3</code>. Data hasil query dapat dibaca sebagai
+                    DataFrame menggunakan Pandas.
+                </p>
+
+                <h3>A. Membaca data SQLite dengan Pandas</h3>
+                <pre><code>import sqlite3
+import pandas as pd
+
+# Membuka atau membuat database SQLite
+conn = sqlite3.connect("penjualan.db")
+
+query = """
+SELECT
+    id_pelanggan,
+    COUNT(*) AS jumlah_transaksi,
+    SUM(total) AS total_belanja
+FROM transaksi
+GROUP BY id_pelanggan
+"""
+
+df = pd.read_sql_query(query, conn)
+
+print(df.head())
+
+conn.close()</code></pre>
+
+                <p>
+                    Fungsi <code>pd.read_sql_query()</code> menjalankan query dan
+                    mengembalikan hasilnya sebagai DataFrame.
+                </p>
+
+                <h3>B. Mengirim parameter dengan aman</h3>
+                <p>
+                    Hindari menyusun query menggunakan penggabungan string dari input
+                    pengguna. Gunakan parameter query agar nilai input diperlakukan
+                    sebagai data, bukan sebagai bagian dari sintaks SQL.
+                </p>
+
+                <pre><code>import sqlite3
+import pandas as pd
+
+kota = "Semarang"
+
+with sqlite3.connect("penjualan.db") as conn:
+    query = """
+    SELECT
+        p.nama,
+        p.kota,
+        t.tanggal,
+        t.total
+    FROM pelanggan AS p
+    JOIN transaksi AS t
+        ON p.id_pelanggan = t.id_pelanggan
+    WHERE p.kota = ?
+    ORDER BY t.tanggal
+    """
+
+    df = pd.read_sql_query(
+        query,
+        conn,
+        params=(kota,)
+    )
+
+print(df.head())</code></pre>
+
+                <p>
+                    Pada SQLite, tanda <code>?</code> digunakan sebagai placeholder
+                    parameter. Sistem database lain dapat menggunakan bentuk placeholder
+                    yang berbeda.
+                </p>
+
+                <h3>C. Analisis lanjutan menggunakan Pandas</h3>
+                <pre><code>import matplotlib.pyplot as plt
+
+df["tanggal"] = pd.to_datetime(df["tanggal"])
+
+penjualan_harian = (
+    df.groupby(df["tanggal"].dt.date)["total"]
+      .sum()
+)
+
+penjualan_harian.plot(
+    kind="line",
+    figsize=(10, 5),
+    marker="o"
+)
+
+plt.title("Tren Penjualan Harian")
+plt.xlabel("Tanggal")
+plt.ylabel("Total Penjualan")
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()</code></pre>
+
+                <p>
+                    Setelah data diambil dari database, Pandas dapat digunakan untuk
+                    melakukan transformasi dan agregasi tambahan. Matplotlib kemudian
+                    membantu menyajikan pola data secara visual.
+                </p>
+
+                <h3>D. Alur kerja SQL dan Python</h3>
+                <ol>
+                    <li>Hubungkan Python dengan database.</li>
+                    <li>Tulis query untuk mengambil data yang relevan.</li>
+                    <li>Filter dan agregasikan data sedekat mungkin dengan sumbernya.</li>
+                    <li>Masukkan hasil query ke DataFrame.</li>
+                    <li>Lakukan pembersihan dan analisis lanjutan menggunakan Pandas.</li>
+                    <li>Buat visualisasi atau gunakan data sebagai masukan model Machine Learning.</li>
+                </ol>
+
+                <p>
+                    Untuk database besar, mengambil hanya kolom dan baris yang diperlukan
+                    dapat menghemat memori serta mempercepat proses analisis.
+                </p>
+            </section>
+
+            <section>
+                <h2>10. Mini Project: Analisis Penjualan dengan SQL dan Python</h2>
+                <p>
+                    Pada proyek ini, kamu akan menganalisis transaksi penjualan dari
+                    database relasional dan memvisualisasikan hasilnya menggunakan Python.
+                </p>
+
+                <h3>Struktur data</h3>
+                <p>Tabel <code>pelanggan</code>:</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>id_pelanggan</th>
+                            <th>nama</th>
+                            <th>kota</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Andi</td>
+                            <td>Semarang</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Budi</td>
+                            <td>Yogyakarta</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Citra</td>
+                            <td>Semarang</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p>Tabel <code>transaksi</code>:</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>id_transaksi</th>
+                            <th>id_pelanggan</th>
+                            <th>tanggal</th>
+                            <th>total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>101</td>
+                            <td>1</td>
+                            <td>2026-01-05</td>
+                            <td>250000</td>
+                        </tr>
+                        <tr>
+                            <td>102</td>
+                            <td>2</td>
+                            <td>2026-01-07</td>
+                            <td>400000</td>
+                        </tr>
+                        <tr>
+                            <td>103</td>
+                            <td>1</td>
+                            <td>2026-02-02</td>
+                            <td>350000</td>
+                        </tr>
+                        <tr>
+                            <td>104</td>
+                            <td>3</td>
+                            <td>2026-02-10</td>
+                            <td>500000</td>
+                        </tr>
+                        <tr>
+                            <td>105</td>
+                            <td>2</td>
+                            <td>2026-02-15</td>
+                            <td>150000</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Langkah 1: Membuat database dan tabel</h3>
+                <pre><code>import sqlite3
+
+conn = sqlite3.connect("penjualan.db")
+
+conn.executescript("""
+CREATE TABLE IF NOT EXISTS pelanggan (
+    id_pelanggan INTEGER PRIMARY KEY,
+    nama TEXT NOT NULL,
+    kota TEXT
+);
+
+CREATE TABLE IF NOT EXISTS transaksi (
+    id_transaksi INTEGER PRIMARY KEY,
+    id_pelanggan INTEGER NOT NULL,
+    tanggal TEXT NOT NULL,
+    total REAL NOT NULL,
+    FOREIGN KEY (id_pelanggan)
+        REFERENCES pelanggan(id_pelanggan)
+);
+""")
+
+conn.commit()</code></pre>
+
+                <h3>Langkah 2: Memasukkan data contoh</h3>
+                <pre><code>pelanggan = [
+    (1, "Andi", "Semarang"),
+    (2, "Budi", "Yogyakarta"),
+    (3, "Citra", "Semarang")
+]
+
+transaksi = [
+    (101, 1, "2026-01-05", 250000),
+    (102, 2, "2026-01-07", 400000),
+    (103, 1, "2026-02-02", 350000),
+    (104, 3, "2026-02-10", 500000),
+    (105, 2, "2026-02-15", 150000)
+]
+
+conn.executemany(
+    "INSERT OR IGNORE INTO pelanggan VALUES (?, ?, ?)",
+    pelanggan
+)
+
+conn.executemany(
+    "INSERT OR IGNORE INTO transaksi VALUES (?, ?, ?, ?)",
+    transaksi
+)
+
+conn.commit()</code></pre>
+
+                <p>
+                    Contoh ini memakai <code>INSERT OR IGNORE</code> agar data dengan
+                    primary key yang sudah ada tidak dimasukkan kembali pada saat
+                    skrip dijalankan ulang. Untuk proyek nyata, aturan penanganan
+                    duplikasi sebaiknya ditentukan secara eksplisit.
+                </p>
+
+                <h3>Langkah 3: Menganalisis penjualan per kota</h3>
+                <pre><code>import pandas as pd
+
+query = """
+SELECT
+    p.kota,
+    COUNT(t.id_transaksi) AS jumlah_transaksi,
+    SUM(t.total) AS total_penjualan,
+    AVG(t.total) AS rata_rata_transaksi
+FROM pelanggan AS p
+JOIN transaksi AS t
+    ON p.id_pelanggan = t.id_pelanggan
+GROUP BY p.kota
+ORDER BY total_penjualan DESC;
+"""
+
+df_kota = pd.read_sql_query(query, conn)
+print(df_kota)</code></pre>
+
+                <p>
+                    Berdasarkan data contoh, Semarang menghasilkan penjualan sebesar
+                    Rp1.100.000 dari tiga transaksi, sedangkan Yogyakarta menghasilkan
+                    Rp550.000 dari dua transaksi.
+                </p>
+
+                <h3>Langkah 4: Menyimpan hasil analisis</h3>
+                <pre><code>df_kota.to_csv(
+    "hasil_analisis_penjualan.csv",
+    index=False
+)
+
+conn.close()</code></pre>
+
+                <p>
+                    Hasil analisis dapat disimpan sebagai CSV, kemudian digunakan
+                    dalam laporan, dashboard, atau proses analisis berikutnya.
+                </p>
+
+                <h3>Tugas mini project</h3>
+                <ol>
+                    <li>Temukan pelanggan dengan total belanja terbesar.</li>
+                    <li>Hitung jumlah transaksi untuk setiap pelanggan, termasuk pelanggan yang belum memiliki transaksi.</li>
+                    <li>Hitung penjualan bulanan.</li>
+                    <li>Urutkan transaksi berdasarkan nilai total dari terbesar ke terkecil.</li>
+                    <li>Gunakan window function untuk menentukan peringkat pelanggan berdasarkan total belanja.</li>
+                    <li>Visualisasikan penjualan per kota dengan Matplotlib.</li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>Latihan Mandiri</h2>
+                <ol>
+                    <li>Apa perbedaan database, tabel, baris, dan kolom?</li>
+                    <li>Jelaskan perbedaan primary key dan foreign key.</li>
+                    <li>Buat query untuk mengambil transaksi dengan total lebih dari Rp300.000.</li>
+                    <li>Hitung jumlah transaksi dan total penjualan untuk setiap pelanggan.</li>
+                    <li>Apa perbedaan WHERE dan HAVING?</li>
+                    <li>Jelaskan perbedaan INNER JOIN dan LEFT JOIN.</li>
+                    <li>Apa manfaat CTE dibandingkan query bersarang yang panjang?</li>
+                    <li>Apa perbedaan GROUP BY dan window function?</li>
+                    <li>Buat query untuk mencari tiga pelanggan dengan total belanja terbesar.</li>
+                    <li>Jelaskan bagaimana hasil query SQL dapat digunakan dalam proses Machine Learning menggunakan Python.</li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>Ringkasan</h2>
+                <ul>
+                    <li>Database relasional menyimpan data dalam tabel yang saling berhubungan.</li>
+                    <li>Primary key mengidentifikasi baris secara unik, sedangkan foreign key menghubungkan tabel.</li>
+                    <li>SELECT, WHERE, dan ORDER BY digunakan untuk mengambil, menyaring, dan mengurutkan data.</li>
+                    <li>GROUP BY dan fungsi agregasi membantu membuat ringkasan statistik.</li>
+                    <li>JOIN dan subquery menggabungkan atau mengambil data dari beberapa query.</li>
+                    <li>CTE membuat query kompleks lebih terstruktur.</li>
+                    <li>Window function memungkinkan peringkat, perbandingan antarbaris, dan perhitungan kumulatif.</li>
+                    <li>SQL dapat dipadukan dengan Python untuk membangun alur analisis data yang efisien.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Referensi untuk Belajar</h2>
+                <ul>
+                    <li><a href="https://www.postgresql.org/docs/" target="_blank" rel="noopener noreferrer">Dokumentasi PostgreSQL</a></li>
+                    <li><a href="https://dev.mysql.com/doc/" target="_blank" rel="noopener noreferrer">Dokumentasi MySQL</a></li>
+                    <li><a href="https://www.sqlite.org/docs.html" target="_blank" rel="noopener noreferrer">Dokumentasi SQLite</a></li>
+                    <li><a href="https://pandas.pydata.org/docs/" target="_blank" rel="noopener noreferrer">Dokumentasi Pandas</a></li>
+                </ul>
+            </section>
+        </article>
+    </main>
+
+    <footer>
+        ShadowLab — Belajar Tanpa Batas
+    </footer>
+</body>
+</html>

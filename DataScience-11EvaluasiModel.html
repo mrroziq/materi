@@ -1,0 +1,1184 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluasi Model | Data Science</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)']],
+                displayMath: [['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+    <header class="navbar">
+        <a href="index.html" class="logo">ShadowLab</a>
+        <nav>
+            <a href="index.html">Beranda</a>
+            <a href="MateriDataScience.html">Materi Data Science</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <article class="article">
+            <p class="eyebrow">BAGIAN XI / DATA SCIENCE</p>
+            <h1>Evaluasi Model</h1>
+            <p class="intro">
+                Evaluasi model adalah proses mengukur seberapa baik model Machine Learning
+                menghasilkan prediksi pada data yang belum digunakan untuk melatihnya.
+                Evaluasi membantu menentukan apakah model sudah sesuai dengan tujuan
+                analisis, mampu melakukan generalisasi, dan layak digunakan dalam
+                permasalahan nyata.
+            </p>
+
+            <section>
+                <h2>1. Confusion Matrix</h2>
+                <p>
+                    Confusion matrix adalah tabel yang membandingkan label aktual dengan
+                    hasil prediksi model klasifikasi. Pada klasifikasi biner, terdapat
+                    empat kemungkinan hasil.
+                </p>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Prediksi Positif</th>
+                            <th>Prediksi Negatif</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>Aktual Positif</th>
+                            <td>True Positive (TP)</td>
+                            <td>False Negative (FN)</td>
+                        </tr>
+                        <tr>
+                            <th>Aktual Negatif</th>
+                            <td>False Positive (FP)</td>
+                            <td>True Negative (TN)</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Makna setiap komponen</h3>
+                <ul>
+                    <li><strong>True Positive (TP):</strong> kasus positif berhasil diprediksi positif.</li>
+                    <li><strong>True Negative (TN):</strong> kasus negatif berhasil diprediksi negatif.</li>
+                    <li><strong>False Positive (FP):</strong> kasus negatif keliru diprediksi positif.</li>
+                    <li><strong>False Negative (FN):</strong> kasus positif keliru diprediksi negatif.</li>
+                </ul>
+
+                <h3>Contoh kasus</h3>
+                <p>
+                    Sebuah model memprediksi apakah pelanggan akan mengalami gagal bayar.
+                    Dari 100 pelanggan, diperoleh hasil berikut.
+                </p>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Prediksi Gagal Bayar</th>
+                            <th>Prediksi Tidak Gagal Bayar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>Aktual Gagal Bayar</th>
+                            <td>TP = 20</td>
+                            <td>FN = 10</td>
+                        </tr>
+                        <tr>
+                            <th>Aktual Tidak Gagal Bayar</th>
+                            <td>FP = 5</td>
+                            <td>TN = 65</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p>
+                    Model berhasil mendeteksi 20 dari 30 pelanggan yang benar-benar
+                    gagal bayar. Sebanyak 10 kasus gagal bayar tidak terdeteksi, sedangkan
+                    5 pelanggan yang sebenarnya tidak gagal bayar keliru ditandai positif.
+                </p>
+
+                <h3>Membuat confusion matrix dengan Python</h3>
+                <pre><code>from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+import matplotlib.pyplot as plt
+
+y_true = [1] * 30 + [0] * 70
+y_pred = (
+    [1] * 20 + [0] * 10 +
+    [1] * 5 + [0] * 65
+)
+
+cm = confusion_matrix(y_true, y_pred, labels=[1, 0])
+print(cm)
+
+disp = ConfusionMatrixDisplay(
+    confusion_matrix=cm,
+    display_labels=["Positif", "Negatif"]
+)
+
+disp.plot()
+plt.title("Confusion Matrix")
+plt.show()</code></pre>
+
+                <p>
+                    Urutan label harus diperhatikan. Pada kode tersebut, urutan label
+                    adalah positif kemudian negatif, sehingga posisi baris dan kolom
+                    mengikuti urutan itu.
+                </p>
+            </section>
+
+            <section>
+                <h2>2. Accuracy, Precision, Recall, dan F1-score</h2>
+                <p>
+                    Confusion matrix dapat digunakan untuk menghitung berbagai metrik
+                    klasifikasi. Setiap metrik menyoroti aspek performa yang berbeda.
+                </p>
+
+                <h3>A. Accuracy</h3>
+                <p>
+                    Accuracy adalah proporsi seluruh prediksi yang benar.
+                </p>
+
+                \[
+                \text{Accuracy}=\frac{TP+TN}{TP+TN+FP+FN}
+                \]
+
+                <p>
+                    Berdasarkan contoh sebelumnya:
+                </p>
+
+                \[
+                \text{Accuracy}=\frac{20+65}{100}=0.85
+                \]
+
+                <p>
+                    Accuracy model adalah 85%. Namun, accuracy dapat menyesatkan pada
+                    dataset yang sangat tidak seimbang. Misalnya, jika 99% kasus
+                    merupakan kelas negatif, model yang selalu memprediksi negatif
+                    sudah memiliki accuracy 99%, tetapi gagal mendeteksi seluruh
+                    kasus positif.
+                </p>
+
+                <h3>B. Precision</h3>
+                <p>
+                    Precision mengukur proporsi prediksi positif yang benar-benar positif.
+                </p>
+
+                \[
+                \text{Precision}=\frac{TP}{TP+FP}
+                \]
+
+                \[
+                \text{Precision}=\frac{20}{20+5}=0.80
+                \]
+
+                <p>
+                    Precision sebesar 80% berarti 80% dari seluruh prediksi gagal bayar
+                    memang merupakan kasus gagal bayar.
+                </p>
+
+                <h3>C. Recall</h3>
+                <p>
+                    Recall mengukur proporsi kasus positif aktual yang berhasil
+                    ditemukan model. Recall juga dikenal sebagai sensitivity atau
+                    true positive rate.
+                </p>
+
+                \[
+                \text{Recall}=\frac{TP}{TP+FN}
+                \]
+
+                \[
+                \text{Recall}=\frac{20}{20+10}\approx0.667
+                \]
+
+                <p>
+                    Recall sekitar 66,7% berarti model mendeteksi sekitar dua pertiga
+                    dari seluruh pelanggan yang benar-benar gagal bayar.
+                </p>
+
+                <h3>D. F1-score</h3>
+                <p>
+                    F1-score adalah rata-rata harmonik antara precision dan recall.
+                </p>
+
+                \[
+                F_1=2\frac{\text{Precision}\times\text{Recall}}
+                {\text{Precision}+\text{Recall}}
+                \]
+
+                <p>
+                    Pada contoh ini, F1-score sekitar 72,7%. Metrik ini berguna ketika
+                    precision dan recall sama-sama penting.
+                </p>
+
+                <h3>Menghitung metrik dengan Python</h3>
+                <pre><code>from sklearn.metrics import (
+    accuracy_score,
+    precision_score,
+    recall_score,
+    f1_score
+)
+
+y_true = [1] * 30 + [0] * 70
+y_pred = (
+    [1] * 20 + [0] * 10 +
+    [1] * 5 + [0] * 65
+)
+
+print("Accuracy:", accuracy_score(y_true, y_pred))
+print("Precision:", precision_score(y_true, y_pred))
+print("Recall:", recall_score(y_true, y_pred))
+print("F1-score:", f1_score(y_true, y_pred))</code></pre>
+
+                <h3>Memilih metrik yang sesuai</h3>
+                <ul>
+                    <li>Gunakan accuracy jika kesalahan kedua kelas memiliki konsekuensi yang relatif sebanding dan distribusi kelas tidak terlalu bermasalah.</li>
+                    <li>Utamakan precision jika false positive sangat mahal.</li>
+                    <li>Utamakan recall jika false negative sangat berisiko.</li>
+                    <li>Gunakan F1-score ketika perlu menyeimbangkan precision dan recall.</li>
+                </ul>
+
+                <p>
+                    Tidak ada satu metrik yang selalu terbaik. Pemilihannya harus
+                    didasarkan pada karakteristik data dan konsekuensi kesalahan.
+                </p>
+            </section>
+
+            <section>
+                <h2>3. ROC Curve dan ROC-AUC</h2>
+                <p>
+                    Banyak model klasifikasi menghasilkan skor atau probabilitas,
+                    bukan hanya label kelas. Untuk klasifikasi biner, ROC curve
+                    mengevaluasi performa model pada berbagai threshold.
+                </p>
+
+                <p>
+                    ROC curve menggambarkan hubungan antara:
+                </p>
+
+                \[
+                \text{TPR}=\frac{TP}{TP+FN}
+                \]
+
+                \[
+                \text{FPR}=\frac{FP}{FP+TN}
+                \]
+
+                <p>
+                    TPR sama dengan recall, sedangkan FPR adalah proporsi kasus negatif
+                    yang salah diprediksi positif.
+                </p>
+
+                <h3>ROC-AUC</h3>
+                <p>
+                    ROC-AUC adalah luas di bawah ROC curve. Nilainya umumnya berada
+                    antara 0 dan 1 untuk skor yang relevan.
+                </p>
+
+                <ul>
+                    <li>AUC mendekati 1 menunjukkan kemampuan pemeringkatan kelas yang baik.</li>
+                    <li>AUC sekitar 0,5 menunjukkan kemampuan pemeringkatan yang setara dengan tebakan acak dalam kondisi umum.</li>
+                    <li>AUC di bawah 0,5 dapat menunjukkan bahwa urutan skor berlawanan dengan label positif yang didefinisikan.</li>
+                </ul>
+
+                <p>
+                    ROC-AUC dapat dipahami sebagai peluang bahwa model memberi skor
+                    lebih tinggi kepada satu contoh positif yang dipilih secara acak
+                    daripada satu contoh negatif yang dipilih secara acak, dengan
+                    penanganan yang sesuai untuk skor yang sama.
+                </p>
+
+                <h3>Contoh menggunakan Python</h3>
+                <pre><code>from sklearn.metrics import roc_curve, roc_auc_score
+import matplotlib.pyplot as plt
+
+y_true = [0, 0, 0, 1, 1, 1]
+y_score = [0.10, 0.35, 0.40, 0.55, 0.80, 0.95]
+
+fpr, tpr, thresholds = roc_curve(y_true, y_score)
+auc = roc_auc_score(y_true, y_score)
+
+plt.plot(fpr, tpr, label=f"ROC-AUC = {auc:.3f}")
+plt.plot([0, 1], [0, 1], linestyle="--", label="Tebakan acak")
+plt.xlabel("False Positive Rate")
+plt.ylabel("True Positive Rate")
+plt.title("ROC Curve")
+plt.legend()
+plt.grid(True)
+plt.show()
+
+print("ROC-AUC:", auc)</code></pre>
+
+                <p>
+                    ROC-AUC mengukur kualitas pemeringkatan secara keseluruhan, bukan
+                    performa pada satu threshold tertentu. Model dengan ROC-AUC tinggi
+                    belum tentu menghasilkan precision atau recall yang sesuai pada
+                    threshold yang sedang digunakan.
+                </p>
+
+                <p>
+                    Pada dataset dengan kelas positif yang sangat jarang, ROC-AUC
+                    sebaiknya tidak menjadi satu-satunya metrik. Precision-recall curve
+                    dan PR-AUC dapat memberikan informasi tambahan tentang kemampuan
+                    menemukan kasus positif.
+                </p>
+            </section>
+
+            <section>
+                <h2>4. Kolmogorov–Smirnov (KS) Statistic</h2>
+                <p>
+                    Dalam evaluasi model klasifikasi, khususnya credit scoring dan
+                    risiko gagal bayar, KS statistic sering digunakan untuk mengukur
+                    sejauh mana skor model memisahkan kelompok positif dan negatif.
+                </p>
+
+                <p>
+                    KS membandingkan distribusi kumulatif skor pada kedua kelas.
+                    Secara umum, statistiknya adalah selisih absolut maksimum antara
+                    dua empirical cumulative distribution functions (ECDF).
+                </p>
+
+                \[
+                KS=\sup_s\left|F_1(s)-F_0(s)\right|
+                \]
+
+                <p>
+                    Di sini, \(F_1(s)\) dan \(F_0(s)\) adalah distribusi kumulatif
+                    skor untuk kelas positif dan negatif. Nilai KS biasanya dilaporkan
+                    pada rentang 0 sampai 1 atau dalam skala 0 sampai 100.
+                </p>
+
+                <p>
+                    Dalam evaluasi risiko, jika skor yang lebih tinggi berarti risiko
+                    lebih tinggi, KS dapat dihitung dari selisih absolut maksimum
+                    antara cumulative distribution function kedua kelompok. Definisi
+                    kelas positif dan arah skor harus konsisten.
+                </p>
+
+                <h3>Contoh interpretasi</h3>
+                <ul>
+                    <li>KS = 0,10 menunjukkan pemisahan distribusi yang relatif kecil.</li>
+                    <li>KS = 0,35 menunjukkan pemisahan yang lebih kuat dibandingkan KS = 0,10 pada konteks dan definisi yang sama.</li>
+                    <li>KS = 0 menunjukkan distribusi skor kedua kelas tidak terpisah berdasarkan statistik tersebut.</li>
+                </ul>
+
+                <p>
+                    Angka tersebut hanya ilustrasi. Tidak ada satu nilai KS yang
+                    menjamin model layak digunakan untuk semua jenis masalah.
+                </p>
+
+                <h3>Menghitung KS dari prediksi model</h3>
+                <pre><code>import numpy as np
+from sklearn.metrics import roc_curve
+
+y_true = np.array([0, 0, 0, 1, 1, 1])
+y_score = np.array([0.10, 0.35, 0.40, 0.55, 0.80, 0.95])
+
+fpr, tpr, thresholds = roc_curve(y_true, y_score)
+
+ks_values = tpr - fpr
+idx = np.argmax(np.abs(ks_values))
+
+ks_statistic = abs(ks_values[idx])
+best_threshold = thresholds[idx]
+
+print("KS statistic:", ks_statistic)
+print("Threshold pada pemisahan maksimum:", best_threshold)</code></pre>
+
+                <p>
+                    Untuk skor yang semakin tinggi berarti semakin positif, KS dapat
+                    diperoleh dari selisih TPR dan FPR pada seluruh threshold lalu
+                    mengambil selisih absolut terbesar. Kode ini mengasumsikan
+                    <code>1</code> adalah kelas positif.
+                </p>
+
+                <h3>KS dan ROC-AUC</h3>
+                <ul>
+                    <li>ROC-AUC merangkum kemampuan pemeringkatan melalui luas di bawah kurva.</li>
+                    <li>KS mengukur pemisahan maksimum antara distribusi kumulatif dua kelas.</li>
+                    <li>Keduanya mengevaluasi aspek yang berbeda, sehingga nilai tinggi pada salah satunya tidak menjamin nilai tinggi yang sebanding pada metrik lainnya.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>5. MAE, MSE, RMSE, dan \(R^2\)</h2>
+                <p>
+                    Untuk regresi, target model berupa nilai numerik. Evaluasi dilakukan
+                    dengan membandingkan prediksi \(\hat{y}_i\) dengan nilai aktual \(y_i\).
+                </p>
+
+                <h3>A. Mean Absolute Error (MAE)</h3>
+                \[
+                MAE=\frac{1}{n}\sum_{i=1}^{n}|y_i-\hat{y}_i|
+                \]
+
+                <p>
+                    MAE menghitung rata-rata nilai absolut kesalahan. Jika target
+                    berupa harga dalam rupiah, MAE juga memiliki satuan rupiah.
+                </p>
+
+                <h3>B. Mean Squared Error (MSE)</h3>
+                \[
+                MSE=\frac{1}{n}\sum_{i=1}^{n}(y_i-\hat{y}_i)^2
+                \]
+
+                <p>
+                    MSE menghitung rata-rata kuadrat kesalahan. Kesalahan besar
+                    mendapat penalti lebih kuat, dan satuannya merupakan kuadrat
+                    satuan target.
+                </p>
+
+                <h3>C. Root Mean Squared Error (RMSE)</h3>
+                \[
+                RMSE=\sqrt{\frac{1}{n}\sum_{i=1}^{n}(y_i-\hat{y}_i)^2}
+                \]
+
+                <p>
+                    RMSE adalah akar kuadrat MSE sehingga memiliki satuan yang sama
+                    dengan target.
+                </p>
+
+                <h3>D. Koefisien determinasi (\(R^2\))</h3>
+                \[
+                R^2=1-
+                \frac{\sum_{i=1}^{n}(y_i-\hat{y}_i)^2}
+                {\sum_{i=1}^{n}(y_i-\bar{y})^2}
+                \]
+
+                <p>
+                    \(R^2\) membandingkan kesalahan model dengan variasi target terhadap
+                    rata-ratanya. Nilai 1 berarti prediksi sempurna pada data yang
+                    dievaluasi. Nilai 0 berarti model tidak lebih baik dalam jumlah
+                    kuadrat kesalahan daripada prediksi menggunakan rata-rata target
+                    pada data tersebut. Nilai negatif juga dapat terjadi.
+                </p>
+
+                <h3>Contoh perhitungan</h3>
+                <p>Misalkan nilai aktual dan prediksi sebagai berikut.</p>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Aktual</th>
+                            <th>Prediksi</th>
+                            <th>Kesalahan absolut</th>
+                            <th>Kuadrat kesalahan</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>100</td>
+                            <td>90</td>
+                            <td>10</td>
+                            <td>100</td>
+                        </tr>
+                        <tr>
+                            <td>200</td>
+                            <td>220</td>
+                            <td>20</td>
+                            <td>400</td>
+                        </tr>
+                        <tr>
+                            <td>300</td>
+                            <td>290</td>
+                            <td>10</td>
+                            <td>100</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p>
+                    Dari data tersebut, MAE adalah \(40/3\approx13{,}33\), MSE adalah
+                    \(600/3=200\), dan RMSE adalah \(\sqrt{200}\approx14{,}14\).
+                </p>
+
+                <h3>Menghitung metrik dengan Python</h3>
+                <pre><code>from sklearn.metrics import (
+    mean_absolute_error,
+    mean_squared_error,
+    r2_score
+)
+import numpy as np
+
+y_true = [100, 200, 300]
+y_pred = [90, 220, 290]
+
+mae = mean_absolute_error(y_true, y_pred)
+mse = mean_squared_error(y_true, y_pred)
+rmse = np.sqrt(mse)
+r2 = r2_score(y_true, y_pred)
+
+print("MAE:", mae)
+print("MSE:", mse)
+print("RMSE:", rmse)
+print("R2:", r2)</code></pre>
+
+                <h3>Memilih metrik regresi</h3>
+                <ul>
+                    <li>MAE mudah ditafsirkan karena berada dalam satuan target dan relatif tidak sensitif terhadap besarnya outlier dibandingkan MSE.</li>
+                    <li>MSE memberi penalti kuadrat pada kesalahan besar.</li>
+                    <li>RMSE memiliki satuan target dan lebih menekankan kesalahan besar.</li>
+                    <li>\(R^2\) memberikan ukuran relatif terhadap variasi target, tetapi bukan ukuran langsung besarnya kesalahan dalam satuan asli.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>6. Evaluasi Clustering</h2>
+                <p>
+                    Clustering merupakan unsupervised learning, sehingga sering kali
+                    tidak tersedia label aktual untuk dibandingkan dengan hasil cluster.
+                    Evaluasi dapat menggunakan struktur geometris kelompok atau,
+                    jika tersedia, label eksternal.
+                </p>
+
+                <h3>A. Silhouette Score</h3>
+                <p>
+                    Silhouette score membandingkan kedekatan suatu titik dengan cluster
+                    sendiri dan kedekatannya dengan cluster tetangga terdekat.
+                </p>
+
+                \[
+                s(i)=\frac{b(i)-a(i)}{\max(a(i),b(i))}
+                \]
+
+                <ul>
+                    <li>\(a(i)\): rata-rata jarak titik \(i\) ke titik lain dalam cluster yang sama.</li>
+                    <li>\(b(i)\): rata-rata jarak terkecil dari titik \(i\) ke salah satu cluster lain.</li>
+                </ul>
+
+                <p>
+                    Nilai silhouette berada antara -1 dan 1. Nilai mendekati 1
+                    menunjukkan titik lebih sesuai dengan cluster-nya, nilai sekitar
+                    0 menunjukkan titik berada di dekat batas kelompok, dan nilai
+                    negatif dapat menunjukkan penempatan kelompok yang kurang sesuai.
+                </p>
+
+                <h3>B. Davies-Bouldin Index</h3>
+                <p>
+                    Davies-Bouldin Index membandingkan penyebaran di dalam cluster
+                    dengan jarak antarcluster. Nilai yang lebih kecil umumnya
+                    menunjukkan kelompok yang lebih kompak dan terpisah.
+                </p>
+
+                <h3>C. Adjusted Rand Index (ARI)</h3>
+                <p>
+                    Jika label pembanding tersedia, Adjusted Rand Index dapat mengukur
+                    kesesuaian pengelompokan dengan label tersebut. ARI bernilai 1
+                    menunjukkan kesesuaian sempurna, sedangkan nilai mendekati 0
+                    secara umum menunjukkan kesesuaian yang sebanding dengan
+                    pengelompokan acak setelah penyesuaian.
+                </p>
+
+                <h3>Contoh Python</h3>
+                <pre><code>from sklearn.datasets import make_blobs
+from sklearn.cluster import KMeans
+from sklearn.metrics import (
+    silhouette_score,
+    davies_bouldin_score
+)
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import make_pipeline
+
+X, _ = make_blobs(
+    n_samples=300,
+    centers=3,
+    cluster_std=1.0,
+    random_state=42
+)
+
+model = make_pipeline(
+    StandardScaler(),
+    KMeans(n_clusters=3, random_state=42, n_init=10)
+)
+
+labels = model.fit_predict(X)
+X_scaled = model.named_steps["standardscaler"].transform(X)
+
+print("Silhouette:", silhouette_score(X_scaled, labels))
+print("Davies-Bouldin:", davies_bouldin_score(X_scaled, labels))</code></pre>
+
+                <p>
+                    Metrik internal seperti silhouette dan Davies-Bouldin mengukur
+                    karakteristik geometris cluster, bukan secara langsung kegunaan
+                    bisnis atau makna kelompok. Hasilnya perlu dipadukan dengan
+                    interpretasi domain.
+                </p>
+            </section>
+
+            <section>
+                <h2>7. Overfitting dan Underfitting</h2>
+                <p>
+                    Overfitting dan underfitting menggambarkan dua kondisi ketika model
+                    belum memiliki kemampuan generalisasi yang sesuai.
+                </p>
+
+                <h3>Overfitting</h3>
+                <p>
+                    Overfitting terjadi ketika model terlalu menyesuaikan diri dengan
+                    data training, termasuk noise atau pola yang tidak berlaku umum.
+                    Model biasanya memiliki performa training sangat baik, tetapi
+                    performa pada data baru jauh lebih buruk.
+                </p>
+
+                <h3>Underfitting</h3>
+                <p>
+                    Underfitting terjadi ketika model terlalu sederhana atau belum
+                    cukup terlatih untuk menangkap pola penting. Performa training
+                    dan evaluasi sama-sama buruk.
+                </p>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Kondisi</th>
+                            <th>Training error</th>
+                            <th>Validation error</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Underfitting</td>
+                            <td>Tinggi</td>
+                            <td>Tinggi</td>
+                        </tr>
+                        <tr>
+                            <td>Model cukup sesuai</td>
+                            <td>Rendah</td>
+                            <td>Rendah</td>
+                        </tr>
+                        <tr>
+                            <td>Overfitting</td>
+                            <td>Sangat rendah</td>
+                            <td>Lebih tinggi</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Cara mengurangi overfitting</h3>
+                <ul>
+                    <li>Membatasi kompleksitas model.</li>
+                    <li>Menggunakan regularisasi.</li>
+                    <li>Menambah data yang relevan jika memungkinkan.</li>
+                    <li>Menggunakan cross-validation.</li>
+                    <li>Melakukan feature selection secara benar.</li>
+                    <li>Menghindari data leakage.</li>
+                    <li>Menggunakan early stopping jika didukung algoritma.</li>
+                </ul>
+
+                <h3>Cara mengatasi underfitting</h3>
+                <ul>
+                    <li>Menggunakan model yang lebih fleksibel.</li>
+                    <li>Menambah fitur yang informatif.</li>
+                    <li>Mengurangi regularisasi yang terlalu kuat.</li>
+                    <li>Memastikan preprocessing dan pelatihan berjalan dengan benar.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>8. Bias-Variance Trade-off</h2>
+                <p>
+                    Bias-variance trade-off menjelaskan kompromi antara kesalahan
+                    akibat asumsi model yang terlalu sederhana dan kesalahan akibat
+                    sensitivitas model terhadap data training.
+                </p>
+
+                <ul>
+                    <li><strong>Bias tinggi:</strong> model membuat asumsi yang terlalu sederhana sehingga gagal menangkap pola.</li>
+                    <li><strong>Variance tinggi:</strong> model sangat sensitif terhadap perubahan sampel training sehingga prediksi dapat berubah banyak ketika data pelatihan berubah.</li>
+                    <li><strong>Irreducible error:</strong> variasi atau noise yang tidak dapat dihilangkan sepenuhnya oleh model.</li>
+                </ul>
+
+                <p>
+                    Dalam kerangka klasik untuk regresi dengan squared error, ekspektasi
+                    kesalahan prediksi dapat diuraikan menjadi komponen bias kuadrat,
+                    variance, dan noise yang tidak dapat dihindari.
+                </p>
+
+                \[
+                \mathbb{E}\left[(Y-\hat{f}(X))^2\right]
+                =
+                \operatorname{Bias}(\hat{f}(X))^2
+                +
+                \operatorname{Var}(\hat{f}(X))
+                +
+                \sigma^2
+                \]
+
+                <p>
+                    Persamaan ini merupakan bentuk konseptual di bawah asumsi tertentu,
+                    seperti model data \(Y=f(X)+\varepsilon\) dengan noise bermean nol
+                    dan varians \(\sigma^2\).
+                </p>
+
+                <h3>Ilustrasi</h3>
+                <ul>
+                    <li>Linear Regression sederhana pada pola yang sangat nonlinier dapat memiliki bias tinggi.</li>
+                    <li>Decision Tree yang sangat dalam pada dataset kecil dapat memiliki variance tinggi.</li>
+                    <li>Regularisasi, pemilihan fitur, dan validasi membantu menemukan kompleksitas yang sesuai.</li>
+                </ul>
+
+                <p>
+                    Tujuan pengembangan model bukan membuat kesalahan training sekecil
+                    mungkin, melainkan memperoleh performa generalisasi yang baik pada
+                    data yang relevan.
+                </p>
+            </section>
+
+            <section>
+                <h2>9. Pemilihan Threshold</h2>
+                <p>
+                    Pada klasifikasi biner, model sering menghasilkan probabilitas
+                    kelas positif. Threshold digunakan untuk mengubah probabilitas
+                    menjadi label kelas.
+                </p>
+
+                <p>Aturan klasifikasi sederhana:</p>
+                \[
+                \hat{y}=
+                \begin{cases}
+                1, & \hat{p}\ge t,\\
+                0, & \hat{p}<t.
+                \end{cases}
+                \]
+
+                <p>
+                    Di sini, \(\hat{p}\) adalah skor probabilitas dan \(t\) adalah
+                    threshold. Threshold 0,5 sering digunakan sebagai titik awal,
+                    tetapi bukan pilihan terbaik untuk semua masalah.
+                </p>
+
+                <h3>Pengaruh threshold</h3>
+                <ul>
+                    <li>Threshold lebih rendah biasanya membuat lebih banyak kasus diprediksi positif, sehingga recall cenderung meningkat dan false positive juga dapat bertambah.</li>
+                    <li>Threshold lebih tinggi biasanya membuat lebih sedikit kasus diprediksi positif, sehingga precision dapat meningkat, tetapi sebagian kasus positif mungkin terlewat.</li>
+                </ul>
+
+                <h3>Contoh pemilihan threshold berdasarkan F1-score</h3>
+                <pre><code>import numpy as np
+from sklearn.metrics import f1_score
+
+y_true = np.array([0, 0, 0, 1, 1, 1])
+y_prob = np.array([0.10, 0.25, 0.45, 0.40, 0.65, 0.90])
+
+thresholds = np.arange(0.1, 1.0, 0.05)
+results = []
+
+for threshold in thresholds:
+    y_pred = (y_prob >= threshold).astype(int)
+    score = f1_score(y_true, y_pred, zero_division=0)
+    results.append((threshold, score))
+
+best_threshold, best_f1 = max(
+    results,
+    key=lambda item: item[1]
+)
+
+print("Threshold terbaik:", best_threshold)
+print("F1-score validation:", best_f1)</code></pre>
+
+                <p>
+                    Threshold dipilih berdasarkan data validation, bukan test set.
+                    Setelah threshold ditetapkan, performa akhir dapat dilaporkan
+                    menggunakan test set yang tidak digunakan untuk pemilihan tersebut.
+                </p>
+
+                <h3>Pemilihan berdasarkan biaya kesalahan</h3>
+                <p>
+                    Jika biaya false positive dan false negative diketahui, threshold
+                    dapat dipilih untuk meminimalkan perkiraan total biaya. Misalnya,
+                    dalam deteksi gagal bayar, melewatkan kasus berisiko tinggi dapat
+                    memiliki konsekuensi berbeda dari menandai pelanggan berisiko rendah
+                    secara keliru.
+                </p>
+
+                <p>
+                    Threshold juga harus mempertimbangkan apakah probabilitas model
+                    terkalibrasi. Skor yang terkalibrasi lebih mudah diinterpretasikan
+                    sebagai perkiraan probabilitas, tetapi kalibrasi tetap perlu
+                    dievaluasi.
+                </p>
+            </section>
+
+            <section>
+                <h2>10. Validasi Berbasis Waktu</h2>
+                <p>
+                    Pada data deret waktu atau prediksi masa depan, pembagian acak dapat
+                    menghasilkan evaluasi yang tidak realistis. Validasi berbasis waktu
+                    melatih model menggunakan data masa lalu dan menguji pada periode
+                    yang lebih baru.
+                </p>
+
+                <h3>Contoh skema validasi</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Fold</th>
+                            <th>Data training</th>
+                            <th>Data validation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Januari–Maret</td>
+                            <td>April</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Januari–April</td>
+                            <td>Mei</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Januari–Mei</td>
+                            <td>Juni</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p>
+                    Skema ini meniru kondisi saat model menggunakan data historis
+                    untuk memprediksi periode berikutnya.
+                </p>
+
+                <h3>Contoh Python dengan TimeSeriesSplit</h3>
+                <pre><code>import numpy as np
+from sklearn.model_selection import TimeSeriesSplit
+
+X = np.arange(20).reshape(-1, 1)
+y = np.arange(20)
+
+tscv = TimeSeriesSplit(n_splits=4)
+
+for fold, (train_idx, valid_idx) in enumerate(
+    tscv.split(X),
+    start=1
+):
+    print("Fold:", fold)
+    print("Training:", train_idx)
+    print("Validation:", valid_idx)
+    print()</code></pre>
+
+                <p>
+                    TimeSeriesSplit menjaga urutan indeks: data training berada sebelum
+                    data validation. Untuk kasus nyata, tanggal, jarak antarobservasi,
+                    panjang horizon prediksi, dan ketersediaan fitur perlu diperhatikan.
+                </p>
+
+                <h3>Hal yang perlu diwaspadai</h3>
+                <ul>
+                    <li>Jangan menggunakan fitur yang baru tersedia setelah waktu prediksi.</li>
+                    <li>Pastikan label sudah dapat diketahui pada waktu evaluasi yang ditentukan.</li>
+                    <li>Gunakan preprocessing yang dipelajari dari data training setiap fold.</li>
+                    <li>Perhatikan perubahan distribusi data dari waktu ke waktu.</li>
+                    <li>Untuk label dengan jendela waktu yang saling tumpang tindih, pertimbangkan pemisahan atau embargo yang sesuai agar informasi tidak bocor antarfold.</li>
+                </ul>
+
+                <p>
+                    Validasi berbasis waktu sangat penting untuk peramalan penjualan,
+                    risiko kredit, deteksi fraud, prediksi permintaan, dan sistem yang
+                    digunakan untuk memperkirakan kejadian di masa depan.
+                </p>
+            </section>
+
+            <section>
+                <h2>11. Interpretasi dan Explainability Model</h2>
+                <p>
+                    Explainability adalah pendekatan untuk memahami alasan model
+                    menghasilkan prediksi tertentu. Hal ini membantu pemeriksaan
+                    kesalahan, komunikasi hasil, pengawasan risiko, dan penilaian
+                    apakah model menggunakan pola yang masuk akal.
+                </p>
+
+                <h3>A. Model intrinsik yang mudah diinterpretasikan</h3>
+                <p>
+                    Beberapa model memiliki struktur yang relatif mudah diperiksa,
+                    misalnya Linear Regression, Logistic Regression, dan Decision Tree
+                    yang dangkal.
+                </p>
+
+                <p>
+                    Pada Linear Regression, koefisien menunjukkan perubahan prediksi
+                    yang terkait dengan perubahan satu unit fitur ketika fitur lain
+                    tetap. Interpretasi ini bergantung pada spesifikasi model dan tidak
+                    dengan sendirinya membuktikan hubungan sebab-akibat.
+                </p>
+
+                <h3>B. Feature importance</h3>
+                <p>
+                    Feature importance memperkirakan seberapa besar fitur berkontribusi
+                    pada perilaku atau performa model menurut metode tertentu.
+                    Random Forest dan beberapa algoritma boosting menyediakan ukuran
+                    kepentingan fitur bawaan.
+                </p>
+
+                <pre><code>from sklearn.ensemble import RandomForestClassifier
+import pandas as pd
+
+X = pd.DataFrame({
+    "usia": [22, 25, 30, 35, 40, 45, 50, 55],
+    "pendapatan": [3, 4, 5, 6, 7, 8, 9, 10],
+    "jumlah_transaksi": [1, 2, 1, 3, 4, 3, 5, 6]
+})
+
+y = [0, 0, 0, 0, 1, 1, 1, 1]
+
+model = RandomForestClassifier(
+    n_estimators=100,
+    random_state=42
+)
+
+model.fit(X, y)
+
+importance = pd.Series(
+    model.feature_importances_,
+    index=X.columns
+).sort_values(ascending=False)
+
+print(importance)</code></pre>
+
+                <p>
+                    Feature importance bawaan pohon sering didasarkan pada penurunan
+                    impurity. Ukuran ini dapat bias terhadap fitur dengan banyak
+                    kemungkinan pemisahan dan dapat membagi kepentingan antarfitur
+                    yang berkorelasi.
+                </p>
+
+                <h3>C. Permutation importance</h3>
+                <p>
+                    Permutation importance mengukur perubahan performa model ketika
+                    satu fitur diacak. Jika performa turun banyak setelah fitur
+                    diacak, fitur tersebut berperan penting bagi model pada dataset
+                    evaluasi yang digunakan.
+                </p>
+
+                <pre><code>from sklearn.inspection import permutation_importance
+
+result = permutation_importance(
+    model,
+    X,
+    y,
+    n_repeats=10,
+    random_state=42,
+    scoring="accuracy"
+)
+
+importance = pd.Series(
+    result.importances_mean,
+    index=X.columns
+).sort_values(ascending=False)
+
+print(importance)</code></pre>
+
+                <p>
+                    Contoh ini menggunakan dataset kecil untuk demonstrasi. Untuk
+                    interpretasi yang lebih dapat dipercaya, gunakan data evaluasi
+                    yang representatif dan bukan hanya data training.
+                </p>
+
+                <h3>D. SHAP dan LIME</h3>
+                <ul>
+                    <li><strong>SHAP:</strong> menggunakan gagasan Shapley values untuk menguraikan kontribusi fitur terhadap prediksi relatif terhadap baseline tertentu.</li>
+                    <li><strong>LIME:</strong> membangun penjelasan lokal dengan mendekati perilaku model di sekitar satu contoh menggunakan model yang lebih sederhana.</li>
+                </ul>
+
+                <p>
+                    Metode penjelasan lokal dapat membantu memahami prediksi individual,
+                    sedangkan ringkasan global membantu melihat pola kontribusi fitur
+                    pada banyak observasi.
+                </p>
+
+                <h3>E. Contoh menggunakan SHAP</h3>
+                <pre><code># Instalasi jika belum tersedia:
+# pip install shap
+
+import shap
+
+explainer = shap.TreeExplainer(model)
+shap_values = explainer.shap_values(X)
+
+shap.summary_plot(shap_values, X)</code></pre>
+
+                <p>
+                    Bentuk keluaran SHAP dapat berbeda menurut jenis model, versi
+                    pustaka, dan jumlah kelas. Periksa dokumentasi versi yang digunakan
+                    sebelum menentukan indeks kelas atau format visualisasi.
+                </p>
+
+                <h3>Hal penting saat menjelaskan model</h3>
+                <ul>
+                    <li>Penjelasan model bukan bukti hubungan sebab-akibat.</li>
+                    <li>Fitur yang berkorelasi dapat membuat kontribusi sulit dipisahkan.</li>
+                    <li>Interpretasi harus sesuai dengan populasi dan periode data yang dianalisis.</li>
+                    <li>Periksa apakah model menggunakan fitur yang bocor atau tidak relevan.</li>
+                    <li>Untuk penggunaan berisiko tinggi, explainability perlu dipadukan dengan validasi, pengawasan, dan evaluasi dampak.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Mini Project: Evaluasi Model Klasifikasi</h2>
+                <p>
+                    Pada proyek ini, kamu akan melatih Logistic Regression, mengevaluasi
+                    prediksinya, memeriksa ROC-AUC, dan memilih threshold berdasarkan
+                    validation set.
+                </p>
+
+                <h3>Langkah 1: Menyiapkan data</h3>
+                <pre><code>from sklearn.datasets import load_breast_cancer
+from sklearn.model_selection import train_test_split
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression
+
+data = load_breast_cancer()
+X = data.data
+y = data.target
+
+X_train, X_temp, y_train, y_temp = train_test_split(
+    X,
+    y,
+    test_size=0.40,
+    random_state=42,
+    stratify=y
+)
+
+X_valid, X_test, y_valid, y_test = train_test_split(
+    X_temp,
+    y_temp,
+    test_size=0.50,
+    random_state=42,
+    stratify=y_temp
+)
+
+model = make_pipeline(
+    StandardScaler(),
+    LogisticRegression(max_iter=5000)
+)
+
+model.fit(X_train, y_train)</code></pre>
+
+                <h3>Langkah 2: Memilih threshold dari validation set</h3>
+                <pre><code>import numpy as np
+from sklearn.metrics import f1_score, roc_auc_score
+
+valid_prob = model.predict_proba(X_valid)[:, 1]
+
+thresholds = np.arange(0.1, 0.91, 0.01)
+
+scores = [
+    f1_score(
+        y_valid,
+        (valid_prob >= t).astype(int),
+        zero_division=0
+    )
+    for t in thresholds
+]
+
+best_idx = int(np.argmax(scores))
+best_threshold = thresholds[best_idx]
+
+print("Threshold terpilih:", best_threshold)
+print("Validation F1:", scores[best_idx])
+print("Validation ROC-AUC:", roc_auc_score(y_valid, valid_prob))</code></pre>
+
+                <h3>Langkah 3: Evaluasi akhir pada test set</h3>
+                <pre><code>from sklearn.metrics import (
+    confusion_matrix,
+    classification_report,
+    roc_auc_score
+)
+
+test_prob = model.predict_proba(X_test)[:, 1]
+test_pred = (test_prob >= best_threshold).astype(int)
+
+print("Confusion matrix:")
+print(confusion_matrix(y_test, test_pred))
+
+print("Classification report:")
+print(classification_report(y_test, test_pred))
+
+print("Test ROC-AUC:", roc_auc_score(y_test, test_prob))</code></pre>
+
+                <p>
+                    Threshold dipilih menggunakan validation set, sedangkan test set
+                    hanya digunakan untuk evaluasi akhir. Dalam dataset contoh ini,
+                    kelas positif ditentukan oleh pengodean target bawaan dataset.
+                    Pada permasalahan lain, pastikan kelas positif sesuai dengan
+                    tujuan analisis.
+                </p>
+
+                <h3>Tugas pengembangan</h3>
+                <ol>
+                    <li>Bandingkan hasil pada threshold 0,3, 0,5, dan threshold terpilih.</li>
+                    <li>Amati perubahan confusion matrix, precision, dan recall.</li>
+                    <li>Buat ROC curve dan hitung ROC-AUC.</li>
+                    <li>Hitung KS statistic dari probabilitas test set.</li>
+                    <li>Jelaskan mengapa skor validation dan test dapat berbeda.</li>
+                    <li>Identifikasi risiko data leakage dalam alur pemodelan.</li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>Latihan Mandiri</h2>
+                <ol>
+                    <li>Apa perbedaan TP, TN, FP, dan FN?</li>
+                    <li>Mengapa accuracy dapat menyesatkan pada dataset tidak seimbang?</li>
+                    <li>Jelaskan perbedaan precision dan recall.</li>
+                    <li>Apa informasi yang diberikan ROC-AUC?</li>
+                    <li>Jelaskan cara kerja KS statistic dan hubungannya dengan TPR serta FPR.</li>
+                    <li>Apa perbedaan MAE, MSE, dan RMSE?</li>
+                    <li>Mengapa \(R^2\) dapat bernilai negatif?</li>
+                    <li>Bagaimana silhouette score digunakan untuk mengevaluasi clustering?</li>
+                    <li>Apa perbedaan overfitting dan underfitting?</li>
+                    <li>Jelaskan bias-variance trade-off.</li>
+                    <li>Bagaimana perubahan threshold memengaruhi precision dan recall?</li>
+                    <li>Mengapa data deret waktu membutuhkan validasi yang menghormati urutan waktu?</li>
+                    <li>Apa perbedaan feature importance dan permutation importance?</li>
+                    <li>Mengapa penjelasan model tidak otomatis menunjukkan hubungan sebab-akibat?</li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>Ringkasan</h2>
+                <ul>
+                    <li>Confusion matrix menjadi dasar penghitungan metrik klasifikasi.</li>
+                    <li>Accuracy, precision, recall, dan F1-score memiliki tujuan evaluasi yang berbeda.</li>
+                    <li>ROC-AUC mengukur kemampuan pemeringkatan, sedangkan KS mengukur pemisahan maksimum distribusi kumulatif dua kelas.</li>
+                    <li>MAE, MSE, RMSE, dan \(R^2\) digunakan untuk mengevaluasi regresi.</li>
+                    <li>Clustering dapat dievaluasi menggunakan silhouette score, Davies-Bouldin Index, dan metrik lain yang sesuai.</li>
+                    <li>Overfitting dan underfitting menunjukkan masalah generalisasi yang berbeda.</li>
+                    <li>Threshold perlu dipilih berdasarkan tujuan dan biaya kesalahan.</li>
+                    <li>Validasi berbasis waktu mengurangi risiko evaluasi yang tidak realistis pada prediksi masa depan.</li>
+                    <li>Explainability membantu memahami perilaku model, tetapi tidak membuktikan kausalitas.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Referensi untuk Belajar</h2>
+                <ul>
+                    <li><a href="https://scikit-learn.org/stable/modules/model_evaluation.html" target="_blank" rel="noopener noreferrer">Scikit-learn: Model Evaluation</a></li>
+                    <li><a href="https://scikit-learn.org/stable/modules/cross_validation.html" target="_blank" rel="noopener noreferrer">Scikit-learn: Cross-Validation</a></li>
+                    <li><a href="https://scikit-learn.org/stable/modules/permutation_importance.html" target="_blank" rel="noopener noreferrer">Scikit-learn: Permutation Importance</a></li>
+                    <li><a href="https://shap.readthedocs.io/" target="_blank" rel="noopener noreferrer">Dokumentasi SHAP</a></li>
+                </ul>
+            </section>
+        </article>
+    </main>
+
+    <footer>
+        ShadowLab — Belajar Tanpa Batas
+    </footer>
+</body>
+</html>

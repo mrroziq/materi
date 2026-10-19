@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Engineering dan Big Data | Data Science</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+    MathJax = {
+        tex: {
+            inlineMath: [['\\(', '\\)']],
+            displayMath: [['\\[', '\\]']]
+        }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+    <header class="navbar">
+        <a href="index.html" class="logo">ShadowLab</a>
+        <nav>
+            <a href="index.html">Beranda</a>
+            <a href="MateriDataScience.html">Materi Data Science</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <article class="article">
+            <p class="eyebrow">BAGIAN XV / DATA SCIENCE</p>
+            <h1>Data Engineering dan Big Data</h1>
+            <p class="intro">
+                Data engineering adalah bidang yang berfokus pada pembangunan sistem untuk
+                mengumpulkan, menyimpan, memproses, dan menyediakan data agar siap digunakan
+                untuk analisis maupun machine learning. Dalam skala besar, proses ini melibatkan
+                teknologi big data, data pipeline, sistem terdistribusi, serta pemantauan kualitas data.
+            </p>
+
+            <section>
+                <h2>1. Konsep ETL dan ELT</h2>
+                <p>
+                    ETL dan ELT merupakan dua pendekatan untuk memindahkan data dari sumber ke
+                    sistem penyimpanan atau analisis. Perbedaan utamanya terletak pada kapan
+                    transformasi data dilakukan.
+                </p>
+
+                <h3>ETL (Extract, Transform, Load)</h3>
+                <ol>
+                    <li><strong>Extract:</strong> mengambil data dari sumber, seperti database, API, atau file.</li>
+                    <li><strong>Transform:</strong> membersihkan dan mengubah data ke format yang dibutuhkan.</li>
+                    <li><strong>Load:</strong> memasukkan data hasil transformasi ke sistem tujuan.</li>
+                </ol>
+
+                <h3>ELT (Extract, Load, Transform)</h3>
+                <ol>
+                    <li><strong>Extract:</strong> mengambil data dari sumber.</li>
+                    <li><strong>Load:</strong> menyimpan data ke sistem tujuan terlebih dahulu.</li>
+                    <li><strong>Transform:</strong> mengolah data di dalam sistem tujuan sesuai kebutuhan analisis.</li>
+                </ol>
+
+                <p>
+                    ETL sering digunakan ketika data perlu dibersihkan sebelum masuk ke sistem
+                    tujuan. ELT banyak digunakan pada platform penyimpanan modern yang mampu
+                    melakukan transformasi secara efisien di dalam sistemnya.
+                </p>
+
+                <p>Contoh proses sederhana ETL menggunakan Pandas:</p>
+
+                <pre><code>import pandas as pd
+
+# Extract
+df = pd.read_csv("transaksi.csv")
+
+# Transform
+df = df.drop_duplicates()
+df["total"] = df["harga"] * df["jumlah"]
+df = df.dropna(subset=["harga", "jumlah"])
+
+# Load
+df.to_csv("transaksi_bersih.csv", index=False)
+
+print("Jumlah baris hasil:", len(df))</code></pre>
+
+                <p>
+                    Pada contoh ini, data dibaca dari CSV, dibersihkan, dibuatkan kolom total,
+                    lalu disimpan kembali ke CSV. Dalam sistem produksi, tahap load dapat berupa
+                    penyimpanan ke database, data warehouse, atau data lake.
+                </p>
+            </section>
+
+            <section>
+                <h2>2. Data Warehouse dan Data Lake</h2>
+                <p>
+                    Data warehouse dan data lake merupakan dua pendekatan penyimpanan data yang
+                    memiliki tujuan dan karakteristik berbeda.
+                </p>
+
+                <h3>Data Warehouse</h3>
+                <p>
+                    Data warehouse dirancang untuk menyimpan data yang terstruktur dan telah
+                    diorganisasikan agar mudah digunakan dalam pelaporan, business intelligence,
+                    serta analisis historis.
+                </p>
+
+                <ul>
+                    <li>Biasanya menggunakan skema data yang jelas.</li>
+                    <li>Mendukung kueri analitis dan agregasi.</li>
+                    <li>Sering menyimpan data dari berbagai sistem operasional.</li>
+                </ul>
+
+                <h3>Data Lake</h3>
+                <p>
+                    Data lake menyimpan data dalam berbagai bentuk, termasuk data terstruktur,
+                    semi-terstruktur, dan tidak terstruktur. Data dapat disimpan sebelum seluruh
+                    kebutuhan transformasinya diketahui.
+                </p>
+
+                <ul>
+                    <li>Dapat menyimpan CSV, JSON, Parquet, gambar, log, dan data lainnya.</li>
+                    <li>Cocok untuk eksplorasi data, machine learning, dan pemrosesan skala besar.</li>
+                    <li>Membutuhkan pengelolaan metadata, kualitas, keamanan, dan tata kelola data.</li>
+                </ul>
+
+                <p>Perbandingan ringkas:</p>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Aspek</th>
+                            <th>Data Warehouse</th>
+                            <th>Data Lake</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Jenis data</td>
+                            <td>Umumnya terstruktur</td>
+                            <td>Terstruktur hingga tidak terstruktur</td>
+                        </tr>
+                        <tr>
+                            <td>Skema</td>
+                            <td>Biasanya ditentukan sebelum analisis</td>
+                            <td>Dapat ditentukan saat data digunakan</td>
+                        </tr>
+                        <tr>
+                            <td>Penggunaan</td>
+                            <td>Pelaporan dan analisis bisnis</td>
+                            <td>Eksplorasi, analitik, dan machine learning</td>
+                        </tr>
+                        <tr>
+                            <td>Pengelolaan</td>
+                            <td>Fokus pada struktur dan konsistensi analitis</td>
+                            <td>Fokus pada fleksibilitas sekaligus tata kelola</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p>
+                    Keduanya tidak selalu saling menggantikan. Organisasi dapat menggunakan
+                    data lake untuk menyimpan data mentah dan data warehouse untuk menyediakan
+                    data terkurasi bagi pelaporan.
+                </p>
+            </section>
+
+            <section>
+                <h2>3. Pemrosesan Data Batch dan Streaming</h2>
+                <p>
+                    Data dapat diproses sekaligus dalam kumpulan atau diproses secara berkelanjutan
+                    ketika data baru masuk.
+                </p>
+
+                <h3>Batch Processing</h3>
+                <p>
+                    Batch processing mengolah sekumpulan data dalam satu proses terjadwal.
+                    Contohnya adalah menghitung total transaksi setiap malam atau membuat laporan
+                    penjualan bulanan.
+                </p>
+
+                <h3>Stream Processing</h3>
+                <p>
+                    Stream processing mengolah data yang datang secara berkelanjutan. Contohnya
+                    adalah mendeteksi transaksi mencurigakan, memantau sensor, atau memperbarui
+                    metrik operasional secara mendekati waktu nyata.
+                </p>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Aspek</th>
+                            <th>Batch</th>
+                            <th>Streaming</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Pola pemrosesan</td>
+                            <td>Kumpulan data</td>
+                            <td>Aliran data berkelanjutan</td>
+                        </tr>
+                        <tr>
+                            <td>Latensi</td>
+                            <td>Menit, jam, atau lebih</td>
+                            <td>Dapat sangat rendah</td>
+                        </tr>
+                        <tr>
+                            <td>Contoh</td>
+                            <td>Laporan harian</td>
+                            <td>Monitoring sensor</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p>Contoh batch processing untuk menghitung total penjualan harian:</p>
+
+                <pre><code>import pandas as pd
+
+df = pd.read_csv("transaksi.csv")
+df["waktu"] = pd.to_datetime(df["waktu"])
+
+df["tanggal"] = df["waktu"].dt.date
+
+ringkasan = (
+    df.groupby("tanggal", as_index=False)
+    .agg(total_penjualan=("nilai_transaksi", "sum"))
+)
+
+ringkasan.to_csv("penjualan_harian.csv", index=False)
+
+print(ringkasan)</code></pre>
+
+                <p>
+                    Batch dan streaming dapat digunakan bersama. Misalnya, sistem menyimpan
+                    transaksi sebagai aliran data, kemudian membuat ringkasan harian melalui
+                    pemrosesan batch.
+                </p>
+            </section>
+
+            <section>
+                <h2>4. Format Data CSV, JSON, dan Parquet</h2>
+                <p>
+                    Format penyimpanan memengaruhi ukuran file, struktur data, kecepatan baca,
+                    dan kemudahan pertukaran data.
+                </p>
+
+                <h3>CSV</h3>
+                <p>
+                    CSV menyimpan data tabular sebagai teks dengan pemisah antarkolom.
+                    Format ini mudah dibaca manusia dan didukung oleh hampir semua alat analisis,
+                    tetapi tidak menyimpan tipe data kolom secara eksplisit.
+                </p>
+
+                <pre><code>import pandas as pd
+
+df = pd.read_csv("data.csv")
+df.to_csv("hasil.csv", index=False)</code></pre>
+
+                <h3>JSON</h3>
+                <p>
+                    JSON mendukung struktur data berupa objek, array, string, angka, boolean,
+                    dan nilai null. Format ini banyak digunakan pada API dan pertukaran data
+                    antaraplikasi.
+                </p>
+
+                <pre><code>import pandas as pd
+
+df = pd.read_json("data.json")
+df.to_json("hasil.json", orient="records", indent=2)</code></pre>
+
+                <p>
+                    Jika JSON berisi objek bersarang, struktur tersebut mungkin perlu diratakan
+                    menggunakan <code>pd.json_normalize()</code>.
+                </p>
+
+                <h3>Parquet</h3>
+                <p>
+                    Parquet adalah format penyimpanan kolumnar yang menyimpan informasi tipe data
+                    dan mendukung kompresi. Format ini sering cocok untuk analisis data berukuran
+                    besar karena kueri dapat membaca kolom yang diperlukan saja.
+                </p>
+
+                <pre><code>import pandas as pd
+
+df = pd.read_csv("data.csv")
+
+df.to_parquet("data.parquet", index=False)
+
+data_parquet = pd.read_parquet("data.parquet")
+
+print(data_parquet.head())</code></pre>
+
+                <p>
+                    Pembacaan dan penulisan Parquet pada Pandas memerlukan mesin pendukung,
+                    misalnya <code>pyarrow</code> atau <code>fastparquet</code>.
+                </p>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Format</th>
+                            <th>Kelebihan</th>
+                            <th>Penggunaan umum</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>CSV</td>
+                            <td>Sederhana dan mudah dibuka</td>
+                            <td>Dataset tabular dan pertukaran data</td>
+                        </tr>
+                        <tr>
+                            <td>JSON</td>
+                            <td>Mendukung struktur bertingkat</td>
+                            <td>API dan aplikasi web</td>
+                        </tr>
+                        <tr>
+                            <td>Parquet</td>
+                            <td>Kolumnar, bertipe, dan mendukung kompresi</td>
+                            <td>Analitik data besar</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section>
+                <h2>5. Dasar Apache Spark</h2>
+                <p>
+                    Apache Spark adalah mesin pemrosesan data terdistribusi yang dirancang untuk
+                    mengolah data dalam skala besar. Spark dapat menjalankan operasi transformasi
+                    dan analisis dengan membagi pekerjaan ke beberapa partisi dan mesin.
+                </p>
+
+                <p>Beberapa komponen penting Spark meliputi:</p>
+                <ul>
+                    <li><strong>Spark SQL:</strong> memproses data terstruktur menggunakan SQL dan DataFrame.</li>
+                    <li><strong>DataFrame:</strong> representasi data terstruktur dengan kolom bernama.</li>
+                    <li><strong>Transformations:</strong> operasi seperti filter, select, dan groupBy.</li>
+                    <li><strong>Actions:</strong> operasi yang meminta hasil, misalnya count dan collect.</li>
+                    <li><strong>Partition:</strong> bagian data yang dapat diproses secara paralel.</li>
+                </ul>
+
+                <h3>Contoh menggunakan PySpark</h3>
+                <pre><code>from pyspark.sql import SparkSession
+from pyspark.sql.functions import col, sum
+
+spark = (
+    SparkSession.builder
+    .appName("AnalisisPenjualan")
+    .getOrCreate()
+)
+
+df = spark.read.csv(
+    "transaksi.csv",
+    header=True,
+    inferSchema=True
+)
+
+df.printSchema()
+
+hasil = (
+    df.filter(col("jumlah") > 0)
+    .groupBy("produk")
+    .agg(sum("jumlah").alias("total_jumlah"))
+)
+
+hasil.show()
+
+spark.stop()</code></pre>
+
+                <p>
+                    Contoh tersebut membaca CSV, memfilter transaksi dengan jumlah positif,
+                    lalu menghitung total jumlah per produk. Kolom <code>produk</code> dan
+                    <code>jumlah</code> harus tersedia pada file.
+                </p>
+
+                <p>
+                    Spark mendukung eksekusi terdistribusi, tetapi tidak semua pekerjaan otomatis
+                    menjadi lebih cepat. Ukuran data, jumlah partisi, biaya komunikasi, dan
+                    konfigurasi komputasi tetap memengaruhi performa.
+                </p>
+            </section>
+
+            <section>
+                <h2>6. Data Pipeline</h2>
+                <p>
+                    Data pipeline adalah rangkaian proses otomatis yang memindahkan dan mengolah
+                    data dari sumber hingga menjadi keluaran yang siap digunakan.
+                </p>
+
+                <p>Contoh alur pipeline:</p>
+
+                <pre><code>Sumber Data
+    |
+    v
+Pengambilan Data
+    |
+    v
+Validasi dan Pembersihan
+    |
+    v
+Transformasi
+    |
+    v
+Penyimpanan
+    |
+    v
+Analisis atau Machine Learning</code></pre>
+
+                <p>Pipeline yang baik biasanya memiliki karakteristik berikut:</p>
+                <ul>
+                    <li><strong>Reproducible:</strong> proses dapat dijalankan kembali dengan hasil yang dapat ditelusuri.</li>
+                    <li><strong>Reliable:</strong> kegagalan dapat dideteksi dan ditangani.</li>
+                    <li><strong>Idempotent:</strong> menjalankan ulang proses tidak menyebabkan duplikasi atau efek samping yang tidak diinginkan.</li>
+                    <li><strong>Observable:</strong> status, log, metrik, dan kegagalan dapat dipantau.</li>
+                    <li><strong>Scalable:</strong> proses dapat menyesuaikan diri dengan pertumbuhan data.</li>
+                </ul>
+
+                <h3>Contoh pipeline sederhana</h3>
+                <pre><code>import pandas as pd
+from pathlib import Path
+
+def run_pipeline(source, destination):
+    df = pd.read_csv(source)
+
+    df.columns = (
+        df.columns
+        .str.strip()
+        .str.lower()
+        .str.replace(" ", "_")
+    )
+
+    df = df.drop_duplicates()
+
+    required_columns = ["produk", "jumlah", "harga"]
+
+    missing_columns = [
+        column
+        for column in required_columns
+        if column not in df.columns
+    ]
+
+    if missing_columns:
+        raise ValueError(
+            f"Kolom wajib tidak tersedia: {missing_columns}"
+        )
+
+    df = df.dropna(
+        subset=required_columns
+    )
+
+    df["total"] = df["jumlah"] * df["harga"]
+
+    destination = Path(destination)
+    destination.parent.mkdir(
+        parents=True,
+        exist_ok=True
+    )
+
+    df.to_csv(destination, index=False)
+
+    return df.shape
+
+hasil = run_pipeline(
+    "transaksi.csv",
+    "output/transaksi_bersih.csv"
+)
+
+print("Ukuran data hasil:", hasil)</code></pre>
+
+                <p>
+                    Contoh ini memisahkan proses ke dalam fungsi agar dapat digunakan kembali.
+                    Pada sistem produksi, pipeline juga perlu menangani skema yang berubah,
+                    kegagalan sumber data, pencatatan log, dan mekanisme pemulihan.
+                </p>
+            </section>
+
+            <section>
+                <h2>7. API dan Pengambilan Data</h2>
+                <p>
+                    API (Application Programming Interface) memungkinkan suatu aplikasi meminta
+                    atau mengirim data ke sistem lain. REST API sering menggunakan HTTP dan
+                    mengembalikan data dalam format JSON.
+                </p>
+
+                <p>Metode HTTP yang umum antara lain:</p>
+                <ul>
+                    <li><strong>GET:</strong> mengambil data.</li>
+                    <li><strong>POST:</strong> mengirim data atau membuat sumber daya.</li>
+                    <li><strong>PUT/PATCH:</strong> memperbarui data.</li>
+                    <li><strong>DELETE:</strong> menghapus sumber daya.</li>
+                </ul>
+
+                <h3>Contoh mengambil data dari API</h3>
+                <pre><code>import requests
+import pandas as pd
+
+url = "https://jsonplaceholder.typicode.com/posts"
+
+response = requests.get(
+    url,
+    timeout=15
+)
+
+response.raise_for_status()
+
+data = response.json()
+
+df = pd.DataFrame(data)
+
+print(df.head())
+df.to_csv("posts.csv", index=False)</code></pre>
+
+                <p>
+                    Contoh tersebut menggunakan API publik untuk demonstrasi. Pada proyek nyata,
+                    pastikan penggunaan API sesuai ketentuan penyedia layanan, batas permintaan,
+                    autentikasi, dan kebijakan privasi.
+                </p>
+
+                <h3>Hal yang perlu diperhatikan</h3>
+                <ul>
+                    <li>Gunakan timeout agar permintaan tidak menunggu tanpa batas.</li>
+                    <li>Periksa kode status HTTP melalui <code>raise_for_status()</code>.</li>
+                    <li>Tangani pagination jika hasil dibagi ke beberapa halaman.</li>
+                    <li>Jangan menaruh API key atau token rahasia langsung di kode yang dibagikan.</li>
+                    <li>Tambahkan retry dengan jeda yang sesuai untuk kegagalan sementara.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>8. Orkestrasi Workflow</h2>
+                <p>
+                    Orkestrasi workflow adalah proses mengatur urutan pelaksanaan tugas, jadwal,
+                    dependensi, percobaan ulang, serta penanganan kegagalan dalam sebuah pipeline.
+                </p>
+
+                <p>
+                    Misalnya, pipeline analisis penjualan membutuhkan beberapa tugas:
+                </p>
+
+                <ol>
+                    <li>Mengambil data transaksi.</li>
+                    <li>Memvalidasi dan membersihkan data.</li>
+                    <li>Menghitung ringkasan penjualan.</li>
+                    <li>Menyimpan hasil analisis.</li>
+                    <li>Mengirim notifikasi jika proses selesai atau gagal.</li>
+                </ol>
+
+                <p>
+                    Tugas pembersihan tidak seharusnya berjalan sebelum pengambilan data selesai.
+                    Orkestrator mengelola ketergantungan semacam ini.
+                </p>
+
+                <h3>Contoh orkestrasi menggunakan Apache Airflow</h3>
+                <pre><code>from datetime import datetime
+
+from airflow import DAG
+from airflow.operators.bash import BashOperator
+
+with DAG(
+    dag_id="pipeline_penjualan",
+    start_date=datetime(2026, 1, 1),
+    schedule="@daily",
+    catchup=False
+) as dag:
+
+    extract = BashOperator(
+        task_id="extract_data",
+        bash_command="python extract.py"
+    )
+
+    transform = BashOperator(
+        task_id="transform_data",
+        bash_command="python transform.py"
+    )
+
+    load = BashOperator(
+        task_id="load_data",
+        bash_command="python load.py"
+    )
+
+    extract >> transform >> load</code></pre>
+
+                <p>
+                    Operator <code>Extract</code>, <code>Transform</code>, dan <code>Load</code>
+                    pada contoh tersebut menjalankan skrip Python secara berurutan. File skrip
+                    yang dipanggil harus tersedia di lingkungan tempat Airflow berjalan.
+                </p>
+
+                <p>
+                    Airflow memerlukan instalasi dan konfigurasi lingkungan tersendiri. Selain
+                    Airflow, terdapat pilihan lain seperti Prefect dan Dagster. Pemilihan alat
+                    bergantung pada kompleksitas pipeline, kebutuhan pemantauan, dan lingkungan
+                    infrastruktur.
+                </p>
+            </section>
+
+            <section>
+                <h2>9. Data Quality dan Monitoring</h2>
+                <p>
+                    Data quality adalah tingkat kesesuaian data terhadap kebutuhan penggunaan.
+                    Data yang buruk dapat menghasilkan laporan yang salah dan model machine
+                    learning yang tidak andal.
+                </p>
+
+                <p>Dimensi kualitas data yang umum meliputi:</p>
+                <ul>
+                    <li><strong>Completeness:</strong> apakah data penting tersedia?</li>
+                    <li><strong>Validity:</strong> apakah nilai memenuhi aturan dan tipe yang diharapkan?</li>
+                    <li><strong>Consistency:</strong> apakah data konsisten antarbagian sistem?</li>
+                    <li><strong>Uniqueness:</strong> apakah terdapat duplikasi yang tidak semestinya?</li>
+                    <li><strong>Timeliness:</strong> apakah data tersedia tepat waktu?</li>
+                    <li><strong>Accuracy:</strong> apakah data merepresentasikan kondisi sebenarnya?</li>
+                </ul>
+
+                <h3>Contoh validasi kualitas data</h3>
+                <pre><code>import pandas as pd
+
+df = pd.read_csv("transaksi.csv")
+
+assert "harga" in df.columns
+assert "jumlah" in df.columns
+
+assert df["harga"].notna().all(), (
+    "Terdapat harga kosong"
+)
+
+assert df["jumlah"].notna().all(), (
+    "Terdapat jumlah kosong"
+)
+
+assert (df["harga"] >= 0).all(), (
+    "Harga tidak boleh negatif"
+)
+
+assert (df["jumlah"] >= 0).all(), (
+    "Jumlah tidak boleh negatif"
+)
+
+print("Validasi dasar berhasil")
+print("Jumlah baris:", len(df))
+print("Jumlah duplikasi:", df.duplicated().sum())</code></pre>
+
+                <p>
+                    Pernyataan <code>assert</code> dapat menghentikan program jika kondisi
+                    tidak terpenuhi. Pada pipeline produksi, validasi biasanya perlu menghasilkan
+                    laporan kegagalan yang terstruktur dan mengirim notifikasi bila diperlukan.
+                </p>
+
+                <h3>Monitoring pipeline</h3>
+                <p>
+                    Monitoring dilakukan untuk memastikan pipeline tetap berjalan dengan benar.
+                    Beberapa metrik yang dapat dipantau meliputi:
+                </p>
+
+                <ul>
+                    <li>Waktu eksekusi setiap tahap.</li>
+                    <li>Jumlah baris yang masuk dan keluar.</li>
+                    <li>Persentase nilai kosong dan jumlah duplikasi.</li>
+                    <li>Kegagalan tugas dan jumlah percobaan ulang.</li>
+                    <li>Keterlambatan kedatangan data.</li>
+                    <li>Perubahan distribusi fitur dari waktu ke waktu.</li>
+                </ul>
+
+                <p>
+                    Perubahan distribusi data dapat menjadi indikasi data drift. Namun, data drift
+                    tidak selalu berarti performa model langsung memburuk; evaluasi tambahan
+                    diperlukan untuk mengetahui dampaknya.
+                </p>
+            </section>
+
+            <section>
+                <h2>Ringkasan</h2>
+                <ul>
+                    <li>ETL melakukan transformasi sebelum pemuatan, sedangkan ELT melakukan transformasi setelah data dimuat.</li>
+                    <li>Data warehouse berorientasi pada analisis data terstruktur, sedangkan data lake mendukung penyimpanan beragam jenis data.</li>
+                    <li>Batch memproses kumpulan data, sementara streaming memproses aliran data berkelanjutan.</li>
+                    <li>CSV sederhana, JSON mendukung struktur bertingkat, dan Parquet cocok untuk penyimpanan kolumnar analitis.</li>
+                    <li>Apache Spark membantu memproses data skala besar secara terdistribusi.</li>
+                    <li>Data pipeline menghubungkan tahapan pengambilan, transformasi, dan penyimpanan data.</li>
+                    <li>API memungkinkan sistem mengambil dan bertukar data.</li>
+                    <li>Orkestrasi mengatur jadwal, urutan tugas, dependensi, dan pemulihan kegagalan.</li>
+                    <li>Data quality dan monitoring membantu menjaga keandalan data serta proses pengolahannya.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Latihan Mandiri</h2>
+                <ol>
+                    <li>Jelaskan perbedaan ETL dan ELT beserta contoh penggunaannya.</li>
+                    <li>Apa perbedaan data warehouse dan data lake?</li>
+                    <li>Kapan batch processing lebih sesuai daripada stream processing?</li>
+                    <li>Mengapa Parquet dapat efisien untuk analisis data kolumnar?</li>
+                    <li>Apa fungsi DataFrame dalam Apache Spark?</li>
+                    <li>Rancang pipeline untuk mengolah data transaksi dari CSV hingga menjadi laporan penjualan bulanan.</li>
+                    <li>Apa perbedaan GET dan POST dalam HTTP?</li>
+                    <li>Mengapa pipeline membutuhkan orkestrasi workflow?</li>
+                    <li>Sebutkan lima pemeriksaan kualitas data yang dapat diterapkan pada dataset transaksi.</li>
+                </ol>
+            </section>
+        </article>
+    </main>
+
+    <footer>ShadowLab — Belajar Tanpa Batas</footer>
+</body>
+</html>

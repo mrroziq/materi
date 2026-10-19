@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Machine Learning | Data Science</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)']],
+                displayMath: [['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+    <header class="navbar">
+        <a href="index.html" class="logo">ShadowLab</a>
+        <nav>
+            <a href="index.html">Beranda</a>
+            <a href="MateriDataScience.html">Materi Data Science</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <article class="article">
+            <p class="eyebrow">BAGIAN X / DATA SCIENCE</p>
+            <h1>Machine Learning</h1>
+            <p class="intro">
+                Machine Learning adalah cabang kecerdasan buatan yang memungkinkan
+                komputer mempelajari pola dari data untuk membuat prediksi, klasifikasi,
+                pengelompokan, atau keputusan tanpa harus diprogram menggunakan aturan
+                eksplisit untuk setiap kasus. Dalam Data Science, Machine Learning
+                digunakan untuk mengubah data menjadi model yang dapat membantu
+                menyelesaikan permasalahan nyata.
+            </p>
+
+            <section>
+                <h2>1. Pengertian dan Jenis Machine Learning</h2>
+                <p>
+                    Machine Learning (ML) merupakan pendekatan komputasi yang membangun
+                    model berdasarkan data. Model mempelajari hubungan atau pola dari
+                    contoh yang tersedia, kemudian menggunakan pola tersebut untuk
+                    menghasilkan prediksi pada data baru.
+                </p>
+
+                <p>
+                    Misalnya, sebuah perusahaan memiliki data harga rumah, luas bangunan,
+                    jumlah kamar, dan lokasi. Model Machine Learning dapat mempelajari
+                    hubungan antara karakteristik rumah dan harganya untuk memperkirakan
+                    harga rumah lain.
+                </p>
+
+                <h3>Jenis utama Machine Learning</h3>
+                <ul>
+                    <li>
+                        <strong>Supervised learning:</strong> belajar menggunakan data
+                        yang memiliki label atau target, misalnya prediksi harga rumah.
+                    </li>
+                    <li>
+                        <strong>Unsupervised learning:</strong> menemukan struktur atau
+                        pola dalam data tanpa label target, misalnya segmentasi pelanggan.
+                    </li>
+                    <li>
+                        <strong>Reinforcement learning:</strong> mempelajari strategi
+                        melalui interaksi dengan lingkungan berdasarkan reward atau
+                        konsekuensi tindakan.
+                    </li>
+                </ul>
+
+                <h3>Alur umum Machine Learning</h3>
+                <ol>
+                    <li>Mengumpulkan dan memahami data.</li>
+                    <li>Membersihkan data dan melakukan preprocessing.</li>
+                    <li>Menentukan fitur dan target jika tersedia.</li>
+                    <li>Membagi data untuk pelatihan dan evaluasi.</li>
+                    <li>Melatih model.</li>
+                    <li>Mengevaluasi hasil model.</li>
+                    <li>Memperbaiki model dan menggunakannya pada data baru.</li>
+                </ol>
+
+                <p>
+                    Keberhasilan Machine Learning tidak hanya ditentukan oleh algoritma.
+                    Kualitas data, pemilihan fitur, cara evaluasi, dan kesesuaian model
+                    dengan permasalahan juga sangat penting.
+                </p>
+            </section>
+
+            <section>
+                <h2>2. Supervised dan Unsupervised Learning</h2>
+
+                <h3>A. Supervised learning</h3>
+                <p>
+                    Supervised learning menggunakan data yang memiliki pasangan fitur
+                    dan target. Fitur merupakan informasi yang digunakan untuk membuat
+                    prediksi, sedangkan target adalah nilai yang ingin diprediksi.
+                </p>
+
+                <p>
+                    Misalkan data rumah memiliki fitur luas bangunan dan jumlah kamar,
+                    sedangkan targetnya adalah harga rumah.
+                </p>
+
+                <ul>
+                    <li><strong>Regression:</strong> memprediksi nilai numerik, seperti harga rumah.</li>
+                    <li><strong>Classification:</strong> memprediksi kategori, seperti email spam atau bukan spam.</li>
+                </ul>
+
+                <h3>B. Unsupervised learning</h3>
+                <p>
+                    Unsupervised learning bekerja tanpa target berlabel. Tujuannya
+                    adalah menemukan pola, kelompok, struktur, atau representasi
+                    yang berguna dari data.
+                </p>
+
+                <ul>
+                    <li><strong>Clustering:</strong> mengelompokkan data yang memiliki kemiripan.</li>
+                    <li><strong>Dimensionality reduction:</strong> mengurangi jumlah dimensi data sambil mempertahankan informasi penting.</li>
+                    <li><strong>Anomaly detection:</strong> menemukan data yang menyimpang dari pola umum.</li>
+                </ul>
+
+                <h3>Perbedaan utama</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Aspek</th>
+                            <th>Supervised</th>
+                            <th>Unsupervised</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Label target</td>
+                            <td>Tersedia</td>
+                            <td>Tidak diperlukan</td>
+                        </tr>
+                        <tr>
+                            <td>Tujuan</td>
+                            <td>Prediksi target</td>
+                            <td>Menemukan struktur data</td>
+                        </tr>
+                        <tr>
+                            <td>Contoh algoritma</td>
+                            <td>Linear Regression, Random Forest</td>
+                            <td>K-Means, PCA</td>
+                        </tr>
+                        <tr>
+                            <td>Evaluasi</td>
+                            <td>MAE, RMSE, accuracy, F1-score</td>
+                            <td>Silhouette score, interpretasi kelompok</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section>
+                <h2>3. Pembagian Data Training, Validation, dan Testing</h2>
+                <p>
+                    Model perlu dievaluasi pada data yang tidak digunakan untuk
+                    mempelajari parameter model. Pembagian data membantu memperkirakan
+                    kemampuan model menghadapi data baru.
+                </p>
+
+                <h3>Training set</h3>
+                <p>
+                    Digunakan untuk melatih model. Pada tahap ini, algoritma mempelajari
+                    parameter berdasarkan data yang tersedia.
+                </p>
+
+                <h3>Validation set</h3>
+                <p>
+                    Digunakan untuk membandingkan model, memilih fitur, menentukan
+                    hyperparameter, dan menetapkan keputusan pengembangan model.
+                </p>
+
+                <h3>Test set</h3>
+                <p>
+                    Digunakan untuk evaluasi akhir setelah pemilihan model selesai.
+                    Data ini sebaiknya tidak digunakan berulang kali untuk memilih
+                    model karena hal tersebut dapat membuat evaluasi terlalu optimistis.
+                </p>
+
+                <h3>Contoh pembagian data</h3>
+                <p>
+                    Untuk dataset yang cukup besar, salah satu pembagian yang dapat
+                    digunakan adalah 70% training, 15% validation, dan 15% testing.
+                    Pembagian ini bukan aturan mutlak; proporsinya perlu disesuaikan
+                    dengan ukuran dan karakteristik data.
+                </p>
+
+                <h3>Contoh menggunakan Scikit-learn</h3>
+                <pre><code>from sklearn.model_selection import train_test_split
+
+# X berisi fitur, y berisi target
+X_train, X_temp, y_train, y_temp = train_test_split(
+    X,
+    y,
+    test_size=0.30,
+    random_state=42
+)
+
+X_valid, X_test, y_valid, y_test = train_test_split(
+    X_temp,
+    y_temp,
+    test_size=0.50,
+    random_state=42
+)
+
+print("Training:", X_train.shape)
+print("Validation:", X_valid.shape)
+print("Testing:", X_test.shape)</code></pre>
+
+                <p>
+                    Pada pembagian tersebut, sekitar 70% data digunakan untuk training,
+                    15% untuk validation, dan 15% untuk testing.
+                </p>
+
+                <p>
+                    Untuk klasifikasi, parameter <code>stratify=y</code> dapat digunakan
+                    agar proporsi kelas lebih terjaga. Untuk data deret waktu, pembagian
+                    sebaiknya mengikuti urutan waktu, bukan dilakukan secara acak.
+                </p>
+
+                <h3>Data leakage</h3>
+                <p>
+                    Data leakage terjadi ketika informasi yang seharusnya tidak tersedia
+                    pada saat prediksi ikut digunakan saat pelatihan atau evaluasi.
+                    Akibatnya, skor model dapat terlihat tinggi tetapi performanya buruk
+                    pada penggunaan nyata.
+                </p>
+
+                <p>
+                    Contohnya adalah melakukan standardisasi pada seluruh dataset sebelum
+                    membaginya. Mean dan standar deviasi dari data validation serta
+                    testing ikut memengaruhi preprocessing. Cara yang lebih aman adalah
+                    mempelajari parameter preprocessing dari data training saja.
+                </p>
+            </section>
+
+            <section>
+                <h2>4. Linear Regression</h2>
+                <p>
+                    Linear Regression digunakan untuk memodelkan hubungan antara
+                    variabel fitur dan target numerik. Model mencari garis atau
+                    kombinasi linear yang menghasilkan prediksi mendekati nilai aktual.
+                </p>
+
+                <h3>Persamaan sederhana</h3>
+                \[
+                \hat{y} = b_0 + b_1x
+                \]
+
+                <p>
+                    Keterangan:
+                </p>
+                <ul>
+                    <li>\(\hat{y}\): nilai prediksi.</li>
+                    <li>\(b_0\): intercept atau konstanta.</li>
+                    <li>\(b_1\): koefisien atau kemiringan garis.</li>
+                    <li>\(x\): nilai fitur.</li>
+                </ul>
+
+                <p>
+                    Untuk banyak fitur, model dapat ditulis sebagai:
+                </p>
+
+                \[
+                \hat{y} = b_0 + b_1x_1 + b_2x_2 + \cdots + b_px_p
+                \]
+
+                <p>
+                    Salah satu metode untuk menentukan koefisien adalah Ordinary Least
+                    Squares (OLS), yaitu meminimalkan jumlah kuadrat residual.
+                </p>
+
+                \[
+                J = \sum_{i=1}^{n}(y_i-\hat{y}_i)^2
+                \]
+
+                <h3>Contoh menggunakan Python</h3>
+                <pre><code>import numpy as np
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_absolute_error, mean_squared_error
+
+# Fitur: luas rumah dalam meter persegi
+X = np.array([
+    [30],
+    [45],
+    [60],
+    [75],
+    [90]
+])
+
+# Target: harga rumah dalam juta rupiah
+y = np.array([150, 210, 280, 340, 410])
+
+model = LinearRegression()
+model.fit(X, y)
+
+prediksi = model.predict([[70]])
+
+print("Intercept:", model.intercept_)
+print("Koefisien:", model.coef_[0])
+print("Prediksi harga:", prediksi[0])</code></pre>
+
+                <p>
+                    Model mempelajari hubungan antara luas rumah dan harga berdasarkan
+                    contoh yang tersedia. Dataset di atas hanya contoh sederhana,
+                    sehingga hasilnya tidak dapat langsung dianggap sebagai estimasi
+                    harga pasar yang akurat.
+                </p>
+
+                <h3>Kelebihan dan keterbatasan</h3>
+                <ul>
+                    <li>Mudah dipahami dan relatif cepat dilatih.</li>
+                    <li>Koefisien dapat membantu menjelaskan hubungan fitur dengan target.</li>
+                    <li>Hubungan yang kompleks dan nonlinier mungkin tidak dapat dimodelkan dengan baik tanpa transformasi fitur.</li>
+                    <li>Outlier dan multikolinearitas dapat memengaruhi interpretasi koefisien.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>5. Logistic Regression</h2>
+                <p>
+                    Logistic Regression digunakan untuk klasifikasi, terutama ketika
+                    target terdiri atas dua kelas. Meskipun namanya mengandung kata
+                    regression, model ini memperkirakan probabilitas suatu kelas.
+                </p>
+
+                <p>Model menggunakan fungsi sigmoid:</p>
+
+                \[
+                P(Y=1\mid x)=
+                \frac{1}{1+e^{-(b_0+b_1x)}}
+                \]
+
+                <p>
+                    Fungsi sigmoid memetakan nilai linear menjadi probabilitas antara
+                    0 dan 1. Probabilitas kemudian dapat diubah menjadi kelas menggunakan
+                    threshold, misalnya 0,5.
+                </p>
+
+                <h3>Contoh Python</h3>
+                <pre><code>from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import classification_report
+
+X = [
+    [20], [25], [30], [35], [40],
+    [45], [50], [55], [60], [65]
+]
+
+y = [0, 0, 0, 0, 0, 1, 1, 1, 1, 1]
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X,
+    y,
+    test_size=0.30,
+    random_state=42,
+    stratify=y
+)
+
+model = LogisticRegression()
+model.fit(X_train, y_train)
+
+prediksi = model.predict(X_test)
+probabilitas = model.predict_proba(X_test)
+
+print(classification_report(y_test, prediksi))
+print("Probabilitas kelas:", probabilitas)</code></pre>
+
+                <p>
+                    Dalam contoh ini, fitur numerik digunakan untuk memprediksi kelas
+                    0 atau 1. Dalam praktik, pemilihan threshold perlu mempertimbangkan
+                    konsekuensi false positive dan false negative.
+                </p>
+
+                <h3>Contoh penerapan</h3>
+                <ul>
+                    <li>Prediksi pelanggan berhenti berlangganan.</li>
+                    <li>Deteksi transaksi berisiko.</li>
+                    <li>Klasifikasi email spam.</li>
+                    <li>Prediksi kemungkinan gagal bayar.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>6. K-Nearest Neighbors (KNN)</h2>
+                <p>
+                    K-Nearest Neighbors adalah algoritma yang membuat prediksi berdasarkan
+                    sejumlah \(k\) tetangga terdekat dari data yang ingin diprediksi.
+                    Untuk klasifikasi, kelas ditentukan berdasarkan suara mayoritas.
+                    Untuk regresi, prediksi umumnya menggunakan rata-rata nilai target
+                    tetangga terdekat.
+                </p>
+
+                <h3>Jarak Euclidean</h3>
+                \[
+                d(x,z)=\sqrt{\sum_{j=1}^{p}(x_j-z_j)^2}
+                \]
+
+                <p>
+                    Algoritma menghitung jarak antara titik baru dan data training,
+                    kemudian memilih \(k\) titik dengan jarak terkecil.
+                </p>
+
+                <h3>Contoh Python</h3>
+                <pre><code>from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+
+X = [
+    [1, 20], [2, 25], [1, 22], [3, 30],
+    [7, 60], [8, 65], [9, 70], [8, 75]
+]
+
+y = [0, 0, 0, 0, 1, 1, 1, 1]
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.25, random_state=42, stratify=y
+)
+
+model = make_pipeline(
+    StandardScaler(),
+    KNeighborsClassifier(n_neighbors=3)
+)
+
+model.fit(X_train, y_train)
+prediksi = model.predict(X_test)
+
+print("Accuracy:", accuracy_score(y_test, prediksi))</code></pre>
+
+                <p>
+                    StandardScaler digunakan karena KNN bergantung pada jarak.
+                    Tanpa scaling, fitur yang memiliki rentang angka besar dapat
+                    mendominasi perhitungan jarak.
+                </p>
+
+                <h3>Pengaruh nilai k</h3>
+                <ul>
+                    <li><strong>k terlalu kecil:</strong> model sensitif terhadap noise.</li>
+                    <li><strong>k terlalu besar:</strong> batas antarkelas dapat menjadi terlalu halus dan mengabaikan pola lokal.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>7. Decision Tree</h2>
+                <p>
+                    Decision Tree membangun model berbentuk pohon keputusan. Setiap
+                    simpul melakukan pemisahan berdasarkan fitur, sedangkan daun
+                    menghasilkan prediksi.
+                </p>
+
+                <p>
+                    Untuk klasifikasi, pemisahan dapat dipilih berdasarkan ukuran
+                    ketidakmurnian seperti Gini impurity atau entropy. Untuk regresi,
+                    pemisahan umumnya dipilih untuk mengurangi variasi atau kesalahan
+                    prediksi dalam kelompok.
+                </p>
+
+                <h3>Contoh struktur pohon</h3>
+                <pre><code>Apakah pendapatan > 5 juta?
+|
+|-- Ya
+|   |-- Prediksi: risiko rendah
+|
+|-- Tidak
+    |-- Apakah riwayat terlambat?
+        |-- Ya    -> risiko tinggi
+        |-- Tidak -> risiko sedang</code></pre>
+
+                <p>
+                    Struktur di atas hanya ilustrasi aturan keputusan, bukan pohon
+                    yang telah dilatih dari dataset tertentu.
+                </p>
+
+                <h3>Contoh Python</h3>
+                <pre><code>from sklearn.tree import DecisionTreeClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+
+X = [
+    [20, 1], [25, 0], [30, 1], [35, 0],
+    [40, 1], [45, 0], [50, 1], [55, 0]
+]
+
+y = [0, 0, 0, 0, 1, 1, 1, 1]
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.25, random_state=42, stratify=y
+)
+
+model = DecisionTreeClassifier(
+    max_depth=3,
+    random_state=42
+)
+
+model.fit(X_train, y_train)
+prediksi = model.predict(X_test)
+
+print("Accuracy:", accuracy_score(y_test, prediksi))</code></pre>
+
+                <h3>Parameter penting</h3>
+                <ul>
+                    <li><code>max_depth</code>: kedalaman maksimum pohon.</li>
+                    <li><code>min_samples_split</code>: jumlah minimum sampel untuk membagi simpul.</li>
+                    <li><code>min_samples_leaf</code>: jumlah minimum sampel pada daun.</li>
+                    <li><code>criterion</code>: ukuran yang digunakan untuk mengevaluasi pemisahan.</li>
+                </ul>
+
+                <p>
+                    Pohon yang terlalu dalam dapat menghafal data training. Pembatasan
+                    kedalaman dan ukuran daun membantu mengurangi overfitting.
+                </p>
+            </section>
+
+            <section>
+                <h2>8. Random Forest</h2>
+                <p>
+                    Random Forest adalah metode ensemble yang menggabungkan banyak
+                    Decision Tree. Setiap pohon dilatih menggunakan sampel bootstrap
+                    dan, pada setiap pemisahan, mempertimbangkan subset fitur secara acak.
+                </p>
+
+                <p>
+                    Untuk klasifikasi, prediksi umumnya ditentukan melalui voting atau
+                    agregasi probabilitas. Untuk regresi, prediksi biasanya diperoleh
+                    dengan merata-ratakan prediksi pohon.
+                </p>
+
+                <h3>Contoh Python</h3>
+                <pre><code>from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import classification_report
+
+X = [
+    [20, 1], [25, 0], [30, 1], [35, 0],
+    [40, 1], [45, 0], [50, 1], [55, 0],
+    [60, 1], [65, 0], [70, 1], [75, 0]
+]
+
+y = [0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1]
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.25, random_state=42, stratify=y
+)
+
+model = RandomForestClassifier(
+    n_estimators=200,
+    max_depth=5,
+    random_state=42
+)
+
+model.fit(X_train, y_train)
+prediksi = model.predict(X_test)
+
+print(classification_report(y_test, prediksi))</code></pre>
+
+                <h3>Kelebihan</h3>
+                <ul>
+                    <li>Dapat memodelkan hubungan nonlinier.</li>
+                    <li>Mengurangi ketergantungan pada satu pohon.</li>
+                    <li>Relatif tangguh terhadap berbagai pola data tabular.</li>
+                    <li>Dapat memberikan informasi kepentingan fitur.</li>
+                </ul>
+
+                <p>
+                    Random Forest dapat membutuhkan memori dan waktu prediksi lebih
+                    besar daripada satu Decision Tree. Feature importance juga perlu
+                    ditafsirkan hati-hati karena dapat bias terhadap fitur tertentu
+                    atau dipengaruhi korelasi antarfitur.
+                </p>
+            </section>
+
+            <section>
+                <h2>9. Gradient Boosting</h2>
+                <p>
+                    Gradient Boosting merupakan metode ensemble yang membangun model
+                    secara bertahap. Setiap model baru berusaha memperbaiki kesalahan
+                    atau mengurangi fungsi kerugian dari model sebelumnya.
+                </p>
+
+                <p>
+                    Berbeda dari Random Forest yang umumnya melatih banyak pohon secara
+                    relatif independen, Gradient Boosting membangun pohon secara
+                    berurutan sehingga hasil tahap sebelumnya memengaruhi tahap berikutnya.
+                </p>
+
+                <h3>Gambaran proses</h3>
+                <ol>
+                    <li>Membuat prediksi awal.</li>
+                    <li>Mengukur kesalahan menggunakan loss function.</li>
+                    <li>Melatih model baru untuk memperbaiki kesalahan tersebut.</li>
+                    <li>Menambahkan kontribusi model baru ke model gabungan.</li>
+                    <li>Mengulangi proses hingga jumlah iterasi tercapai.</li>
+                </ol>
+
+                <p>
+                    Bentuk umum pembaruan model dapat ditulis sebagai:
+                </p>
+
+                \[
+                F_m(x)=F_{m-1}(x)+\eta h_m(x)
+                \]
+
+                <p>
+                    Di sini, \(F_m\) adalah model setelah tahap ke-\(m\),
+                    \(h_m(x)\) merupakan kontribusi model baru, dan \(\eta\) adalah
+                    learning rate.
+                </p>
+
+                <h3>Contoh menggunakan GradientBoostingClassifier</h3>
+                <pre><code>from sklearn.ensemble import GradientBoostingClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import roc_auc_score
+
+X = [
+    [20, 1], [25, 0], [30, 1], [35, 0],
+    [40, 1], [45, 0], [50, 1], [55, 0],
+    [60, 1], [65, 0], [70, 1], [75, 0]
+]
+
+y = [0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1]
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.25, random_state=42, stratify=y
+)
+
+model = GradientBoostingClassifier(
+    n_estimators=100,
+    learning_rate=0.05,
+    max_depth=2,
+    random_state=42
+)
+
+model.fit(X_train, y_train)
+probabilitas = model.predict_proba(X_test)[:, 1]
+
+print("ROC-AUC:", roc_auc_score(y_test, probabilitas))</code></pre>
+
+                <h3>Algoritma boosting yang populer</h3>
+                <ul>
+                    <li><strong>Gradient Boosting:</strong> pendekatan boosting berbasis optimisasi loss.</li>
+                    <li><strong>AdaBoost:</strong> menyesuaikan bobot sampel agar model berikutnya lebih memperhatikan contoh yang sulit.</li>
+                    <li><strong>XGBoost:</strong> implementasi gradient boosting dengan berbagai optimisasi.</li>
+                    <li><strong>LightGBM:</strong> implementasi gradient boosting yang dirancang untuk efisiensi pada banyak tugas tabular.</li>
+                    <li><strong>CatBoost:</strong> implementasi boosting dengan dukungan khusus untuk fitur kategorikal.</li>
+                </ul>
+
+                <p>
+                    Gradient Boosting sering kuat untuk data tabular, tetapi memerlukan
+                    pengaturan learning rate, jumlah pohon, kompleksitas pohon, dan
+                    regularisasi agar tidak overfitting.
+                </p>
+            </section>
+
+            <section>
+                <h2>10. Support Vector Machine (SVM)</h2>
+                <p>
+                    Support Vector Machine berusaha menemukan batas pemisah antarkelas
+                    yang memiliki margin besar. Titik data yang paling berpengaruh
+                    terhadap batas tersebut disebut support vectors.
+                </p>
+
+                <p>
+                    Untuk kasus yang tidak dapat dipisahkan secara linear, SVM dapat
+                    menggunakan kernel untuk merepresentasikan hubungan nonlinier.
+                </p>
+
+                <h3>Kernel yang umum</h3>
+                <ul>
+                    <li><code>linear</code>: batas pemisah linear.</li>
+                    <li><code>rbf</code>: menangkap pola nonlinier melalui kernel radial basis function.</li>
+                    <li><code>poly</code>: menggunakan kernel polinomial.</li>
+                </ul>
+
+                <h3>Contoh Python</h3>
+                <pre><code>from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.svm import SVC
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+
+X = [
+    [1, 20], [2, 25], [1, 22], [3, 30],
+    [7, 60], [8, 65], [9, 70], [8, 75]
+]
+
+y = [0, 0, 0, 0, 1, 1, 1, 1]
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.25, random_state=42, stratify=y
+)
+
+model = make_pipeline(
+    StandardScaler(),
+    SVC(kernel="rbf", C=1.0)
+)
+
+model.fit(X_train, y_train)
+prediksi = model.predict(X_test)
+
+print("Accuracy:", accuracy_score(y_test, prediksi))</code></pre>
+
+                <p>
+                    StandardScaler penting untuk SVM yang menggunakan kernel berbasis
+                    jarak. Parameter <code>C</code> mengatur kompromi antara margin
+                    dan kesalahan klasifikasi pada training, sedangkan parameter
+                    <code>gamma</code> mengatur pengaruh satu sampel pada kernel RBF.
+                </p>
+            </section>
+
+            <section>
+                <h2>11. Naive Bayes</h2>
+                <p>
+                    Naive Bayes merupakan keluarga algoritma klasifikasi yang menggunakan
+                    Teorema Bayes dengan asumsi bahwa fitur saling independen secara
+                    kondisional terhadap kelas.
+                </p>
+
+                <p>Teorema Bayes dinyatakan sebagai:</p>
+
+                \[
+                P(C\mid X)=\frac{P(X\mid C)P(C)}{P(X)}
+                \]
+
+                <p>
+                    \(P(C\mid X)\) adalah probabilitas kelas setelah mengamati fitur,
+                    \(P(X\mid C)\) adalah likelihood, \(P(C)\) adalah prior kelas,
+                    dan \(P(X)\) adalah probabilitas fitur yang diamati.
+                </p>
+
+                <p>
+                    Asumsi independensi membuat perhitungan lebih sederhana, meskipun
+                    asumsi ini sering tidak sepenuhnya terpenuhi pada data nyata.
+                </p>
+
+                <h3>Jenis Naive Bayes</h3>
+                <ul>
+                    <li><strong>GaussianNB:</strong> cocok untuk fitur kontinu dengan asumsi distribusi Gaussian per kelas.</li>
+                    <li><strong>MultinomialNB:</strong> sering digunakan untuk frekuensi kata atau data hitungan.</li>
+                    <li><strong>BernoulliNB:</strong> cocok untuk fitur biner.</li>
+                </ul>
+
+                <h3>Contoh klasifikasi teks</h3>
+                <pre><code>from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.pipeline import make_pipeline
+
+teks = [
+    "promo diskon murah",
+    "menangkan hadiah sekarang",
+    "rapat dilaksanakan besok",
+    "laporan proyek telah selesai",
+    "diskon spesial hari ini",
+    "jadwal kuliah minggu depan"
+]
+
+label = [
+    "spam",
+    "spam",
+    "bukan_spam",
+    "bukan_spam",
+    "spam",
+    "bukan_spam"
+]
+
+model = make_pipeline(
+    CountVectorizer(),
+    MultinomialNB()
+)
+
+model.fit(teks, label)
+
+pesan_baru = [
+    "promo diskon hari ini",
+    "rapat proyek besok"
+]
+
+print(model.predict(pesan_baru))</code></pre>
+
+                <p>
+                    CountVectorizer mengubah teks menjadi representasi jumlah kata,
+                    kemudian MultinomialNB mempelajari hubungan antara kata dan kelas.
+                    Contoh ini hanya demonstrasi sederhana, bukan sistem deteksi spam
+                    yang siap digunakan.
+                </p>
+            </section>
+
+            <section>
+                <h2>12. K-Means Clustering</h2>
+                <p>
+                    K-Means adalah algoritma unsupervised learning yang membagi data
+                    menjadi \(k\) kelompok. Setiap kelompok diwakili oleh centroid,
+                    yaitu rata-rata posisi titik yang menjadi anggotanya.
+                </p>
+
+                <p>Tujuan K-Means adalah meminimalkan jumlah kuadrat jarak ke centroid:</p>
+
+                \[
+                J=\sum_{i=1}^{n}\left\|x_i-\mu_{c_i}\right\|^2
+                \]
+
+                <p>
+                    Di sini, \(x_i\) adalah titik data, \(\mu_{c_i}\) adalah centroid
+                    kelompok yang ditetapkan untuk titik tersebut, dan \(c_i\) adalah
+                    label kelompok.
+                </p>
+
+                <h3>Langkah algoritma</h3>
+                <ol>
+                    <li>Menentukan jumlah kelompok \(k\).</li>
+                    <li>Menginisialisasi centroid.</li>
+                    <li>Menetapkan setiap titik ke centroid terdekat.</li>
+                    <li>Menghitung ulang centroid berdasarkan anggota kelompok.</li>
+                    <li>Mengulangi penetapan dan pembaruan sampai konvergen atau batas iterasi tercapai.</li>
+                </ol>
+
+                <h3>Contoh Python</h3>
+                <pre><code>import matplotlib.pyplot as plt
+from sklearn.cluster import KMeans
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import make_pipeline
+
+X = [
+    [20, 200],
+    [25, 250],
+    [30, 300],
+    [50, 800],
+    [55, 850],
+    [60, 900]
+]
+
+model = make_pipeline(
+    StandardScaler(),
+    KMeans(n_clusters=2, random_state=42, n_init=10)
+)
+
+label = model.fit_predict(X)
+
+print("Label cluster:", label)</code></pre>
+
+                <p>
+                    Contoh ini mengelompokkan data berdasarkan dua fitur numerik.
+                    StandardScaler membantu mencegah fitur dengan rentang lebih besar
+                    mendominasi perhitungan jarak.
+                </p>
+
+                <h3>Menentukan jumlah cluster</h3>
+                <p>
+                    Metode elbow membandingkan jumlah cluster dengan nilai inertia.
+                    Penurunan inertia yang mulai melambat dapat membantu memilih nilai
+                    \(k\), tetapi titik elbow tidak selalu jelas.
+                </p>
+
+                <p>
+                    Silhouette score juga dapat digunakan untuk menilai seberapa dekat
+                    sebuah titik dengan kelompoknya dibandingkan dengan kelompok lain.
+                    Pemilihan jumlah cluster tetap perlu mempertimbangkan tujuan analisis
+                    dan interpretasi kelompok.
+                </p>
+            </section>
+
+            <section>
+                <h2>13. Hierarchical Clustering</h2>
+                <p>
+                    Hierarchical clustering membentuk struktur kelompok bertingkat.
+                    Hasilnya dapat digambarkan menggunakan dendrogram yang menunjukkan
+                    bagaimana kelompok-kelompok digabungkan atau dipisahkan.
+                </p>
+
+                <h3>Dua pendekatan</h3>
+                <ul>
+                    <li>
+                        <strong>Agglomerative:</strong> dimulai dari setiap titik sebagai
+                        kelompok tersendiri, kemudian menggabungkan kelompok secara bertahap.
+                    </li>
+                    <li>
+                        <strong>Divisive:</strong> dimulai dari satu kelompok besar,
+                        kemudian membaginya menjadi kelompok yang lebih kecil.
+                    </li>
+                </ul>
+
+                <p>
+                    Pada praktik umum, agglomerative clustering lebih sering digunakan.
+                    Metode linkage menentukan jarak antarkelompok, misalnya single,
+                    complete, average, dan Ward.
+                </p>
+
+                <h3>Contoh Python</h3>
+                <pre><code>from sklearn.cluster import AgglomerativeClustering
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import make_pipeline
+
+X = [
+    [20, 200],
+    [25, 250],
+    [30, 300],
+    [50, 800],
+    [55, 850],
+    [60, 900]
+]
+
+model = make_pipeline(
+    StandardScaler(),
+    AgglomerativeClustering(
+        n_clusters=2,
+        linkage="ward"
+    )
+)
+
+label = model.fit_predict(X)
+
+print("Label cluster:", label)</code></pre>
+
+                <h3>K-Means dibandingkan hierarchical clustering</h3>
+                <ul>
+                    <li>K-Means memerlukan jumlah cluster \(k\) sejak awal.</li>
+                    <li>Hierarchical clustering dapat dipelajari melalui struktur dendrogram untuk menentukan pemotongan kelompok.</li>
+                    <li>K-Means menggunakan centroid dan umumnya efisien untuk dataset yang relatif besar.</li>
+                    <li>Hierarchical clustering dapat lebih mahal secara komputasi pada dataset besar.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>14. Principal Component Analysis (PCA)</h2>
+                <p>
+                    Principal Component Analysis adalah teknik reduksi dimensi yang
+                    mengubah fitur menjadi kombinasi linear baru yang disebut principal
+                    components. Komponen pertama menangkap variasi terbesar, komponen
+                    berikutnya menangkap variasi terbesar yang tersisa dengan syarat
+                    ortogonal terhadap komponen sebelumnya.
+                </p>
+
+                <h3>Tujuan PCA</h3>
+                <ul>
+                    <li>Mengurangi jumlah fitur.</li>
+                    <li>Membantu visualisasi data berdimensi tinggi.</li>
+                    <li>Mengurangi redundansi akibat korelasi antarfitur.</li>
+                    <li>Membangun representasi ringkas untuk proses analisis lanjutan.</li>
+                </ul>
+
+                <p>
+                    PCA biasanya dilakukan dengan memusatkan data terlebih dahulu.
+                    Standardisasi juga sering diperlukan apabila fitur memiliki skala
+                    atau satuan yang berbeda.
+                </p>
+
+                <h3>Contoh Python</h3>
+                <pre><code>from sklearn.decomposition import PCA
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import make_pipeline
+
+X = [
+    [10, 100, 1],
+    [12, 120, 2],
+    [14, 140, 3],
+    [30, 300, 4],
+    [32, 320, 5],
+    [34, 340, 6]
+]
+
+model = make_pipeline(
+    StandardScaler(),
+    PCA(n_components=2)
+)
+
+X_reduksi = model.fit_transform(X)
+
+print("Dimensi awal:", len(X[0]))
+print("Dimensi baru:", X_reduksi.shape[1])
+print(X_reduksi)</code></pre>
+
+                <p>
+                    Pada contoh tersebut, tiga fitur diubah menjadi dua komponen.
+                    Komponen PCA tidak selalu memiliki arti langsung seperti fitur
+                    aslinya karena merupakan kombinasi dari fitur-fitur tersebut.
+                </p>
+
+                <h3>Explained variance ratio</h3>
+                <p>
+                    Explained variance ratio menunjukkan proporsi variasi data yang
+                    dijelaskan oleh setiap komponen.
+                </p>
+
+                \[
+                \text{EVR}_j =
+                \frac{\lambda_j}{\sum_{k=1}^{p}\lambda_k}
+                \]
+
+                <p>
+                    Di sini, \(\lambda_j\) adalah eigenvalue komponen ke-\(j\).
+                    Jumlah explained variance ratio dari beberapa komponen pertama
+                    membantu menilai banyaknya variasi yang dipertahankan.
+                </p>
+
+                <p>
+                    PCA dapat mengurangi dimensi, tetapi tidak menjamin seluruh
+                    informasi yang penting untuk prediksi target akan tetap terjaga.
+                    Jika digunakan untuk supervised learning, PCA harus dipelajari
+                    hanya dari data training dan diterapkan ke data validation serta
+                    testing melalui pipeline.
+                </p>
+            </section>
+
+            <section>
+                <h2>15. Cross-Validation</h2>
+                <p>
+                    Cross-validation adalah teknik evaluasi yang membagi data menjadi
+                    beberapa bagian atau fold. Model dilatih dan dievaluasi beberapa
+                    kali dengan bagian yang berbeda sebagai data validasi.
+                </p>
+
+                <h3>K-Fold Cross-Validation</h3>
+                <ol>
+                    <li>Data dibagi menjadi \(k\) fold.</li>
+                    <li>Model dilatih menggunakan \(k-1\) fold.</li>
+                    <li>Fold yang tersisa digunakan untuk evaluasi.</li>
+                    <li>Proses diulangi sampai setiap fold menjadi bagian validasi.</li>
+                    <li>Skor dirangkum, misalnya dengan menghitung rata-rata dan simpangan baku.</li>
+                </ol>
+
+                <p>Rata-rata skor cross-validation dapat ditulis sebagai:</p>
+
+                \[
+                \bar{S}=\frac{1}{k}\sum_{i=1}^{k}S_i
+                \]
+
+                <p>
+                    \(S_i\) merupakan skor pada fold ke-\(i\). Simpangan baku skor
+                    dapat memberikan gambaran variasi performa di antara fold.
+                </p>
+
+                <h3>Contoh Python</h3>
+                <pre><code>from sklearn.datasets import load_breast_cancer
+from sklearn.model_selection import StratifiedKFold, cross_val_score
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression
+
+data = load_breast_cancer()
+X = data.data
+y = data.target
+
+model = make_pipeline(
+    StandardScaler(),
+    LogisticRegression(max_iter=5000)
+)
+
+cv = StratifiedKFold(
+    n_splits=5,
+    shuffle=True,
+    random_state=42
+)
+
+scores = cross_val_score(
+    model,
+    X,
+    y,
+    cv=cv,
+    scoring="accuracy"
+)
+
+print("Skor setiap fold:", scores)
+print("Rata-rata:", scores.mean())
+print("Simpangan baku:", scores.std())</code></pre>
+
+                <p>
+                    StratifiedKFold menjaga proporsi kelas pada setiap fold sehingga
+                    berguna untuk banyak tugas klasifikasi.
+                </p>
+
+                <h3>Hal yang perlu diperhatikan</h3>
+                <ul>
+                    <li>Cross-validation mengurangi ketergantungan pada satu pembagian data.</li>
+                    <li>Preprocessing yang mempelajari parameter dari data harus dimasukkan ke pipeline agar dilakukan dengan benar pada setiap fold.</li>
+                    <li>Data berkelompok, seperti beberapa catatan dari orang yang sama, mungkin membutuhkan group-aware splitting.</li>
+                    <li>Data deret waktu biasanya membutuhkan time-series validation yang menghormati urutan waktu.</li>
+                    <li>Test set tetap sebaiknya disimpan untuk evaluasi akhir.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>16. Hyperparameter Tuning</h2>
+                <p>
+                    Hyperparameter adalah pengaturan yang ditentukan sebelum atau selama
+                    proses pengembangan model, tetapi tidak dipelajari sebagai parameter
+                    biasa dari data training. Hyperparameter tuning bertujuan mencari
+                    kombinasi pengaturan yang menghasilkan performa validasi terbaik.
+                </p>
+
+                <h3>Contoh hyperparameter</h3>
+                <ul>
+                    <li>Decision Tree: <code>max_depth</code> dan <code>min_samples_leaf</code>.</li>
+                    <li>Random Forest: <code>n_estimators</code> dan <code>max_features</code>.</li>
+                    <li>KNN: <code>n_neighbors</code> dan jenis pembobotan jarak.</li>
+                    <li>SVM: <code>C</code>, <code>kernel</code>, dan <code>gamma</code>.</li>
+                    <li>Gradient Boosting: <code>learning_rate</code>, jumlah estimator, dan kedalaman pohon.</li>
+                    <li>K-Means: <code>n_clusters</code> dan metode inisialisasi centroid.</li>
+                </ul>
+
+                <h3>Grid Search</h3>
+                <p>
+                    Grid Search mencoba seluruh kombinasi hyperparameter yang ditentukan.
+                    Metode ini mudah dipahami, tetapi jumlah percobaan dapat meningkat
+                    dengan cepat jika banyak parameter digunakan.
+                </p>
+
+                <h3>Random Search</h3>
+                <p>
+                    Random Search mengambil sejumlah kombinasi dari ruang parameter.
+                    Metode ini dapat menjadi alternatif yang efisien ketika ruang
+                    pencarian besar.
+                </p>
+
+                <h3>Contoh GridSearchCV</h3>
+                <pre><code>from sklearn.datasets import load_breast_cancer
+from sklearn.model_selection import GridSearchCV, StratifiedKFold
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.svm import SVC
+
+data = load_breast_cancer()
+X = data.data
+y = data.target
+
+pipeline = make_pipeline(
+    StandardScaler(),
+    SVC()
+)
+
+param_grid = {
+    "svc__C": [0.1, 1, 10],
+    "svc__kernel": ["linear", "rbf"],
+    "svc__gamma": ["scale", "auto"]
+}
+
+cv = StratifiedKFold(
+    n_splits=5,
+    shuffle=True,
+    random_state=42
+)
+
+search = GridSearchCV(
+    estimator=pipeline,
+    param_grid=param_grid,
+    scoring="accuracy",
+    cv=cv,
+    n_jobs=-1
+)
+
+search.fit(X, y)
+
+print("Parameter terbaik:", search.best_params_)
+print("Skor CV terbaik:", search.best_score_)
+
+model_terbaik = search.best_estimator_</code></pre>
+
+                <p>
+                    Pada pipeline tersebut, standardisasi dilakukan di dalam setiap
+                    fold training. Awalan <code>svc__</code> menunjukkan bahwa
+                    hyperparameter tersebut milik langkah bernama <code>svc</code>
+                    pada pipeline Scikit-learn.
+                </p>
+
+                <h3>Alur tuning yang baik</h3>
+                <ol>
+                    <li>Pisahkan test set terlebih dahulu.</li>
+                    <li>Tentukan metrik yang sesuai dengan tujuan bisnis atau penelitian.</li>
+                    <li>Tentukan ruang hyperparameter yang masuk akal.</li>
+                    <li>Gunakan cross-validation pada data training untuk membandingkan kombinasi.</li>
+                    <li>Pilih model berdasarkan hasil validasi.</li>
+                    <li>Evaluasi model terpilih pada test set yang belum digunakan untuk pemilihan.</li>
+                </ol>
+
+                <p>
+                    Metrik tidak harus selalu accuracy. Untuk klasifikasi tidak seimbang,
+                    precision, recall, F1-score, PR-AUC, ROC-AUC, atau metrik lain dapat
+                    lebih sesuai bergantung pada tujuan. Untuk regresi, MAE, RMSE, dan
+                    \(R^2\) sering digunakan.
+                </p>
+            </section>
+
+            <section>
+                <h2>Mini Project: Prediksi dan Evaluasi Model</h2>
+                <p>
+                    Proyek ini membandingkan beberapa algoritma klasifikasi menggunakan
+                    dataset contoh dari Scikit-learn. Tujuannya bukan hanya mencari skor
+                    tertinggi, tetapi juga membiasakan diri dengan pipeline, cross-validation,
+                    dan evaluasi yang konsisten.
+                </p>
+
+                <h3>Langkah 1: Memuat data dan menentukan model</h3>
+                <pre><code>from sklearn.datasets import load_breast_cancer
+from sklearn.model_selection import StratifiedKFold, cross_val_score
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.ensemble import RandomForestClassifier
+
+data = load_breast_cancer()
+X = data.data
+y = data.target
+
+models = {
+    "Logistic Regression": make_pipeline(
+        StandardScaler(),
+        LogisticRegression(max_iter=5000)
+    ),
+    "KNN": make_pipeline(
+        StandardScaler(),
+        KNeighborsClassifier(n_neighbors=5)
+    ),
+    "Random Forest": RandomForestClassifier(
+        n_estimators=200,
+        random_state=42
+    )
+}
+
+cv = StratifiedKFold(
+    n_splits=5,
+    shuffle=True,
+    random_state=42
+)</code></pre>
+
+                <h3>Langkah 2: Membandingkan skor cross-validation</h3>
+                <pre><code>for nama, model in models.items():
+    scores = cross_val_score(
+        model,
+        X,
+        y,
+        cv=cv,
+        scoring="accuracy"
+    )
+
+    print(nama)
+    print("Rata-rata:", scores.mean())
+    print("Simpangan baku:", scores.std())
+    print()</code></pre>
+
+                <p>
+                    Skor aktual diperoleh ketika kode dijalankan. Jangan memilih model
+                    hanya berdasarkan satu skor; perhatikan variasi antarfold, biaya
+                    komputasi, interpretabilitas, dan kebutuhan penggunaan.
+                </p>
+
+                <h3>Tugas pengembangan</h3>
+                <ol>
+                    <li>Ubah metrik menjadi F1-score dan bandingkan hasilnya.</li>
+                    <li>Tambahkan Decision Tree ke daftar model.</li>
+                    <li>Gunakan GridSearchCV untuk mencari hyperparameter Random Forest.</li>
+                    <li>Bandingkan hasil sebelum dan sesudah tuning.</li>
+                    <li>Pisahkan test set sejak awal, lalu gunakan hanya untuk evaluasi akhir.</li>
+                    <li>Jelaskan mengapa skor cross-validation dan skor test dapat berbeda.</li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>Latihan Mandiri</h2>
+                <ol>
+                    <li>Jelaskan perbedaan supervised learning dan unsupervised learning.</li>
+                    <li>Apa perbedaan regression dan classification?</li>
+                    <li>Mengapa dataset perlu dibagi menjadi training dan testing?</li>
+                    <li>Jelaskan cara kerja Linear Regression dan Logistic Regression.</li>
+                    <li>Mengapa standardisasi sering penting untuk KNN dan SVM?</li>
+                    <li>Jelaskan perbedaan Decision Tree, Random Forest, dan Gradient Boosting.</li>
+                    <li>Bagaimana Naive Bayes menggunakan Teorema Bayes?</li>
+                    <li>Apa tujuan K-Means dan bagaimana centroid diperbarui?</li>
+                    <li>Jelaskan perbedaan K-Means dan Hierarchical Clustering.</li>
+                    <li>Apa tujuan PCA dan bagaimana explained variance ratio digunakan?</li>
+                    <li>Mengapa cross-validation berguna dalam pemilihan model?</li>
+                    <li>Jelaskan perbedaan parameter model dan hyperparameter.</li>
+                    <li>Apa yang dimaksud dengan overfitting dan bagaimana cara menguranginya?</li>
+                    <li>Mengapa test set tidak sebaiknya digunakan berulang kali untuk memilih hyperparameter?</li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>Ringkasan</h2>
+                <ul>
+                    <li>Machine Learning mempelajari pola data untuk menghasilkan prediksi atau menemukan struktur.</li>
+                    <li>Supervised learning menggunakan target, sedangkan unsupervised learning mencari pola tanpa target.</li>
+                    <li>Training, validation, dan testing memiliki fungsi berbeda dalam pengembangan dan evaluasi model.</li>
+                    <li>Linear Regression memprediksi nilai numerik; Logistic Regression memodelkan probabilitas kelas.</li>
+                    <li>KNN, Decision Tree, Random Forest, Gradient Boosting, SVM, dan Naive Bayes memiliki mekanisme dan kebutuhan yang berbeda.</li>
+                    <li>K-Means dan Hierarchical Clustering digunakan untuk pengelompokan data.</li>
+                    <li>PCA mengurangi dimensi melalui kombinasi linear fitur.</li>
+                    <li>Cross-validation membantu menilai kestabilan model, sedangkan hyperparameter tuning mencari pengaturan yang sesuai.</li>
+                    <li>Pipeline membantu menerapkan preprocessing secara konsisten dan mengurangi risiko data leakage.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Referensi untuk Belajar</h2>
+                <ul>
+                    <li><a href="https://scikit-learn.org/stable/user_guide.html" target="_blank" rel="noopener noreferrer">Scikit-learn User Guide</a></li>
+                    <li><a href="https://scikit-learn.org/stable/supervised_learning.html" target="_blank" rel="noopener noreferrer">Scikit-learn: Supervised Learning</a></li>
+                    <li><a href="https://scikit-learn.org/stable/unsupervised_learning.html" target="_blank" rel="noopener noreferrer">Scikit-learn: Unsupervised Learning</a></li>
+                    <li><a href="https://scikit-learn.org/stable/modules/cross_validation.html" target="_blank" rel="noopener noreferrer">Scikit-learn: Cross-Validation</a></li>
+                    <li><a href="https://scikit-learn.org/stable/modules/grid_search.html" target="_blank" rel="noopener noreferrer">Scikit-learn: Hyperparameter Tuning</a></li>
+                </ul>
+            </section>
+        </article>
+    </main>
+
+    <footer>
+        ShadowLab — Belajar Tanpa Batas
+    </footer>
+</body>
+</html>

@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Cleaning dan Preprocessing | Data Science</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+    MathJax = {
+        tex: {
+            inlineMath: [['\\(', '\\)']],
+            displayMath: [['\\[', '\\]']]
+        }
+    };
+    </script>
+    <script
+        id="MathJax-script"
+        async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+    </script>
+</head>
+<body>
+    <header class="navbar">
+        <a href="index.html" class="logo">ShadowLab</a>
+        <nav>
+            <a href="index.html">Beranda</a>
+            <a href="MateriDataScience.html">Materi Data Science</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <article class="article">
+            <p class="eyebrow">MATERI / DATA SCIENCE</p>
+            <h1>Bagian VI — Data Cleaning dan Preprocessing</h1>
+            <p class="intro">
+                Data cleaning dan preprocessing merupakan tahap penting dalam
+                pengolahan data sebelum analisis statistik atau pemodelan machine
+                learning. Tahap ini bertujuan memperbaiki kualitas data,
+                menangani ketidakkonsistenan, serta mengubah data ke bentuk yang
+                sesuai untuk algoritma yang digunakan.
+            </p>
+
+            <section>
+                <h2>1. Memahami Struktur Dataset</h2>
+                <p>
+                    Sebelum membersihkan data, kita perlu memahami susunan,
+                    tipe, dan karakteristik setiap variabel. Dataset biasanya
+                    disusun dalam bentuk tabel yang terdiri atas baris dan kolom.
+                </p>
+
+                <ul>
+                    <li><strong>Baris:</strong> observasi atau sampel.</li>
+                    <li><strong>Kolom:</strong> variabel atau fitur.</li>
+                    <li><strong>Target:</strong> variabel yang ingin diprediksi pada supervised learning.</li>
+                    <li><strong>Fitur:</strong> variabel yang digunakan untuk membantu prediksi.</li>
+                </ul>
+
+                <p>Misalnya, dataset prediksi harga rumah:</p>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Luas (m²)</th>
+                            <th>Kamar Tidur</th>
+                            <th>Lokasi</th>
+                            <th>Harga (juta)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>80</td>
+                            <td>3</td>
+                            <td>Semarang</td>
+                            <td>650</td>
+                        </tr>
+                        <tr>
+                            <td>120</td>
+                            <td>4</td>
+                            <td>Solo</td>
+                            <td>800</td>
+                        </tr>
+                        <tr>
+                            <td>60</td>
+                            <td>2</td>
+                            <td>Semarang</td>
+                            <td>450</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p>
+                    Dalam contoh ini, luas, jumlah kamar tidur, dan lokasi
+                    merupakan fitur. Harga menjadi target jika tujuan analisisnya
+                    adalah memprediksi harga rumah.
+                </p>
+
+                <h3>Memeriksa dataset menggunakan Pandas</h3>
+                <pre><code>import pandas as pd
+
+df = pd.read_csv("rumah.csv")
+
+print(df.head())
+print(df.shape)
+print(df.columns)
+print(df.info())
+print(df.describe(include="all"))
+print(df.dtypes)</code></pre>
+
+                <p>Fungsi-fungsi tersebut digunakan untuk:</p>
+                <ul>
+                    <li><code>head()</code>: melihat beberapa baris pertama.</li>
+                    <li><code>shape</code>: mengetahui jumlah baris dan kolom.</li>
+                    <li><code>columns</code>: melihat nama kolom.</li>
+                    <li><code>info()</code>: memeriksa tipe data dan nilai yang tidak kosong.</li>
+                    <li><code>describe()</code>: merangkum statistik deskriptif.</li>
+                    <li><code>dtypes</code>: memeriksa tipe data setiap kolom.</li>
+                </ul>
+
+                <p>
+                    Perhatikan pula satuan, rentang nilai, kategori, format tanggal,
+                    dan kemungkinan kesalahan pencatatan. Angka yang tersimpan
+                    sebagai teks, misalnya, dapat mengganggu perhitungan statistik.
+                </p>
+            </section>
+
+            <section>
+                <h2>2. Menangani Data Kosong</h2>
+                <p>
+                    Data kosong atau <em>missing values</em> adalah nilai yang
+                    tidak tersedia pada suatu observasi. Dalam Pandas, nilai
+                    kosong sering direpresentasikan sebagai <code>NaN</code>,
+                    <code>None</code>, atau <code>NaT</code>, bergantung pada
+                    tipe datanya.
+                </p>
+
+                <h3>Mendeteksi data kosong</h3>
+                <pre><code>print(df.isna().sum())
+
+persentase_kosong = df.isna().mean() * 100
+print(persentase_kosong)</code></pre>
+
+                <p>
+                    Hasil pertama menunjukkan jumlah nilai kosong pada setiap
+                    kolom. Hasil kedua menunjukkan persentase nilai kosong.
+                </p>
+
+                <h3>Metode penanganan data kosong</h3>
+                <ol>
+                    <li>
+                        <strong>Menghapus baris:</strong> sesuai jika jumlah baris
+                        yang terdampak kecil dan penghapusan tidak menimbulkan bias
+                        yang berarti.
+                    </li>
+                    <li>
+                        <strong>Menghapus kolom:</strong> dapat dipertimbangkan
+                        jika sebagian besar nilainya kosong dan kolom tersebut
+                        tidak penting.
+                    </li>
+                    <li>
+                        <strong>Imputasi mean:</strong> mengganti nilai kosong
+                        dengan rata-rata. Cocok untuk beberapa fitur numerik,
+                        tetapi sensitif terhadap outlier.
+                    </li>
+                    <li>
+                        <strong>Imputasi median:</strong> mengganti nilai kosong
+                        dengan median. Biasanya lebih tahan terhadap outlier.
+                    </li>
+                    <li>
+                        <strong>Imputasi modus:</strong> mengganti nilai kosong
+                        dengan kategori atau nilai yang paling sering muncul.
+                    </li>
+                    <li>
+                        <strong>Imputasi berdasarkan kelompok atau model:</strong>
+                        menggunakan informasi lain yang relevan, dengan tetap
+                        memperhatikan risiko bias.
+                    </li>
+                </ol>
+
+                <pre><code># Menghapus baris yang memiliki nilai kosong
+df_bersih = df.dropna()
+
+# Mengisi nilai kosong dengan median
+df["usia"] = df["usia"].fillna(df["usia"].median())
+
+# Mengisi nilai kosong dengan modus
+modus = df["kota"].mode()
+if not modus.empty:
+    df["kota"] = df["kota"].fillna(modus.iloc[0])</code></pre>
+
+                <p>
+                    Tidak ada satu metode yang selalu paling baik. Pilih metode
+                    berdasarkan makna variabel, pola data yang hilang, dan tujuan
+                    analisis. Nilai kosong juga tidak selalu berarti kesalahan:
+                    bisa jadi informasi tersebut memang belum tersedia.
+                </p>
+
+                <p>
+                    <strong>Catatan machine learning:</strong> parameter imputasi
+                    sebaiknya dipelajari dari data latih saja, lalu diterapkan
+                    pada data validasi dan data uji. Cara ini membantu mencegah
+                    kebocoran informasi.
+                </p>
+            </section>
+
+            <section>
+                <h2>3. Menangani Data Duplikat</h2>
+                <p>
+                    Data duplikat adalah catatan yang muncul lebih dari sekali.
+                    Duplikasi dapat terjadi akibat penggabungan tabel, proses
+                    input berulang, atau kesalahan pengumpulan data.
+                </p>
+
+                <h3>Mendeteksi duplikasi</h3>
+                <pre><code># Menampilkan jumlah baris duplikat
+print(df.duplicated().sum())
+
+# Menampilkan baris duplikat
+print(df[df.duplicated()])
+
+# Memeriksa duplikasi berdasarkan kolom tertentu
+print(df[df.duplicated(subset=["id_pelanggan"], keep=False)])</code></pre>
+
+                <h3>Menghapus duplikasi</h3>
+                <pre><code># Mempertahankan kemunculan pertama
+df = df.drop_duplicates()
+
+# Duplikasi berdasarkan kolom identitas
+df = df.drop_duplicates(subset=["id_pelanggan"], keep="first")
+
+# Mempertahankan kemunculan terakhir
+df = df.drop_duplicates(subset=["id_pelanggan"], keep="last")</code></pre>
+
+                <p>
+                    Jangan langsung menghapus semua baris yang tampak serupa.
+                    Dua transaksi dengan pelanggan dan jumlah yang sama mungkin
+                    merupakan transaksi berbeda. Tentukan dahulu identitas unik
+                    suatu catatan dan aturan bisnis yang berlaku.
+                </p>
+            </section>
+
+            <section>
+                <h2>4. Mendeteksi dan Menangani Outlier</h2>
+                <p>
+                    <em>Outlier</em> adalah observasi yang nilainya sangat berbeda
+                    dari sebagian besar data. Outlier dapat muncul akibat
+                    kesalahan pengukuran, kesalahan input, atau kondisi nyata
+                    yang jarang terjadi.
+                </p>
+
+                <p>
+                    Outlier tidak selalu merupakan kesalahan. Pendapatan yang
+                    sangat tinggi, misalnya, bisa menjadi observasi valid yang
+                    justru penting untuk dianalisis.
+                </p>
+
+                <h3>Metode IQR</h3>
+                <p>
+                    Interquartile range (IQR) adalah selisih kuartil ketiga dan
+                    kuartil pertama:
+                </p>
+
+                \[
+                IQR = Q_3 - Q_1
+                \]
+
+                <p>
+                    Batas bawah dan batas atas yang sering digunakan untuk
+                    menandai kandidat outlier adalah:
+                </p>
+
+                \[
+                B_{\text{bawah}} = Q_1 - 1.5(IQR)
+                \]
+
+                \[
+                B_{\text{atas}} = Q_3 + 1.5(IQR)
+                \]
+
+                <p>
+                    Nilai di luar batas tersebut ditandai sebagai kandidat
+                    outlier, bukan otomatis sebagai data yang salah.
+                </p>
+
+                <pre><code>Q1 = df["pendapatan"].quantile(0.25)
+Q3 = df["pendapatan"].quantile(0.75)
+
+IQR = Q3 - Q1
+
+batas_bawah = Q1 - 1.5 * IQR
+batas_atas = Q3 + 1.5 * IQR
+
+outlier = df[
+    (df["pendapatan"] &lt; batas_bawah) |
+    (df["pendapatan"] &gt; batas_atas)
+]
+
+print(outlier)</code></pre>
+
+                <h3>Metode Z-score</h3>
+                <p>
+                    Z-score mengukur jarak suatu nilai dari rata-rata dalam
+                    satuan simpangan baku:
+                </p>
+
+                \[
+                z = \frac{x-\mu}{\sigma}
+                \]
+
+                <p>
+                    Nilai dengan \(|z| &gt; 3\) sering diperiksa sebagai kandidat
+                    outlier jika distribusi data dan asumsi penggunaannya sesuai.
+                    Metode ini sensitif terhadap nilai ekstrem karena rata-rata
+                    dan simpangan baku juga dipengaruhi oleh outlier.
+                </p>
+
+                <pre><code>from scipy.stats import zscore
+
+z = zscore(df["pendapatan"], nan_policy="omit")
+kandidat_outlier = df[z.abs() > 3]
+
+print(kandidat_outlier)</code></pre>
+
+                <h3>Pilihan penanganan</h3>
+                <ul>
+                    <li>Memperbaiki nilai jika terbukti terjadi kesalahan pencatatan.</li>
+                    <li>Menghapus observasi jika tidak valid dan alasannya jelas.</li>
+                    <li>Melakukan capping atau winsorization pada batas tertentu.</li>
+                    <li>Menggunakan transformasi untuk mengurangi kemencengan distribusi.</li>
+                    <li>Mempertahankan nilai jika observasi tersebut valid dan relevan.</li>
+                </ul>
+
+                <p>
+                    Penanganan outlier perlu mempertimbangkan konteks masalah.
+                    Menghapus nilai ekstrem tanpa alasan dapat menghilangkan
+                    informasi penting dan membuat model kurang representatif.
+                </p>
+            </section>
+
+            <section>
+                <h2>5. Encoding Variabel Kategorikal</h2>
+                <p>
+                    Banyak algoritma machine learning membutuhkan representasi
+                    numerik. Oleh karena itu, variabel kategorikal seperti kota,
+                    jenis pekerjaan, atau tingkat pendidikan perlu diubah ke
+                    bentuk yang dapat diproses oleh model.
+                </p>
+
+                <h3>Label encoding</h3>
+                <p>
+                    Setiap kategori dipetakan ke suatu bilangan. Metode ini
+                    dapat sesuai untuk kategori ordinal, yaitu kategori yang
+                    memiliki urutan bermakna.
+                </p>
+
+                <pre><code>from sklearn.preprocessing import OrdinalEncoder
+
+tingkat = [["SMA"], ["S1"], ["S2"], ["S3"]]
+
+encoder = OrdinalEncoder(
+    categories=[["SMA", "S1", "S2", "S3"]]
+)
+
+hasil = encoder.fit_transform(tingkat)
+print(hasil)</code></pre>
+
+                <p>
+                    Urutan kategori harus ditentukan berdasarkan makna yang
+                    benar. Jangan memberikan angka berurutan pada kategori
+                    nominal jika angka tersebut dapat membuat model menganggap
+                    adanya urutan atau jarak tertentu.
+                </p>
+
+                <h3>One-hot encoding</h3>
+                <p>
+                    One-hot encoding membuat kolom biner untuk setiap kategori.
+                    Contohnya, kategori warna diubah menjadi kolom merah,
+                    biru, dan hijau.
+                </p>
+
+                <pre><code>import pandas as pd
+
+data = pd.DataFrame({
+    "warna": ["merah", "biru", "hijau", "merah"]
+})
+
+hasil = pd.get_dummies(data, columns=["warna"], dtype=int)
+print(hasil)</code></pre>
+
+                <p>
+                    One-hot encoding sesuai untuk banyak fitur nominal dengan
+                    jumlah kategori yang tidak terlalu besar. Jika kategori
+                    sangat banyak, pertimbangkan strategi lain sesuai algoritma
+                    dan karakteristik data.
+                </p>
+
+                <h3>Encoding dengan Scikit-learn</h3>
+                <pre><code>from sklearn.preprocessing import OneHotEncoder
+
+encoder = OneHotEncoder(
+    handle_unknown="ignore",
+    sparse_output=False
+)
+
+hasil = encoder.fit_transform(data[["warna"]])
+print(hasil)</code></pre>
+
+                <p>
+                    Opsi <code>handle_unknown="ignore"</code> membantu menangani
+                    kategori baru yang muncul ketika data validasi atau data uji
+                    diproses. Pada versi Scikit-learn lama, nama parameter untuk
+                    menghasilkan array padat dapat berbeda.
+                </p>
+            </section>
+
+            <section>
+                <h2>6. Normalisasi dan Standardisasi</h2>
+                <p>
+                    Fitur numerik dapat memiliki skala yang berbeda. Misalnya,
+                    usia berada pada rentang puluhan, sedangkan pendapatan bisa
+                    mencapai jutaan. Perbedaan skala dapat memengaruhi algoritma
+                    tertentu, terutama algoritma berbasis jarak atau optimisasi.
+                </p>
+
+                <h3>Min-max normalization</h3>
+                <p>
+                    Normalisasi min-max mengubah nilai ke rentang tertentu,
+                    umumnya 0 sampai 1:
+                </p>
+
+                \[
+                x' = \frac{x-x_{\min}}{x_{\max}-x_{\min}}
+                \]
+
+                <p>
+                    Nilai minimum menjadi 0 dan maksimum menjadi 1 jika
+                    \(x_{\max} \neq x_{\min}\).
+                </p>
+
+                <pre><code>from sklearn.preprocessing import MinMaxScaler
+
+scaler = MinMaxScaler()
+X_normalisasi = scaler.fit_transform(X)</code></pre>
+
+                <h3>Standardisasi</h3>
+                <p>
+                    Standardisasi mengubah data agar memiliki rata-rata 0 dan
+                    simpangan baku 1 pada data yang digunakan untuk mempelajari
+                    parameter transformasi:
+                </p>
+
+                \[
+                z = \frac{x-\mu}{\sigma}
+                \]
+
+                <pre><code>from sklearn.preprocessing import StandardScaler
+
+scaler = StandardScaler()
+X_standar = scaler.fit_transform(X)</code></pre>
+
+                <h3>Perbedaan normalisasi dan standardisasi</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Aspek</th>
+                            <th>Min-max</th>
+                            <th>Standardisasi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Tujuan</td>
+                            <td>Mengubah rentang nilai</td>
+                            <td>Mengubah pusat dan skala data</td>
+                        </tr>
+                        <tr>
+                            <td>Rentang hasil</td>
+                            <td>Biasanya 0 sampai 1</td>
+                            <td>Tidak dibatasi</td>
+                        </tr>
+                        <tr>
+                            <td>Sensitif terhadap outlier</td>
+                            <td>Ya</td>
+                            <td>Ya</td>
+                        </tr>
+                        <tr>
+                            <td>Contoh penggunaan</td>
+                            <td>Model yang memerlukan rentang tertentu</td>
+                            <td>Regresi teratur, SVM, dan metode berbasis jarak</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p>
+                    Tidak semua algoritma membutuhkan penskalaan. Model berbasis
+                    pohon keputusan, seperti Random Forest, umumnya tidak
+                    bergantung pada skala fitur seperti halnya KNN atau SVM.
+                </p>
+
+                <p>
+                    Parameter scaler harus dipelajari dari data latih saja.
+                    Data validasi dan data uji menggunakan parameter yang sama
+                    melalui <code>transform()</code>, bukan mempelajari skala baru.
+                </p>
+            </section>
+
+            <section>
+                <h2>7. Transformasi Distribusi</h2>
+                <p>
+                    Sebagian fitur numerik memiliki distribusi yang sangat
+                    menceng atau rentang nilai yang lebar. Transformasi dapat
+                    membantu mengurangi kemencengan, menstabilkan varians,
+                    atau membuat hubungan antara variabel lebih sesuai untuk
+                    model tertentu.
+                </p>
+
+                <h3>Transformasi logaritmik</h3>
+                <p>
+                    Untuk data nonnegatif dengan kemencengan ke kanan, salah satu
+                    pilihan adalah transformasi:
+                </p>
+
+                \[
+                x' = \log(1+x)
+                \]
+
+                <p>
+                    Bentuk ini sering digunakan untuk data yang mengandung nol
+                    karena \(\log(1+0)=0\).
+                </p>
+
+                <pre><code>import numpy as np
+
+df["pendapatan_log"] = np.log1p(df["pendapatan"])</code></pre>
+
+                <p>
+                    Transformasi logaritmik biasa hanya dapat diterapkan pada
+                    nilai positif. <code>log1p</code> sesuai untuk nilai
+                    nonnegatif, bukan untuk data dengan nilai negatif arbitrer.
+                </p>
+
+                <h3>Transformasi akar kuadrat</h3>
+                <p>
+                    Transformasi akar kuadrat dapat digunakan untuk beberapa
+                    jenis data nonnegatif, termasuk hitungan:
+                </p>
+
+                \[
+                x' = \sqrt{x}
+                \]
+
+                <pre><code>df["jumlah_transaksi_sqrt"] = np.sqrt(
+    df["jumlah_transaksi"]
+)</code></pre>
+
+                <h3>Power transformation</h3>
+                <p>
+                    Metode Box-Cox dan Yeo-Johnson menyediakan transformasi
+                    yang lebih fleksibel. Box-Cox membutuhkan nilai positif,
+                    sedangkan Yeo-Johnson dapat menangani nilai nol dan negatif.
+                </p>
+
+                <pre><code>from sklearn.preprocessing import PowerTransformer
+
+transformer = PowerTransformer(method="yeo-johnson")
+X_transformasi = transformer.fit_transform(X)</code></pre>
+
+                <p>
+                    Transformasi tidak selalu meningkatkan performa. Evaluasi
+                    dampaknya menggunakan validasi yang tepat dan periksa apakah
+                    interpretasi fitur masih sesuai dengan kebutuhan analisis.
+                </p>
+            </section>
+
+            <section>
+                <h2>8. Menangani Ketidakseimbangan Kelas</h2>
+                <p>
+                    Ketidakseimbangan kelas terjadi ketika jumlah observasi pada
+                    suatu kelas jauh lebih banyak daripada kelas lainnya.
+                    Contohnya, dalam prediksi penipuan transaksi, transaksi
+                    normal dapat berjumlah jauh lebih banyak daripada transaksi
+                    penipuan.
+                </p>
+
+                <p>
+                    Pada kondisi ini, model yang selalu memprediksi kelas
+                    mayoritas bisa memperoleh akurasi tinggi, tetapi gagal
+                    mendeteksi kelas minoritas.
+                </p>
+
+                <h3>Metode penanganan</h3>
+                <ol>
+                    <li>
+                        <strong>Class weighting:</strong> memberikan bobot lebih
+                        besar pada kesalahan kelas minoritas.
+                    </li>
+                    <li>
+                        <strong>Undersampling:</strong> mengurangi jumlah sampel
+                        kelas mayoritas.
+                    </li>
+                    <li>
+                        <strong>Oversampling:</strong> menambah representasi kelas
+                        minoritas, misalnya dengan pengambilan sampel ulang.
+                    </li>
+                    <li>
+                        <strong>SMOTE:</strong> menghasilkan sampel sintetis
+                        berdasarkan struktur tetangga kelas minoritas untuk data
+                        yang sesuai.
+                    </li>
+                    <li>
+                        <strong>Penyesuaian threshold:</strong> memilih ambang
+                        prediksi berdasarkan kebutuhan operasional.
+                    </li>
+                </ol>
+
+                <h3>Menggunakan class weight</h3>
+                <pre><code>from sklearn.linear_model import LogisticRegression
+
+model = LogisticRegression(
+    class_weight="balanced",
+    max_iter=1000
+)
+
+model.fit(X_train, y_train)</code></pre>
+
+                <h3>Menggunakan SMOTE</h3>
+                <pre><code>from imblearn.over_sampling import SMOTE
+
+smote = SMOTE(random_state=42)
+
+X_train_baru, y_train_baru = smote.fit_resample(
+    X_train,
+    y_train
+)</code></pre>
+
+                <p>
+                    Resampling hanya boleh dilakukan pada data latih. Jangan
+                    melakukan oversampling atau SMOTE sebelum pemisahan data,
+                    karena sampel sintetis atau duplikasi dapat membuat informasi
+                    dari data validasi masuk ke proses pelatihan.
+                </p>
+
+                <h3>Metrik evaluasi</h3>
+                <ul>
+                    <li><strong>Precision:</strong> proporsi prediksi positif yang benar.</li>
+                    <li><strong>Recall:</strong> proporsi kasus positif aktual yang berhasil ditemukan.</li>
+                    <li><strong>F1-score:</strong> rata-rata harmonik precision dan recall.</li>
+                    <li><strong>PR-AUC:</strong> luas di bawah kurva precision-recall.</li>
+                    <li><strong>ROC-AUC:</strong> mengukur kemampuan pemeringkatan antara kelas positif dan negatif.</li>
+                    <li><strong>Confusion matrix:</strong> merangkum prediksi benar dan salah untuk setiap kelas.</li>
+                </ul>
+
+                <p>
+                    Metrik terbaik bergantung pada tujuan masalah. Pada deteksi
+                    penyakit atau penipuan, recall kelas positif bisa sangat
+                    penting; pada sistem yang menghasilkan banyak peringatan
+                    palsu, precision juga perlu diperhatikan.
+                </p>
+            </section>
+
+            <section>
+                <h2>9. Data Leakage</h2>
+                <p>
+                    <em>Data leakage</em> atau kebocoran data terjadi ketika
+                    informasi yang seharusnya tidak tersedia pada saat prediksi
+                    masuk ke proses pelatihan atau evaluasi model. Kebocoran
+                    dapat membuat hasil evaluasi tampak sangat baik, tetapi
+                    performa sebenarnya buruk saat digunakan pada data baru.
+                </p>
+
+                <h3>Jenis data leakage</h3>
+                <ul>
+                    <li>
+                        <strong>Target leakage:</strong> fitur mengandung
+                        informasi yang baru diketahui setelah target terjadi.
+                    </li>
+                    <li>
+                        <strong>Preprocessing leakage:</strong> statistik
+                        imputasi, scaling, atau seleksi fitur dipelajari dari
+                        seluruh dataset sebelum pemisahan data.
+                    </li>
+                    <li>
+                        <strong>Leakage antarwaktu:</strong> informasi masa depan
+                        digunakan untuk memprediksi kejadian di masa lalu.
+                    </li>
+                    <li>
+                        <strong>Leakage antarentitas:</strong> informasi dari
+                        individu atau objek yang sama tersebar ke data latih
+                        dan data uji sehingga evaluasi tidak mencerminkan
+                        penggunaan sebenarnya.
+                    </li>
+                </ul>
+
+                <h3>Contoh yang keliru</h3>
+                <pre><code>from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import train_test_split
+
+scaler = StandardScaler()
+
+# Keliru: scaler mempelajari statistik dari seluruh data
+X_scaled = scaler.fit_transform(X)
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X_scaled, y, test_size=0.2, random_state=42
+)</code></pre>
+
+                <h3>Contoh yang benar</h3>
+                <pre><code>from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import train_test_split
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
+scaler = StandardScaler()
+
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)</code></pre>
+
+                <p>
+                    Dalam contoh yang benar, scaler hanya mempelajari rata-rata
+                    dan simpangan baku dari data latih. Data uji ditransformasi
+                    menggunakan parameter tersebut.
+                </p>
+
+                <p>
+                    Untuk data berurutan berdasarkan waktu, pemisahan acak
+                    belum tentu tepat. Gunakan pemisahan berdasarkan waktu
+                    apabila model ditujukan untuk memprediksi kejadian pada
+                    periode mendatang. Untuk data berkelompok, pertimbangkan
+                    pemisahan berdasarkan entitas atau kelompok.
+                </p>
+            </section>
+
+            <section>
+                <h2>10. Pipeline Preprocessing</h2>
+                <p>
+                    Pipeline adalah rangkaian tahapan preprocessing dan
+                    pemodelan yang dijalankan secara terstruktur. Pipeline
+                    membantu menjaga konsistensi antara pelatihan dan prediksi,
+                    serta mengurangi risiko data leakage saat digunakan dengan
+                    validasi silang.
+                </p>
+
+                <h3>Contoh pipeline data numerik dan kategorikal</h3>
+                <p>
+                    Misalkan dataset memiliki fitur numerik berupa usia dan
+                    pendapatan serta fitur kategorikal berupa kota dan pekerjaan.
+                    Kita dapat membangun preprocessing berbeda untuk setiap
+                    kelompok fitur.
+                </p>
+
+                <pre><code>import pandas as pd
+
+from sklearn.compose import ColumnTransformer
+from sklearn.impute import SimpleImputer
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import classification_report
+
+df = pd.read_csv("pelanggan.csv")
+
+X = df.drop(columns=["berhenti_berlangganan"])
+y = df["berhenti_berlangganan"]
+
+numerik = ["usia", "pendapatan"]
+kategorikal = ["kota", "pekerjaan"]
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X,
+    y,
+    test_size=0.2,
+    random_state=42,
+    stratify=y
+)
+
+pipeline_numerik = Pipeline([
+    ("imputer", SimpleImputer(strategy="median")),
+    ("scaler", StandardScaler())
+])
+
+pipeline_kategorikal = Pipeline([
+    ("imputer", SimpleImputer(strategy="most_frequent")),
+    ("encoder", OneHotEncoder(handle_unknown="ignore"))
+])
+
+preprocessor = ColumnTransformer([
+    ("numerik", pipeline_numerik, numerik),
+    ("kategorikal", pipeline_kategorikal, kategorikal)
+])
+
+model = Pipeline([
+    ("preprocessing", preprocessor),
+    ("classifier", LogisticRegression(max_iter=1000))
+])
+
+model.fit(X_train, y_train)
+
+prediksi = model.predict(X_test)
+print(classification_report(y_test, prediksi))</code></pre>
+
+                <h3>Alur pipeline</h3>
+                <ol>
+                    <li>Memisahkan fitur dan target.</li>
+                    <li>Membagi data menjadi data latih dan data uji.</li>
+                    <li>Mengimputasi nilai kosong.</li>
+                    <li>Melakukan scaling pada fitur numerik.</li>
+                    <li>Melakukan encoding pada fitur kategorikal.</li>
+                    <li>Melatih model menggunakan fitur hasil preprocessing.</li>
+                    <li>Mengevaluasi model pada data uji.</li>
+                </ol>
+
+                <p>
+                    Pada pipeline tersebut, setiap transformasi mempelajari
+                    parameternya melalui <code>fit()</code> ketika pipeline
+                    dilatih. Ketika <code>predict()</code> dipanggil, transformasi
+                    yang sama diterapkan secara otomatis pada data baru.
+                </p>
+
+                <p>
+                    Pipeline dasar di atas belum mencakup seluruh kemungkinan
+                    preprocessing. Penanganan outlier, transformasi distribusi,
+                    pemilihan fitur, atau penanganan ketidakseimbangan kelas
+                    dapat ditambahkan sesuai kebutuhan. Jika menggunakan SMOTE,
+                    gunakan pipeline dari <code>imblearn</code> agar resampling
+                    dilakukan hanya pada bagian data latih dalam setiap fold
+                    validasi.
+                </p>
+            </section>
+
+            <section>
+                <h2>Proyek Mini: Membersihkan Dataset Pelanggan</h2>
+                <p>
+                    Tujuan proyek ini adalah mempersiapkan dataset pelanggan
+                    untuk memprediksi apakah pelanggan berhenti berlangganan.
+                    Dataset memiliki fitur usia, pendapatan, kota, pekerjaan,
+                    dan target berhenti berlangganan.
+                </p>
+
+                <h3>Langkah 1 — Memuat dan memeriksa data</h3>
+                <pre><code>import pandas as pd
+
+df = pd.read_csv("pelanggan.csv")
+
+print(df.head())
+print(df.shape)
+print(df.info())
+print(df.isna().sum())
+print(df.duplicated().sum())</code></pre>
+
+                <h3>Langkah 2 — Memeriksa duplikasi dan konsistensi kategori</h3>
+                <pre><code>df = df.drop_duplicates()
+
+df["kota"] = (
+    df["kota"]
+    .astype("string")
+    .str.strip()
+    .str.title()
+)
+
+print(df["kota"].value_counts(dropna=False))</code></pre>
+
+                <p>
+                    Normalisasi teks seperti menghapus spasi dan menyeragamkan
+                    kapitalisasi dapat membantu menyatukan kategori yang
+                    seharusnya sama. Pastikan perubahan tersebut sesuai dengan
+                    aturan data, bukan menggabungkan kategori yang berbeda.
+                </p>
+
+                <h3>Langkah 3 — Memisahkan data</h3>
+                <pre><code>from sklearn.model_selection import train_test_split
+
+X = df.drop(columns=["berhenti_berlangganan"])
+y = df["berhenti_berlangganan"]
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y,
+    test_size=0.2,
+    random_state=42,
+    stratify=y
+)</code></pre>
+
+                <h3>Langkah 4 — Melatih pipeline</h3>
+                <p>
+                    Gunakan pipeline pada Bagian 10 untuk mengimputasi nilai
+                    kosong, melakukan standardisasi, mengubah kategori menjadi
+                    representasi numerik, dan melatih model.
+                </p>
+
+                <h3>Langkah 5 — Mengevaluasi hasil</h3>
+                <pre><code>from sklearn.metrics import (
+    confusion_matrix,
+    accuracy_score,
+    precision_score,
+    recall_score,
+    f1_score
+)
+
+print("Confusion matrix:")
+print(confusion_matrix(y_test, prediksi))
+
+print("Accuracy:", accuracy_score(y_test, prediksi))
+print("Precision:", precision_score(y_test, prediksi, zero_division=0))
+print("Recall:", recall_score(y_test, prediksi, zero_division=0))
+print("F1-score:", f1_score(y_test, prediksi, zero_division=0))</code></pre>
+
+                <p>
+                    Jika kelas target tidak seimbang, jangan hanya mengandalkan
+                    accuracy. Periksa precision, recall, F1-score, dan metrik
+                    lain yang sesuai dengan tujuan penggunaan model.
+                </p>
+            </section>
+
+            <section>
+                <h2>Latihan Mandiri</h2>
+                <ol>
+                    <li>
+                        Sebuah dataset memiliki 1.000 baris dan 12 kolom.
+                        Bagaimana cara memeriksa jumlah nilai kosong pada setiap
+                        kolom menggunakan Pandas?
+                    </li>
+                    <li>
+                        Kapan median lebih tepat digunakan daripada mean untuk
+                        imputasi data numerik?
+                    </li>
+                    <li>
+                        Jelaskan perbedaan data duplikat berdasarkan seluruh
+                        kolom dan duplikat berdasarkan satu kolom identitas.
+                    </li>
+                    <li>
+                        Diketahui \(Q_1=20\) dan \(Q_3=40\). Hitung IQR serta
+                        batas bawah dan batas atas kandidat outlier menggunakan
+                        aturan \(1.5(IQR)\).
+                    </li>
+                    <li>
+                        Mengapa one-hot encoding sering digunakan untuk kategori
+                        nominal?
+                    </li>
+                    <li>
+                        Jelaskan perbedaan min-max normalization dan
+                        standardisasi.
+                    </li>
+                    <li>
+                        Mengapa transformasi \(\log(1+x)\) dapat membantu
+                        mengurangi kemencengan distribusi ke kanan?
+                    </li>
+                    <li>
+                        Mengapa akurasi dapat menyesatkan pada dataset dengan
+                        kelas yang sangat tidak seimbang?
+                    </li>
+                    <li>
+                        Berikan contoh data leakage yang mungkin terjadi pada
+                        prediksi kredit atau prediksi pelanggan berhenti
+                        berlangganan.
+                    </li>
+                    <li>
+                        Apa keuntungan menggunakan <code>Pipeline</code> dan
+                        <code>ColumnTransformer</code> dibandingkan melakukan
+                        setiap preprocessing secara terpisah?
+                    </li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>Ringkasan</h2>
+                <ul>
+                    <li>
+                        Memahami struktur dataset merupakan langkah awal sebelum
+                        melakukan pembersihan.
+                    </li>
+                    <li>
+                        Data kosong perlu ditangani berdasarkan pola kehilangan
+                        data dan karakteristik variabel.
+                    </li>
+                    <li>
+                        Duplikasi harus diperiksa berdasarkan identitas dan
+                        konteks observasi.
+                    </li>
+                    <li>
+                        Outlier perlu diperiksa, bukan otomatis dihapus.
+                    </li>
+                    <li>
+                        Encoding mengubah kategori menjadi representasi yang
+                        dapat diproses oleh algoritma.
+                    </li>
+                    <li>
+                        Normalisasi dan standardisasi membantu menyamakan skala
+                        fitur ketika diperlukan.
+                    </li>
+                    <li>
+                        Transformasi distribusi dapat membantu karakteristik
+                        data sesuai dengan kebutuhan analisis atau model.
+                    </li>
+                    <li>
+                        Ketidakseimbangan kelas perlu ditangani menggunakan
+                        strategi dan metrik yang sesuai.
+                    </li>
+                    <li>
+                        Data leakage dapat menghasilkan evaluasi yang terlalu
+                        optimistis.
+                    </li>
+                    <li>
+                        Pipeline membuat preprocessing lebih konsisten dan
+                        membantu mengurangi risiko kebocoran data.
+                    </li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Referensi</h2>
+                <ul>
+                    <li>
+                        <a href="https://pandas.pydata.org/docs/" target="_blank" rel="noopener noreferrer">
+                            Dokumentasi resmi Pandas
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://numpy.org/doc/" target="_blank" rel="noopener noreferrer">
+                            Dokumentasi resmi NumPy
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://scikit-learn.org/stable/" target="_blank" rel="noopener noreferrer">
+                            Dokumentasi resmi Scikit-learn
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://imbalanced-learn.org/stable/" target="_blank" rel="noopener noreferrer">
+                            Dokumentasi resmi imbalanced-learn
+                        </a>
+                    </li>
+                    <li>
+                        Kuhn, M. dan Johnson, K. (2013). <em>Applied Predictive Modeling</em>. Springer.
+                    </li>
+                    <li>
+                        Géron, A. (2022). <em>Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow</em>. Edisi ke-3. O'Reilly Media.
+                    </li>
+                </ul>
+            </section>
+        </article>
+    </main>
+
+    <footer>
+        ShadowLab — Belajar Tanpa Batas
+    </footer>
+</body>
+</html>

@@ -1,0 +1,1605 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python untuk Data Science | Kalkulus</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+    MathJax = {
+        tex: {
+            inlineMath: [['\\(', '\\)']],
+            displayMath: [['\\[', '\\]']]
+        }
+    };
+    </script>
+    <script
+        id="MathJax-script"
+        async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+    </script>
+</head>
+<body>
+    <header class="navbar">
+        <a href="index.html" class="logo">Kalkulus</a>
+        <nav>
+            <a href="index.html">Beranda</a>
+            <a href="MateriDataScience.html">Materi Data Science</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <article class="article">
+            <p class="eyebrow">BAGIAN II · PEMROGRAMAN</p>
+            <h1>Python untuk Data Science</h1>
+            <p class="intro">
+                Python merupakan bahasa pemrograman yang banyak digunakan
+                dalam data science karena memiliki sintaks yang relatif
+                sederhana serta didukung berbagai pustaka untuk pengolahan,
+                analisis, visualisasi, dan pemodelan data. Pada bagian ini,
+                kita akan mempelajari dasar-dasar Python sebagai fondasi
+                untuk memahami proses analisis data.
+            </p>
+
+            <section>
+                <h2>Tujuan Pembelajaran</h2>
+                <p>Setelah mempelajari materi ini, mahasiswa diharapkan mampu:</p>
+                <ul>
+                    <li>Menggunakan variabel dan tipe data Python.</li>
+                    <li>Menyusun ekspresi menggunakan operator.</li>
+                    <li>Mengendalikan alur program dengan percabangan dan perulangan.</li>
+                    <li>Mengolah data menggunakan struktur data bawaan Python.</li>
+                    <li>Membuat fungsi dan menyusun program secara modular.</li>
+                    <li>Membaca dan menulis file serta menangani kesalahan program.</li>
+                    <li>Menggunakan library dan lingkungan kerja Python.</li>
+                    <li>Menjalankan kode Python melalui Jupyter Notebook dan Google Colab.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>1. Variabel dan Tipe Data</h2>
+
+                <h3>1.1 Variabel</h3>
+                <p>
+                    Variabel adalah nama yang digunakan untuk merujuk pada
+                    suatu nilai atau objek di dalam program. Variabel dibuat
+                    melalui operasi penugasan menggunakan tanda sama dengan
+                    (<code>=</code>).
+                </p>
+
+                <pre><code>nama = "Andi"
+umur = 20
+tinggi = 170.5
+mahasiswa = True
+
+print(nama)
+print(umur)
+print(tinggi)
+print(mahasiswa)</code></pre>
+
+                <p>
+                    Python tidak mengharuskan kita menuliskan tipe data
+                    ketika membuat variabel. Tipe data ditentukan berdasarkan
+                    objek yang diberikan kepada variabel.
+                </p>
+
+                <h3>1.2 Aturan Penamaan Variabel</h3>
+                <ul>
+                    <li>Nama variabel dapat mengandung huruf, angka, dan garis bawah.</li>
+                    <li>Nama variabel tidak boleh diawali angka.</li>
+                    <li>Nama variabel tidak boleh mengandung spasi.</li>
+                    <li>Huruf besar dan kecil dibedakan.</li>
+                    <li>Kata kunci Python tidak boleh digunakan sebagai nama variabel.</li>
+                </ul>
+
+                <pre><code>nilai_matematika = 90
+nilai2 = 85
+
+# Contoh nama yang tidak valid:
+# 2nilai = 85
+# nilai matematika = 90</code></pre>
+
+                <h3>1.3 Tipe Data Dasar</h3>
+                <p>Beberapa tipe data dasar yang sering digunakan adalah:</p>
+
+                <ul>
+                    <li><code>int</code>: bilangan bulat, misalnya <code>10</code>.</li>
+                    <li><code>float</code>: bilangan desimal, misalnya <code>3.14</code>.</li>
+                    <li><code>str</code>: teks, misalnya <code>"Python"</code>.</li>
+                    <li><code>bool</code>: nilai logika, yaitu <code>True</code> atau <code>False</code>.</li>
+                    <li><code>NoneType</code>: menyatakan ketiadaan nilai, yaitu <code>None</code>.</li>
+                </ul>
+
+                <pre><code>a = 10
+b = 3.14
+c = "Data Science"
+d = True
+e = None
+
+print(type(a))
+print(type(b))
+print(type(c))
+print(type(d))
+print(type(e))</code></pre>
+
+                <h3>1.4 Konversi Tipe Data</h3>
+                <p>
+                    Konversi tipe data digunakan untuk mengubah nilai dari
+                    satu tipe ke tipe lainnya, misalnya dari teks menjadi
+                    bilangan bulat.
+                </p>
+
+                <pre><code>angka_teks = "25"
+angka = int(angka_teks)
+
+desimal = float("3.5")
+teks = str(100)
+
+print(angka + 5)
+print(desimal)
+print(teks)</code></pre>
+
+                <p>
+                    Perlu diperhatikan bahwa tidak semua nilai dapat dikonversi
+                    secara langsung. Contohnya, <code>int("halo")</code>
+                    menghasilkan kesalahan karena teks tersebut bukan
+                    representasi bilangan bulat yang valid.
+                </p>
+
+                <div class="example">
+                    <h3>Contoh Soal</h3>
+                    <p>Perhatikan program berikut.</p>
+                    <pre><code>x = "10"
+y = 5
+
+print(int(x) + y)
+print(type(x))
+print(type(int(x)))</code></pre>
+
+                    <p><strong>Penyelesaian:</strong></p>
+                    <ul>
+                        <li>Baris pertama mencetak <code>15</code>.</li>
+                        <li>Baris kedua mencetak <code>&lt;class 'str'&gt;</code>.</li>
+                        <li>Baris ketiga mencetak <code>&lt;class 'int'&gt;</code>.</li>
+                    </ul>
+                    <p>
+                        Fungsi <code>int(x)</code> mengonversi nilai
+                        <code>x</code> menjadi bilangan bulat tanpa mengubah
+                        tipe asli variabel <code>x</code>.
+                    </p>
+                </div>
+            </section>
+
+            <section>
+                <h2>2. Operator dan Ekspresi</h2>
+
+                <h3>2.1 Operator Aritmetika</h3>
+                <p>
+                    Operator aritmetika digunakan untuk melakukan perhitungan
+                    matematis.
+                </p>
+
+                <ul>
+                    <li><code>+</code>: penjumlahan.</li>
+                    <li><code>-</code>: pengurangan.</li>
+                    <li><code>*</code>: perkalian.</li>
+                    <li><code>/</code>: pembagian biasa.</li>
+                    <li><code>//</code>: pembagian dengan pembulatan ke bawah.</li>
+                    <li><code>%</code>: sisa pembagian.</li>
+                    <li><code>**</code>: perpangkatan.</li>
+                </ul>
+
+                <pre><code>a = 17
+b = 5
+
+print(a + b)   # 22
+print(a - b)   # 12
+print(a * b)   # 85
+print(a / b)   # 3.4
+print(a // b)  # 3
+print(a % b)   # 2
+print(a ** b)  # 1419857</code></pre>
+
+                <h3>2.2 Operator Perbandingan</h3>
+                <p>
+                    Operator perbandingan membandingkan dua nilai dan
+                    menghasilkan nilai logika <code>True</code> atau
+                    <code>False</code>.
+                </p>
+
+                <ul>
+                    <li><code>==</code>: sama dengan.</li>
+                    <li><code>!=</code>: tidak sama dengan.</li>
+                    <li><code>&gt;</code>: lebih besar dari.</li>
+                    <li><code>&lt;</code>: lebih kecil dari.</li>
+                    <li><code>&gt;=</code>: lebih besar dari atau sama dengan.</li>
+                    <li><code>&lt;=</code>: lebih kecil dari atau sama dengan.</li>
+                </ul>
+
+                <pre><code>nilai = 85
+
+print(nilai >= 75)  # True
+print(nilai == 100) # False
+print(nilai != 0)   # True</code></pre>
+
+                <h3>2.3 Operator Logika</h3>
+                <p>
+                    Operator logika menggabungkan atau membalikkan kondisi.
+                </p>
+
+                <ul>
+                    <li><code>and</code>: bernilai benar jika kedua kondisi benar.</li>
+                    <li><code>or</code>: bernilai benar jika minimal satu kondisi benar.</li>
+                    <li><code>not</code>: membalikkan nilai logika.</li>
+                </ul>
+
+                <pre><code>nilai = 85
+kehadiran = 90
+
+lulus = nilai >= 75 and kehadiran >= 80
+istimewa = nilai >= 90 or kehadiran >= 95
+
+print(lulus)      # True
+print(istimewa)   # False
+print(not lulus)  # False</code></pre>
+
+                <h3>2.4 Operator Penugasan</h3>
+                <p>
+                    Operator penugasan digunakan untuk memberikan nilai
+                    atau memperbarui nilai suatu variabel.
+                </p>
+
+                <pre><code>x = 10
+x += 5   # x = x + 5
+x -= 3   # x = x - 3
+x *= 2   # x = x * 2
+
+print(x) # 24</code></pre>
+
+                <h3>2.5 Ekspresi dan Prioritas Operator</h3>
+                <p>
+                    Ekspresi adalah kombinasi nilai, variabel, dan operator
+                    yang menghasilkan suatu nilai. Python mengikuti prioritas
+                    operator tertentu, seperti perkalian yang dikerjakan
+                    sebelum penjumlahan.
+                </p>
+
+                <pre><code>hasil1 = 2 + 3 * 4
+hasil2 = (2 + 3) * 4
+
+print(hasil1)  # 14
+print(hasil2)  # 20</code></pre>
+
+                <p>
+                    Penggunaan tanda kurung membantu memperjelas urutan
+                    operasi, terutama ketika ekspresi menjadi kompleks.
+                </p>
+
+                <div class="example">
+                    <h3>Contoh Soal</h3>
+                    <p>Tentukan hasil ekspresi berikut.</p>
+                    <pre><code>hasil = (20 - 4) / 2 ** 2 + 3
+print(hasil)</code></pre>
+                    <p><strong>Penyelesaian:</strong></p>
+                    <p>
+                        Pangkat dihitung terlebih dahulu, kemudian operasi
+                        di dalam kurung, pembagian, dan penjumlahan.
+                    </p>
+                    <p>
+                        \[
+                        \frac{20-4}{2^2}+3
+                        =\frac{16}{4}+3=7
+                        \]
+                    </p>
+                    <p>Jadi, program mencetak <code>7.0</code>.</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>3. Percabangan (if, elif, else)</h2>
+
+                <h3>3.1 Konsep Percabangan</h3>
+                <p>
+                    Percabangan memungkinkan program memilih tindakan
+                    berdasarkan kondisi tertentu. Python menggunakan
+                    <code>if</code>, <code>elif</code>, dan
+                    <code>else</code>.
+                </p>
+
+                <h3>3.2 Pernyataan if</h3>
+                <p>
+                    Pernyataan <code>if</code> menjalankan blok kode ketika
+                    kondisi bernilai benar.
+                </p>
+
+                <pre><code>nilai = 85
+
+if nilai >= 75:
+    print("Lulus")</code></pre>
+
+                <p>
+                    Tanda titik dua menandai awal blok kode, sedangkan
+                    indentasi menunjukkan kode yang termasuk dalam blok
+                    tersebut. Python umumnya menggunakan empat spasi.
+                </p>
+
+                <h3>3.3 Pernyataan if-else</h3>
+                <p>
+                    Pernyataan <code>else</code> dijalankan ketika kondisi
+                    pada <code>if</code> tidak terpenuhi.
+                </p>
+
+                <pre><code>nilai = 60
+
+if nilai >= 75:
+    print("Lulus")
+else:
+    print("Tidak lulus")</code></pre>
+
+                <h3>3.4 Pernyataan if-elif-else</h3>
+                <p>
+                    <code>elif</code> digunakan untuk memeriksa kondisi
+                    alternatif apabila kondisi sebelumnya tidak terpenuhi.
+                </p>
+
+                <pre><code>nilai = 82
+
+if nilai >= 90:
+    print("A")
+elif nilai >= 80:
+    print("B")
+elif nilai >= 70:
+    print("C")
+elif nilai >= 60:
+    print("D")
+else:
+    print("E")</code></pre>
+
+                <p>
+                    Program tersebut mencetak <code>B</code>. Pemeriksaan
+                    dilakukan dari atas ke bawah dan blok pertama yang
+                    kondisinya benar akan dijalankan.
+                </p>
+
+                <h3>3.5 Percabangan Bersarang</h3>
+                <p>
+                    Percabangan bersarang adalah percabangan yang ditempatkan
+                    di dalam blok percabangan lainnya.
+                </p>
+
+                <pre><code>nilai = 85
+kehadiran = 90
+
+if nilai >= 75:
+    if kehadiran >= 80:
+        print("Lulus dengan syarat lengkap")
+    else:
+        print("Nilai cukup, kehadiran kurang")
+else:
+    print("Tidak lulus")</code></pre>
+
+                <div class="example">
+                    <h3>Contoh Soal</h3>
+                    <p>
+                        Sebuah program menentukan kategori data berdasarkan
+                        nilai pengukuran. Jika nilai negatif, tampilkan
+                        "Tidak valid". Jika nol, tampilkan "Nol". Selain itu,
+                        tampilkan "Positif".
+                    </p>
+                    <pre><code>x = -3
+
+if x < 0:
+    print("Tidak valid")
+elif x == 0:
+    print("Nol")
+else:
+    print("Positif")</code></pre>
+                    <p>
+                        Karena \(x=-3\), keluaran program adalah
+                        <code>Tidak valid</code>.
+                    </p>
+                </div>
+            </section>
+
+            <section>
+                <h2>4. Perulangan (for, while)</h2>
+
+                <h3>4.1 Konsep Perulangan</h3>
+                <p>
+                    Perulangan digunakan untuk menjalankan suatu blok kode
+                    berkali-kali. Dua bentuk perulangan utama dalam Python
+                    adalah <code>for</code> dan <code>while</code>.
+                </p>
+
+                <h3>4.2 Perulangan for</h3>
+                <p>
+                    Perulangan <code>for</code> digunakan untuk menelusuri
+                    elemen dalam suatu objek yang dapat diiterasi, seperti
+                    list, tuple, string, atau objek rentang.
+                </p>
+
+                <pre><code>for i in range(5):
+    print(i)</code></pre>
+
+                <p>Hasilnya adalah angka 0 sampai 4.</p>
+
+                <p>
+                    Fungsi <code>range()</code> dapat menerima tiga argumen:
+                    nilai awal, batas akhir eksklusif, dan langkah.
+                </p>
+
+                <pre><code>for i in range(2, 11, 2):
+    print(i)</code></pre>
+
+                <p>Hasilnya adalah 2, 4, 6, 8, dan 10.</p>
+
+                <h3>4.3 Menghitung Jumlah Data</h3>
+                <p>
+                    Perulangan dapat digunakan untuk menjumlahkan sekumpulan
+                    data secara bertahap.
+                </p>
+
+                <pre><code>data = [10, 20, 30, 40]
+total = 0
+
+for angka in data:
+    total += angka
+
+print(total)  # 100</code></pre>
+
+                <h3>4.4 Perulangan while</h3>
+                <p>
+                    Perulangan <code>while</code> menjalankan blok kode
+                    selama kondisi bernilai benar.
+                </p>
+
+                <pre><code>i = 1
+
+while i <= 5:
+    print(i)
+    i += 1</code></pre>
+
+                <p>
+                    Variabel <code>i</code> diperbarui pada setiap iterasi
+                    sehingga kondisi akhirnya menjadi salah dan perulangan
+                    berhenti.
+                </p>
+
+                <h3>4.5 break dan continue</h3>
+                <ul>
+                    <li><code>break</code> menghentikan perulangan secara langsung.</li>
+                    <li><code>continue</code> melewati sisa kode pada iterasi saat ini dan melanjutkan ke iterasi berikutnya.</li>
+                </ul>
+
+                <pre><code>for i in range(1, 10):
+    if i == 5:
+        break
+    print(i)</code></pre>
+
+                <p>Program mencetak angka 1 sampai 4.</p>
+
+                <pre><code>for i in range(1, 6):
+    if i == 3:
+        continue
+    print(i)</code></pre>
+
+                <p>Program mencetak 1, 2, 4, dan 5.</p>
+
+                <h3>4.6 Perulangan Bersarang</h3>
+                <p>
+                    Perulangan bersarang adalah perulangan di dalam
+                    perulangan lainnya. Struktur ini berguna untuk
+                    memproses data berbentuk tabel atau matriks.
+                </p>
+
+                <pre><code>for i in range(1, 4):
+    for j in range(1, 3):
+        print(i, j)</code></pre>
+
+                <div class="example">
+                    <h3>Contoh Soal</h3>
+                    <p>
+                        Hitung jumlah bilangan genap dari 1 sampai 10
+                        menggunakan perulangan.
+                    </p>
+
+                    <pre><code>total = 0
+
+for i in range(1, 11):
+    if i % 2 == 0:
+        total += i
+
+print(total)</code></pre>
+
+                    <p>
+                        Bilangan genap yang dijumlahkan adalah
+                        \(2,4,6,8,10\). Dengan demikian,
+                    </p>
+                    <p>
+                        \[
+                        2+4+6+8+10=30.
+                        \]
+                    </p>
+                </div>
+            </section>
+
+            <section>
+                <h2>5. Struktur Data: list, tuple, set, dictionary</h2>
+
+                <p>
+                    Struktur data digunakan untuk menyimpan dan mengatur
+                    sekumpulan nilai. Python menyediakan beberapa struktur
+                    data bawaan dengan karakteristik yang berbeda.
+                </p>
+
+                <h3>5.1 List</h3>
+                <p>
+                    <code>list</code> adalah kumpulan elemen yang berurutan,
+                    dapat diubah, dan dapat mengandung elemen duplikat.
+                    List dibuat menggunakan tanda kurung siku.
+                </p>
+
+                <pre><code>nilai = [80, 90, 75, 90]
+
+print(nilai[0])   # 80
+print(nilai[-1])  # 90
+
+nilai.append(95)
+nilai[0] = 85
+
+print(nilai)</code></pre>
+
+                <p>
+                    Indeks Python dimulai dari nol. Indeks negatif digunakan
+                    untuk mengakses elemen dari bagian akhir list.
+                </p>
+
+                <p>Operasi list yang umum digunakan:</p>
+                <ul>
+                    <li><code>append(x)</code>: menambahkan elemen ke akhir.</li>
+                    <li><code>insert(i, x)</code>: menyisipkan elemen pada indeks tertentu.</li>
+                    <li><code>remove(x)</code>: menghapus kemunculan pertama nilai tertentu.</li>
+                    <li><code>pop(i)</code>: menghapus dan mengembalikan elemen pada indeks tertentu.</li>
+                    <li><code>sort()</code>: mengurutkan list secara langsung.</li>
+                    <li><code>len()</code>: menghitung banyak elemen.</li>
+                </ul>
+
+                <h3>5.2 Tuple</h3>
+                <p>
+                    <code>tuple</code> adalah kumpulan elemen yang berurutan
+                    dan tidak dapat diubah setelah dibuat. Tuple biasanya
+                    ditulis menggunakan tanda kurung biasa.
+                </p>
+
+                <pre><code>koordinat = (10, 20)
+
+print(koordinat[0])
+print(koordinat[1])</code></pre>
+
+                <p>
+                    Tuple cocok untuk menyimpan data yang tidak seharusnya
+                    diubah, seperti koordinat atau pasangan nilai tetap.
+                    Tuple yang hanya memiliki satu elemen harus ditulis
+                    dengan koma, misalnya <code>(5,)</code>.
+                </p>
+
+                <h3>5.3 Set</h3>
+                <p>
+                    <code>set</code> adalah kumpulan elemen unik yang tidak
+                    memiliki urutan indeks. Set berguna untuk menghilangkan
+                    duplikasi dan melakukan operasi himpunan.
+                </p>
+
+                <pre><code>data = [1, 2, 2, 3, 3, 3]
+unik = set(data)
+
+print(unik)
+
+A = {1, 2, 3}
+B = {3, 4, 5}
+
+print(A | B)  # Gabungan
+print(A & B)  # Irisan
+print(A - B)  # Selisih</code></pre>
+
+                <p>
+                    Set kosong dibuat menggunakan <code>set()</code>,
+                    bukan <code>{}</code>, karena tanda <code>{}</code>
+                    digunakan untuk dictionary kosong.
+                </p>
+
+                <h3>5.4 Dictionary</h3>
+                <p>
+                    <code>dictionary</code> menyimpan pasangan kunci dan
+                    nilai. Setiap kunci harus unik dan dapat digunakan
+                    untuk mengakses nilai yang berkaitan dengannya.
+                </p>
+
+                <pre><code>mahasiswa = {
+    "nama": "Andi",
+    "umur": 20,
+    "jurusan": "Matematika"
+}
+
+print(mahasiswa["nama"])
+print(mahasiswa["umur"])
+
+mahasiswa["umur"] = 21
+mahasiswa["semester"] = 5
+
+print(mahasiswa)</code></pre>
+
+                <p>
+                    Dictionary juga menyediakan metode
+                    <code>keys()</code>, <code>values()</code>,
+                    <code>items()</code>, dan <code>get()</code>.
+                    Metode <code>get()</code> dapat digunakan untuk
+                    mengambil nilai tanpa langsung menghasilkan
+                    <code>KeyError</code> ketika kunci tidak ditemukan.
+                </p>
+
+                <pre><code>print(mahasiswa.get("IPK", 0.0))
+
+for kunci, nilai in mahasiswa.items():
+    print(kunci, ":", nilai)</code></pre>
+
+                <h3>5.5 Perbandingan Struktur Data</h3>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Struktur</th>
+                            <th>Berurutan</th>
+                            <th>Dapat diubah</th>
+                            <th>Duplikat</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>List</td>
+                            <td>Ya</td>
+                            <td>Ya</td>
+                            <td>Ya</td>
+                        </tr>
+                        <tr>
+                            <td>Tuple</td>
+                            <td>Ya</td>
+                            <td>Tidak</td>
+                            <td>Ya</td>
+                        </tr>
+                        <tr>
+                            <td>Set</td>
+                            <td>Tidak memiliki indeks urutan</td>
+                            <td>Ya</td>
+                            <td>Tidak</td>
+                        </tr>
+                        <tr>
+                            <td>Dictionary</td>
+                            <td>Mempertahankan urutan penyisipan</td>
+                            <td>Ya</td>
+                            <td>Kunci tidak boleh duplikat</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="example">
+                    <h3>Contoh Soal</h3>
+                    <p>
+                        Diberikan data nilai mahasiswa berikut.
+                    </p>
+                    <pre><code>nilai = [80, 75, 90, 80, 85]
+
+print(len(nilai))
+print(sum(nilai) / len(nilai))
+print(set(nilai))</code></pre>
+
+                    <p><strong>Penyelesaian:</strong></p>
+                    <ul>
+                        <li>Banyak data adalah 5.</li>
+                        <li>Rata-rata nilai adalah \(410/5=82\).</li>
+                        <li>Set menyimpan nilai unik, yaitu 80, 75, 90, dan 85. Urutan tampilannya tidak dijamin.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section>
+                <h2>6. Fungsi dan Modularisasi</h2>
+
+                <h3>6.1 Pengertian Fungsi</h3>
+                <p>
+                    Fungsi adalah blok kode yang dirancang untuk melakukan
+                    tugas tertentu dan dapat dipanggil berulang kali.
+                    Fungsi membantu mengurangi pengulangan kode,
+                    meningkatkan keterbacaan, dan memudahkan pengujian.
+                </p>
+
+                <h3>6.2 Membuat Fungsi dengan def</h3>
+                <p>
+                    Fungsi dibuat menggunakan kata kunci
+                    <code>def</code>, diikuti nama fungsi, parameter,
+                    dan blok kode.
+                </p>
+
+                <pre><code>def sapa():
+    print("Selamat belajar Python!")
+
+sapa()</code></pre>
+
+                <h3>6.3 Parameter dan Argumen</h3>
+                <p>
+                    Parameter merupakan variabel yang ditulis dalam definisi
+                    fungsi, sedangkan argumen adalah nilai yang diberikan
+                    ketika fungsi dipanggil.
+                </p>
+
+                <pre><code>def luas_persegi_panjang(panjang, lebar):
+    luas = panjang * lebar
+    return luas
+
+hasil = luas_persegi_panjang(10, 5)
+print(hasil)  # 50</code></pre>
+
+                <h3>6.4 Pernyataan return</h3>
+                <p>
+                    Pernyataan <code>return</code> mengembalikan hasil
+                    perhitungan kepada pemanggil fungsi. Fungsi yang tidak
+                    menjalankan <code>return</code> secara eksplisit
+                    menghasilkan nilai <code>None</code>.
+                </p>
+
+                <pre><code>def rata_rata(data):
+    if len(data) == 0:
+        return None
+
+    return sum(data) / len(data)
+
+nilai = [80, 90, 70]
+print(rata_rata(nilai))</code></pre>
+
+                <h3>6.5 Parameter Default dan Argumen Bernama</h3>
+                <p>
+                    Parameter default memiliki nilai awal yang digunakan
+                    apabila argumen tidak diberikan. Argumen bernama
+                    memungkinkan pemanggil menentukan parameter berdasarkan
+                    namanya.
+                </p>
+
+                <pre><code>def pangkat(angka, eksponen=2):
+    return angka ** eksponen
+
+print(pangkat(5))               # 25
+print(pangkat(5, 3))            # 125
+print(pangkat(angka=2, eksponen=4))  # 16</code></pre>
+
+                <h3>6.6 Modularisasi Program</h3>
+                <p>
+                    Modularisasi adalah teknik membagi program menjadi
+                    bagian-bagian yang memiliki tanggung jawab tertentu.
+                    Fungsi dapat diletakkan dalam file Python terpisah
+                    yang kemudian diimpor menggunakan <code>import</code>.
+                </p>
+
+                <p>Misalnya, file <code>statistika.py</code> berisi:</p>
+                <pre><code>def rata_rata(data):
+    return sum(data) / len(data)
+
+def nilai_maksimum(data):
+    return max(data)</code></pre>
+
+                <p>
+                    File lain dapat menggunakan fungsi tersebut.
+                </p>
+
+                <pre><code>import statistika
+
+data = [70, 80, 90]
+
+print(statistika.rata_rata(data))
+print(statistika.nilai_maksimum(data))</code></pre>
+
+                <p>
+                    Dengan modularisasi, kode lebih mudah digunakan kembali
+                    dan dipelihara.
+                </p>
+
+                <div class="example">
+                    <h3>Contoh Soal</h3>
+                    <p>
+                        Buat fungsi untuk menghitung varians populasi dari
+                        sekumpulan data numerik. Varians populasi didefinisikan
+                        sebagai
+                    </p>
+
+                    <p>
+                        \[
+                        \sigma^2 =
+                        \frac{1}{n}\sum_{i=1}^{n}(x_i-\bar{x})^2.
+                        \]
+                    </p>
+
+                    <pre><code>def varians_populasi(data):
+    if len(data) == 0:
+        raise ValueError("Data tidak boleh kosong")
+
+    mean = sum(data) / len(data)
+    jumlah = sum((x - mean) ** 2 for x in data)
+
+    return jumlah / len(data)
+
+print(varians_populasi([2, 4, 6]))</code></pre>
+
+                    <p>
+                        Rata-rata data adalah 4. Jumlah kuadrat selisih
+                        terhadap rata-rata adalah
+                        \(4+0+4=8\). Varians populasinya adalah
+                        \(8/3\), atau sekitar 2,67.
+                    </p>
+                </div>
+            </section>
+
+            <section>
+                <h2>7. File Handling</h2>
+
+                <h3>7.1 Membuka File</h3>
+                <p>
+                    File handling adalah proses membaca, membuat, dan
+                    menulis file melalui program. Python menyediakan
+                    fungsi <code>open()</code> untuk mengakses file.
+                </p>
+
+                <p>Mode file yang umum digunakan:</p>
+                <ul>
+                    <li><code>"r"</code>: membaca file yang sudah ada.</li>
+                    <li><code>"w"</code>: menulis file dan mengganti isi file jika sudah ada.</li>
+                    <li><code>"a"</code>: menambahkan isi pada akhir file.</li>
+                    <li><code>"x"</code>: membuat file baru dan gagal jika file sudah ada.</li>
+                    <li><code>"b"</code>: mode biner, misalnya <code>"rb"</code>.</li>
+                </ul>
+
+                <h3>7.2 Membaca File Teks</h3>
+                <p>
+                    Penggunaan <code>with</code> disarankan karena file
+                    akan ditutup secara otomatis setelah blok kode selesai.
+                </p>
+
+                <pre><code>with open("data.txt", "r", encoding="utf-8") as file:
+    isi = file.read()
+
+print(isi)</code></pre>
+
+                <p>
+                    Selain <code>read()</code>, kita dapat menggunakan
+                    <code>readline()</code> untuk membaca satu baris atau
+                    melakukan iterasi langsung terhadap objek file.
+                </p>
+
+                <h3>7.3 Menulis File</h3>
+                <pre><code>with open("hasil.txt", "w", encoding="utf-8") as file:
+    file.write("Hasil Analisis Data\n")
+    file.write("Jumlah data: 100\n")</code></pre>
+
+                <p>
+                    Mode <code>"w"</code> menimpa isi file yang sudah ada.
+                    Jika ingin menambahkan isi tanpa menghapus konten
+                    sebelumnya, gunakan mode <code>"a"</code>.
+                </p>
+
+                <h3>7.4 Membaca dan Menulis CSV</h3>
+                <p>
+                    CSV (Comma-Separated Values) adalah format file tabular
+                    yang banyak digunakan untuk menyimpan data. Python
+                    menyediakan modul bawaan <code>csv</code>.
+                </p>
+
+                <pre><code>import csv
+
+with open("mahasiswa.csv", "r", newline="", encoding="utf-8") as file:
+    pembaca = csv.DictReader(file)
+
+    for baris in pembaca:
+        print(baris["nama"], baris["nilai"])</code></pre>
+
+                <p>
+                    Contoh tersebut mengasumsikan file CSV mempunyai
+                    kolom <code>nama</code> dan <code>nilai</code>.
+                    Untuk menulis CSV, gunakan <code>csv.DictWriter</code>
+                    atau <code>csv.writer</code>.
+                </p>
+
+                <pre><code>import csv
+
+data = [
+    {"nama": "Andi", "nilai": 85},
+    {"nama": "Budi", "nilai": 90}
+]
+
+with open("hasil.csv", "w", newline="", encoding="utf-8") as file:
+    kolom = ["nama", "nilai"]
+    penulis = csv.DictWriter(file, fieldnames=kolom)
+
+    penulis.writeheader()
+    penulis.writerows(data)</code></pre>
+
+                <h3>7.5 File untuk Data Science</h3>
+                <p>
+                    Dalam data science, data sering diperoleh dari CSV,
+                    JSON, Excel, basis data, atau API. Python dapat membaca
+                    berbagai format tersebut menggunakan modul bawaan
+                    maupun library tambahan seperti pandas.
+                </p>
+
+                <pre><code>import pandas as pd
+
+data = pd.read_csv("data.csv")
+
+print(data.head())
+print(data.info())</code></pre>
+
+                <p>
+                    Kode tersebut membutuhkan library pandas dan file
+                    <code>data.csv</code> yang tersedia pada lokasi yang
+                    sesuai.
+                </p>
+
+                <div class="example">
+                    <h3>Contoh Soal</h3>
+                    <p>
+                        Buat program untuk menyimpan tiga nilai mahasiswa
+                        ke dalam file teks.
+                    </p>
+
+                    <pre><code>nilai = [80, 85, 90]
+
+with open("nilai.txt", "w", encoding="utf-8") as file:
+    for n in nilai:
+        file.write(f"{n}\n")</code></pre>
+
+                    <p>
+                        File <code>nilai.txt</code> berisi tiga baris:
+                        80, 85, dan 90.
+                    </p>
+                </div>
+            </section>
+
+            <section>
+                <h2>8. Exception Handling</h2>
+
+                <h3>8.1 Pengertian Exception</h3>
+                <p>
+                    Exception adalah kondisi kesalahan yang terjadi ketika
+                    program dijalankan. Contohnya adalah pembagian dengan
+                    nol, akses kunci dictionary yang tidak tersedia, atau
+                    pembacaan file yang tidak ditemukan.
+                </p>
+
+                <pre><code>angka = int("abc")</code></pre>
+
+                <p>
+                    Program tersebut menghasilkan <code>ValueError</code>
+                    karena teks <code>"abc"</code> tidak dapat dikonversi
+                    menjadi bilangan bulat.
+                </p>
+
+                <h3>8.2 try dan except</h3>
+                <p>
+                    Blok <code>try</code> berisi kode yang berpotensi
+                    menimbulkan exception, sedangkan <code>except</code>
+                    menentukan tindakan ketika exception tertentu terjadi.
+                </p>
+
+                <pre><code>try:
+    angka = int(input("Masukkan bilangan bulat: "))
+    print(100 / angka)
+except ValueError:
+    print("Input harus berupa bilangan bulat.")
+except ZeroDivisionError:
+    print("Bilangan tidak boleh nol.")</code></pre>
+
+                <h3>8.3 else dan finally</h3>
+                <ul>
+                    <li><code>else</code> dijalankan jika blok <code>try</code> tidak menghasilkan exception.</li>
+                    <li><code>finally</code> dijalankan setelah proses <code>try</code> selesai, baik terjadi exception maupun tidak.</li>
+                </ul>
+
+                <pre><code>try:
+    angka = int("25")
+except ValueError:
+    print("Konversi gagal")
+else:
+    print("Konversi berhasil:", angka)
+finally:
+    print("Proses selesai")</code></pre>
+
+                <h3>8.4 Menghasilkan Exception dengan raise</h3>
+                <p>
+                    Kata kunci <code>raise</code> digunakan untuk menghasilkan
+                    exception secara sengaja, misalnya ketika suatu fungsi
+                    menerima argumen yang tidak valid.
+                </p>
+
+                <pre><code>def hitung_rata_rata(data):
+    if len(data) == 0:
+        raise ValueError("Data tidak boleh kosong")
+
+    return sum(data) / len(data)
+
+print(hitung_rata_rata([80, 90, 100]))</code></pre>
+
+                <p>
+                    Validasi tersebut membantu mencegah hasil perhitungan
+                    yang tidak bermakna. Exception yang sengaja dihasilkan
+                    tetap perlu ditangani jika program harus terus berjalan.
+                </p>
+
+                <h3>8.5 Prinsip Penanganan Kesalahan</h3>
+                <ul>
+                    <li>Tangani jenis exception yang memang dapat diperkirakan.</li>
+                    <li>Berikan pesan kesalahan yang jelas.</li>
+                    <li>Hindari menangkap semua exception tanpa alasan.</li>
+                    <li>Validasi masukan sebelum melakukan perhitungan.</li>
+                    <li>Gunakan <code>with</code> untuk mengelola file dengan aman.</li>
+                </ul>
+
+                <div class="example">
+                    <h3>Contoh Soal</h3>
+                    <p>
+                        Buat fungsi pembagian yang menolak pembagi nol.
+                    </p>
+
+                    <pre><code>def bagi(a, b):
+    if b == 0:
+        raise ZeroDivisionError("Pembagi tidak boleh nol")
+    return a / b
+
+try:
+    print(bagi(10, 0))
+except ZeroDivisionError as e:
+    print("Kesalahan:", e)</code></pre>
+
+                    <p>
+                        Keluaran program adalah pesan kesalahan
+                        <code>Kesalahan: Pembagi tidak boleh nol</code>.
+                        Program tetap dapat melanjutkan proses setelah
+                        exception tersebut ditangani.
+                    </p>
+                </div>
+            </section>
+
+            <section>
+                <h2>9. Library dan Virtual Environment</h2>
+
+                <h3>9.1 Modul, Library, dan Package</h3>
+                <p>
+                    Modul adalah file Python yang dapat berisi fungsi,
+                    kelas, dan variabel. Package mengorganisasi modul
+                    dalam struktur direktori. Istilah library sering
+                    digunakan untuk menyebut kumpulan kode yang menyediakan
+                    fungsi tertentu.
+                </p>
+
+                <p>
+                    Python memiliki modul bawaan seperti
+                    <code>math</code>, <code>random</code>, dan
+                    <code>statistics</code>.
+                </p>
+
+                <pre><code>import math
+import statistics
+
+print(math.sqrt(81))
+print(math.pi)
+
+data = [70, 80, 90]
+print(statistics.mean(data))
+print(statistics.median(data))</code></pre>
+
+                <h3>9.2 Mengimpor Library</h3>
+                <p>
+                    Modul dapat diimpor menggunakan beberapa bentuk sintaks.
+                </p>
+
+                <pre><code>import math
+print(math.sqrt(25))
+
+from math import pi, sqrt
+print(sqrt(36))
+print(pi)
+
+import statistics as stats
+print(stats.mean([10, 20, 30]))</code></pre>
+
+                <h3>9.3 Library Penting untuk Data Science</h3>
+                <ul>
+                    <li><strong>NumPy:</strong> operasi numerik dan array multidimensi.</li>
+                    <li><strong>pandas:</strong> manipulasi data berbentuk tabel.</li>
+                    <li><strong>Matplotlib:</strong> pembuatan grafik dan visualisasi.</li>
+                    <li><strong>Seaborn:</strong> visualisasi statistik.</li>
+                    <li><strong>SciPy:</strong> komputasi ilmiah dan metode numerik.</li>
+                    <li><strong>scikit-learn:</strong> pemrosesan data dan machine learning.</li>
+                </ul>
+
+                <p>
+                    Contoh penggunaan NumPy:
+                </p>
+
+                <pre><code>import numpy as np
+
+data = np.array([10, 20, 30, 40, 50])
+
+print(np.mean(data))
+print(np.std(data))
+print(data * 2)</code></pre>
+
+                <p>
+                    Contoh penggunaan pandas:
+                </p>
+
+                <pre><code>import pandas as pd
+
+data = {
+    "nama": ["Andi", "Budi", "Citra"],
+    "nilai": [80, 90, 85]
+}
+
+df = pd.DataFrame(data)
+
+print(df)
+print(df["nilai"].mean())</code></pre>
+
+                <h3>9.4 Instalasi Library dengan pip</h3>
+                <p>
+                    <code>pip</code> adalah alat untuk menginstal dan
+                    mengelola package Python. Perintah berikut dijalankan
+                    pada terminal atau command prompt, bukan sebagai
+                    kode Python biasa.
+                </p>
+
+                <pre><code>python -m pip install numpy pandas matplotlib seaborn scikit-learn</code></pre>
+
+                <p>
+                    Untuk melihat package yang terpasang, gunakan:
+                </p>
+
+                <pre><code>python -m pip list</code></pre>
+
+                <h3>9.5 Pengertian Virtual Environment</h3>
+                <p>
+                    Virtual environment adalah lingkungan Python terisolasi
+                    yang memungkinkan setiap proyek memiliki package dan
+                    versi dependensi masing-masing. Penggunaan lingkungan
+                    terpisah membantu mengurangi konflik antarpaket.
+                </p>
+
+                <h3>9.6 Membuat Virtual Environment</h3>
+                <p>Pada Windows:</p>
+                <pre><code>python -m venv .venv
+.venv\Scripts\activate</code></pre>
+
+                <p>Pada Linux atau macOS:</p>
+                <pre><code>python3 -m venv .venv
+source .venv/bin/activate</code></pre>
+
+                <p>
+                    Setelah lingkungan aktif, library dapat diinstal
+                    khusus untuk lingkungan tersebut.
+                </p>
+
+                <pre><code>python -m pip install numpy pandas</code></pre>
+
+                <p>
+                    Untuk menonaktifkan lingkungan, jalankan
+                    <code>deactivate</code>. Perintah aktivasi berbeda
+                    untuk setiap sistem operasi dan jenis shell.
+                </p>
+
+                <h3>9.7 Menyimpan Dependensi</h3>
+                <p>
+                    Daftar package proyek dapat disimpan dalam file
+                    <code>requirements.txt</code>.
+                </p>
+
+                <pre><code>python -m pip freeze > requirements.txt</code></pre>
+
+                <p>
+                    Lingkungan lain dapat memasang dependensi dari file
+                    tersebut menggunakan:
+                </p>
+
+                <pre><code>python -m pip install -r requirements.txt</code></pre>
+
+                <div class="example">
+                    <h3>Contoh Soal</h3>
+                    <p>
+                        Seorang mahasiswa mengerjakan dua proyek. Proyek A
+                        memerlukan versi library tertentu, sedangkan Proyek B
+                        menggunakan versi yang berbeda. Mengapa virtual
+                        environment bermanfaat?
+                    </p>
+
+                    <p><strong>Penyelesaian:</strong></p>
+                    <p>
+                        Setiap proyek dapat memiliki lingkungan terpisah
+                        sehingga versi library yang diperlukan tidak harus
+                        saling menggantikan. Hal ini memudahkan reproduksi
+                        eksperimen dan pengelolaan dependensi.
+                    </p>
+                </div>
+            </section>
+
+            <section>
+                <h2>10. Jupyter Notebook dan Google Colab</h2>
+
+                <h3>10.1 Jupyter Notebook</h3>
+                <p>
+                    Jupyter Notebook adalah lingkungan interaktif untuk
+                    menulis dan menjalankan kode, menampilkan hasil
+                    perhitungan, membuat visualisasi, serta menambahkan
+                    penjelasan. Dokumen notebook terdiri atas sel-sel
+                    yang dapat dijalankan secara terpisah.
+                </p>
+
+                <p>Dua jenis sel yang paling umum adalah:</p>
+                <ul>
+                    <li><strong>Code cell:</strong> menjalankan kode Python.</li>
+                    <li><strong>Markdown cell:</strong> menuliskan penjelasan, judul, daftar, dan rumus matematika.</li>
+                </ul>
+
+                <h3>10.2 Menjalankan Jupyter Notebook</h3>
+                <p>
+                    Jupyter dapat diinstal dalam lingkungan Python melalui
+                    terminal.
+                </p>
+
+                <pre><code>python -m pip install notebook
+jupyter notebook</code></pre>
+
+                <p>
+                    Setelah perintah dijalankan, antarmuka Jupyter biasanya
+                    dibuka melalui browser. Perintah instalasi tersebut
+                    dijalankan pada terminal setelah Python tersedia.
+                </p>
+
+                <h3>10.3 Menjalankan Kode dalam Sel</h3>
+                <p>
+                    Misalnya, sel pertama berisi:
+                </p>
+
+                <pre><code>angka = [10, 20, 30, 40, 50]
+print(sum(angka))</code></pre>
+
+                <p>
+                    Sel berikutnya dapat menggunakan variabel
+                    <code>angka</code> selama kernel yang sama masih aktif
+                    dan sel pembentuk variabel telah dijalankan.
+                </p>
+
+                <pre><code>rata_rata = sum(angka) / len(angka)
+print(rata_rata)</code></pre>
+
+                <p>
+                    Urutan eksekusi sel dapat berbeda dari urutan tampilannya.
+                    Karena itu, jalankan sel secara teratur dan mulai ulang
+                    kernel apabila keadaan variabel menjadi tidak konsisten.
+                </p>
+
+                <h3>10.4 Google Colab</h3>
+                <p>
+                    Google Colab adalah layanan notebook berbasis cloud yang
+                    memungkinkan pengguna menjalankan Python melalui browser.
+                    Colab dapat digunakan tanpa memasang lingkungan Python
+                    lokal dan mendukung integrasi dengan Google Drive.
+                </p>
+
+                <p>
+                    Untuk memulai, buka
+                    <a href="https://colab.research.google.com/"
+                       target="_blank" rel="noopener noreferrer">
+                        Google Colab
+                    </a>,
+                    buat notebook baru, kemudian jalankan kode pada sel
+                    menggunakan tombol eksekusi atau kombinasi
+                    <code>Shift + Enter</code>.
+                </p>
+
+                <h3>10.5 Menggunakan Library di Colab</h3>
+                <p>
+                    Banyak library data science telah tersedia di Colab.
+                    Jika library tertentu belum tersedia, instal menggunakan
+                    perintah khusus notebook.
+                </p>
+
+                <pre><code>%pip install numpy pandas matplotlib</code></pre>
+
+                <p>
+                    Tanda <code>%</code> pada perintah tersebut merupakan
+                    sintaks khusus IPython, bukan sintaks Python standar
+                    yang dapat digunakan langsung pada semua file
+                    <code>.py</code>.
+                </p>
+
+                <h3>10.6 Membaca File CSV di Colab</h3>
+                <p>
+                    Jika file CSV sudah tersedia di lingkungan notebook,
+                    file tersebut dapat dibaca menggunakan pandas.
+                </p>
+
+                <pre><code>import pandas as pd
+
+df = pd.read_csv("/content/data.csv")
+
+display(df.head())
+print(df.shape)
+print(df.columns)</code></pre>
+
+                <p>
+                    Jika file belum tersedia, unggah melalui panel Files
+                    atau gunakan fasilitas upload notebook. Untuk file
+                    yang tersimpan di Google Drive, pengguna juga dapat
+                    menghubungkan Drive terlebih dahulu.
+                </p>
+
+                <h3>10.7 Contoh Alur Analisis Data Sederhana</h3>
+                <p>
+                    Berikut contoh alur kerja dasar yang menggabungkan
+                    Python, pandas, dan visualisasi data.
+                </p>
+
+                <pre><code>import pandas as pd
+import matplotlib.pyplot as plt
+
+data = {
+    "bulan": ["Januari", "Februari", "Maret", "April"],
+    "penjualan": [120, 150, 135, 180]
+}
+
+df = pd.DataFrame(data)
+
+print(df)
+print("Rata-rata:", df["penjualan"].mean())
+print("Penjualan tertinggi:", df["penjualan"].max())
+
+df.plot(
+    x="bulan",
+    y="penjualan",
+    kind="bar",
+    legend=False
+)
+
+plt.title("Penjualan per Bulan")
+plt.xlabel("Bulan")
+plt.ylabel("Jumlah Penjualan")
+plt.tight_layout()
+plt.show()</code></pre>
+
+                <p>
+                    Program tersebut membuat tabel penjualan, menghitung
+                    rata-rata, mencari nilai maksimum, dan menghasilkan
+                    diagram batang. Contoh ini menggunakan data buatan
+                    untuk memperkenalkan alur analisis data.
+                </p>
+
+                <h3>10.8 Jupyter Notebook vs Google Colab</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Aspek</th>
+                            <th>Jupyter Notebook lokal</th>
+                            <th>Google Colab</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Instalasi</td>
+                            <td>Umumnya perlu instalasi lokal</td>
+                            <td>Dijalankan melalui browser</td>
+                        </tr>
+                        <tr>
+                            <td>Komputasi</td>
+                            <td>Menggunakan sumber daya komputer lokal</td>
+                            <td>Menggunakan runtime cloud yang tersedia</td>
+                        </tr>
+                        <tr>
+                            <td>File</td>
+                            <td>Dapat mengakses file lokal</td>
+                            <td>File perlu diunggah atau dihubungkan</td>
+                        </tr>
+                        <tr>
+                            <td>Penggunaan</td>
+                            <td>Cocok untuk pengembangan lokal</td>
+                            <td>Cocok untuk pembelajaran dan eksperimen cloud</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p>
+                    Pilihan lingkungan kerja bergantung pada kebutuhan proyek,
+                    sumber daya komputasi, akses internet, serta pengelolaan
+                    file dan dependensi.
+                </p>
+
+                <div class="example">
+                    <h3>Contoh Soal</h3>
+                    <p>
+                        Sebuah dataset berisi nilai ujian 70, 80, 90, 85,
+                        dan 75. Tuliskan program untuk menghitung rata-rata
+                        dan menampilkan grafik sederhana di notebook.
+                    </p>
+
+                    <pre><code>import pandas as pd
+import matplotlib.pyplot as plt
+
+nilai = [70, 80, 90, 85, 75]
+
+df = pd.DataFrame({"nilai": nilai})
+
+print("Rata-rata:", df["nilai"].mean())
+
+df["nilai"].plot(kind="line", marker="o")
+plt.title("Nilai Ujian Mahasiswa")
+plt.xlabel("Indeks Mahasiswa")
+plt.ylabel("Nilai")
+plt.show()</code></pre>
+
+                    <p>
+                        Rata-rata nilai adalah
+                        \[
+                        \bar{x} =
+                        \frac{70+80+90+85+75}{5}=80.
+                        \]
+                        Grafik menampilkan nilai setiap mahasiswa
+                        berdasarkan urutan datanya.
+                    </p>
+                </div>
+            </section>
+
+            <section>
+                <h2>Rangkuman</h2>
+                <ul>
+                    <li>Variabel menyimpan referensi nilai, sedangkan tipe data menentukan karakteristik objek yang digunakan.</li>
+                    <li>Operator digunakan untuk perhitungan, perbandingan, logika, dan penugasan.</li>
+                    <li>Percabangan memilih tindakan berdasarkan kondisi, sedangkan perulangan mengulang instruksi.</li>
+                    <li>List, tuple, set, dan dictionary memiliki karakteristik penyimpanan yang berbeda.</li>
+                    <li>Fungsi dan modularisasi membantu menghasilkan program yang terstruktur dan dapat digunakan kembali.</li>
+                    <li>File handling memungkinkan program membaca serta menulis data.</li>
+                    <li>Exception handling membantu mengelola kesalahan ketika program berjalan.</li>
+                    <li>Library menyediakan fungsi siap pakai, sementara virtual environment membantu mengisolasi dependensi proyek.</li>
+                    <li>Jupyter Notebook dan Google Colab menyediakan lingkungan interaktif untuk eksplorasi dan analisis data.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Latihan Mandiri</h2>
+                <p>
+                    Kerjakan latihan berikut menggunakan Python.
+                    Usahakan menulis program sendiri sebelum melihat
+                    dokumentasi atau mendiskusikan jawabannya.
+                </p>
+
+                <h3>Latihan 1 — Variabel dan Tipe Data</h3>
+                <ol>
+                    <li>Buat variabel yang menyimpan nama, umur, IPK, dan status mahasiswa.</li>
+                    <li>Tampilkan tipe data setiap variabel menggunakan <code>type()</code>.</li>
+                    <li>Konversikan teks <code>"2026"</code> menjadi bilangan bulat dan tambahkan 10.</li>
+                </ol>
+
+                <h3>Latihan 2 — Operator dan Ekspresi</h3>
+                <ol>
+                    <li>Hitung nilai dari \(5^3+2(10-4)\) menggunakan Python.</li>
+                    <li>Tentukan sisa pembagian 157 oleh 12.</li>
+                    <li>Buat ekspresi logika untuk memeriksa apakah sebuah bilangan berada pada interval tertutup \([10,50]\).</li>
+                </ol>
+
+                <h3>Latihan 3 — Percabangan</h3>
+                <ol>
+                    <li>Buat program yang menentukan apakah sebuah bilangan positif, negatif, atau nol.</li>
+                    <li>Buat program kategori nilai: A untuk nilai minimal 85, B untuk minimal 75, C untuk minimal 60, dan D untuk nilai di bawah 60.</li>
+                    <li>Tambahkan validasi agar nilai di luar interval 0 sampai 100 dinyatakan tidak valid.</li>
+                </ol>
+
+                <h3>Latihan 4 — Perulangan</h3>
+                <ol>
+                    <li>Gunakan <code>for</code> untuk mencetak bilangan ganjil dari 1 sampai 25.</li>
+                    <li>Hitung jumlah bilangan dari 1 sampai 100.</li>
+                    <li>Gunakan <code>while</code> untuk mencetak pangkat dua dari 1 sampai 1024.</li>
+                </ol>
+
+                <h3>Latihan 5 — Struktur Data</h3>
+                <ol>
+                    <li>Buat list berisi 10 nilai mahasiswa, lalu hitung rata-rata, nilai minimum, dan nilai maksimum.</li>
+                    <li>Ubah list yang berisi elemen duplikat menjadi set untuk mendapatkan elemen unik.</li>
+                    <li>Buat dictionary yang menyimpan nama, NIM, dan program studi seorang mahasiswa.</li>
+                    <li>Buat dua set bilangan dan hitung gabungan, irisan, serta selisihnya.</li>
+                </ol>
+
+                <h3>Latihan 6 — Fungsi</h3>
+                <ol>
+                    <li>Buat fungsi untuk menghitung luas lingkaran dengan parameter jari-jari.</li>
+                    <li>Buat fungsi untuk menentukan apakah suatu bilangan merupakan bilangan prima.</li>
+                    <li>Buat fungsi yang menerima list nilai dan mengembalikan rata-ratanya. Tangani kasus list kosong.</li>
+                </ol>
+
+                <h3>Latihan 7 — File Handling</h3>
+                <ol>
+                    <li>Buat file teks yang berisi lima nama mahasiswa.</li>
+                    <li>Baca file tersebut dan tampilkan setiap nama pada baris berbeda.</li>
+                    <li>Buat file CSV dengan kolom nama dan nilai, kemudian baca kembali menggunakan modul <code>csv</code> atau pandas.</li>
+                </ol>
+
+                <h3>Latihan 8 — Exception Handling</h3>
+                <ol>
+                    <li>Buat program pembagian dua bilangan yang menangani pembagi nol.</li>
+                    <li>Buat program yang meminta input bilangan bulat dan menangani input yang tidak valid.</li>
+                    <li>Tambahkan validasi pada fungsi rata-rata agar data kosong menghasilkan pesan kesalahan yang sesuai.</li>
+                </ol>
+
+                <h3>Latihan 9 — Library dan Virtual Environment</h3>
+                <ol>
+                    <li>Gunakan modul <code>math</code> untuk menghitung akar kuadrat dari 144.</li>
+                    <li>Gunakan pandas untuk membuat DataFrame berisi nama dan nilai lima mahasiswa.</li>
+                    <li>Buat virtual environment dan instal NumPy serta pandas di dalamnya.</li>
+                </ol>
+
+                <h3>Latihan 10 — Mini Proyek Analisis Data</h3>
+                <p>
+                    Buat program analisis nilai mahasiswa dengan ketentuan
+                    berikut:
+                </p>
+                <ol>
+                    <li>Simpan minimal 10 data nilai mahasiswa dalam sebuah list atau file CSV.</li>
+                    <li>Hitung rata-rata, median, nilai minimum, dan nilai maksimum.</li>
+                    <li>Tentukan kategori setiap mahasiswa menggunakan percabangan.</li>
+                    <li>Gunakan fungsi untuk menghitung statistik agar kode lebih terstruktur.</li>
+                    <li>Tangani kemungkinan file tidak ditemukan atau data tidak valid.</li>
+                    <li>Tampilkan hasil dalam bentuk tabel menggunakan pandas.</li>
+                    <li>Buat visualisasi distribusi nilai menggunakan Matplotlib.</li>
+                    <li>Jalankan program di Jupyter Notebook atau Google Colab.</li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>Referensi Belajar</h2>
+                <ul>
+                    <li>
+                        <a href="https://docs.python.org/3/tutorial/"
+                           target="_blank" rel="noopener noreferrer">
+                            Python Tutorial — Dokumentasi Resmi Python
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://numpy.org/doc/"
+                           target="_blank" rel="noopener noreferrer">
+                            NumPy Documentation
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://pandas.pydata.org/docs/"
+                           target="_blank" rel="noopener noreferrer">
+                            pandas Documentation
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://matplotlib.org/stable/"
+                           target="_blank" rel="noopener noreferrer">
+                            Matplotlib Documentation
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://jupyter.org/"
+                           target="_blank" rel="noopener noreferrer">
+                            Project Jupyter
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://colab.research.google.com/"
+                           target="_blank" rel="noopener noreferrer">
+                            Google Colab
+                        </a>
+                    </li>
+                </ul>
+            </section>
+        </article>
+    </main>
+
+    <footer>Website Pembelajaran Kalkulus</footer>
+</body>
+</html>

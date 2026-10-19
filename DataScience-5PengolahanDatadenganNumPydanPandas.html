@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengolahan Data dengan NumPy dan Pandas | ShadowLab</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+    MathJax = {
+        tex: {
+            inlineMath: [['\\(', '\\)']],
+            displayMath: [['\\[', '\\]']]
+        }
+    };
+    </script>
+    <script
+        id="MathJax-script"
+        async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+    </script>
+</head>
+<body>
+    <header class="navbar">
+        <a href="index.html" class="logo">ShadowLab</a>
+        <nav>
+            <a href="index.html">Beranda</a>
+            <a href="MateriDataScience.html">Materi Data Science</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <article class="article">
+            <p class="eyebrow">DATA SCIENCE DAN PENGOLAHAN DATA</p>
+            <h1>Bagian V — Pengolahan Data dengan NumPy dan Pandas</h1>
+            <p class="intro">
+                Pengolahan data merupakan tahapan penting dalam data science.
+                Data mentah sering kali memiliki struktur yang belum sesuai
+                untuk analisis sehingga perlu dibaca, dipilih, dibersihkan,
+                digabungkan, dan ditransformasikan. NumPy menyediakan
+                struktur array dan operasi numerik yang efisien, sedangkan
+                Pandas menyediakan Series dan DataFrame untuk mengolah
+                data tabular secara sistematis.
+            </p>
+
+            <section>
+                <h2>1. Array dan Operasi Vektor Menggunakan NumPy</h2>
+                <p>
+                    NumPy (Numerical Python) adalah pustaka Python untuk
+                    komputasi numerik. Struktur utamanya adalah
+                    <code>ndarray</code>, yaitu array multidimensi yang
+                    memungkinkan operasi matematika dilakukan secara
+                    efisien pada banyak elemen sekaligus.
+                </p>
+
+                <h3>a. Membuat array</h3>
+                <pre><code>import numpy as np
+
+# Array satu dimensi
+nilai = np.array([70, 80, 90, 85])
+
+# Array dua dimensi
+matriks = np.array([
+    [1, 2, 3],
+    [4, 5, 6]
+])
+
+print(nilai)
+print(matriks)
+print("Dimensi:", matriks.ndim)
+print("Bentuk:", matriks.shape)
+print("Jumlah elemen:", matriks.size)</code></pre>
+
+                <p>Array di atas memiliki bentuk \(2\times3\), yaitu dua baris dan tiga kolom.</p>
+
+                <h3>b. Membuat array dengan fungsi khusus</h3>
+                <pre><code>import numpy as np
+
+print(np.zeros((2, 3)))
+print(np.ones((2, 2)))
+print(np.arange(0, 10, 2))
+print(np.linspace(0, 1, 5))</code></pre>
+
+                <p>
+                    Fungsi <code>zeros()</code> menghasilkan array berisi
+                    nol, <code>ones()</code> menghasilkan array berisi
+                    satu, <code>arange()</code> menghasilkan urutan dengan
+                    interval tertentu, dan <code>linspace()</code>
+                    menghasilkan sejumlah nilai dengan jarak yang sama
+                    pada suatu interval.
+                </p>
+
+                <h3>c. Operasi vektor</h3>
+                <p>
+                    Operasi vektor dapat dilakukan langsung terhadap array
+                    tanpa harus menuliskan perulangan secara eksplisit.
+                    Operasi ini biasanya diterapkan elemen demi elemen.
+                </p>
+
+                \[
+                    \mathbf{a}=(a_1,\ldots,a_n),\qquad
+                    \mathbf{b}=(b_1,\ldots,b_n)
+                \]
+
+                <p>Penjumlahan dua vektor didefinisikan sebagai</p>
+                \[
+                    \mathbf{a}+\mathbf{b}
+                    =(a_1+b_1,\ldots,a_n+b_n)
+                \]
+
+                <pre><code>import numpy as np
+
+a = np.array([1, 2, 3])
+b = np.array([4, 5, 6])
+
+print(a + b)
+print(a * b)
+print(a ** 2)
+print(np.dot(a, b))
+print(np.mean(a))
+print(np.sum(a))</code></pre>
+
+                <p>Hasilnya berturut-turut:</p>
+                <pre><code>[5 7 9]
+[ 4 10 18]
+[1 4 9]
+32
+2.0
+6</code></pre>
+
+                <p>
+                    Perlu dibedakan antara perkalian elemen demi elemen,
+                    yang ditulis <code>a * b</code>, dan perkalian titik
+                    atau dot product, yang menghitung
+                    \(\mathbf{a}\cdot\mathbf{b}=\sum_i a_i b_i\).
+                </p>
+
+                <h3>d. Broadcasting</h3>
+                <p>
+                    Broadcasting memungkinkan operasi antara array dan
+                    nilai atau array lain yang bentuknya kompatibel.
+                </p>
+                <pre><code>import numpy as np
+
+nilai = np.array([60, 70, 80, 90])
+
+# Menambahkan 5 pada setiap elemen
+print(nilai + 5)
+
+# Mengubah skala nilai
+print(nilai / 100)</code></pre>
+
+                <p>
+                    Broadcasting mengurangi kebutuhan perulangan manual.
+                    Namun, operasi antara dua array tetap harus memenuhi
+                    aturan kompatibilitas bentuk NumPy.
+                </p>
+            </section>
+
+            <section>
+                <h2>2. Series dan DataFrame</h2>
+                <p>
+                    Pandas adalah pustaka untuk mengolah data tabular.
+                    Dua struktur utamanya adalah Series dan DataFrame.
+                </p>
+
+                <h3>a. Series</h3>
+                <p>
+                    Series merupakan struktur data satu dimensi yang
+                    memiliki label indeks. Series dapat digunakan untuk
+                    merepresentasikan satu kolom data.
+                </p>
+
+                <pre><code>import pandas as pd
+
+nilai = pd.Series(
+    [80, 90, 75, 85],
+    index=["Ani", "Budi", "Citra", "Doni"],
+    name="Nilai"
+)
+
+print(nilai)
+print("Nilai Ani:", nilai["Ani"])
+print("Rata-rata:", nilai.mean())</code></pre>
+
+                <h3>b. DataFrame</h3>
+                <p>
+                    DataFrame merupakan struktur data dua dimensi
+                    berbentuk tabel yang memiliki label baris dan kolom.
+                    Setiap kolom dapat memiliki tipe data yang berbeda.
+                </p>
+
+                <pre><code>import pandas as pd
+
+data = {
+    "Nama": ["Ani", "Budi", "Citra", "Doni"],
+    "Usia": [20, 21, 19, 22],
+    "Nilai": [80, 90, 75, 85]
+}
+
+df = pd.DataFrame(data)
+
+print(df)
+print(df.shape)
+print(df.columns)
+print(df.dtypes)
+print(df.info())</code></pre>
+
+                <p>
+                    Atribut <code>shape</code> memberikan jumlah baris dan
+                    kolom. Atribut <code>columns</code> menunjukkan nama
+                    kolom, sedangkan <code>dtypes</code> menunjukkan
+                    tipe data setiap kolom.
+                </p>
+
+                <h3>c. Ringkasan data</h3>
+                <pre><code>print(df.head())
+print(df.tail())
+print(df.describe())
+print(df["Nama"].value_counts())</code></pre>
+
+                <p>
+                    <code>head()</code> menampilkan baris awal,
+                    <code>tail()</code> menampilkan baris akhir,
+                    <code>describe()</code> merangkum statistik numerik,
+                    dan <code>value_counts()</code> menghitung frekuensi
+                    setiap nilai.
+                </p>
+            </section>
+
+            <section>
+                <h2>3. Membaca CSV, Excel, dan JSON</h2>
+                <p>
+                    Data untuk analisis dapat berasal dari berbagai format
+                    berkas. Pandas menyediakan fungsi untuk membaca
+                    berbagai format tersebut ke dalam DataFrame.
+                </p>
+
+                <h3>a. Membaca CSV</h3>
+                <pre><code>import pandas as pd
+
+df = pd.read_csv("data_mahasiswa.csv")
+
+print(df.head())</code></pre>
+
+                <p>
+                    CSV merupakan format teks yang menyimpan data
+                    berbentuk tabel. Jika pemisah kolom berupa titik koma,
+                    gunakan parameter <code>sep=";"</code>.
+                </p>
+
+                <pre><code>df = pd.read_csv(
+    "data_mahasiswa.csv",
+    sep=";",
+    encoding="utf-8"
+)</code></pre>
+
+                <h3>b. Membaca Excel</h3>
+                <pre><code>import pandas as pd
+
+df = pd.read_excel("data_mahasiswa.xlsx")
+
+# Membaca sheet tertentu
+df = pd.read_excel(
+    "data_mahasiswa.xlsx",
+    sheet_name="Mahasiswa"
+)</code></pre>
+
+                <p>
+                    Pembacaan berkas Excel biasanya membutuhkan mesin
+                    pembaca seperti <code>openpyxl</code> untuk format
+                    <code>.xlsx</code>. Jika diperlukan, instal pustaka
+                    tersebut melalui pip.
+                </p>
+
+                <pre><code>pip install openpyxl</code></pre>
+
+                <h3>c. Membaca JSON</h3>
+                <pre><code>import pandas as pd
+
+df = pd.read_json("data_mahasiswa.json")
+
+print(df.head())</code></pre>
+
+                <p>
+                    JSON sering digunakan untuk pertukaran data antara
+                    aplikasi dan API. Struktur JSON dapat berupa daftar
+                    objek, objek bersarang, atau bentuk lainnya. Untuk
+                    JSON bertingkat, fungsi <code>json_normalize()</code>
+                    dapat membantu meratakan struktur tertentu.
+                </p>
+
+                <pre><code>import json
+import pandas as pd
+
+with open("data_mahasiswa.json", encoding="utf-8") as file:
+    data = json.load(file)
+
+df = pd.json_normalize(data)
+print(df.head())</code></pre>
+
+                <p>
+                    Periksa selalu nama kolom, jumlah baris, tipe data,
+                    dan nilai yang hilang setelah membaca berkas.
+                    Untuk dataset besar, gunakan parameter seperti
+                    <code>usecols</code> atau <code>chunksize</code>
+                    pada pembacaan CSV jika sesuai kebutuhan.
+                </p>
+            </section>
+
+            <section>
+                <h2>4. Memilih Baris dan Kolom</h2>
+                <p>
+                    Pemilihan baris dan kolom memungkinkan kita mengambil
+                    bagian data yang diperlukan tanpa mengolah seluruh
+                    tabel.
+                </p>
+
+                <h3>a. Memilih kolom</h3>
+                <pre><code># Memilih satu kolom
+nama = df["Nama"]
+
+# Memilih beberapa kolom
+subset = df[["Nama", "Nilai"]]
+
+print(subset)</code></pre>
+
+                <h3>b. Menggunakan loc</h3>
+                <p>
+                    <code>loc</code> memilih data berdasarkan label
+                    indeks dan nama kolom.
+                </p>
+                <pre><code># Memilih baris dengan label indeks 0
+print(df.loc[0])
+
+# Memilih baris dan kolom tertentu
+print(df.loc[0:2, ["Nama", "Nilai"]])</code></pre>
+
+                <p>
+                    Pada pemilihan berbasis label, rentang
+                    <code>loc[0:2]</code> umumnya mencakup label awal
+                    dan akhir, yaitu 0, 1, dan 2.
+                </p>
+
+                <h3>c. Menggunakan iloc</h3>
+                <p>
+                    <code>iloc</code> memilih data berdasarkan posisi
+                    bilangan bulat, dimulai dari indeks posisi 0.
+                </p>
+                <pre><code># Baris pertama
+print(df.iloc[0])
+
+# Dua baris pertama dan dua kolom pertama
+print(df.iloc[0:2, 0:2])</code></pre>
+
+                <p>
+                    Berbeda dari <code>loc</code>, batas akhir pada
+                    pemotongan posisi menggunakan <code>iloc</code>
+                    tidak disertakan.
+                </p>
+
+                <h3>d. Mengubah nilai</h3>
+                <pre><code>df.loc[0, "Nilai"] = 95
+df.loc[df["Nama"] == "Budi", "Nilai"] = 92
+
+print(df)</code></pre>
+
+                <p>
+                    Gunakan <code>loc</code> untuk penetapan nilai secara
+                    eksplisit. Cara ini membantu menghindari masalah
+                    perubahan data melalui salinan atau tampilan sementara.
+                </p>
+            </section>
+
+            <section>
+                <h2>5. Filtering dan Sorting</h2>
+                <p>
+                    Filtering digunakan untuk memilih baris berdasarkan
+                    kondisi tertentu. Sorting digunakan untuk mengurutkan
+                    data menurut nilai satu atau beberapa kolom.
+                </p>
+
+                <h3>a. Filtering</h3>
+                <pre><code># Memilih mahasiswa dengan nilai minimal 80
+lulus = df[df["Nilai"] >= 80]
+
+# Dua kondisi sekaligus
+hasil = df[
+    (df["Nilai"] >= 80) &
+    (df["Usia"] >= 20)
+]
+
+# Salah satu dari dua kondisi
+hasil_lain = df[
+    (df["Nilai"] >= 90) |
+    (df["Usia"] < 20)
+]
+
+print(lulus)
+print(hasil)</code></pre>
+
+                <p>
+                    Gunakan operator <code>&amp;</code> untuk kondisi
+                    AND dan <code>|</code> untuk kondisi OR. Setiap
+                    kondisi perlu diberi tanda kurung.
+                </p>
+
+                <h3>b. Menggunakan isin dan query</h3>
+                <pre><code># Memilih nama tertentu
+pilihan = df[df["Nama"].isin(["Ani", "Citra"])]
+
+# Menyaring dengan ekspresi query
+nilai_tinggi = df.query("Nilai >= 85")
+
+print(pilihan)
+print(nilai_tinggi)</code></pre>
+
+                <h3>c. Sorting</h3>
+                <pre><code># Mengurutkan nilai dari kecil ke besar
+urut_naik = df.sort_values("Nilai")
+
+# Mengurutkan nilai dari besar ke kecil
+urut_turun = df.sort_values(
+    "Nilai",
+    ascending=False
+)
+
+# Mengurutkan berdasarkan dua kolom
+urut_ganda = df.sort_values(
+    ["Usia", "Nilai"],
+    ascending=[True, False]
+)
+
+print(urut_turun)</code></pre>
+
+                <p>
+                    Filtering dan sorting sering digunakan untuk
+                    mengeksplorasi data, mencari observasi tertentu,
+                    dan menyiapkan subset untuk analisis lanjutan.
+                </p>
+            </section>
+
+            <section>
+                <h2>6. Grouping dan Agregasi</h2>
+                <p>
+                    Grouping membagi data ke dalam kelompok berdasarkan
+                    nilai kategori tertentu. Agregasi menghitung ringkasan
+                    pada setiap kelompok, misalnya mean, jumlah, minimum,
+                    maksimum, atau banyaknya observasi.
+                </p>
+
+                <h3>a. GroupBy</h3>
+                <pre><code>import pandas as pd
+
+data = {
+    "Jurusan": ["Matematika", "Statistika", "Matematika",
+                "Statistika", "Matematika"],
+    "Nilai": [80, 85, 90, 75, 95]
+}
+
+df = pd.DataFrame(data)
+
+rata_rata = df.groupby("Jurusan")["Nilai"].mean()
+
+print(rata_rata)</code></pre>
+
+                <p>
+                    Data dikelompokkan menurut jurusan, kemudian mean
+                    nilai dihitung untuk setiap kelompok.
+                </p>
+
+                <h3>b. Beberapa agregasi sekaligus</h3>
+                <pre><code>ringkasan = df.groupby("Jurusan").agg(
+    jumlah=("Nilai", "count"),
+    rata_rata=("Nilai", "mean"),
+    minimum=("Nilai", "min"),
+    maksimum=("Nilai", "max")
+)
+
+print(ringkasan)</code></pre>
+
+                <h3>c. Grouping dengan lebih dari satu kolom</h3>
+                <pre><code>data = {
+    "Jurusan": ["Matematika", "Matematika",
+                "Statistika", "Statistika"],
+    "Angkatan": [2024, 2025, 2024, 2025],
+    "Nilai": [80, 90, 85, 88]
+}
+
+df = pd.DataFrame(data)
+
+hasil = df.groupby(
+    ["Jurusan", "Angkatan"]
+)["Nilai"].mean()
+
+print(hasil)</code></pre>
+
+                <p>
+                    Grouping digunakan dalam analisis penjualan per
+                    wilayah, rata-rata nilai per jurusan, jumlah
+                    transaksi per bulan, dan berbagai ringkasan data lain.
+                </p>
+            </section>
+
+            <section>
+                <h2>7. Merge, Join, dan Concatenation</h2>
+                <p>
+                    Dataset sering disimpan dalam beberapa tabel.
+                    Pandas menyediakan operasi untuk menggabungkan tabel
+                    berdasarkan kunci maupun menyatukan data berdasarkan
+                    baris atau kolom.
+                </p>
+
+                <h3>a. Merge</h3>
+                <p>
+                    <code>merge()</code> menggabungkan dua DataFrame
+                    berdasarkan satu atau beberapa kolom kunci.
+                </p>
+                <pre><code>import pandas as pd
+
+mahasiswa = pd.DataFrame({
+    "ID": [1, 2, 3],
+    "Nama": ["Ani", "Budi", "Citra"]
+})
+
+nilai = pd.DataFrame({
+    "ID": [1, 2, 3],
+    "Nilai": [85, 90, 78]
+})
+
+gabungan = pd.merge(
+    mahasiswa,
+    nilai,
+    on="ID",
+    how="inner"
+)
+
+print(gabungan)</code></pre>
+
+                <p>Jenis merge yang umum:</p>
+                <ul>
+                    <li><code>inner</code>: hanya kunci yang cocok di kedua tabel.</li>
+                    <li><code>left</code>: seluruh baris dari tabel kiri, ditambah pasangan yang cocok.</li>
+                    <li><code>right</code>: seluruh baris dari tabel kanan, ditambah pasangan yang cocok.</li>
+                    <li><code>outer</code>: seluruh kunci dari kedua tabel.</li>
+                </ul>
+
+                <h3>b. Join</h3>
+                <p>
+                    <code>join()</code> lazim digunakan untuk menggabungkan
+                    DataFrame berdasarkan indeks.
+                </p>
+                <pre><code>profil = pd.DataFrame(
+    {"Jurusan": ["Matematika", "Statistika"]},
+    index=[1, 2]
+)
+
+nilai = pd.DataFrame(
+    {"Nilai": [85, 90]},
+    index=[1, 2]
+)
+
+hasil = profil.join(nilai)
+print(hasil)</code></pre>
+
+                <h3>c. Concatenation</h3>
+                <p>
+                    <code>concat()</code> menyatukan beberapa DataFrame
+                    sepanjang baris atau kolom.
+                </p>
+                <pre><code>data_a = pd.DataFrame({
+    "Nama": ["Ani", "Budi"],
+    "Nilai": [80, 85]
+})
+
+data_b = pd.DataFrame({
+    "Nama": ["Citra", "Doni"],
+    "Nilai": [90, 88]
+})
+
+# Menyatukan baris
+gabungan_baris = pd.concat(
+    [data_a, data_b],
+    ignore_index=True
+)
+
+print(gabungan_baris)</code></pre>
+
+                <p>
+                    Periksa keunikan kunci sebelum melakukan merge.
+                    Jika satu kunci muncul berulang kali pada kedua tabel,
+                    hasil penggabungan dapat menghasilkan banyak baris
+                    akibat pencocokan banyak-ke-banyak.
+                </p>
+            </section>
+
+            <section>
+                <h2>8. Manipulasi Tanggal dan Waktu</h2>
+                <p>
+                    Data tanggal dan waktu sering muncul dalam transaksi,
+                    log aplikasi, data sensor, dan riwayat aktivitas.
+                    Pandas menyediakan tipe datetime serta fungsi untuk
+                    mengubah format, mengekstrak komponen waktu, dan
+                    melakukan perhitungan tanggal.
+                </p>
+
+                <h3>a. Mengubah kolom menjadi datetime</h3>
+                <pre><code>import pandas as pd
+
+df = pd.DataFrame({
+    "Tanggal": [
+        "2026-01-05",
+        "2026-02-12",
+        "2026-03-20"
+    ],
+    "Penjualan": [100, 150, 200]
+})
+
+df["Tanggal"] = pd.to_datetime(df["Tanggal"])
+
+print(df.dtypes)</code></pre>
+
+                <h3>b. Mengekstrak komponen tanggal</h3>
+                <pre><code>df["Tahun"] = df["Tanggal"].dt.year
+df["Bulan"] = df["Tanggal"].dt.month
+df["Hari"] = df["Tanggal"].dt.day
+df["NamaHari"] = df["Tanggal"].dt.day_name()
+
+print(df)</code></pre>
+
+                <h3>c. Menghitung selisih waktu</h3>
+                <pre><code>df["Tanggal"] = pd.to_datetime(df["Tanggal"])
+
+tanggal_awal = pd.Timestamp("2026-01-01")
+
+df["SelisihHari"] = (
+    df["Tanggal"] - tanggal_awal
+).dt.days
+
+print(df[["Tanggal", "SelisihHari"]])</code></pre>
+
+                <h3>d. Mengelompokkan berdasarkan periode</h3>
+                <pre><code>penjualan_bulanan = (
+    df.set_index("Tanggal")["Penjualan"]
+      .resample("MS")
+      .sum()
+)
+
+print(penjualan_bulanan)</code></pre>
+
+                <p>
+                    Kode tersebut menjumlahkan penjualan per bulan,
+                    dengan periode dimulai pada awal setiap bulan.
+                    Frekuensi seperti harian, mingguan, dan bulanan dapat
+                    digunakan sesuai kebutuhan analisis.
+                </p>
+
+                <p>
+                    Jika data memiliki zona waktu, perhatikan perbedaan
+                    waktu lokal dan UTC. Gunakan konversi zona waktu yang
+                    sesuai sebelum membandingkan waktu dari sumber berbeda.
+                </p>
+            </section>
+
+            <section>
+                <h2>9. Missing Values dan Duplikasi</h2>
+                <p>
+                    Missing values adalah nilai yang tidak tersedia,
+                    sedangkan duplikasi terjadi ketika terdapat baris
+                    atau observasi yang berulang. Keduanya perlu diperiksa
+                    sebelum analisis karena dapat memengaruhi hasil.
+                </p>
+
+                <h3>a. Memeriksa nilai yang hilang</h3>
+                <pre><code>import pandas as pd
+import numpy as np
+
+df = pd.DataFrame({
+    "Nama": ["Ani", "Budi", "Citra", "Doni"],
+    "Usia": [20, np.nan, 19, 22],
+    "Nilai": [80, 90, np.nan, 85]
+})
+
+print(df.isna())
+print(df.isna().sum())
+print(df.isna().mean() * 100)</code></pre>
+
+                <p>
+                    <code>isna().sum()</code> menghitung jumlah nilai
+                    yang hilang pada setiap kolom, sedangkan
+                    <code>isna().mean() * 100</code> menghitung
+                    persentasenya.
+                </p>
+
+                <h3>b. Menghapus missing values</h3>
+                <pre><code># Menghapus baris yang memiliki setidaknya satu nilai hilang
+df_bersih = df.dropna()
+
+# Menghapus baris jika kolom tertentu kosong
+df_bersih = df.dropna(subset=["Usia"])</code></pre>
+
+                <h3>c. Mengisi missing values</h3>
+                <pre><code># Mengisi usia dengan median
+df["Usia"] = df["Usia"].fillna(
+    df["Usia"].median()
+)
+
+# Mengisi nilai dengan mean
+df["Nilai"] = df["Nilai"].fillna(
+    df["Nilai"].mean()
+)</code></pre>
+
+                <p>
+                    Pemilihan metode pengisian bergantung pada makna
+                    data, distribusi, dan penyebab nilai hilang.
+                    Penghapusan atau pengisian tidak boleh dilakukan
+                    secara otomatis tanpa mempertimbangkan dampaknya.
+                    Untuk machine learning, parameter imputasi sebaiknya
+                    dipelajari dari data pelatihan saja agar tidak terjadi
+                    kebocoran informasi dari data validasi atau pengujian.
+                </p>
+
+                <h3>d. Memeriksa dan menghapus duplikasi</h3>
+                <pre><code>print(df.duplicated())
+print("Jumlah duplikasi:", df.duplicated().sum())
+
+# Menghapus baris yang sepenuhnya duplikat
+df = df.drop_duplicates()
+
+# Memeriksa duplikasi berdasarkan kolom tertentu
+duplikat_nama = df[df.duplicated(subset=["Nama"])]
+
+print(duplikat_nama)</code></pre>
+
+                <p>
+                    Baris yang memiliki nama sama belum tentu merupakan
+                    duplikasi yang sebenarnya. Tentukan kunci unik
+                    berdasarkan konteks, misalnya ID transaksi atau
+                    kombinasi ID pelanggan dan waktu transaksi.
+                </p>
+            </section>
+
+            <section>
+                <h2>10. Transformasi dan Ekspor Data</h2>
+                <p>
+                    Transformasi data mengubah bentuk, tipe, skala, atau
+                    representasi data agar sesuai untuk analisis. Setelah
+                    pengolahan selesai, hasil dapat disimpan kembali ke
+                    format berkas yang diperlukan.
+                </p>
+
+                <h3>a. Mengubah tipe data</h3>
+                <pre><code>import pandas as pd
+
+df = pd.DataFrame({
+    "Usia": ["20", "21", "19"],
+    "Nilai": ["80", "90", "75"]
+})
+
+df["Usia"] = pd.to_numeric(df["Usia"])
+df["Nilai"] = pd.to_numeric(df["Nilai"])
+
+print(df.dtypes)</code></pre>
+
+                <p>
+                    Fungsi <code>to_numeric()</code> mengubah nilai menjadi
+                    tipe numerik. Jika data mengandung nilai yang tidak
+                    dapat dikonversi, parameter <code>errors="coerce"</code>
+                    dapat digunakan untuk mengubah nilai tersebut menjadi
+                    missing values.
+                </p>
+
+                <h3>b. Membuat kolom baru</h3>
+                <pre><code>df["Lulus"] = df["Nilai"] >= 80
+
+df["Kategori"] = df["Nilai"].apply(
+    lambda x: "Tinggi" if x >= 85
+    else "Sedang" if x >= 75
+    else "Rendah"
+)
+
+print(df)</code></pre>
+
+                <h3>c. Normalisasi sederhana</h3>
+                <p>
+                    Min-max scaling mengubah nilai numerik ke rentang
+                    0 sampai 1, selama nilai maksimum dan minimum berbeda.
+                </p>
+                \[
+                    x'=\frac{x-x_{\min}}{x_{\max}-x_{\min}}
+                \]
+
+                <pre><code>nilai_min = df["Nilai"].min()
+nilai_max = df["Nilai"].max()
+
+if nilai_max != nilai_min:
+    df["Nilai_Normal"] = (
+        (df["Nilai"] - nilai_min) /
+        (nilai_max - nilai_min)
+    )
+else:
+    df["Nilai_Normal"] = 0.0
+
+print(df)</code></pre>
+
+                <p>
+                    Pada proyek machine learning, nilai minimum dan
+                    maksimum untuk scaling perlu dihitung dari data
+                    pelatihan saja, kemudian digunakan kembali untuk
+                    data validasi dan pengujian.
+                </p>
+
+                <h3>d. Mengganti nama dan menghapus kolom</h3>
+                <pre><code>df = df.rename(columns={
+    "Nilai": "Nilai_Ujian"
+})
+
+df = df.drop(columns=["Kategori"])
+
+print(df)</code></pre>
+
+                <h3>e. Mengekspor data ke CSV</h3>
+                <pre><code>df.to_csv(
+    "data_bersih.csv",
+    index=False
+)</code></pre>
+
+                <h3>f. Mengekspor data ke Excel dan JSON</h3>
+                <pre><code># Excel
+df.to_excel(
+    "data_bersih.xlsx",
+    index=False
+)
+
+# JSON
+df.to_json(
+    "data_bersih.json",
+    orient="records",
+    indent=2,
+    force_ascii=False
+)</code></pre>
+
+                <p>
+                    Parameter <code>index=False</code> mencegah indeks
+                    DataFrame disimpan sebagai kolom tambahan pada CSV
+                    atau Excel. Pilih format ekspor berdasarkan kebutuhan
+                    penggunaan data berikutnya.
+                </p>
+            </section>
+
+            <section>
+                <h2>11. Contoh Proyek Mini: Membersihkan Data Penjualan</h2>
+                <p>
+                    Pada contoh berikut, beberapa teknik pengolahan data
+                    digabungkan dalam satu alur kerja sederhana.
+                </p>
+
+                <pre><code>import pandas as pd
+
+data = {
+    "Tanggal": [
+        "2026-01-05",
+        "2026-01-10",
+        "2026-02-02",
+        "2026-02-15",
+        "2026-02-15"
+    ],
+    "Produk": [
+        "Laptop",
+        "Mouse",
+        "Laptop",
+        "Keyboard",
+        "Keyboard"
+    ],
+    "Jumlah": [2, 5, 1, 3, 3],
+    "Harga": [8000000, 150000, 8000000, 400000, 400000]
+}
+
+df = pd.DataFrame(data)
+
+# Menghapus baris duplikat
+df = df.drop_duplicates()
+
+# Memastikan tipe data
+df["Tanggal"] = pd.to_datetime(df["Tanggal"])
+df["Jumlah"] = pd.to_numeric(df["Jumlah"])
+df["Harga"] = pd.to_numeric(df["Harga"])
+
+# Menghitung total transaksi
+df["Total"] = df["Jumlah"] * df["Harga"]
+
+# Menghitung penjualan per produk
+penjualan_produk = (
+    df.groupby("Produk")["Total"]
+      .sum()
+      .sort_values(ascending=False)
+)
+
+print(penjualan_produk)
+
+# Menyimpan hasil
+df.to_csv("penjualan_bersih.csv", index=False)</code></pre>
+
+                <p>
+                    Alur proyek tersebut meliputi pembuatan DataFrame,
+                    penghapusan duplikasi, konversi tipe data,
+                    penambahan kolom hasil perhitungan, agregasi, dan
+                    ekspor. Dalam proyek nyata, duplikasi harus
+                    diverifikasi terlebih dahulu agar transaksi sah
+                    tidak ikut terhapus.
+                </p>
+            </section>
+
+            <section>
+                <h2>12. Latihan Mandiri</h2>
+                <ol>
+                    <li>
+                        Buat array NumPy berisi bilangan 1 sampai 10.
+                        Hitung mean, median, varians populasi, dan
+                        simpangan bakunya.
+                    </li>
+                    <li>
+                        Buat DataFrame yang berisi nama, jurusan, dan
+                        nilai lima mahasiswa. Tampilkan hanya kolom nama
+                        dan nilai.
+                    </li>
+                    <li>
+                        Baca berkas CSV bernama
+                        <code>mahasiswa.csv</code>, kemudian tampilkan
+                        lima baris pertama, bentuk DataFrame, dan tipe
+                        data setiap kolom.
+                    </li>
+                    <li>
+                        Dari DataFrame mahasiswa, pilih mahasiswa yang
+                        nilainya minimal 80 dan urutkan berdasarkan nilai
+                        dari tertinggi ke terendah.
+                    </li>
+                    <li>
+                        Hitung rata-rata nilai mahasiswa untuk setiap
+                        jurusan menggunakan <code>groupby()</code>.
+                    </li>
+                    <li>
+                        Buat dua DataFrame terpisah, yaitu data mahasiswa
+                        dan data nilai. Gabungkan keduanya berdasarkan
+                        kolom ID menggunakan <code>merge()</code>.
+                    </li>
+                    <li>
+                        Ubah kolom tanggal berbentuk teks menjadi datetime.
+                        Buat kolom baru yang berisi bulan dan tahun.
+                    </li>
+                    <li>
+                        Buat DataFrame yang memiliki missing values.
+                        Hitung jumlah nilai hilang pada setiap kolom,
+                        kemudian bandingkan hasil penghapusan baris dan
+                        pengisian dengan median.
+                    </li>
+                    <li>
+                        Hapus duplikasi berdasarkan ID transaksi dan
+                        jelaskan mengapa penghapusan berdasarkan seluruh
+                        kolom bisa menghasilkan keputusan berbeda.
+                    </li>
+                    <li>
+                        Buat kolom total harga dari perkalian jumlah
+                        barang dengan harga satuan. Simpan hasil akhir
+                        ke dalam berkas CSV dan Excel.
+                    </li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>13. Ringkasan</h2>
+                <p>
+                    NumPy digunakan untuk operasi array dan komputasi
+                    numerik, sedangkan Pandas mempermudah pengolahan
+                    data berbentuk tabel. Melalui Series dan DataFrame,
+                    kita dapat membaca berkas, memilih data, melakukan
+                    filtering, sorting, grouping, menggabungkan tabel,
+                    memanipulasi tanggal, menangani nilai hilang,
+                    menghapus duplikasi, mentransformasikan data, dan
+                    mengekspor hasil pengolahan.
+                </p>
+
+                <p>
+                    Tahapan tersebut merupakan bagian penting dari
+                    preprocessing data. Data yang telah diperiksa dan
+                    dibersihkan dapat digunakan untuk eksplorasi data,
+                    visualisasi, analisis statistik, dan pembangunan
+                    model machine learning.
+                </p>
+            </section>
+
+            <section>
+                <h2>Referensi</h2>
+                <ul>
+                    <li>Dokumentasi NumPy: https://numpy.org/doc/</li>
+                    <li>Dokumentasi Pandas: https://pandas.pydata.org/docs/</li>
+                    <li>Wes McKinney. <em>Python for Data Analysis.</em></li>
+                    <li>Dokumentasi Python: https://docs.python.org/3/</li>
+                    <li>Dokumentasi openpyxl: https://openpyxl.readthedocs.io/</li>
+                </ul>
+            </section>
+        </article>
+    </main>
+
+    <footer>ShadowLab — Belajar Tanpa Batas</footer>
+</body>
+</html>

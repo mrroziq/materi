@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turunan | Kalkulus</title>
+    <link rel="stylesheet" href="style.css">
+
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)']],
+                displayMath: [['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script
+        id="MathJax-script"
+        async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+    </script>
+</head>
+<body>
+    <header class="navbar">
+        <a href="index.html" class="logo">Kalkulus</a>
+        <nav>
+            <a href="index.html">Beranda</a>
+            <a href="MateriMath.html">Materi</a>
+            <a href="game.html">Game Soal</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <article class="article">
+            <p class="eyebrow">BAGIAN III — TURUNAN</p>
+
+            <h1>Turunan</h1>
+
+            <p class="intro">
+                Turunan merupakan salah satu konsep utama dalam kalkulus
+                yang digunakan untuk mengukur laju perubahan suatu fungsi.
+                Dalam geometri, turunan menyatakan gradien garis singgung
+                pada grafik fungsi. Konsep ini banyak digunakan untuk
+                menentukan kecepatan, percepatan, nilai maksimum dan
+                minimum, serta membangun pendekatan terhadap suatu fungsi.
+            </p>
+
+            <section>
+                <h2>1. Pengertian Turunan sebagai Limit</h2>
+
+                <p>
+                    Turunan berawal dari gagasan laju perubahan rata-rata.
+                    Jika suatu fungsi berubah dari \(f(x)\) menjadi
+                    \(f(x+h)\), laju perubahan rata-ratanya adalah
+                </p>
+
+                \[
+                \frac{f(x+h)-f(x)}{h},\qquad h\ne0.
+                \]
+
+                <p>
+                    Ketika \(h\) mendekati nol, kedua titik pada grafik
+                    semakin berdekatan. Jika limitnya ada, laju perubahan
+                    rata-rata tersebut mendekati laju perubahan sesaat,
+                    yang disebut turunan.
+                </p>
+
+                <p>Turunan fungsi \(f\) di titik \(x\) didefinisikan sebagai</p>
+
+                \[
+                f'(x)=\lim_{h\to0}\frac{f(x+h)-f(x)}{h}.
+                \]
+
+                <h3>Contoh 1</h3>
+
+                <p>Tentukan turunan \(f(x)=x^2\) menggunakan definisi limit.</p>
+
+                <p><strong>Penyelesaian:</strong></p>
+
+                <p>Berdasarkan definisi turunan,</p>
+
+                \[
+                f'(x)=\lim_{h\to0}\frac{(x+h)^2-x^2}{h}.
+                \]
+
+                <p>Kembangkan bentuk kuadrat:</p>
+
+                \[
+                f'(x)=\lim_{h\to0}\frac{x^2+2xh+h^2-x^2}{h}.
+                \]
+
+                <p>Sederhanakan dengan mencoret suku yang sama:</p>
+
+                \[
+                f'(x)=\lim_{h\to0}\frac{2xh+h^2}{h}.
+                \]
+
+                <p>Untuk \(h\ne0\), diperoleh</p>
+
+                \[
+                f'(x)=\lim_{h\to0}(2x+h)=2x.
+                \]
+
+                <p>Jadi,</p>
+
+                \[
+                \boxed{f'(x)=2x}.
+                \]
+
+                <h3>Latihan</h3>
+
+                <ol>
+                    <li>Tentukan turunan \(f(x)=x^2+1\) menggunakan definisi limit.</li>
+                    <li>Jelaskan mengapa nilai \(h=0\) tidak dapat langsung dimasukkan ke dalam hasil bagi perubahan.</li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>2. Turunan dan Gradien Garis Singgung</h2>
+
+                <p>
+                    Gradien garis secan adalah gradien garis yang melalui
+                    dua titik pada grafik fungsi. Jika kedua titik semakin
+                    berdekatan, garis secan dapat mendekati garis singgung.
+                    Gradien garis singgung pada titik \(x=a\) diberikan oleh
+                </p>
+
+                \[
+                m=f'(a).
+                \]
+
+                <p>
+                    Dengan demikian, turunan pada suatu titik merupakan
+                    gradien garis singgung grafik fungsi di titik tersebut.
+                </p>
+
+                <h3>2.1 Persamaan garis singgung</h3>
+
+                <p>
+                    Jika grafik \(y=f(x)\) memiliki turunan di \(x=a\),
+                    persamaan garis singgungnya adalah
+                </p>
+
+                \[
+                y-f(a)=f'(a)(x-a).
+                \]
+
+                <h3>Contoh 2</h3>
+
+                <p>
+                    Tentukan persamaan garis singgung kurva
+                    \(f(x)=x^2\) di titik dengan absis \(x=2\).
+                </p>
+
+                <p><strong>Penyelesaian:</strong></p>
+
+                <p>Turunan fungsi tersebut adalah</p>
+
+                \[
+                f'(x)=2x.
+                \]
+
+                <p>Gradien di \(x=2\) adalah</p>
+
+                \[
+                f'(2)=2(2)=4.
+                \]
+
+                <p>Koordinat titik singgungnya adalah</p>
+
+                \[
+                (2,f(2))=(2,4).
+                \]
+
+                <p>Gunakan persamaan garis singgung:</p>
+
+                \[
+                \begin{aligned}
+                y-4&=4(x-2),\\
+                y&=4x-4.
+                \end{aligned}
+                \]
+
+                <p>Jadi, persamaan garis singgungnya adalah</p>
+
+                \[
+                \boxed{y=4x-4}.
+                \]
+
+                <h3>2.2 Makna turunan dalam konteks perubahan</h3>
+
+                <p>
+                    Jika \(s(t)\) menyatakan posisi benda pada waktu \(t\),
+                    maka kecepatan sesaat adalah
+                </p>
+
+                \[
+                v(t)=s'(t).
+                \]
+
+                <p>
+                    Jika \(v(t)\) menyatakan kecepatan, percepatan sesaat
+                    adalah
+                </p>
+
+                \[
+                a(t)=v'(t)=s''(t).
+                \]
+
+                <p>
+                    Turunan juga dapat digunakan untuk menggambarkan laju
+                    perubahan biaya, jumlah produksi, suhu, atau besaran
+                    lain yang bergantung pada suatu variabel.
+                </p>
+
+                <h3>Latihan</h3>
+
+                <ol>
+                    <li>Tentukan gradien garis singgung \(y=x^3\) di \(x=1\).</li>
+                    <li>Tentukan persamaan garis singgung \(y=x^2+1\) di \(x=1\).</li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>3. Definisi Turunan</h2>
+
+                <p>
+                    Secara formal, fungsi \(f\) dikatakan memiliki turunan
+                    di \(x=a\) jika limit berikut ada sebagai bilangan real:
+                </p>
+
+                \[
+                f'(a)=\lim_{h\to0}\frac{f(a+h)-f(a)}{h}.
+                \]
+
+                <p>
+                    Bentuk lain dari definisi yang sama adalah
+                </p>
+
+                \[
+                f'(a)=\lim_{x\to a}\frac{f(x)-f(a)}{x-a}.
+                \]
+
+                <p>
+                    Jika limit tersebut ada untuk setiap \(x\) pada suatu
+                    interval, fungsi dikatakan terdiferensialkan pada
+                    interval tersebut.
+                </p>
+
+                <h3>3.1 Hubungan kontinuitas dan diferensiabilitas</h3>
+
+                <p>
+                    Jika suatu fungsi terdiferensialkan di \(x=a\),
+                    maka fungsi tersebut kontinu di \(x=a\). Namun,
+                    fungsi yang kontinu belum tentu memiliki turunan
+                    di setiap titiknya.
+                </p>
+
+                <h3>Contoh 3</h3>
+
+                <p>
+                    Perhatikan fungsi \(f(x)=|x|\) di \(x=0\).
+                    Fungsi ini kontinu di \(0\), karena
+                </p>
+
+                \[
+                \lim_{x\to0}|x|=0=f(0).
+                \]
+
+                <p>
+                    Akan tetapi, turunan kiri dan kanan berbeda.
+                    Dari sebelah kiri, \(f(x)=-x\), sehingga
+                </p>
+
+                \[
+                f'_-(0)=-1.
+                \]
+
+                <p>
+                    Dari sebelah kanan, \(f(x)=x\), sehingga
+                </p>
+
+                \[
+                f'_+(0)=1.
+                \]
+
+                <p>
+                    Karena turunan kiri tidak sama dengan turunan kanan,
+                    \(f'(0)\) tidak ada. Contoh ini menunjukkan bahwa
+                    kontinuitas tidak menjamin diferensiabilitas.
+                </p>
+
+                <h3>Latihan</h3>
+
+                <ol>
+                    <li>Tuliskan definisi turunan menggunakan limit.</li>
+                    <li>Apakah setiap fungsi yang kontinu pasti terdiferensialkan? Jelaskan.</li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>4. Aturan Turunan Dasar</h2>
+
+                <p>
+                    Definisi turunan dapat digunakan untuk menurunkan
+                    berbagai fungsi. Namun, untuk mempermudah perhitungan,
+                    digunakan aturan-aturan turunan dasar.
+                </p>
+
+                <h3>4.1 Turunan konstanta</h3>
+
+                \[
+                \frac{d}{dx}(c)=0.
+                \]
+
+                <h3>4.2 Aturan pangkat</h3>
+
+                \[
+                \frac{d}{dx}(x^n)=nx^{n-1}.
+                \]
+
+                <p>
+                    Aturan pangkat berlaku untuk nilai \(n\) yang
+                    sesuai dengan domain dan diferensiabilitas fungsi.
+                </p>
+
+                <h3>4.3 Konstanta kali fungsi</h3>
+
+                \[
+                \frac{d}{dx}[cf(x)]=cf'(x).
+                \]
+
+                <h3>4.4 Penjumlahan dan pengurangan</h3>
+
+                \[
+                \frac{d}{dx}[f(x)\pm g(x)]=f'(x)\pm g'(x).
+                \]
+
+                <h3>4.5 Aturan perkalian</h3>
+
+                \[
+                \frac{d}{dx}[f(x)g(x)]
+                =f'(x)g(x)+f(x)g'(x).
+                \]
+
+                <h3>4.6 Aturan pembagian</h3>
+
+                \[
+                \frac{d}{dx}\left[\frac{f(x)}{g(x)}\right]
+                =\frac{f'(x)g(x)-f(x)g'(x)}{[g(x)]^2},
+                \qquad g(x)\ne0.
+                \]
+
+                <h3>Contoh 4</h3>
+
+                <p>Tentukan turunan fungsi</p>
+
+                \[
+                f(x)=3x^4-2x^3+5x-7.
+                \]
+
+                <p><strong>Penyelesaian:</strong></p>
+
+                <p>Turunkan setiap suku menggunakan aturan pangkat.</p>
+
+                \[
+                \begin{aligned}
+                f'(x)
+                &=3(4x^3)-2(3x^2)+5-0\\
+                &=12x^3-6x^2+5.
+                \end{aligned}
+                \]
+
+                <p>Jadi,</p>
+
+                \[
+                \boxed{f'(x)=12x^3-6x^2+5}.
+                \]
+
+                <h3>Contoh 5</h3>
+
+                <p>Tentukan turunan \(f(x)=(x^2+1)(x^3-2)\).</p>
+
+                <p><strong>Penyelesaian:</strong></p>
+
+                <p>Gunakan aturan perkalian:</p>
+
+                \[
+                \begin{aligned}
+                f'(x)
+                &=(2x)(x^3-2)+(x^2+1)(3x^2)\\
+                &=2x^4-4x+3x^4+3x^2\\
+                &=5x^4+3x^2-4x.
+                \end{aligned}
+                \]
+
+                <h3>Contoh 6</h3>
+
+                <p>Tentukan turunan</p>
+
+                \[
+                f(x)=\frac{x^2+1}{x}.
+                \]
+
+                <p>Dengan aturan pembagian,</p>
+
+                \[
+                \begin{aligned}
+                f'(x)
+                &=\frac{(2x)(x)-(x^2+1)(1)}{x^2}\\
+                &=\frac{x^2-1}{x^2}.
+                \end{aligned}
+                \]
+
+                <p>Jadi, untuk \(x\ne0\),</p>
+
+                \[
+                \boxed{f'(x)=\frac{x^2-1}{x^2}}.
+                \]
+
+                <h3>Latihan</h3>
+
+                <ol>
+                    <li>Tentukan turunan \(f(x)=5x^4-3x^2+7\).</li>
+                    <li>Tentukan turunan \(f(x)=(x^2+2)(x+3)\).</li>
+                    <li>Tentukan turunan \(f(x)=\frac{x+1}{x^2}\).</li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>5. Aturan Rantai</h2>
+
+                <p>
+                    Aturan rantai digunakan untuk menentukan turunan
+                    fungsi komposisi. Jika
+                    \(y=f(g(x))\), maka
+                </p>
+
+                \[
+                \frac{dy}{dx}=f'(g(x))g'(x).
+                \]
+
+                <p>
+                    Artinya, turunkan fungsi bagian luar dengan
+                    mempertahankan fungsi bagian dalam, kemudian
+                    kalikan dengan turunan fungsi bagian dalam.
+                </p>
+
+                <h3>Contoh 7</h3>
+
+                <p>Tentukan turunan</p>
+
+                \[
+                y=(3x^2+1)^5.
+                \]
+
+                <p><strong>Penyelesaian:</strong></p>
+
+                <p>
+                    Fungsi bagian luar adalah pangkat lima, sedangkan
+                    fungsi bagian dalam adalah \(3x^2+1\).
+                </p>
+
+                \[
+                \begin{aligned}
+                y'
+                &=5(3x^2+1)^4\cdot\frac{d}{dx}(3x^2+1)\\
+                &=5(3x^2+1)^4(6x)\\
+                &=30x(3x^2+1)^4.
+                \end{aligned}
+                \]
+
+                <h3>Contoh 8</h3>
+
+                <p>Tentukan turunan</p>
+
+                \[
+                y=\sqrt{2x+3}.
+                \]
+
+                <p>Ubah bentuk akar menjadi pangkat:</p>
+
+                \[
+                y=(2x+3)^{1/2}.
+                \]
+
+                <p>Dengan aturan rantai,</p>
+
+                \[
+                \begin{aligned}
+                y'
+                &=\frac12(2x+3)^{-1/2}(2)\\
+                &=\frac{1}{\sqrt{2x+3}}.
+                \end{aligned}
+                \]
+
+                <p>Turunan tersebut berlaku pada bagian domain dengan \(2x+3>0\).</p>
+
+                <h3>Latihan</h3>
+
+                <ol>
+                    <li>Tentukan turunan \(y=(x^2+4)^3\).</li>
+                    <li>Tentukan turunan \(y=(5x-2)^7\).</li>
+                    <li>Tentukan turunan \(y=\frac{1}{(x^2+1)^2}\).</li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>6. Turunan Implisit dan Turunan Invers</h2>
+
+                <h3>6.1 Turunan implisit</h3>
+
+                <p>
+                    Tidak semua persamaan dapat ditulis dengan mudah
+                    dalam bentuk \(y=f(x)\). Pada persamaan implisit,
+                    variabel \(x\) dan \(y\) muncul dalam satu hubungan.
+                    Turunan implisit diperoleh dengan menurunkan kedua
+                    ruas terhadap \(x\), sambil mengingat bahwa \(y\)
+                    bergantung pada \(x\).
+                </p>
+
+                <p>Contohnya,</p>
+
+                \[
+                x^2+y^2=25.
+                \]
+
+                <p>Turunkan kedua ruas terhadap \(x\):</p>
+
+                \[
+                2x+2y\frac{dy}{dx}=0.
+                \]
+
+                <p>Selesaikan terhadap \(\frac{dy}{dx}\):</p>
+
+                \[
+                \boxed{\frac{dy}{dx}=-\frac{x}{y}},\qquad y\ne0.
+                \]
+
+                <h3>Contoh 9</h3>
+
+                <p>Tentukan \(\frac{dy}{dx}\) jika</p>
+
+                \[
+                x^2+xy+y^2=7.
+                \]
+
+                <p><strong>Penyelesaian:</strong></p>
+
+                <p>Turunkan setiap suku terhadap \(x\):</p>
+
+                \[
+                2x+\left(x\frac{dy}{dx}+y\right)
+                +2y\frac{dy}{dx}=0.
+                \]
+
+                <p>Kumpulkan suku yang memuat \(\frac{dy}{dx}\):</p>
+
+                \[
+                (x+2y)\frac{dy}{dx}=-(2x+y).
+                \]
+
+                <p>Jadi,</p>
+
+                \[
+                \boxed{\frac{dy}{dx}=-\frac{2x+y}{x+2y}},
+                \qquad x+2y\ne0.
+                \]
+
+                <h3>6.2 Turunan fungsi invers</h3>
+
+                <p>
+                    Jika \(f\) memiliki invers dan \(f'(x)\ne0\),
+                    turunan fungsi invers dapat dinyatakan sebagai
+                </p>
+
+                \[
+                (f^{-1})'(x)=\frac{1}{f'(f^{-1}(x))}.
+                \]
+
+                <p>
+                    Rumus tersebut menunjukkan bahwa turunan fungsi
+                    invers berkaitan dengan kebalikan turunan fungsi
+                    asal pada titik yang bersesuaian.
+                </p>
+
+                <h3>Contoh 10</h3>
+
+                <p>
+                    Diketahui \(f(x)=2x+3\). Tentukan turunan inversnya.
+                </p>
+
+                <p><strong>Penyelesaian:</strong></p>
+
+                <p>Invers fungsi adalah</p>
+
+                \[
+                f^{-1}(x)=\frac{x-3}{2}.
+                \]
+
+                <p>Dengan demikian,</p>
+
+                \[
+                \boxed{(f^{-1})'(x)=\frac12}.
+                \]
+
+                <h3>Latihan</h3>
+
+                <ol>
+                    <li>Tentukan \(\frac{dy}{dx}\) dari \(x^2+4y^2=16\).</li>
+                    <li>Jika \(f(x)=3x-6\), tentukan \((f^{-1})'(x)\).</li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>7. Turunan Fungsi Trigonometri</h2>
+
+                <p>
+                    Turunan fungsi trigonometri digunakan untuk
+                    menganalisis perubahan fungsi yang melibatkan
+                    sudut. Dalam rumus-rumus berikut, sudut dinyatakan
+                    dalam radian.
+                </p>
+
+                <h3>7.1 Rumus dasar</h3>
+
+                \[
+                \frac{d}{dx}(\sin x)=\cos x.
+                \]
+
+                \[
+                \frac{d}{dx}(\cos x)=-\sin x.
+                \]
+
+                \[
+                \frac{d}{dx}(\tan x)=\sec^2 x.
+                \]
+
+                \[
+                \frac{d}{dx}(\cot x)=-\csc^2 x.
+                \]
+
+                \[
+                \frac{d}{dx}(\sec x)=\sec x\tan x.
+                \]
+
+                \[
+                \frac{d}{dx}(\csc x)=-\csc x\cot x.
+                \]
+
+                <h3>7.2 Menggunakan aturan rantai</h3>
+
+                <p>
+                    Jika argumen fungsi trigonometri berupa fungsi
+                    \(u(x)\), gunakan aturan rantai:
+                </p>
+
+                \[
+                \frac{d}{dx}\sin u(x)=\cos u(x)\,u'(x).
+                \]
+
+                <h3>Contoh 11</h3>
+
+                <p>Tentukan turunan</p>
+
+                \[
+                y=\sin(3x^2).
+                \]
+
+                <p><strong>Penyelesaian:</strong></p>
+
+                \[
+                \begin{aligned}
+                y'&=\cos(3x^2)\cdot6x\\
+                &=6x\cos(3x^2).
+                \end{aligned}
+                \]
+
+                <h3>Contoh 12</h3>
+
+                <p>Tentukan turunan</p>
+
+                \[
+                y=x^2\cos x.
+                \]
+
+                <p>Dengan aturan perkalian,</p>
+
+                \[
+                \begin{aligned}
+                y'&=2x\cos x+x^2(-\sin x)\\
+                &=2x\cos x-x^2\sin x.
+                \end{aligned}
+                \]
+
+                <h3>Latihan</h3>
+
+                <ol>
+                    <li>Tentukan turunan \(y=4\sin x-3\cos x\).</li>
+                    <li>Tentukan turunan \(y=\cos(2x+1)\).</li>
+                    <li>Tentukan turunan \(y=x\sin x\).</li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>8. Turunan Eksponensial dan Logaritma</h2>
+
+                <h3>8.1 Turunan fungsi eksponensial</h3>
+
+                <p>Untuk fungsi eksponensial dengan basis \(e\), berlaku</p>
+
+                \[
+                \frac{d}{dx}(e^x)=e^x.
+                \]
+
+                <p>Untuk basis \(a>0\), \(a\ne1\), berlaku</p>
+
+                \[
+                \frac{d}{dx}(a^x)=a^x\ln a.
+                \]
+
+                <p>Jika pangkatnya berupa fungsi \(u(x)\), maka</p>
+
+                \[
+                \frac{d}{dx}(e^{u(x)})
+                =e^{u(x)}u'(x).
+                \]
+
+                <h3>8.2 Turunan fungsi logaritma</h3>
+
+                <p>Untuk \(x>0\), berlaku</p>
+
+                \[
+                \frac{d}{dx}(\ln x)=\frac1x.
+                \]
+
+                <p>Untuk logaritma dengan basis \(a>0\), \(a\ne1\), berlaku</p>
+
+                \[
+                \frac{d}{dx}(\log_a x)=\frac{1}{x\ln a}.
+                \]
+
+                <p>Untuk fungsi \(\ln|u(x)|\), ketika \(u(x)\ne0\), berlaku</p>
+
+                \[
+                \frac{d}{dx}\ln|u(x)|=\frac{u'(x)}{u(x)}.
+                \]
+
+                <h3>Contoh 13</h3>
+
+                <p>Tentukan turunan</p>
+
+                \[
+                y=e^{x^2+1}.
+                \]
+
+                <p>Dengan aturan rantai,</p>
+
+                \[
+                \boxed{y'=2xe^{x^2+1}}.
+                \]
+
+                <h3>Contoh 14</h3>
+
+                <p>Tentukan turunan</p>
+
+                \[
+                y=\ln(3x^2+1).
+                \]
+
+                <p>Gunakan aturan rantai:</p>
+
+                \[
+                \begin{aligned}
+                y'&=\frac{1}{3x^2+1}\cdot6x\\
+                &=\frac{6x}{3x^2+1}.
+                \end{aligned}
+                \]
+
+                <h3>Latihan</h3>
+
+                <ol>
+                    <li>Tentukan turunan \(y=5^x\).</li>
+                    <li>Tentukan turunan \(y=e^{4x-1}\).</li>
+                    <li>Tentukan turunan \(y=\ln(x^2+4)\).</li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>9. Turunan Tingkat Tinggi</h2>
+
+                <p>
+                    Turunan tingkat tinggi diperoleh dengan menurunkan
+                    fungsi turunan secara berulang. Turunan pertama
+                    dinotasikan \(f'(x)\), turunan kedua \(f''(x)\),
+                    dan turunan ketiga \(f'''(x)\).
+                </p>
+
+                <p>Secara umum, turunan ke-\(n\) ditulis sebagai</p>
+
+                \[
+                f^{(n)}(x)=\frac{d^n f}{dx^n}.
+                \]
+
+                <h3>Contoh 15</h3>
+
+                <p>Tentukan turunan pertama, kedua, dan ketiga dari</p>
+
+                \[
+                f(x)=x^4-2x^3+3x^2-x+5.
+                \]
+
+                <p><strong>Penyelesaian:</strong></p>
+
+                <p>Turunan pertama:</p>
+
+                \[
+                f'(x)=4x^3-6x^2+6x-1.
+                \]
+
+                <p>Turunan kedua:</p>
+
+                \[
+                f''(x)=12x^2-12x+6.
+                \]
+
+                <p>Turunan ketiga:</p>
+
+                \[
+                f'''(x)=24x-12.
+                \]
+
+                <h3>9.1 Makna turunan kedua</h3>
+
+                <p>
+                    Turunan kedua menggambarkan laju perubahan turunan
+                    pertama. Dalam konteks gerak, jika \(s(t)\)
+                    menyatakan posisi, maka \(s''(t)\) menyatakan
+                    percepatan.
+                </p>
+
+                <p>
+                    Dalam analisis grafik, tanda turunan kedua
+                    membantu menjelaskan kecekungan grafik:
+                </p>
+
+                <ul>
+                    <li>Jika \(f''(x)>0\), grafik cekung ke atas.</li>
+                    <li>Jika \(f''(x)<0\), grafik cekung ke bawah.</li>
+                </ul>
+
+                <p>
+                    Perubahan kecekungan dapat terjadi pada titik
+                    belok, tetapi keberadaan titik belok perlu
+                    diperiksa melalui perubahan tanda kecekungan.
+                </p>
+
+                <h3>Latihan</h3>
+
+                <ol>
+                    <li>Tentukan \(f''(x)\) jika \(f(x)=x^5-3x^2\).</li>
+                    <li>Tentukan turunan ketiga \(f(x)=2x^4+x^3\).</li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>10. Diferensial dan Pendekatan Linear</h2>
+
+                <h3>10.1 Diferensial</h3>
+
+                <p>
+                    Jika \(y=f(x)\) terdiferensialkan, diferensial
+                    \(y\) didefinisikan sebagai
+                </p>
+
+                \[
+                dy=f'(x)\,dx.
+                \]
+
+                <p>
+                    Diferensial \(dx\) merupakan perubahan kecil pada
+                    variabel bebas, sedangkan \(dy\) adalah perubahan
+                    yang diperkirakan melalui turunan.
+                </p>
+
+                <p>
+                    Perubahan sebenarnya pada fungsi adalah
+                    \(\Delta y=f(x+\Delta x)-f(x)\). Untuk perubahan
+                    kecil, \(dy\) dapat digunakan sebagai pendekatan
+                    terhadap \(\Delta y\).
+                </p>
+
+                <h3>10.2 Pendekatan linear</h3>
+
+                <p>
+                    Jika \(f\) terdiferensialkan di sekitar \(x=a\),
+                    pendekatan linear fungsi di sekitar titik tersebut
+                    diberikan oleh
+                </p>
+
+                \[
+                L(x)=f(a)+f'(a)(x-a).
+                \]
+
+                <p>
+                    Pendekatan ini menggunakan garis singgung untuk
+                    memperkirakan nilai fungsi di dekat \(a\).
+                    Semakin dekat \(x\) ke \(a\), pendekatan biasanya
+                    semakin baik jika fungsi cukup mulus di sekitar titik itu.
+                </p>
+
+                <h3>Contoh 16</h3>
+
+                <p>
+                    Gunakan pendekatan linear di sekitar \(x=4\)
+                    untuk memperkirakan \(\sqrt{4,1}\).
+                </p>
+
+                <p><strong>Penyelesaian:</strong></p>
+
+                <p>Misalkan</p>
+
+                \[
+                f(x)=\sqrt{x}.
+                \]
+
+                <p>Turunannya adalah</p>
+
+                \[
+                f'(x)=\frac{1}{2\sqrt{x}}.
+                \]
+
+                <p>Pada \(a=4\), diperoleh</p>
+
+                \[
+                f(4)=2,\qquad f'(4)=\frac14.
+                \]
+
+                <p>Maka pendekatan linearnya adalah</p>
+
+                \[
+                L(x)=2+\frac14(x-4).
+                \]
+
+                <p>Untuk \(x=4,1\),</p>
+
+                \[
+                \begin{aligned}
+                \sqrt{4,1}
+                &\approx L(4,1)\\
+                &=2+\frac14(0,1)\\
+                &=2,025.
+                \end{aligned}
+                \]
+
+                <p>
+                    Jadi, pendekatan linear memberikan
+                    \(\sqrt{4,1}\approx2,025\).
+                </p>
+
+                <h3>10.3 Perkiraan galat</h3>
+
+                <p>
+                    Selisih antara nilai sebenarnya dan nilai pendekatan
+                    disebut galat. Untuk perubahan yang kecil,
+                    pendekatan linear dapat memberikan perkiraan
+                    yang cukup baik, tetapi tidak selalu menghasilkan
+                    nilai tepat.
+                </p>
+
+                <h3>Latihan</h3>
+
+                <ol>
+                    <li>Tentukan diferensial \(y=x^3+2x\).</li>
+                    <li>
+                        Gunakan pendekatan linear di sekitar \(x=9\)
+                        untuk memperkirakan \(\sqrt{9,2}\).
+                    </li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>11. Rangkuman</h2>
+
+                <p>
+                    Turunan didefinisikan melalui limit hasil bagi
+                    perubahan dan dapat dimaknai sebagai laju
+                    perubahan sesaat maupun gradien garis singgung.
+                    Definisi formal menjadi dasar bagi aturan
+                    turunan yang lebih praktis.
+                </p>
+
+                <p>
+                    Aturan dasar meliputi aturan pangkat, konstanta,
+                    penjumlahan, perkalian, dan pembagian. Aturan
+                    rantai digunakan untuk fungsi komposisi,
+                    sedangkan turunan implisit membantu menangani
+                    persamaan yang melibatkan beberapa variabel.
+                    Turunan fungsi invers, trigonometri, eksponensial,
+                    dan logaritma memperluas penerapan konsep turunan.
+                </p>
+
+                <p>
+                    Turunan tingkat tinggi digunakan untuk menganalisis
+                    perubahan lanjutan, termasuk percepatan dan
+                    kecekungan grafik. Diferensial serta pendekatan
+                    linear digunakan untuk memperkirakan perubahan
+                    dan nilai fungsi di sekitar suatu titik.
+                </p>
+            </section>
+
+            <section>
+                <h2>12. Evaluasi Akhir</h2>
+
+                <ol>
+                    <li>
+                        Tentukan turunan \(f(x)=x^3-4x^2+2x-1\).
+                    </li>
+                    <li>
+                        Gunakan definisi limit untuk menentukan
+                        turunan \(f(x)=x^2+2x\).
+                    </li>
+                    <li>
+                        Tentukan persamaan garis singgung kurva
+                        \(y=x^2+3\) di \(x=2\).
+                    </li>
+                    <li>
+                        Tentukan turunan \(y=(2x^2+1)^4\).
+                    </li>
+                    <li>
+                        Tentukan turunan \(y=\frac{x^2+1}{x-1}\).
+                    </li>
+                    <li>
+                        Tentukan \(\frac{dy}{dx}\) jika
+                        \(x^2+y^2=16\).
+                    </li>
+                    <li>
+                        Tentukan turunan \(y=\sin(2x)+\cos x\).
+                    </li>
+                    <li>
+                        Tentukan turunan \(y=e^{x^2}\ln x\).
+                    </li>
+                    <li>
+                        Tentukan turunan kedua \(f(x)=x^4-3x^2+1\).
+                    </li>
+                    <li>
+                        Gunakan pendekatan linear di sekitar \(x=1\)
+                        untuk memperkirakan \(\sqrt{1,04}\).
+                    </li>
+                </ol>
+            </section>
+        </article>
+    </main>
+
+    <footer>Website Pembelajaran Kalkulus</footer>
+</body>
+</html>

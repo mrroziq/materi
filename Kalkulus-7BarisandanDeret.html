@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barisan dan Deret | Kalkulus</title>
+    <link rel="stylesheet" href="style.css">
+
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)']],
+                displayMath: [['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script
+        id="MathJax-script"
+        async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+    </script>
+</head>
+
+<body>
+    <header class="navbar">
+        <a href="index.html" class="logo">Kalkulus</a>
+        <nav>
+            <a href="index.html">Beranda</a>
+            <a href="MateriMath.html">Materi Math</a>
+            <a href="game.html">Game Soal</a>
+        </nav>
+    </header>
+
+    <main class="container">
+
+        <article class="article">
+            <p class="eyebrow">BAGIAN VII — BARISAN DAN DERET</p>
+
+            <h1>Barisan dan Deret</h1>
+
+            <p class="intro">
+                Barisan dan deret merupakan konsep penting dalam Kalkulus
+                yang berkaitan dengan urutan bilangan, limit, serta
+                penjumlahan suku-suku yang jumlahnya tak hingga. Konsep ini
+                digunakan untuk mempelajari konvergensi, menyatakan fungsi
+                dalam bentuk deret pangkat, dan mengaproksimasi nilai fungsi.
+            </p>
+
+            <section>
+                <h2>1. Barisan Bilangan</h2>
+
+                <p>
+                    Barisan bilangan adalah urutan bilangan yang setiap
+                    sukunya ditentukan berdasarkan aturan tertentu. Barisan
+                    dapat dituliskan dalam bentuk
+                </p>
+
+                \[
+                    a_1,a_2,a_3,\ldots,a_n,\ldots
+                \]
+
+                <p>
+                    Suku ke-\(n\) dinyatakan dengan \(a_n\). Barisan dapat
+                    dipandang sebagai fungsi yang domainnya berupa bilangan
+                    asli.
+                </p>
+
+                <h3>1.1 Barisan Aritmetika</h3>
+
+                <p>
+                    Barisan aritmetika adalah barisan yang memiliki selisih
+                    tetap antara dua suku berurutan. Jika suku pertamanya
+                    \(a_1\) dan bedanya \(d\), maka suku ke-\(n\) adalah
+                </p>
+
+                \[
+                    a_n=a_1+(n-1)d.
+                \]
+
+                <h3>1.2 Barisan Geometri</h3>
+
+                <p>
+                    Barisan geometri adalah barisan yang memiliki rasio tetap
+                    antara dua suku berurutan. Jika suku pertamanya \(a_1\)
+                    dan rasionya \(r\), maka
+                </p>
+
+                \[
+                    a_n=a_1r^{n-1}.
+                \]
+
+                <h3>Contoh 1</h3>
+
+                <p>
+                    Tentukan lima suku pertama barisan yang didefinisikan
+                    oleh \(a_n=2n+1\).
+                </p>
+
+                <p><strong>Penyelesaian:</strong></p>
+
+                <p>
+                    Dengan mensubstitusikan \(n=1,2,3,4,5\), diperoleh
+                </p>
+
+                \[
+                    \begin{aligned}
+                    a_1&=2(1)+1=3,\\
+                    a_2&=2(2)+1=5,\\
+                    a_3&=2(3)+1=7,\\
+                    a_4&=2(4)+1=9,\\
+                    a_5&=2(5)+1=11.
+                    \end{aligned}
+                \]
+
+                <p>
+                    Jadi, lima suku pertama barisan tersebut adalah
+                    \(3,5,7,9,11\).
+                </p>
+
+                <h3>Latihan</h3>
+
+                <ol>
+                    <li>Tentukan lima suku pertama barisan \(a_n=n^2-1\).</li>
+                    <li>Tentukan suku ke-10 barisan aritmetika dengan suku pertama \(3\) dan beda \(4\).</li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>2. Limit Barisan</h2>
+
+                <p>
+                    Limit barisan menggambarkan nilai yang didekati oleh
+                    suku-suku barisan ketika \(n\) semakin besar. Barisan
+                    \((a_n)\) dikatakan konvergen ke \(L\) jika
+                </p>
+
+                \[
+                    \lim_{n\to\infty}a_n=L.
+                \]
+
+                <p>
+                    Jika barisan tidak memiliki limit berhingga, barisan
+                    tersebut disebut divergen.
+                </p>
+
+                <h3>Contoh 2</h3>
+
+                <p>Tentukan limit barisan berikut.</p>
+
+                \[
+                    \lim_{n\to\infty}\frac{3n+1}{n+2}.
+                \]
+
+                <p><strong>Penyelesaian:</strong></p>
+
+                <p>
+                    Bagi pembilang dan penyebut dengan \(n\), sehingga
+                </p>
+
+                \[
+                    \begin{aligned}
+                    \lim_{n\to\infty}\frac{3n+1}{n+2}
+                    &=\lim_{n\to\infty}
+                    \frac{3+\frac1n}{1+\frac2n}\\
+                    &=\frac{3+0}{1+0}\\
+                    &=3.
+                    \end{aligned}
+                \]
+
+                <p>
+                    Jadi, barisan tersebut konvergen ke \(3\).
+                </p>
+
+                <h3>Teorema Limit Barisan</h3>
+
+                <p>
+                    Jika \(\lim_{n\to\infty}a_n=A\) dan
+                    \(\lim_{n\to\infty}b_n=B\), maka berlaku
+                </p>
+
+                \[
+                    \begin{aligned}
+                    \lim_{n\to\infty}(a_n+b_n)&=A+B,\\
+                    \lim_{n\to\infty}(a_n-b_n)&=A-B,\\
+                    \lim_{n\to\infty}(a_nb_n)&=AB,\\
+                    \lim_{n\to\infty}\frac{a_n}{b_n}&=\frac AB,
+                    \quad B\ne0.
+                    \end{aligned}
+                \]
+
+                <p>
+                    Salah satu limit penting adalah
+                </p>
+
+                \[
+                    \lim_{n\to\infty}\frac1{n^p}=0,
+                    \qquad p>0.
+                \]
+
+                <p>
+                    Artinya, semakin besar \(n\), nilai \(\frac1{n^p}\)
+                    semakin mendekati nol.
+                </p>
+
+                <h3>Latihan</h3>
+
+                <ol>
+                    <li>Tentukan \(\displaystyle\lim_{n\to\infty}\frac{5n-2}{2n+3}\).</li>
+                    <li>Tentukan \(\displaystyle\lim_{n\to\infty}\frac{n}{n^2+1}\).</li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>3. Deret Tak Hingga</h2>
+
+                <p>
+                    Deret merupakan penjumlahan suku-suku suatu barisan.
+                    Deret tak hingga dapat ditulis sebagai
+                </p>
+
+                \[
+                    \sum_{n=1}^{\infty}a_n
+                    =a_1+a_2+a_3+\cdots.
+                \]
+
+                <p>
+                    Untuk menentukan konvergensi deret, digunakan jumlah
+                    parsial, yaitu jumlah \(n\) suku pertama:
+                </p>
+
+                \[
+                    S_n=\sum_{k=1}^{n}a_k.
+                \]
+
+                <p>
+                    Deret tak hingga konvergen jika barisan jumlah parsial
+                    memiliki limit berhingga. Dengan demikian,
+                </p>
+
+                \[
+                    \sum_{n=1}^{\infty}a_n
+                    =\lim_{n\to\infty}S_n.
+                \]
+
+                <h3>3.1 Deret Geometri Tak Hingga</h3>
+
+                <p>
+                    Deret geometri tak hingga memiliki bentuk
+                </p>
+
+                \[
+                    a+ar+ar^2+ar^3+\cdots.
+                \]
+
+                <p>
+                    Jika \(|r|<1\), deret tersebut konvergen dengan jumlah
+                </p>
+
+                \[
+                    S=\frac{a}{1-r}.
+                \]
+
+                <h3>Contoh 3</h3>
+
+                <p>Tentukan jumlah deret berikut.</p>
+
+                \[
+                    \frac12+\frac14+\frac18+\frac1{16}+\cdots
+                \]
+
+                <p><strong>Penyelesaian:</strong></p>
+
+                <p>
+                    Suku pertama adalah \(a=\frac12\) dan rasionya
+                    \(r=\frac12\). Karena \(|r|<1\), deret konvergen.
+                    Jumlahnya adalah
+                </p>
+
+                \[
+                    \begin{aligned}
+                    S&=\frac{a}{1-r}\\
+                    &=\frac{\frac12}{1-\frac12}\\
+                    &=1.
+                    \end{aligned}
+                \]
+
+                <p>
+                    Jadi, jumlah deret tersebut adalah \(1\).
+                </p>
+
+                <h3>Latihan</h3>
+
+                <ol>
+                    <li>Tentukan jumlah deret \(\displaystyle\sum_{n=0}^{\infty}\left(\frac13\right)^n\).</li>
+                    <li>Tentukan apakah deret \(\displaystyle\sum_{n=1}^{\infty}\frac1{n^2}\) konvergen atau divergen.</li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>4. Uji Konvergensi Deret</h2>
+
+                <p>
+                    Uji konvergensi digunakan untuk menentukan apakah suatu
+                    deret tak hingga memiliki jumlah berhingga. Pemilihan
+                    uji bergantung pada bentuk suku deret yang diberikan.
+                </p>
+
+                <h3>4.1 Uji Suku ke-\(n\)</h3>
+
+                <p>
+                    Jika
+                </p>
+
+                \[
+                    \lim_{n\to\infty}a_n\ne0
+                \]
+
+                <p>
+                    atau limit tersebut tidak ada, maka
+                    \(\sum_{n=1}^{\infty}a_n\) divergen. Jika limitnya
+                    sama dengan nol, uji ini belum dapat memastikan
+                    konvergensi.
+                </p>
+
+                <h3>4.2 Uji Integral</h3>
+
+                <p>
+                    Jika \(f(x)\) kontinu, positif, dan menurun pada
+                    \([1,\infty)\), serta \(a_n=f(n)\), maka deret
+                    \(\sum_{n=1}^{\infty}a_n\) dan integral tak wajar
+                    \(\int_1^\infty f(x)\,dx\) sama-sama konvergen atau
+                    sama-sama divergen.
+                </p>
+
+                <h3>4.3 Uji Perbandingan</h3>
+
+                <p>
+                    Untuk deret dengan suku-suku nonnegatif, jika
+                    \(0\leq a_n\leq b_n\), maka berlaku:
+                </p>
+
+                <ul>
+                    <li>Jika \(\sum b_n\) konvergen, maka \(\sum a_n\) konvergen.</li>
+                    <li>Jika \(\sum a_n\) divergen, maka \(\sum b_n\) divergen.</li>
+                </ul>
+
+                <h3>4.4 Uji Rasio</h3>
+
+                <p>
+                    Untuk deret \(\sum a_n\), misalkan
+                </p>
+
+                \[
+                    L=\lim_{n\to\infty}
+                    \left|\frac{a_{n+1}}{a_n}\right|.
+                \]
+
+                <ul>
+                    <li>Jika \(L<1\), deret konvergen absolut.</li>
+                    <li>Jika \(L>1\) atau \(L=\infty\), deret divergen.</li>
+                    <li>Jika \(L=1\), uji ini tidak memberikan kesimpulan.</li>
+                </ul>
+
+                <h3>4.5 Uji Akar</h3>
+
+                <p>Misalkan</p>
+
+                \[
+                    L=\lim_{n\to\infty}\sqrt[n]{|a_n|}.
+                \]
+
+                <ul>
+                    <li>Jika \(L<1\), deret konvergen absolut.</li>
+                    <li>Jika \(L>1\), deret divergen.</li>
+                    <li>Jika \(L=1\), uji ini tidak memberikan kesimpulan.</li>
+                </ul>
+
+                <h3>Contoh 4</h3>
+
+                <p>Tentukan konvergensi deret berikut.</p>
+
+                \[
+                    \sum_{n=1}^{\infty}\frac1{n^2}.
+                \]
+
+                <p><strong>Penyelesaian:</strong></p>
+
+                <p>
+                    Gunakan uji integral dengan \(f(x)=\frac1{x^2}\).
+                    Fungsi ini positif, kontinu, dan menurun untuk \(x\geq1\).
+                    Selanjutnya,
+                </p>
+
+                \[
+                    \begin{aligned}
+                    \int_1^\infty\frac1{x^2}\,dx
+                    &=\lim_{b\to\infty}\int_1^b x^{-2}\,dx\\
+                    &=\lim_{b\to\infty}\left[-\frac1x\right]_1^b\\
+                    &=1.
+                    \end{aligned}
+                \]
+
+                <p>
+                    Karena integralnya konvergen, deret
+                    \(\sum_{n=1}^{\infty}\frac1{n^2}\) juga konvergen.
+                </p>
+
+                <h3>Latihan</h3>
+
+                <ol>
+                    <li>Tentukan konvergensi \(\displaystyle\sum_{n=1}^{\infty}\frac1n\) menggunakan uji yang sesuai.</li>
+                    <li>Tentukan konvergensi \(\displaystyle\sum_{n=1}^{\infty}\frac{n}{2^n}\) menggunakan uji rasio.</li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>5. Deret Positif dan Deret Berganti Tanda</h2>
+
+                <h3>5.1 Deret Positif</h3>
+
+                <p>
+                    Deret positif adalah deret yang seluruh sukunya
+                    nonnegatif. Salah satu contoh penting adalah deret
+                    harmonik
+                </p>
+
+                \[
+                    \sum_{n=1}^{\infty}\frac1n
+                    =1+\frac12+\frac13+\cdots.
+                \]
+
+                <p>
+                    Meskipun \(\lim_{n\to\infty}\frac1n=0\), deret
+                    harmonik divergen. Hal ini menunjukkan bahwa limit
+                    suku ke-\(n\) yang sama dengan nol merupakan syarat
+                    perlu, tetapi bukan syarat cukup bagi konvergensi deret.
+                </p>
+
+                <h3>5.2 Deret Berganti Tanda</h3>
+
+                <p>
+                    Deret berganti tanda memiliki suku positif dan negatif
+                    secara berselang-seling, misalnya
+                </p>
+
+                \[
+                    \sum_{n=1}^{\infty}(-1)^{n+1}a_n
+                    =a_1-a_2+a_3-a_4+\cdots,
+                \]
+
+                <p>dengan \(a_n\geq0\).</p>
+
+                <p>
+                    Menurut uji deret berganti tanda, deret tersebut
+                    konvergen jika \(a_n\) menurun dan
+                    \(\lim_{n\to\infty}a_n=0\).
+                </p>
+
+                <h3>Contoh 5</h3>
+
+                <p>Perhatikan deret berikut.</p>
+
+                \[
+                    \sum_{n=1}^{\infty}\frac{(-1)^{n+1}}n
+                    =1-\frac12+\frac13-\frac14+\cdots.
+                \]
+
+                <p><strong>Penyelesaian:</strong></p>
+
+                <p>
+                    Ambil \(a_n=\frac1n\). Barisan ini menurun dan
+                    \(\lim_{n\to\infty}a_n=0\). Jadi, deret tersebut
+                    konvergen menurut uji deret berganti tanda.
+                </p>
+
+                <p>
+                    Namun, deret nilai mutlaknya adalah deret harmonik
+                    yang divergen. Oleh karena itu, deret ini konvergen
+                    bersyarat.
+                </p>
+
+                <p>
+                    Deret disebut konvergen absolut jika
+                    \(\sum |a_n|\) konvergen. Deret disebut konvergen
+                    bersyarat jika deretnya konvergen, tetapi deret nilai
+                    mutlaknya divergen.
+                </p>
+
+                <h3>Latihan</h3>
+
+                <ol>
+                    <li>Tentukan apakah \(\displaystyle\sum_{n=1}^{\infty}\frac{(-1)^{n+1}}{\sqrt n}\) konvergen.</li>
+                    <li>Jelaskan perbedaan konvergensi absolut dan konvergensi bersyarat.</li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>6. Deret Pangkat</h2>
+
+                <p>
+                    Deret pangkat adalah deret yang memiliki bentuk
+                </p>
+
+                \[
+                    \sum_{n=0}^{\infty}c_n(x-a)^n
+                    =c_0+c_1(x-a)+c_2(x-a)^2+\cdots.
+                \]
+
+                <p>
+                    Pada bentuk tersebut, \(c_n\) merupakan koefisien,
+                    \(x\) adalah variabel, dan \(a\) merupakan pusat deret.
+                    Deret pangkat dapat konvergen untuk nilai \(x\)
+                    tertentu dan divergen untuk nilai lainnya.
+                </p>
+
+                <p>
+                    Terdapat jari-jari konvergensi \(R\) sehingga deret
+                    konvergen absolut jika \(|x-a|<R\) dan divergen jika
+                    \(|x-a|>R\). Pada titik ujung \(|x-a|=R\), konvergensi
+                    harus diperiksa secara terpisah.
+                </p>
+
+                <h3>Contoh 6</h3>
+
+                <p>Perhatikan deret pangkat berikut.</p>
+
+                \[
+                    \sum_{n=0}^{\infty}x^n
+                    =1+x+x^2+x^3+\cdots.
+                \]
+
+                <p>
+                    Deret tersebut merupakan deret geometri dengan
+                    suku pertama \(1\) dan rasio \(x\). Deret konvergen
+                    jika \(|x|<1\), dengan jumlah
+                </p>
+
+                \[
+                    \sum_{n=0}^{\infty}x^n=\frac1{1-x}.
+                \]
+
+                <p>
+                    Untuk \(x=1\), deret menjadi \(1+1+1+\cdots\)
+                    dan divergen. Untuk \(x=-1\), jumlah parsialnya
+                    tidak memiliki limit sehingga deret juga divergen.
+                    Jadi, interval konvergensinya adalah \((-1,1)\).
+                </p>
+
+                <h3>Latihan</h3>
+
+                <ol>
+                    <li>Tentukan jari-jari konvergensi deret \(\displaystyle\sum_{n=0}^{\infty}\frac{x^n}{2^n}\).</li>
+                    <li>Periksa konvergensi deret tersebut pada kedua titik ujung interval konvergensinya.</li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>7. Deret Taylor dan Maclaurin</h2>
+
+                <p>
+                    Deret Taylor digunakan untuk menyatakan fungsi dalam
+                    bentuk deret pangkat di sekitar titik \(a\). Bentuk
+                    umumnya adalah
+                </p>
+
+                \[
+                    f(x)=\sum_{n=0}^{\infty}
+                    \frac{f^{(n)}(a)}{n!}(x-a)^n.
+                \]
+
+                <p>
+                    Jika pusat deret adalah \(a=0\), deret tersebut
+                    disebut deret Maclaurin:
+                </p>
+
+                \[
+                    f(x)=\sum_{n=0}^{\infty}
+                    \frac{f^{(n)}(0)}{n!}x^n.
+                \]
+
+                <p>
+                    Kesamaan fungsi dengan deret Taylor atau Maclaurin
+                    berlaku pada nilai \(x\) ketika deret tersebut
+                    merepresentasikan fungsi. Keberadaan semua turunan
+                    saja belum menjamin kesamaan tersebut.
+                </p>
+
+                <h3>7.1 Deret Maclaurin Fungsi Eksponensial</h3>
+
+                <p>
+                    Untuk \(f(x)=e^x\), semua turunannya adalah \(e^x\).
+                    Karena \(f^{(n)}(0)=1\), diperoleh
+                </p>
+
+                \[
+                    e^x=1+x+\frac{x^2}{2!}
+                    +\frac{x^3}{3!}+\cdots.
+                \]
+
+                <h3>7.2 Deret Maclaurin Fungsi Sinus</h3>
+
+                \[
+                    \sin x=x-\frac{x^3}{3!}
+                    +\frac{x^5}{5!}-\frac{x^7}{7!}+\cdots.
+                \]
+
+                <p>
+                    Deret sinus hanya memuat pangkat ganjil dan tanda
+                    sukunya berganti-ganti. Deret ini konvergen untuk
+                    setiap bilangan real \(x\).
+                </p>
+
+                <h3>7.3 Deret Maclaurin Fungsi Kosinus</h3>
+
+                \[
+                    \cos x=1-\frac{x^2}{2!}
+                    +\frac{x^4}{4!}-\frac{x^6}{6!}+\cdots.
+                \]
+
+                <p>
+                    Berbeda dari deret sinus, deret kosinus hanya memuat
+                    pangkat genap.
+                </p>
+
+                <h3>Contoh 7</h3>
+
+                <p>
+                    Tentukan polinomial Maclaurin berderajat empat untuk
+                    \(f(x)=e^x\).
+                </p>
+
+                <p><strong>Penyelesaian:</strong></p>
+
+                <p>
+                    Dengan menggunakan deret Maclaurin fungsi eksponensial,
+                    ambil suku-suku sampai pangkat empat:
+                </p>
+
+                \[
+                    P_4(x)=1+x+\frac{x^2}{2!}
+                    +\frac{x^3}{3!}+\frac{x^4}{4!}.
+                \]
+
+                <p>
+                    Jadi, polinomial Maclaurin berderajat empat adalah
+                    \[
+                        P_4(x)=1+x+\frac{x^2}{2}
+                        +\frac{x^3}{6}+\frac{x^4}{24}.
+                    \]
+                </p>
+
+                <h3>Latihan</h3>
+
+                <ol>
+                    <li>Tuliskan empat suku tak nol pertama deret Maclaurin \(\sin x\).</li>
+                    <li>Tuliskan polinomial Maclaurin berderajat empat untuk \(\cos x\).</li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>8. Aproksimasi Fungsi dengan Deret</h2>
+
+                <p>
+                    Deret Taylor dan Maclaurin dapat dipotong hingga
+                    sejumlah suku tertentu untuk menghasilkan polinomial
+                    yang mendekati fungsi asal. Polinomial ini dapat
+                    digunakan untuk memperkirakan nilai fungsi dengan
+                    perhitungan yang lebih sederhana.
+                </p>
+
+                <p>
+                    Polinomial Taylor berderajat \(n\) di sekitar titik
+                    \(a\) dituliskan sebagai
+                </p>
+
+                \[
+                    P_n(x)=\sum_{k=0}^{n}
+                    \frac{f^{(k)}(a)}{k!}(x-a)^k.
+                \]
+
+                <h3>Contoh 8</h3>
+
+                <p>
+                    Gunakan tiga suku pertama deret Maclaurin untuk
+                    mengaproksimasi \(e^{0.1}\).
+                </p>
+
+                <p><strong>Penyelesaian:</strong></p>
+
+                <p>
+                    Deret Maclaurin fungsi eksponensial adalah
+                </p>
+
+                \[
+                    e^x=1+x+\frac{x^2}{2!}+\cdots.
+                \]
+
+                <p>
+                    Dengan menggunakan tiga suku pertama dan
+                    mensubstitusikan \(x=0.1\), diperoleh
+                </p>
+
+                \[
+                    \begin{aligned}
+                    e^{0.1}
+                    &\approx 1+0.1+\frac{(0.1)^2}{2}\\
+                    &=1+0.1+0.005\\
+                    &=1.105.
+                    \end{aligned}
+                \]
+
+                <p>
+                    Jadi, aproksimasi \(e^{0.1}\) menggunakan tiga suku
+                    pertama adalah \(1.105\).
+                </p>
+
+                <h3>Contoh 9</h3>
+
+                <p>
+                    Gunakan dua suku pertama deret Maclaurin sinus untuk
+                    mengaproksimasi \(\sin(0.2)\).
+                </p>
+
+                <p><strong>Penyelesaian:</strong></p>
+
+                \[
+                    \sin x\approx x-\frac{x^3}{3!}.
+                \]
+
+                <p>Substitusikan \(x=0.2\):</p>
+
+                \[
+                    \begin{aligned}
+                    \sin(0.2)
+                    &\approx 0.2-\frac{(0.2)^3}{6}\\
+                    &=0.2-\frac{0.008}{6}\\
+                    &\approx 0.198667.
+                    \end{aligned}
+                \]
+
+                <p>
+                    Jadi, aproksimasi \(\sin(0.2)\) adalah sekitar
+                    \(0.198667\).
+                </p>
+
+                <h3>Latihan</h3>
+
+                <ol>
+                    <li>Gunakan \(P_2(x)=1+x+\frac{x^2}{2}\) untuk mengaproksimasi \(e^{0.2}\).</li>
+                    <li>Gunakan \(P_3(x)=x-\frac{x^3}{6}\) untuk mengaproksimasi \(\sin(0.5)\).</li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>9. Ringkasan Materi</h2>
+
+                <p>
+                    Barisan dan deret membantu menjelaskan perilaku
+                    urutan bilangan serta penjumlahan suku-suku yang
+                    jumlahnya tak hingga. Konsep limit digunakan untuk
+                    mempelajari konvergensi, sedangkan berbagai uji
+                    konvergensi membantu menentukan apakah suatu deret
+                    memiliki jumlah berhingga.
+                </p>
+
+                <p>
+                    Deret pangkat, Taylor, dan Maclaurin memberikan cara
+                    untuk menyatakan fungsi sebagai penjumlahan suku-suku
+                    berbentuk pangkat. Dengan memotong deret pada sejumlah
+                    suku tertentu, kita dapat memperoleh aproksimasi fungsi.
+                </p>
+
+                <ul>
+                    <li>
+                        Limit barisan:
+                        \(\displaystyle\lim_{n\to\infty}a_n=L\).
+                    </li>
+                    <li>
+                        Deret tak hingga:
+                        \(\displaystyle\sum_{n=1}^{\infty}a_n\).
+                    </li>
+                    <li>
+                        Deret geometri:
+                        \(\displaystyle S=\frac{a}{1-r}\), untuk \(|r|<1\).
+                    </li>
+                    <li>
+                        Deret pangkat:
+                        \(\displaystyle\sum_{n=0}^{\infty}c_n(x-a)^n\).
+                    </li>
+                    <li>
+                        Deret Taylor:
+                        \(\displaystyle\sum_{n=0}^{\infty}
+                        \frac{f^{(n)}(a)}{n!}(x-a)^n\).
+                    </li>
+                    <li>
+                        Deret Maclaurin:
+                        \(\displaystyle\sum_{n=0}^{\infty}
+                        \frac{f^{(n)}(0)}{n!}x^n\).
+                    </li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>10. Evaluasi Akhir</h2>
+
+                <ol>
+                    <li>Tentukan lima suku pertama barisan \(a_n=3n-2\).</li>
+                    <li>Hitung \(\displaystyle\lim_{n\to\infty}\frac{4n+5}{2n-1}\).</li>
+                    <li>Tentukan jumlah deret geometri \(\displaystyle\sum_{n=0}^{\infty}\left(\frac14\right)^n\).</li>
+                    <li>Tentukan konvergensi deret \(\displaystyle\sum_{n=1}^{\infty}\frac1{n^3}\).</li>
+                    <li>Tentukan apakah \(\displaystyle\sum_{n=1}^{\infty}\frac{(-1)^{n+1}}n\) konvergen absolut atau bersyarat.</li>
+                    <li>Tentukan interval konvergensi \(\displaystyle\sum_{n=0}^{\infty}\left(\frac{x}{3}\right)^n\).</li>
+                    <li>Tuliskan polinomial Maclaurin berderajat tiga untuk \(e^x\).</li>
+                    <li>Gunakan \(P_2(x)=1+x+\frac{x^2}{2}\) untuk mengaproksimasi \(e^{0.3}\).</li>
+                </ol>
+            </section>
+        </article>
+    </main>
+
+    <footer>Website Pembelajaran Kalkulus</footer>
+</body>
+</html>

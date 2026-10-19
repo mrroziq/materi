@@ -1,0 +1,738 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deep Learning | Data Science</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+    MathJax = {
+        tex: {
+            inlineMath: [['\\(', '\\)']],
+            displayMath: [['\\[', '\\]']]
+        }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+    <header class="navbar">
+        <a href="index.html" class="logo">ShadowLab</a>
+        <nav>
+            <a href="index.html">Beranda</a>
+            <a href="MateriDataScience.html">Materi Data Science</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <article class="article">
+            <p class="eyebrow">BAGIAN XIII / DATA SCIENCE</p>
+            <h1>Deep Learning</h1>
+            <p class="intro">
+                Deep learning adalah bagian dari machine learning yang menggunakan jaringan saraf
+                dengan banyak lapisan untuk mempelajari pola dari data. Metode ini banyak digunakan
+                dalam pengenalan gambar, pemrosesan bahasa alami, pengenalan suara, dan analisis data
+                kompleks lainnya.
+            </p>
+
+            <section>
+                <h2>1. Dasar Jaringan Saraf Tiruan</h2>
+                <p>
+                    Jaringan saraf tiruan atau <em>Artificial Neural Network</em> (ANN) merupakan
+                    model komputasi yang tersusun dari unit-unit pemrosesan yang disebut neuron.
+                    Setiap neuron menerima masukan, melakukan perhitungan, lalu menghasilkan keluaran.
+                </p>
+
+                <p>Secara sederhana, jaringan saraf memiliki tiga jenis lapisan:</p>
+                <ul>
+                    <li><strong>Input layer:</strong> menerima fitur dari data.</li>
+                    <li><strong>Hidden layer:</strong> mempelajari representasi atau pola dari data.</li>
+                    <li><strong>Output layer:</strong> menghasilkan prediksi model.</li>
+                </ul>
+
+                <p>
+                    Jaringan dengan banyak hidden layer memungkinkan model mempelajari representasi
+                    bertingkat. Misalnya, pada pengenalan gambar, lapisan awal dapat mempelajari
+                    pola sederhana seperti tepi, sedangkan lapisan berikutnya dapat mengenali bentuk
+                    yang lebih kompleks.
+                </p>
+
+                <p>
+                    Berbeda dari model linear sederhana, jaringan saraf dapat mempelajari hubungan
+                    nonlinier melalui penggunaan activation function.
+                </p>
+            </section>
+
+            <section>
+                <h2>2. Neuron, Layer, dan Activation Function</h2>
+                <p>
+                    Sebuah neuron menghitung kombinasi linear dari input, bobot, dan bias, kemudian
+                    menerapkan fungsi aktivasi.
+                </p>
+
+                \[
+                z=\sum_{i=1}^{n}w_i x_i+b
+                \]
+
+                \[
+                a=f(z)
+                \]
+
+                <p>Keterangan:</p>
+                <ul>
+                    <li>\(x_i\): nilai input ke-\(i\).</li>
+                    <li>\(w_i\): bobot yang dipelajari model.</li>
+                    <li>\(b\): bias.</li>
+                    <li>\(z\): hasil kombinasi linear.</li>
+                    <li>\(f\): fungsi aktivasi.</li>
+                    <li>\(a\): keluaran neuron setelah aktivasi.</li>
+                </ul>
+
+                <h3>Fungsi aktivasi yang umum</h3>
+
+                <p><strong>Sigmoid</strong></p>
+                \[
+                \sigma(z)=\frac{1}{1+e^{-z}}
+                \]
+                <p>
+                    Menghasilkan nilai antara 0 dan 1. Sering digunakan pada output klasifikasi
+                    biner untuk menghasilkan probabilitas.
+                </p>
+
+                <p><strong>ReLU (Rectified Linear Unit)</strong></p>
+                \[
+                \operatorname{ReLU}(z)=\max(0,z)
+                \]
+                <p>
+                    Menghasilkan nol untuk input negatif dan mempertahankan nilai input positif.
+                    ReLU banyak digunakan pada hidden layer.
+                </p>
+
+                <p><strong>Softmax</strong></p>
+                \[
+                \operatorname{softmax}(z_i)=
+                \frac{e^{z_i}}{\sum_{j=1}^{K}e^{z_j}}
+                \]
+                <p>
+                    Mengubah sekumpulan skor menjadi distribusi probabilitas antarkelas.
+                    Softmax lazim digunakan pada output klasifikasi multikelas.
+                </p>
+            </section>
+
+            <section>
+                <h2>3. Forward Propagation</h2>
+                <p>
+                    Forward propagation adalah proses mengalirkan input melalui lapisan-lapisan
+                    jaringan hingga menghasilkan prediksi.
+                </p>
+
+                <p>Untuk jaringan dengan satu hidden layer, perhitungannya dapat ditulis sebagai:</p>
+
+                \[
+                \mathbf{z}^{(1)}=W^{(1)}\mathbf{x}+\mathbf{b}^{(1)}
+                \]
+
+                \[
+                \mathbf{a}^{(1)}=f(\mathbf{z}^{(1)})
+                \]
+
+                \[
+                \mathbf{z}^{(2)}=W^{(2)}\mathbf{a}^{(1)}+\mathbf{b}^{(2)}
+                \]
+
+                \[
+                \hat{\mathbf{y}}=g(\mathbf{z}^{(2)})
+                \]
+
+                <p>
+                    Matriks \(W\) berisi bobot, \(\mathbf{b}\) berisi bias, dan fungsi \(f\) serta
+                    \(g\) merupakan fungsi aktivasi pada lapisan terkait.
+                </p>
+
+                <p>
+                    Contoh sederhana menggunakan Python dan NumPy:
+                </p>
+
+                <pre><code>import numpy as np
+
+x = np.array([0.5, 0.8])
+
+W1 = np.array([
+    [0.2, 0.4],
+    [0.7, 0.3]
+])
+b1 = np.array([0.1, 0.2])
+
+W2 = np.array([
+    [0.6, 0.9]
+])
+b2 = np.array([0.1])
+
+z1 = W1 @ x + b1
+a1 = np.maximum(0, z1)
+
+z2 = W2 @ a1 + b2
+output = 1 / (1 + np.exp(-z2))
+
+print("Aktivasi hidden layer:", a1)
+print("Prediksi:", output)</code></pre>
+
+                <p>
+                    Kode tersebut menggunakan ReLU pada hidden layer dan sigmoid pada output
+                    sehingga menghasilkan satu nilai antara 0 dan 1. Ini merupakan ilustrasi
+                    forward propagation, belum merupakan proses pelatihan lengkap.
+                </p>
+            </section>
+
+            <section>
+                <h2>4. Loss Function</h2>
+                <p>
+                    Loss function mengukur seberapa jauh prediksi model dari nilai target.
+                    Selama pelatihan, model berusaha menemukan parameter yang meminimalkan loss.
+                </p>
+
+                <h3>Mean Squared Error (MSE)</h3>
+                <p>Loss ini umum digunakan untuk regresi.</p>
+
+                \[
+                \operatorname{MSE}=
+                \frac{1}{n}\sum_{i=1}^{n}(y_i-\hat{y}_i)^2
+                \]
+
+                <h3>Binary Cross-Entropy</h3>
+                <p>Loss ini umum digunakan untuk klasifikasi biner dengan target 0 atau 1.</p>
+
+                \[
+                L=-\frac{1}{n}\sum_{i=1}^{n}
+                \left[
+                y_i\log(\hat{y}_i)
+                +(1-y_i)\log(1-\hat{y}_i)
+                \right]
+                \]
+
+                <h3>Categorical Cross-Entropy</h3>
+                <p>
+                    Untuk klasifikasi multikelas dengan target one-hot, loss dapat dihitung sebagai:
+                </p>
+
+                \[
+                L=-\sum_{k=1}^{K}y_k\log(\hat{y}_k)
+                \]
+
+                <p>
+                    Pemilihan loss function harus disesuaikan dengan jenis masalah, format target,
+                    dan keluaran model. Dalam implementasi, gunakan fungsi loss numerik stabil yang
+                    tersedia pada framework.
+                </p>
+            </section>
+
+            <section>
+                <h2>5. Backpropagation</h2>
+                <p>
+                    Backpropagation adalah algoritma untuk menghitung gradien loss terhadap bobot
+                    dan bias pada setiap lapisan jaringan. Gradien tersebut digunakan oleh optimizer
+                    untuk memperbarui parameter.
+                </p>
+
+                <p>
+                    Prosesnya dimulai dari loss pada output, lalu pengaruh kesalahan diteruskan
+                    kembali ke lapisan sebelumnya menggunakan aturan rantai dalam kalkulus.
+                </p>
+
+                <p>Secara matematis, untuk parameter \(\theta\), kita menghitung:</p>
+
+                \[
+                \frac{\partial L}{\partial \theta}
+                \]
+
+                <p>
+                    Jika parameter berupa bobot \(w\), gradien menunjukkan bagaimana perubahan kecil
+                    pada bobot tersebut memengaruhi loss.
+                </p>
+
+                <p>Untuk neuron dengan:</p>
+
+                \[
+                z=wx+b,\qquad a=f(z)
+                \]
+
+                <p>aturan rantai memberikan:</p>
+
+                \[
+                \frac{\partial L}{\partial w}
+                =
+                \frac{\partial L}{\partial a}
+                \frac{\partial a}{\partial z}
+                \frac{\partial z}{\partial w}
+                \]
+
+                <p>
+                    Karena \(\frac{\partial z}{\partial w}=x\), gradien bobot bergantung pada
+                    input, turunan fungsi aktivasi, dan pengaruh keluaran terhadap loss.
+                </p>
+
+                <p>
+                    Backpropagation menghitung gradien, sedangkan optimizer menggunakan gradien
+                    tersebut untuk memperbarui parameter. Keduanya merupakan bagian berbeda dari
+                    proses pelatihan.
+                </p>
+            </section>
+
+            <section>
+                <h2>6. Gradient Descent</h2>
+                <p>
+                    Gradient descent merupakan metode optimasi yang memperbarui parameter ke arah
+                    yang diharapkan dapat menurunkan loss.
+                </p>
+
+                \[
+                \theta_{t+1}=
+                \theta_t-\eta\nabla_{\theta}L(\theta_t)
+                \]
+
+                <p>Keterangan:</p>
+                <ul>
+                    <li>\(\theta_t\): parameter pada langkah ke-\(t\).</li>
+                    <li>\(\eta\): learning rate.</li>
+                    <li>\(\nabla_{\theta}L\): gradien loss terhadap parameter.</li>
+                </ul>
+
+                <p>
+                    Learning rate menentukan ukuran langkah pembaruan. Jika terlalu besar,
+                    optimasi dapat melewati titik minimum atau menjadi tidak stabil. Jika terlalu
+                    kecil, pelatihan dapat berlangsung lambat.
+                </p>
+
+                <p>Terdapat beberapa variasi gradient descent:</p>
+                <ul>
+                    <li><strong>Batch gradient descent:</strong> menghitung gradien menggunakan seluruh data latih.</li>
+                    <li><strong>Stochastic gradient descent:</strong> memperbarui parameter menggunakan satu sampel pada setiap langkah.</li>
+                    <li><strong>Mini-batch gradient descent:</strong> menggunakan sebagian data pada setiap langkah dan umum dipakai dalam deep learning.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>7. Optimizer</h2>
+                <p>
+                    Optimizer adalah algoritma yang menggunakan gradien untuk memperbarui bobot
+                    dan bias. Optimizer yang berbeda memiliki strategi pembaruan parameter yang berbeda.
+                </p>
+
+                <ul>
+                    <li><strong>SGD:</strong> menggunakan gradien untuk memperbarui parameter; dapat dilengkapi momentum.</li>
+                    <li><strong>Momentum:</strong> memanfaatkan arah pembaruan sebelumnya untuk membantu pergerakan optimasi.</li>
+                    <li><strong>RMSprop:</strong> menyesuaikan ukuran langkah berdasarkan rata-rata bergerak kuadrat gradien.</li>
+                    <li><strong>Adam:</strong> menggabungkan estimasi rata-rata gradien dan kuadrat gradien untuk menyesuaikan pembaruan.</li>
+                </ul>
+
+                <p>Contoh penggunaan optimizer Adam dengan PyTorch:</p>
+
+                <pre><code>import torch
+import torch.nn as nn
+
+model = nn.Linear(4, 1)
+
+optimizer = torch.optim.Adam(
+    model.parameters(),
+    lr=0.001
+)
+
+criterion = nn.MSELoss()
+
+X = torch.randn(16, 4)
+y = torch.randn(16, 1)
+
+optimizer.zero_grad()
+
+prediksi = model(X)
+loss = criterion(prediksi, y)
+
+loss.backward()
+optimizer.step()
+
+print("Loss:", loss.item())</code></pre>
+
+                <p>
+                    Urutan pentingnya adalah menghapus gradien lama, menghitung prediksi dan loss,
+                    menghitung gradien melalui <code>backward()</code>, lalu memperbarui parameter
+                    dengan <code>step()</code>.
+                </p>
+            </section>
+
+            <section>
+                <h2>8. Regularisasi dan Dropout</h2>
+                <p>
+                    Jaringan saraf yang terlalu kompleks dapat mengalami overfitting, yaitu
+                    mempelajari pola khusus pada data latih yang tidak dapat digeneralisasi dengan
+                    baik ke data baru.
+                </p>
+
+                <h3>Weight Decay</h3>
+                <p>
+                    Weight decay membatasi besarnya bobot model. Pada pendekatan L2 klasik,
+                    penalti dapat ditambahkan ke loss:
+                </p>
+
+                \[
+                L_{\text{total}}=
+                L_{\text{data}}+\lambda\sum_j w_j^2
+                \]
+
+                <h3>Dropout</h3>
+                <p>
+                    Dropout menonaktifkan sebagian aktivasi neuron secara acak selama pelatihan.
+                    Tujuannya membantu model tidak terlalu bergantung pada neuron tertentu.
+                    Saat evaluasi, dropout umumnya tidak menonaktifkan neuron dan framework
+                    menangani penyesuaian aktivasi yang diperlukan.
+                </p>
+
+                <pre><code>import torch.nn as nn
+
+model = nn.Sequential(
+    nn.Linear(20, 64),
+    nn.ReLU(),
+    nn.Dropout(p=0.3),
+    nn.Linear(64, 32),
+    nn.ReLU(),
+    nn.Dropout(p=0.2),
+    nn.Linear(32, 1)
+)
+
+model.train()
+# Dropout aktif selama pelatihan
+
+model.eval()
+# Dropout dinonaktifkan selama evaluasi</code></pre>
+
+                <p>
+                    Nilai dropout 0.3 berarti sekitar 30% aktivasi yang dikenai dropout dinonaktifkan
+                    secara acak pada setiap proses pelatihan. Dropout bukan jaminan menghilangkan
+                    overfitting; performanya tetap perlu dievaluasi pada data validasi.
+                </p>
+            </section>
+
+            <section>
+                <h2>9. Convolutional Neural Networks (CNN)</h2>
+                <p>
+                    Convolutional Neural Network (CNN) merupakan arsitektur jaringan saraf yang
+                    banyak digunakan untuk data berbentuk grid, terutama gambar. CNN menggunakan
+                    filter atau kernel yang bergerak di atas input untuk mempelajari pola lokal.
+                </p>
+
+                <p>Komponen umum CNN meliputi:</p>
+                <ul>
+                    <li><strong>Convolution layer:</strong> mendeteksi pola lokal melalui filter.</li>
+                    <li><strong>Activation function:</strong> menambahkan kemampuan mempelajari hubungan nonlinier.</li>
+                    <li><strong>Pooling layer:</strong> merangkum informasi spasial dan dapat mengurangi ukuran representasi.</li>
+                    <li><strong>Fully connected layer:</strong> menggabungkan fitur untuk menghasilkan prediksi.</li>
+                </ul>
+
+                <p>
+                    Misalnya, CNN untuk klasifikasi gambar dapat mempelajari pola tepi pada lapisan
+                    awal dan pola objek yang lebih kompleks pada lapisan berikutnya.
+                </p>
+
+                <pre><code>import torch.nn as nn
+
+cnn = nn.Sequential(
+    nn.Conv2d(
+        in_channels=1,
+        out_channels=16,
+        kernel_size=3,
+        padding=1
+    ),
+    nn.ReLU(),
+    nn.MaxPool2d(kernel_size=2),
+    nn.Conv2d(
+        in_channels=16,
+        out_channels=32,
+        kernel_size=3,
+        padding=1
+    ),
+    nn.ReLU(),
+    nn.MaxPool2d(kernel_size=2),
+    nn.Flatten(),
+    nn.Linear(32 * 7 * 7, 10)
+)</code></pre>
+
+                <p>
+                    Contoh ini mengasumsikan input berupa gambar grayscale berukuran
+                    28 × 28 piksel. Dua operasi pooling berukuran 2 × 2 menghasilkan representasi
+                    spasial 7 × 7, sehingga lapisan linear menerima \(32\times7\times7\) fitur.
+                    Output berisi 10 skor kelas; untuk klasifikasi multikelas dengan
+                    <code>CrossEntropyLoss</code>, skor tersebut tidak perlu diubah menjadi
+                    probabilitas secara manual.
+                </p>
+            </section>
+
+            <section>
+                <h2>10. Recurrent Neural Networks (RNN)</h2>
+                <p>
+                    Recurrent Neural Network (RNN) dirancang untuk memproses data berurutan,
+                    seperti teks, sinyal, atau deret waktu. RNN membawa hidden state dari langkah
+                    sebelumnya untuk membantu memproses input saat ini.
+                </p>
+
+                <p>Secara sederhana, pembaruan hidden state dapat dituliskan sebagai:</p>
+
+                \[
+                h_t=f(W_xx_t+W_hh_{t-1}+b)
+                \]
+
+                <p>
+                    Di sini, \(x_t\) adalah input pada waktu \(t\), \(h_{t-1}\) adalah hidden state
+                    sebelumnya, dan \(h_t\) adalah hidden state yang baru.
+                </p>
+
+                <p>
+                    RNN dapat digunakan untuk memprediksi nilai berikutnya dalam deret waktu atau
+                    mengolah urutan token pada teks. Namun, RNN standar dapat mengalami masalah
+                    vanishing gradient ketika mempelajari ketergantungan jangka panjang.
+                </p>
+
+                <pre><code>import torch
+import torch.nn as nn
+
+rnn = nn.RNN(
+    input_size=5,
+    hidden_size=16,
+    num_layers=1,
+    batch_first=True
+)
+
+X = torch.randn(8, 12, 5)
+
+output, hidden = rnn(X)
+
+print("Output:", output.shape)
+print("Hidden state:", hidden.shape)</code></pre>
+
+                <p>
+                    Bentuk input pada contoh adalah
+                    <code>(batch_size, sequence_length, input_size)</code>.
+                    Dengan demikian, terdapat 8 urutan, masing-masing sepanjang 12 langkah,
+                    dan setiap langkah memiliki 5 fitur.
+                </p>
+            </section>
+
+            <section>
+                <h2>11. LSTM dan GRU</h2>
+                <p>
+                    Long Short-Term Memory (LSTM) dan Gated Recurrent Unit (GRU) merupakan
+                    pengembangan RNN yang menggunakan mekanisme gerbang untuk mengatur informasi
+                    yang dipertahankan atau diperbarui.
+                </p>
+
+                <h3>LSTM</h3>
+                <p>
+                    LSTM memiliki cell state dan beberapa gerbang, yaitu forget gate, input gate,
+                    dan output gate. Mekanisme ini membantu jaringan mempertahankan informasi
+                    penting dalam urutan yang panjang.
+                </p>
+
+                <h3>GRU</h3>
+                <p>
+                    GRU menggunakan update gate dan reset gate. Arsitekturnya umumnya lebih
+                    sederhana dibandingkan LSTM karena tidak memiliki cell state terpisah.
+                </p>
+
+                <p>Contoh LSTM dengan PyTorch:</p>
+
+                <pre><code>import torch
+import torch.nn as nn
+
+lstm = nn.LSTM(
+    input_size=5,
+    hidden_size=32,
+    num_layers=1,
+    batch_first=True
+)
+
+X = torch.randn(8, 12, 5)
+
+output, (hidden, cell) = lstm(X)
+
+print("Output:", output.shape)
+print("Hidden state:", hidden.shape)
+print("Cell state:", cell.shape)</code></pre>
+
+                <p>
+                    LSTM dan GRU dapat digunakan untuk prediksi deret waktu, pemrosesan teks,
+                    dan tugas lain yang memerlukan pemodelan urutan. Pemilihan antara keduanya
+                    bergantung pada karakteristik data, kebutuhan komputasi, dan hasil eksperimen.
+                </p>
+            </section>
+
+            <section>
+                <h2>12. Transformer dan Attention</h2>
+                <p>
+                    Transformer adalah arsitektur yang menggunakan mekanisme attention untuk
+                    mempelajari hubungan antarelemen dalam sebuah urutan. Berbeda dengan RNN,
+                    Transformer dapat memproses banyak posisi secara paralel selama pelatihan,
+                    dengan memperhatikan batasan dan struktur input yang digunakan.
+                </p>
+
+                <h3>Scaled Dot-Product Attention</h3>
+
+                \[
+                \operatorname{Attention}(Q,K,V)=
+                \operatorname{softmax}
+                \left(
+                \frac{QK^\top}{\sqrt{d_k}}
+                \right)V
+                \]
+
+                <p>Keterangan:</p>
+                <ul>
+                    <li><strong>Query (Q):</strong> mewakili informasi yang dicari.</li>
+                    <li><strong>Key (K):</strong> digunakan untuk menghitung kecocokan dengan query.</li>
+                    <li><strong>Value (V):</strong> informasi yang digabungkan berdasarkan bobot attention.</li>
+                    <li>\(d_k\): dimensi vektor key yang digunakan untuk penskalaan.</li>
+                </ul>
+
+                <p>
+                    Attention menghasilkan bobot yang menentukan seberapa besar setiap posisi
+                    memengaruhi representasi posisi lain. Multi-head attention menjalankan
+                    beberapa mekanisme attention agar model dapat mempelajari pola hubungan yang
+                    berbeda.
+                </p>
+
+                <p>Transformer umumnya menggunakan:</p>
+                <ul>
+                    <li>Token embedding untuk merepresentasikan token.</li>
+                    <li>Informasi posisi agar urutan token dapat diperhitungkan.</li>
+                    <li>Multi-head attention untuk menggabungkan informasi ant posisi.</li>
+                    <li>Feed-forward network untuk memproses representasi setiap posisi.</li>
+                    <li>Residual connection dan normalisasi untuk membantu pelatihan.</li>
+                </ul>
+
+                <p>
+                    Transformer banyak digunakan pada model bahasa, penerjemahan mesin, visi
+                    komputer, dan berbagai aplikasi multimodal.
+                </p>
+            </section>
+
+            <section>
+                <h2>13. Framework PyTorch atau TensorFlow</h2>
+                <p>
+                    Framework deep learning menyediakan komponen untuk membangun jaringan,
+                    menghitung gradien secara otomatis, melatih model, dan menjalankan inferensi.
+                    Dua framework yang banyak digunakan adalah PyTorch dan TensorFlow.
+                </p>
+
+                <h3>PyTorch</h3>
+                <p>
+                    PyTorch menyediakan tensor, automatic differentiation, modul jaringan saraf,
+                    optimizer, dan perangkat untuk memanfaatkan GPU.
+                </p>
+
+                <pre><code>import torch
+import torch.nn as nn
+
+class NeuralNetwork(nn.Module):
+    def __init__(self, input_size, hidden_size, output_size):
+        super().__init__()
+
+        self.network = nn.Sequential(
+            nn.Linear(input_size, hidden_size),
+            nn.ReLU(),
+            nn.Linear(hidden_size, output_size)
+        )
+
+    def forward(self, x):
+        return self.network(x)
+
+model = NeuralNetwork(
+    input_size=4,
+    hidden_size=16,
+    output_size=1
+)
+
+X = torch.randn(32, 4)
+prediksi = model(X)
+
+print(prediksi.shape)</code></pre>
+
+                <p>
+                    Contoh tersebut membangun jaringan dengan empat fitur input, satu hidden
+                    layer berisi 16 neuron, dan satu output. Kode ini baru menghasilkan prediksi;
+                    pelatihan memerlukan target, loss function, dan optimizer.
+                </p>
+
+                <h3>TensorFlow dan Keras</h3>
+                <p>
+                    TensorFlow menyediakan ekosistem untuk membangun dan menjalankan model.
+                    Keras menyediakan antarmuka tingkat tinggi yang memudahkan penyusunan model
+                    melalui lapisan-lapisan.
+                </p>
+
+                <pre><code>import tensorflow as tf
+from tensorflow import keras
+from tensorflow.keras import layers
+
+model = keras.Sequential([
+    layers.Input(shape=(4,)),
+    layers.Dense(16, activation="relu"),
+    layers.Dense(1)
+])
+
+model.compile(
+    optimizer="adam",
+    loss="mse",
+    metrics=["mae"]
+)
+
+model.summary()</code></pre>
+
+                <p>
+                    Pada contoh ini, model disiapkan untuk regresi dengan empat fitur input dan
+                    satu output. Untuk melatihnya, gunakan
+                    <code>model.fit(X_train, y_train, validation_data=(X_val, y_val), epochs=50)</code>
+                    setelah menyiapkan data latih dan validasi dalam format yang sesuai.
+                </p>
+
+                <h3>Memilih framework</h3>
+                <ul>
+                    <li>Pilih PyTorch jika ingin mempelajari alur tensor, gradien, dan loop pelatihan secara eksplisit.</li>
+                    <li>Pilih TensorFlow/Keras jika menginginkan API tingkat tinggi untuk menyusun dan melatih model.</li>
+                    <li>Keduanya mendukung banyak jenis arsitektur deep learning dan penggunaan akselerator yang kompatibel.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Ringkasan</h2>
+                <ul>
+                    <li>Jaringan saraf tiruan terdiri dari neuron dan lapisan yang mempelajari pola dari data.</li>
+                    <li>Activation function memungkinkan jaringan mempelajari hubungan nonlinier.</li>
+                    <li>Forward propagation menghasilkan prediksi, sedangkan loss function mengukur kesalahan prediksi.</li>
+                    <li>Backpropagation menghitung gradien dan optimizer menggunakannya untuk memperbarui parameter.</li>
+                    <li>Gradient descent merupakan salah satu dasar optimasi jaringan saraf.</li>
+                    <li>Regularisasi dan dropout membantu mengurangi risiko overfitting.</li>
+                    <li>CNN banyak digunakan untuk data gambar, sedangkan RNN, LSTM, dan GRU dirancang untuk data berurutan.</li>
+                    <li>Transformer memanfaatkan attention untuk memodelkan hubungan antarposisi dalam input.</li>
+                    <li>PyTorch dan TensorFlow menyediakan perangkat untuk membangun, melatih, dan mengevaluasi model deep learning.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Latihan Mandiri</h2>
+                <ol>
+                    <li>Apa perbedaan input layer, hidden layer, dan output layer?</li>
+                    <li>Hitung keluaran neuron jika \(x_1=2\), \(x_2=3\), \(w_1=0.5\), \(w_2=0.2\), dan \(b=1\). Gunakan aktivasi ReLU.</li>
+                    <li>Apa perbedaan forward propagation dan backpropagation?</li>
+                    <li>Mengapa learning rate terlalu besar dapat menyebabkan pelatihan tidak stabil?</li>
+                    <li>Apa perbedaan MSE dan binary cross-entropy?</li>
+                    <li>Bagaimana dropout membantu mengurangi overfitting?</li>
+                    <li>Mengapa CNN sesuai untuk pengolahan gambar?</li>
+                    <li>Apa perbedaan RNN, LSTM, dan GRU dalam memproses urutan?</li>
+                    <li>Jelaskan fungsi Query, Key, dan Value dalam attention.</li>
+                    <li>Buat jaringan saraf sederhana dengan PyTorch atau TensorFlow untuk memprediksi nilai numerik.</li>
+                </ol>
+            </section>
+        </article>
+    </main>
+
+    <footer>ShadowLab — Belajar Tanpa Batas</footer>
+</body>
+</html>

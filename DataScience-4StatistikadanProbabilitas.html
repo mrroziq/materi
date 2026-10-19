@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistika dan Probabilitas | ShadowLab</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+    MathJax = {
+        tex: {
+            inlineMath: [['\\(', '\\)']],
+            displayMath: [['\\[', '\\]']]
+        }
+    };
+    </script>
+    <script
+        id="MathJax-script"
+        async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+    </script>
+</head>
+<body>
+    <header class="navbar">
+        <a href="index.html" class="logo">ShadowLab</a>
+        <nav>
+            <a href="index.html">Beranda</a>
+            <a href="MateriDataScience.html">Materi Data Science</a>
+        </nav>
+    </header>
+
+    <main class="container">
+
+        <article class="article">
+            <p class="eyebrow">STATISTIKA DAN PROBABILITAS</p>
+            <h1>Bagian IV — Statistika dan Probabilitas</h1>
+            <p class="intro">
+                Statistika dan probabilitas merupakan fondasi penting
+                dalam analisis data. Probabilitas digunakan untuk
+                memodelkan ketidakpastian, sedangkan statistika digunakan
+                untuk mengumpulkan, menganalisis, menafsirkan, dan
+                mengambil kesimpulan berdasarkan data. Keduanya banyak
+                digunakan dalam data science, machine learning,
+                penelitian ilmiah, dan pengambilan keputusan.
+            </p>
+
+            <section>
+                <h2>1. Statistik Deskriptif</h2>
+                <p>
+                    Statistik deskriptif adalah metode untuk merangkum
+                    dan menyajikan data agar karakteristiknya lebih mudah
+                    dipahami. Penyajian dapat dilakukan melalui tabel,
+                    grafik, maupun ukuran numerik.
+                </p>
+
+                <p>Secara umum, statistik deskriptif meliputi:</p>
+                <ul>
+                    <li>Ukuran pemusatan: mean, median, dan modus.</li>
+                    <li>Ukuran penyebaran: varians, simpangan baku, dan rentang.</li>
+                    <li>Ukuran posisi: kuartil, desil, dan persentil.</li>
+                    <li>Visualisasi: histogram, diagram batang, dan boxplot.</li>
+                </ul>
+
+                <p>
+                    Misalkan data nilai ujian lima mahasiswa adalah
+                    \(60,70,70,80,90\). Data tersebut dapat dirangkum
+                    menggunakan ukuran pemusatan dan penyebaran untuk
+                    memahami pola nilainya.
+                </p>
+
+                <p>
+                    Statistik deskriptif berbeda dari statistika inferensial.
+                    Statistik deskriptif menggambarkan data yang diamati,
+                    sedangkan statistika inferensial menggunakan sampel
+                    untuk menarik kesimpulan tentang populasi.
+                </p>
+            </section>
+
+            <section>
+                <h2>2. Mean, Median, Modus, dan Kuantil</h2>
+                <p>
+                    Ukuran pemusatan menunjukkan nilai yang mewakili
+                    sekumpulan data, sedangkan kuantil menunjukkan posisi
+                    suatu nilai dalam distribusi data.
+                </p>
+
+                <h3>a. Mean</h3>
+                <p>
+                    Mean atau rata-rata aritmetika diperoleh dengan
+                    menjumlahkan seluruh nilai dan membaginya dengan
+                    banyaknya data.
+                </p>
+                \[
+                    \bar{x}=\frac{1}{n}\sum_{i=1}^{n}x_i
+                \]
+
+                <h3>b. Median</h3>
+                <p>
+                    Median adalah nilai tengah setelah data diurutkan.
+                    Jika banyak data ganjil, median merupakan satu nilai
+                    di posisi tengah. Jika banyak data genap, median
+                    merupakan rata-rata dua nilai tengah.
+                </p>
+
+                <h3>c. Modus</h3>
+                <p>
+                    Modus adalah nilai yang paling sering muncul.
+                    Suatu data dapat memiliki satu modus, beberapa modus,
+                    atau tidak memiliki modus jika seluruh frekuensi nilai
+                    sama.
+                </p>
+
+                <h3>d. Kuantil</h3>
+                <p>
+                    Kuantil membagi data terurut menjadi bagian-bagian
+                    berdasarkan proporsi tertentu. Kuartil membagi data
+                    menjadi empat bagian, desil menjadi sepuluh bagian,
+                    dan persentil menjadi seratus bagian.
+                </p>
+
+                <div class="placeholder">
+                    <strong>Contoh:</strong>
+                    <p>
+                        Diketahui data \(4,6,6,8,11\). Mean-nya adalah
+                    </p>
+                    \[
+                        \bar{x}=\frac{4+6+6+8+11}{5}=7
+                    \]
+                    <p>
+                        Median adalah \(6\), sedangkan modus adalah \(6\)
+                        karena nilai tersebut muncul paling sering.
+                        Kuartil bawah dan atas bergantung pada konvensi
+                        perhitungan kuartil yang digunakan.
+                    </p>
+                </div>
+            </section>
+
+            <section>
+                <h2>3. Varians dan Simpangan Baku</h2>
+                <p>
+                    Varians mengukur seberapa jauh data menyebar dari
+                    rata-ratanya. Simpangan baku adalah akar kuadrat
+                    varians sehingga memiliki satuan yang sama dengan data.
+                </p>
+
+                <h3>a. Varians populasi</h3>
+                \[
+                    \sigma^2=\frac{1}{N}\sum_{i=1}^{N}(x_i-\mu)^2
+                \]
+
+                <h3>b. Varians sampel</h3>
+                \[
+                    s^2=\frac{1}{n-1}\sum_{i=1}^{n}(x_i-\bar{x})^2
+                \]
+
+                <p>
+                    Varians sampel menggunakan penyebut \(n-1\) untuk
+                    memperoleh estimator tak bias bagi varians populasi
+                    ketika pengamatan merupakan sampel acak independen
+                    dari populasi dengan varians hingga.
+                </p>
+
+                <h3>c. Simpangan baku</h3>
+                \[
+                    \sigma=\sqrt{\sigma^2},
+                    \qquad s=\sqrt{s^2}
+                \]
+
+                <div class="placeholder">
+                    <strong>Contoh:</strong>
+                    <p>
+                        Diketahui data populasi \(2,4,6\). Mean-nya adalah
+                        \(\mu=4\). Varians populasi:
+                    </p>
+                    \[
+                        \sigma^2=
+                        \frac{(2-4)^2+(4-4)^2+(6-4)^2}{3}
+                        =\frac{8}{3}
+                    \]
+                    <p>
+                        Simpangan bakunya adalah
+                        \(\sigma=\sqrt{8/3}\approx1{,}633\).
+                    </p>
+                </div>
+
+                <p>
+                    Varians yang besar menunjukkan penyebaran data yang
+                    lebih besar terhadap rata-ratanya. Varians nol berarti
+                    seluruh nilai data sama.
+                </p>
+            </section>
+
+            <section>
+                <h2>4. Distribusi Probabilitas</h2>
+                <p>
+                    Distribusi probabilitas menggambarkan bagaimana
+                    probabilitas dialokasikan pada kemungkinan nilai
+                    suatu variabel acak. Distribusi dibedakan menjadi
+                    distribusi diskret dan kontinu.
+                </p>
+
+                <h3>a. Distribusi diskret</h3>
+                <p>
+                    Variabel acak diskret memiliki nilai yang dapat
+                    dihitung atau didaftarkan. Fungsi massa probabilitas
+                    atau PMF ditulis sebagai
+                </p>
+                \[
+                    p_X(x)=P(X=x)
+                \]
+
+                <p>PMF memenuhi syarat:</p>
+                \[
+                    p_X(x)\geq0,
+                    \qquad \sum_x p_X(x)=1
+                \]
+
+                <h3>b. Distribusi kontinu</h3>
+                <p>
+                    Variabel acak kontinu dimodelkan menggunakan fungsi
+                    kepadatan probabilitas atau PDF, yaitu \(f_X(x)\).
+                    Probabilitas pada suatu interval diperoleh melalui
+                    integral.
+                </p>
+                \[
+                    P(a\leq X\leq b)=\int_a^b f_X(x)\,dx
+                \]
+
+                <p>PDF memenuhi syarat:</p>
+                \[
+                    f_X(x)\geq0,
+                    \qquad \int_{-\infty}^{\infty}f_X(x)\,dx=1
+                \]
+
+                <p>
+                    Untuk variabel acak kontinu, probabilitas tepat pada
+                    satu titik adalah nol, yaitu \(P(X=a)=0\).
+                </p>
+            </section>
+
+            <section>
+                <h2>5. Distribusi Bernoulli, Binomial, Normal, dan Poisson</h2>
+
+                <h3>a. Distribusi Bernoulli</h3>
+                <p>
+                    Distribusi Bernoulli memodelkan satu percobaan dengan
+                    dua kemungkinan hasil, yaitu sukses dan gagal.
+                    Misalkan \(X=1\) untuk sukses dan \(X=0\) untuk gagal.
+                </p>
+                \[
+                    P(X=x)=p^x(1-p)^{1-x},\quad x\in\{0,1\}
+                \]
+                \[
+                    E(X)=p,\qquad \operatorname{Var}(X)=p(1-p)
+                \]
+
+                <h3>b. Distribusi Binomial</h3>
+                <p>
+                    Distribusi binomial memodelkan banyaknya sukses dalam
+                    \(n\) percobaan Bernoulli yang independen dengan
+                    probabilitas sukses \(p\) yang tetap.
+                </p>
+                \[
+                    P(X=k)=\binom{n}{k}p^k(1-p)^{n-k}
+                \]
+                \[
+                    E(X)=np,\qquad \operatorname{Var}(X)=np(1-p)
+                \]
+
+                <div class="placeholder">
+                    <strong>Contoh:</strong>
+                    Jika sebuah koin seimbang dilempar tiga kali,
+                    probabilitas muncul tepat dua gambar adalah
+                    \[
+                        P(X=2)=\binom{3}{2}
+                        \left(\frac12\right)^2
+                        \left(\frac12\right)=\frac38
+                    \]
+                </div>
+
+                <h3>c. Distribusi Normal</h3>
+                <p>
+                    Distribusi normal merupakan distribusi kontinu
+                    berbentuk lonceng dan simetris terhadap mean
+                    \(\mu\). Distribusi ini ditentukan oleh mean
+                    \(\mu\) dan varians \(\sigma^2\).
+                </p>
+                \[
+                    f_X(x)=\frac{1}{\sigma\sqrt{2\pi}}
+                    e^{-\frac{(x-\mu)^2}{2\sigma^2}},
+                    \quad \sigma>0
+                \]
+                \[
+                    E(X)=\mu,\qquad \operatorname{Var}(X)=\sigma^2
+                \]
+
+                <p>
+                    Standardisasi dilakukan dengan mengubah nilai \(X\)
+                    menjadi skor baku \(Z\).
+                </p>
+                \[
+                    Z=\frac{X-\mu}{\sigma}
+                \]
+                <p>
+                    Jika \(X\sim N(\mu,\sigma^2)\), maka
+                    \(Z\sim N(0,1)\).
+                </p>
+
+                <h3>d. Distribusi Poisson</h3>
+                <p>
+                    Distribusi Poisson digunakan untuk memodelkan jumlah
+                    kejadian dalam suatu interval waktu atau ruang ketika
+                    kejadian terjadi secara independen dengan laju rata-rata
+                    yang tetap.
+                </p>
+                \[
+                    P(X=k)=\frac{e^{-\lambda}\lambda^k}{k!},
+                    \quad k=0,1,2,\ldots
+                \]
+                \[
+                    E(X)=\lambda,\qquad \operatorname{Var}(X)=\lambda
+                \]
+
+                <p>
+                    Parameter \(\lambda\) menyatakan jumlah kejadian
+                    rata-rata dalam interval yang ditentukan.
+                </p>
+            </section>
+
+            <section>
+                <h2>6. Probabilitas Bersyarat</h2>
+                <p>
+                    Probabilitas bersyarat adalah probabilitas suatu
+                    kejadian dengan informasi bahwa kejadian lain telah
+                    terjadi. Untuk kejadian \(A\) dan \(B\), dengan
+                    \(P(B)>0\), didefinisikan
+                </p>
+                \[
+                    P(A\mid B)=\frac{P(A\cap B)}{P(B)}
+                \]
+
+                <p>
+                    Rumus tersebut dapat ditulis ulang menjadi aturan
+                    perkalian:
+                </p>
+                \[
+                    P(A\cap B)=P(A\mid B)P(B)
+                \]
+
+                <p>
+                    Dua kejadian \(A\) dan \(B\) dikatakan independen jika
+                    \(P(A\cap B)=P(A)P(B)\). Jika \(P(B)>0\), independensi
+                    juga berarti \(P(A\mid B)=P(A)\).
+                </p>
+
+                <div class="placeholder">
+                    <strong>Contoh:</strong>
+                    <p>
+                        Dalam sebuah kelas terdapat 20 mahasiswa,
+                        12 di antaranya perempuan. Sebanyak 8 mahasiswa
+                        menyukai statistika dan 6 di antaranya perempuan.
+                        Jika seorang mahasiswa yang dipilih diketahui
+                        perempuan, probabilitas bahwa ia menyukai
+                        statistika adalah
+                    </p>
+                    \[
+                        P(\text{Statistika}\mid\text{Perempuan})
+                        =\frac{6}{12}=\frac12
+                    \]
+                </div>
+            </section>
+
+            <section>
+                <h2>7. Teorema Bayes</h2>
+                <p>
+                    Teorema Bayes digunakan untuk memperbarui probabilitas
+                    suatu hipotesis setelah memperoleh bukti baru.
+                    Teorema ini penting dalam klasifikasi, diagnosis,
+                    dan pengambilan keputusan berbasis data.
+                </p>
+
+                <p>Untuk kejadian \(A\) dan \(B\), dengan \(P(B)>0\):</p>
+                \[
+                    P(A\mid B)=\frac{P(B\mid A)P(A)}{P(B)}
+                \]
+
+                <p>
+                    Jika \(A_1,\ldots,A_n\) membentuk partisi ruang sampel,
+                    maka
+                </p>
+                \[
+                    P(A_i\mid B)=
+                    \frac{P(B\mid A_i)P(A_i)}
+                    {\sum_{j=1}^{n}P(B\mid A_j)P(A_j)}
+                \]
+
+                <div class="placeholder">
+                    <strong>Contoh:</strong>
+                    <p>
+                        Sebuah penyakit memiliki prevalensi 1%.
+                        Sebuah tes memiliki sensitivitas 90% dan
+                        spesifisitas 95%. Jika hasil tes positif,
+                        probabilitas seseorang benar-benar memiliki
+                        penyakit tersebut adalah
+                    </p>
+                    \[
+                        P(D\mid +)=
+                        \frac{0{,}90(0{,}01)}
+                        {0{,}90(0{,}01)+0{,}05(0{,}99)}
+                    \]
+                    \[
+                        P(D\mid +)\approx0{,}154
+                    \]
+                    <p>
+                        Jadi probabilitasnya sekitar 15,4%, bukan 90%.
+                        Contoh ini menunjukkan pentingnya memperhitungkan
+                        prevalensi awal saat menafsirkan hasil tes.
+                    </p>
+                </div>
+            </section>
+
+            <section>
+                <h2>8. Variabel Acak dan Nilai Harapan</h2>
+                <p>
+                    Variabel acak adalah fungsi yang memetakan setiap
+                    hasil percobaan acak ke suatu bilangan real.
+                    Nilai harapan merupakan rata-rata teoretis
+                    berbobot probabilitas dari nilai-nilai variabel acak.
+                </p>
+
+                <h3>a. Nilai harapan diskret</h3>
+                \[
+                    E(X)=\sum_x xP(X=x)
+                \]
+
+                <h3>b. Nilai harapan kontinu</h3>
+                \[
+                    E(X)=\int_{-\infty}^{\infty}xf_X(x)\,dx
+                \]
+
+                <h3>c. Varians variabel acak</h3>
+                \[
+                    \operatorname{Var}(X)
+                    =E[(X-E(X))^2]
+                    =E(X^2)-[E(X)]^2
+                \]
+
+                <p>
+                    Nilai harapan tidak harus merupakan nilai yang mungkin
+                    muncul pada satu percobaan. Nilai ini menggambarkan
+                    rata-rata jangka panjang dalam pengulangan yang sesuai
+                    dengan model probabilitas.
+                </p>
+
+                <div class="placeholder">
+                    <strong>Contoh:</strong>
+                    <p>
+                        Sebuah dadu seimbang memiliki enam kemungkinan
+                        hasil dengan probabilitas sama. Nilai harapannya
+                        adalah
+                    </p>
+                    \[
+                        E(X)=\sum_{k=1}^{6}k\frac16
+                        =\frac{21}{6}=3{,}5
+                    \]
+                    <p>
+                        Meskipun 3,5 bukan hasil yang dapat muncul pada
+                        satu lemparan, nilai tersebut merupakan rata-rata
+                        teoretis.
+                    </p>
+                </div>
+            </section>
+
+            <section>
+                <h2>9. Sampling dan Central Limit Theorem</h2>
+                <p>
+                    Sampling adalah proses memilih sebagian anggota
+                    populasi untuk dianalisis. Sampel digunakan ketika
+                    mengamati seluruh populasi tidak praktis atau terlalu
+                    mahal.
+                </p>
+
+                <p>Beberapa metode sampling antara lain:</p>
+                <ul>
+                    <li>Simple random sampling: setiap anggota memiliki peluang pemilihan yang sama.</li>
+                    <li>Stratified sampling: populasi dibagi menjadi strata, lalu sampel diambil dari setiap strata.</li>
+                    <li>Cluster sampling: populasi dibagi menjadi kelompok, kemudian beberapa kelompok dipilih.</li>
+                    <li>Systematic sampling: anggota dipilih menggunakan interval tertentu setelah titik awal ditetapkan.</li>
+                </ul>
+
+                <h3>Central Limit Theorem (CLT)</h3>
+                <p>
+                    Teorema Limit Pusat menyatakan bahwa, di bawah
+                    kondisi yang sesuai, distribusi rata-rata sampel
+                    mendekati distribusi normal ketika ukuran sampel
+                    bertambah, meskipun distribusi populasi tidak normal.
+                    Untuk sampel acak independen dari populasi dengan
+                    mean \(\mu\) dan varians hingga \(\sigma^2\):
+                </p>
+                \[
+                    E(\bar{X})=\mu,\qquad
+                    \operatorname{Var}(\bar{X})=\frac{\sigma^2}{n}
+                \]
+
+                <p>
+                    Untuk ukuran sampel yang cukup besar, distribusi
+                    \(\bar X\) dapat didekati oleh
+                </p>
+                \[
+                    \bar X\approx N\left(\mu,\frac{\sigma^2}{n}\right)
+                \]
+
+                <p>
+                    Pendekatan tersebut tidak selalu akurat untuk ukuran
+                    sampel kecil, terutama jika populasi sangat menceng
+                    atau memiliki ekor berat.
+                </p>
+            </section>
+
+            <section>
+                <h2>10. Estimasi Parameter</h2>
+                <p>
+                    Estimasi parameter adalah proses menggunakan data
+                    sampel untuk memperkirakan parameter populasi yang
+                    tidak diketahui, seperti mean, proporsi, atau varians.
+                </p>
+
+                <h3>a. Estimasi titik</h3>
+                <p>
+                    Estimasi titik menghasilkan satu nilai sebagai
+                    perkiraan parameter. Sebagai contoh, mean sampel
+                    digunakan untuk mengestimasi mean populasi.
+                </p>
+                \[
+                    \hat{\mu}=\bar{x}=\frac{1}{n}\sum_{i=1}^{n}x_i
+                \]
+
+                <p>
+                    Untuk proporsi populasi, estimasi titiknya adalah
+                </p>
+                \[
+                    \hat{p}=\frac{x}{n}
+                \]
+                <p>
+                    dengan \(x\) menyatakan banyaknya pengamatan yang
+                    memiliki karakteristik tertentu.
+                </p>
+
+                <h3>b. Sifat estimator</h3>
+                <ul>
+                    <li>Tidak bias: nilai harapan estimator sama dengan parameter yang diestimasi.</li>
+                    <li>Konsisten: estimator mendekati parameter sebenarnya ketika ukuran sampel bertambah.</li>
+                    <li>Efisien: memiliki varians yang lebih kecil dibandingkan estimator lain yang relevan dalam kelas pembanding.</li>
+                </ul>
+
+                <p>
+                    Salah satu metode untuk membangun estimator adalah
+                    maximum likelihood estimation (MLE), yaitu memilih
+                    parameter yang memaksimalkan fungsi likelihood
+                    berdasarkan data yang diamati.
+                </p>
+                \[
+                    \hat{\theta}_{MLE}
+                    =\arg\max_{\theta}L(\theta\mid x_1,\ldots,x_n)
+                \]
+            </section>
+
+            <section>
+                <h2>11. Interval Kepercayaan</h2>
+                <p>
+                    Interval kepercayaan adalah rentang nilai yang
+                    dibentuk dengan prosedur statistik untuk mengestimasi
+                    parameter populasi. Tingkat kepercayaan 95% berarti
+                    bahwa jika prosedur pengambilan sampel dan
+                    pembentukan interval diulang berkali-kali dalam
+                    kondisi yang sama, sekitar 95% interval yang terbentuk
+                    akan mencakup parameter sebenarnya.
+                </p>
+
+                <h3>a. Interval mean dengan simpangan baku populasi diketahui</h3>
+                <p>
+                    Jika asumsi model normal berlaku atau sampel cukup
+                    besar sehingga pendekatan normal layak digunakan,
+                    interval kepercayaan untuk mean populasi adalah
+                </p>
+                \[
+                    \bar{x}\pm z_{\alpha/2}\frac{\sigma}{\sqrt n}
+                \]
+
+                <h3>b. Interval mean dengan simpangan baku populasi tidak diketahui</h3>
+                <p>
+                    Untuk sampel dari populasi normal dengan simpangan
+                    baku populasi tidak diketahui, interval kepercayaan
+                    menggunakan distribusi Student-t:
+                </p>
+                \[
+                    \bar{x}\pm t_{\alpha/2,n-1}\frac{s}{\sqrt n}
+                \]
+
+                <p>
+                    Di sini, \(z_{\alpha/2}\) adalah nilai kritis normal
+                    standar, sedangkan \(t_{\alpha/2,n-1}\) adalah nilai
+                    kritis distribusi-t dengan \(n-1\) derajat kebebasan.
+                </p>
+
+                <div class="placeholder">
+                    <strong>Contoh:</strong>
+                    <p>
+                        Diketahui \(\bar{x}=50\), \(\sigma=10\), dan
+                        \(n=100\). Untuk interval kepercayaan 95%,
+                        gunakan \(z_{0{,}025}=1{,}96\).
+                    </p>
+                    \[
+                        50\pm1{,}96\frac{10}{\sqrt{100}}
+                        =50\pm1{,}96
+                    \]
+                    <p>
+                        Interval kepercayaannya adalah
+                        \((48{,}04,\ 51{,}96)\).
+                    </p>
+                </div>
+            </section>
+
+            <section>
+                <h2>12. Uji Hipotesis</h2>
+                <p>
+                    Uji hipotesis adalah prosedur untuk menilai apakah
+                    data sampel memberikan bukti yang cukup untuk
+                    menolak suatu klaim mengenai populasi.
+                </p>
+
+                <h3>Tahapan uji hipotesis</h3>
+                <ol>
+                    <li>Rumuskan hipotesis nol \(H_0\) dan hipotesis alternatif \(H_1\).</li>
+                    <li>Tentukan tingkat signifikansi \(\alpha\), misalnya 0,05.</li>
+                    <li>Pilih statistik uji yang sesuai dengan asumsi dan jenis data.</li>
+                    <li>Hitung statistik uji dan p-value.</li>
+                    <li>Bandingkan p-value dengan \(\alpha\), lalu buat kesimpulan dalam konteks masalah.</li>
+                </ol>
+
+                <p>
+                    Jika \(p\text{-value}<\alpha\), hipotesis nol ditolak.
+                    Jika \(p\text{-value}\geq\alpha\), hipotesis nol
+                    tidak ditolak. Tidak menolak \(H_0\) bukan berarti
+                    membuktikan bahwa \(H_0\) benar.
+                </p>
+
+                <h3>Kesalahan dalam pengujian</h3>
+                <ul>
+                    <li>Kesalahan tipe I: menolak \(H_0\) padahal \(H_0\) benar.</li>
+                    <li>Kesalahan tipe II: tidak menolak \(H_0\) padahal \(H_0\) salah.</li>
+                </ul>
+
+                <p>
+                    Daya uji atau power adalah probabilitas menolak
+                    hipotesis nol ketika hipotesis nol memang salah.
+                    Daya uji dipengaruhi oleh ukuran sampel, besar efek,
+                    variabilitas, dan tingkat signifikansi.
+                </p>
+            </section>
+
+            <section>
+                <h2>13. Korelasi dan Kovarians</h2>
+                <p>
+                    Kovarians mengukur arah hubungan linear antara dua
+                    variabel. Korelasi Pearson merupakan kovarians yang
+                    dinormalisasi sehingga nilainya berada antara -1 dan 1.
+                </p>
+
+                <h3>a. Kovarians sampel</h3>
+                \[
+                    s_{XY}=
+                    \frac{1}{n-1}\sum_{i=1}^{n}
+                    (x_i-\bar{x})(y_i-\bar{y})
+                \]
+
+                <h3>b. Korelasi Pearson</h3>
+                \[
+                    r=
+                    \frac{\sum_{i=1}^{n}(x_i-\bar{x})(y_i-\bar{y})}
+                    {\sqrt{\sum_{i=1}^{n}(x_i-\bar{x})^2}
+                    \sqrt{\sum_{i=1}^{n}(y_i-\bar{y})^2}}
+                \]
+
+                <p>Interpretasi umum nilai korelasi:</p>
+                <ul>
+                    <li>\(r\) mendekati 1: hubungan linear positif yang kuat.</li>
+                    <li>\(r\) mendekati -1: hubungan linear negatif yang kuat.</li>
+                    <li>\(r\) mendekati 0: hubungan linear lemah atau tidak ada hubungan linear.</li>
+                </ul>
+
+                <p>
+                    Korelasi nol tidak selalu berarti kedua variabel
+                    independen. Korelasi juga tidak membuktikan hubungan
+                    sebab-akibat. Hubungan nonlinear dapat tetap ada
+                    meskipun korelasi Pearson mendekati nol.
+                </p>
+            </section>
+
+            <section>
+                <h2>14. Regresi Statistik</h2>
+                <p>
+                    Regresi digunakan untuk memodelkan hubungan antara
+                    variabel respons \(Y\) dan satu atau lebih variabel
+                    prediktor. Regresi linear sederhana menggunakan
+                    satu variabel prediktor.
+                </p>
+
+                \[
+                    Y_i=\beta_0+\beta_1X_i+\varepsilon_i
+                \]
+
+                <p>
+                    Dengan metode kuadrat terkecil, koefisien regresi
+                    dipilih untuk meminimalkan jumlah kuadrat residual.
+                </p>
+                \[
+                    SSE=\sum_{i=1}^{n}(y_i-\hat{y}_i)^2
+                \]
+
+                <p>
+                    Untuk regresi linear sederhana, estimasi kemiringan
+                    dan intersep adalah
+                </p>
+                \[
+                    \hat{\beta}_1=
+                    \frac{\sum_{i=1}^{n}(x_i-\bar{x})(y_i-\bar{y})}
+                    {\sum_{i=1}^{n}(x_i-\bar{x})^2}
+                \]
+                \[
+                    \hat{\beta}_0=\bar{y}-\hat{\beta}_1\bar{x}
+                \]
+
+                <div class="placeholder">
+                    <strong>Contoh:</strong>
+                    <p>
+                        Model yang menghubungkan jam belajar \(X\) dengan
+                        nilai ujian \(Y\) adalah
+                    </p>
+                    \[
+                        \hat{Y}=40+5X
+                    \]
+                    <p>
+                        Untuk mahasiswa yang belajar selama 4 jam,
+                        nilai prediksi model adalah
+                    </p>
+                    \[
+                        \hat{Y}=40+5(4)=60
+                    \]
+                    <p>
+                        Nilai tersebut merupakan prediksi model, bukan
+                        jaminan nilai ujian yang sebenarnya.
+                    </p>
+                </div>
+
+                <h3>Evaluasi model regresi</h3>
+                <p>
+                    Beberapa ukuran evaluasi regresi adalah MAE, MSE,
+                    RMSE, dan koefisien determinasi \(R^2\). Pemilihan
+                    metrik bergantung pada tujuan analisis dan karakteristik
+                    kesalahan prediksi.
+                </p>
+                \[
+                    MAE=\frac{1}{n}\sum_{i=1}^{n}|y_i-\hat{y}_i|
+                \]
+                \[
+                    RMSE=\sqrt{\frac{1}{n}
+                    \sum_{i=1}^{n}(y_i-\hat{y}_i)^2}
+                \]
+            </section>
+
+            <section>
+                <h2>15. A/B Testing</h2>
+                <p>
+                    A/B testing adalah eksperimen untuk membandingkan
+                    dua versi perlakuan, misalnya dua desain halaman
+                    web, dua jenis tombol, atau dua strategi promosi.
+                    Pengguna dibagi ke kelompok A dan B untuk melihat
+                    apakah perubahan menghasilkan perbedaan pada metrik
+                    yang ditentukan.
+                </p>
+
+                <h3>Langkah-langkah A/B testing</h3>
+                <ol>
+                    <li>Tentukan tujuan dan metrik utama, misalnya conversion rate.</li>
+                    <li>Rumuskan hipotesis nol dan hipotesis alternatif.</li>
+                    <li>Tentukan ukuran sampel dan durasi eksperimen sebelum menganalisis hasil.</li>
+                    <li>Acak pengguna ke kelompok A dan B jika memungkinkan.</li>
+                    <li>Jalankan eksperimen dengan kondisi yang sebanding.</li>
+                    <li>Analisis perbedaan, interval kepercayaan, dan signifikansi statistik.</li>
+                    <li>Nilai besar efek serta manfaat praktis sebelum mengambil keputusan.</li>
+                </ol>
+
+                <h3>Contoh conversion rate</h3>
+                <p>
+                    Misalkan dua desain halaman web diuji dengan data berikut:
+                </p>
+                <ul>
+                    <li>Versi A: 100 konversi dari 1.000 pengunjung.</li>
+                    <li>Versi B: 130 konversi dari 1.000 pengunjung.</li>
+                </ul>
+
+                <p>Conversion rate setiap versi adalah</p>
+                \[
+                    \hat{p}_A=\frac{100}{1000}=0{,}10
+                \]
+                \[
+                    \hat{p}_B=\frac{130}{1000}=0{,}13
+                \]
+
+                <p>
+                    Perbedaan absolutnya adalah
+                </p>
+                \[
+                    \hat{p}_B-\hat{p}_A=0{,}03
+                \]
+                <p>
+                    Artinya, versi B memiliki conversion rate sampel
+                    3 poin persentase lebih tinggi daripada versi A.
+                    Namun, perbedaan sampel tersebut belum cukup untuk
+                    memastikan adanya efek yang signifikan secara
+                    statistik tanpa analisis lebih lanjut.
+                </p>
+
+                <p>
+                    A/B testing yang baik juga mempertimbangkan
+                    randomisasi, ukuran sampel, efek minimum yang
+                    dianggap penting, pengujian berulang, dan risiko
+                    menghentikan eksperimen terlalu dini.
+                </p>
+            </section>
+
+            <section>
+                <h2>16. Penerapan Python untuk Statistika</h2>
+                <p>
+                    Python menyediakan pustaka seperti NumPy, Pandas,
+                    SciPy, dan Matplotlib untuk menghitung statistik,
+                    membangun model probabilitas, melakukan pengujian
+                    hipotesis, dan memvisualisasikan data.
+                </p>
+
+                <h3>a. Statistik deskriptif dengan NumPy</h3>
+                <pre><code>import numpy as np
+
+data = np.array([60, 70, 70, 80, 90])
+
+print("Mean:", np.mean(data))
+print("Median:", np.median(data))
+print("Varians populasi:", np.var(data))
+print("Simpangan baku populasi:", np.std(data))
+print("Kuartil:", np.quantile(data, [0.25, 0.5, 0.75]))</code></pre>
+
+                <h3>b. Menghitung probabilitas binomial</h3>
+                <pre><code>from scipy.stats import binom
+
+n = 3
+p = 0.5
+probabilitas = binom.pmf(2, n, p)
+
+print("P(X = 2):", probabilitas)</code></pre>
+
+                <h3>c. Korelasi dan regresi</h3>
+                <pre><code>import numpy as np
+from scipy.stats import linregress
+
+jam_belajar = np.array([1, 2, 3, 4, 5])
+nilai = np.array([45, 50, 60, 65, 75])
+
+hasil = linregress(jam_belajar, nilai)
+
+print("Korelasi:", hasil.rvalue)
+print("Intersep:", hasil.intercept)
+print("Kemiringan:", hasil.slope)
+print("R-squared:", hasil.rvalue ** 2)</code></pre>
+
+                <p>
+                    Hasil perhitungan Python perlu ditafsirkan sesuai
+                    asumsi statistik, desain pengumpulan data, dan
+                    tujuan analisis. Keluaran perangkat lunak tidak
+                    menggantikan pemahaman konsep.
+                </p>
+            </section>
+
+            <section>
+                <h2>17. Latihan Mandiri</h2>
+                <ol>
+                    <li>
+                        Diketahui data \(5,7,7,8,13\). Tentukan mean,
+                        median, modus, dan rentang data tersebut.
+                    </li>
+                    <li>
+                        Hitung varians populasi dan simpangan baku
+                        populasi dari data \(2,4,6,8\).
+                    </li>
+                    <li>
+                        Sebuah koin seimbang dilempar sebanyak lima kali.
+                        Tentukan probabilitas muncul tepat tiga gambar
+                        menggunakan distribusi binomial.
+                    </li>
+                    <li>
+                        Banyaknya panggilan yang diterima sebuah layanan
+                        mengikuti distribusi Poisson dengan rata-rata
+                        4 panggilan per menit. Hitung probabilitas
+                        menerima tepat dua panggilan dalam satu menit.
+                    </li>
+                    <li>
+                        Sebuah tes memiliki sensitivitas 95%, spesifisitas
+                        90%, dan prevalensi penyakit 2%. Hitung probabilitas
+                        seseorang benar-benar sakit jika hasil tes positif.
+                    </li>
+                    <li>
+                        Sebuah sampel acak berukuran 64 memiliki mean 80.
+                        Jika simpangan baku populasi diketahui sebesar 8,
+                        tentukan interval kepercayaan 95% untuk mean populasi.
+                    </li>
+                    <li>
+                        Jelaskan perbedaan kesalahan tipe I dan tipe II
+                        dalam uji hipotesis.
+                    </li>
+                    <li>
+                        Jika korelasi antara waktu belajar dan nilai ujian
+                        adalah 0,85, jelaskan makna nilai tersebut dan
+                        mengapa korelasi tidak otomatis membuktikan
+                        hubungan sebab-akibat.
+                    </li>
+                    <li>
+                        Diberikan model regresi
+                        \(\hat{Y}=25+8X\). Tentukan nilai prediksi
+                        ketika \(X=6\) dan interpretasikan koefisien
+                        kemiringannya.
+                    </li>
+                    <li>
+                        Dalam A/B testing, versi A menghasilkan 80 konversi
+                        dari 800 pengunjung, sedangkan versi B menghasilkan
+                        108 konversi dari 900 pengunjung. Hitung conversion
+                        rate masing-masing versi dan perbedaan absolutnya.
+                        Jelaskan mengapa analisis statistik masih diperlukan.
+                    </li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>18. Ringkasan</h2>
+                <p>
+                    Statistika deskriptif membantu merangkum data,
+                    sedangkan probabilitas menyediakan model matematis
+                    untuk ketidakpastian. Distribusi probabilitas,
+                    variabel acak, dan nilai harapan membentuk dasar
+                    analisis peluang. Sampling, estimasi, interval
+                    kepercayaan, dan uji hipotesis digunakan untuk
+                    menarik kesimpulan dari sampel. Korelasi, regresi,
+                    dan A/B testing selanjutnya membantu memahami
+                    hubungan antarvariabel, membuat prediksi, dan
+                    mengevaluasi perubahan secara sistematis.
+                </p>
+            </section>
+        </article>
+    </main>
+
+    <footer>ShadowLab — Belajar Tanpa Batas</footer>
+</body>
+</html>

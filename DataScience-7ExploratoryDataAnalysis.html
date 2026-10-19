@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exploratory Data Analysis (EDA) | Data Science</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+    MathJax = {
+        tex: {
+            inlineMath: [['\\(', '\\)']],
+            displayMath: [['\\[', '\\]']]
+        }
+    };
+    </script>
+    <script
+        id="MathJax-script"
+        async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+    </script>
+</head>
+<body>
+    <header class="navbar">
+        <a href="index.html" class="logo">ShadowLab</a>
+        <nav>
+            <a href="index.html">Beranda</a>
+            <a href="MateriDataScience.html">Materi Data Science</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <article class="article">
+            <p class="eyebrow">MATERI / DATA SCIENCE</p>
+            <h1>Bagian VII — Exploratory Data Analysis (EDA)</h1>
+            <p class="intro">
+                Exploratory Data Analysis (EDA) adalah proses mengeksplorasi,
+                meringkas, dan memvisualisasikan data untuk memahami karakteristik,
+                pola, hubungan antarvariabel, serta kemungkinan masalah dalam
+                dataset. EDA membantu membangun pemahaman sebelum melakukan
+                analisis statistik lebih lanjut atau mengembangkan model machine
+                learning.
+            </p>
+
+            <section>
+                <h2>Pengantar EDA</h2>
+                <p>
+                    EDA tidak hanya bertujuan menghasilkan grafik. Proses ini
+                    membantu menjawab pertanyaan seperti:
+                </p>
+                <ul>
+                    <li>Bagaimana karakteristik umum dataset?</li>
+                    <li>Apakah terdapat nilai yang tidak wajar atau data kosong?</li>
+                    <li>Bagaimana distribusi setiap variabel?</li>
+                    <li>Apakah terdapat hubungan antara dua variabel atau lebih?</li>
+                    <li>Apakah data memiliki kelompok atau pola tertentu?</li>
+                    <li>Hipotesis apa yang layak diuji lebih lanjut?</li>
+                </ul>
+
+                <p>
+                    EDA bersifat eksploratif. Pola yang ditemukan dapat menjadi
+                    petunjuk, tetapi belum tentu membuktikan hubungan sebab-akibat.
+                    Temuan juga perlu mempertimbangkan kualitas data, konteks
+                    masalah, dan kemungkinan bias pengambilan sampel.
+                </p>
+
+                <h3>Memuat dan mengenali dataset</h3>
+                <pre><code>import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+df = pd.read_csv("data.csv")
+
+print(df.head())
+print(df.shape)
+print(df.info())
+print(df.describe(include="all"))
+print(df.isna().sum())</code></pre>
+
+                <p>
+                    Sebelum mengeksplorasi hubungan antarvariabel, pahami dahulu
+                    arti setiap kolom, satuan pengukuran, rentang waktu,
+                    unit observasi, dan cara data dikumpulkan.
+                </p>
+            </section>
+
+            <section>
+                <h2>1. Analisis Satu Variabel (Univariat)</h2>
+                <p>
+                    Analisis univariat mempelajari satu variabel secara terpisah.
+                    Tujuannya adalah memahami pusat data, penyebaran, distribusi,
+                    frekuensi, dan nilai yang tidak biasa.
+                </p>
+
+                <h3>A. Variabel numerik</h3>
+                <p>
+                    Variabel numerik dapat berupa usia, tinggi badan, pendapatan,
+                    waktu, atau jumlah transaksi. Ukuran yang sering digunakan
+                    meliputi:
+                </p>
+                <ul>
+                    <li><strong>Mean:</strong> rata-rata aritmetika.</li>
+                    <li><strong>Median:</strong> nilai tengah setelah data diurutkan.</li>
+                    <li><strong>Minimum dan maksimum:</strong> nilai terkecil dan terbesar.</li>
+                    <li><strong>Varians:</strong> ukuran penyebaran berdasarkan kuadrat selisih terhadap rata-rata.</li>
+                    <li><strong>Simpangan baku:</strong> akar dari varians.</li>
+                    <li><strong>Kuartil:</strong> membagi data terurut menjadi empat bagian.</li>
+                </ul>
+
+                <p>Rata-rata sampel didefinisikan sebagai:</p>
+                \[
+                \bar{x}=\frac{1}{n}\sum_{i=1}^{n}x_i
+                \]
+
+                <p>
+                    Varians sampel yang menggunakan koreksi derajat kebebasan
+                    adalah:
+                </p>
+                \[
+                s^2=\frac{1}{n-1}\sum_{i=1}^{n}(x_i-\bar{x})^2
+                \]
+
+                <p>Contoh menghitung statistik deskriptif:</p>
+                <pre><code>print(df["usia"].describe())
+
+print("Mean:", df["usia"].mean())
+print("Median:", df["usia"].median())
+print("Modus:", df["usia"].mode().tolist())
+print("Varians:", df["usia"].var())
+print("Simpangan baku:", df["usia"].std())</code></pre>
+
+                <h3>B. Histogram</h3>
+                <p>
+                    Histogram menunjukkan frekuensi observasi dalam interval
+                    nilai tertentu. Grafik ini membantu melihat konsentrasi data,
+                    kemencengan, puncak distribusi, dan kemungkinan nilai ekstrem.
+                </p>
+
+                <pre><code>plt.figure(figsize=(8, 5))
+sns.histplot(data=df, x="usia", bins=20, kde=True)
+plt.title("Distribusi Usia")
+plt.xlabel("Usia")
+plt.ylabel("Frekuensi")
+plt.tight_layout()
+plt.show()</code></pre>
+
+                <h3>C. Variabel kategorikal</h3>
+                <p>
+                    Variabel kategorikal memuat kelompok seperti jenis kelamin,
+                    kota, jenis produk, atau status pelanggan. Analisis dapat
+                    dilakukan dengan menghitung frekuensi dan proporsi kategori.
+                </p>
+
+                <pre><code>print(df["kota"].value_counts(dropna=False))
+print(df["kota"].value_counts(normalize=True, dropna=False) * 100)
+
+plt.figure(figsize=(8, 5))
+sns.countplot(data=df, x="kota", order=df["kota"].value_counts().index)
+plt.title("Jumlah Observasi Berdasarkan Kota")
+plt.xticks(rotation=30)
+plt.tight_layout()
+plt.show()</code></pre>
+
+                <p>
+                    Jika satu kategori sangat dominan, hal tersebut dapat
+                    menunjukkan karakteristik populasi atau kemungkinan bias
+                    pada proses pengumpulan data.
+                </p>
+            </section>
+
+            <section>
+                <h2>2. Analisis Dua Variabel (Bivariat)</h2>
+                <p>
+                    Analisis bivariat mempelajari hubungan antara dua variabel.
+                    Metode yang digunakan bergantung pada tipe kedua variabel
+                    serta pertanyaan yang ingin dijawab.
+                </p>
+
+                <h3>A. Numerik dengan numerik</h3>
+                <p>
+                    Scatter plot digunakan untuk melihat pola hubungan dua
+                    variabel numerik. Setiap titik merepresentasikan satu
+                    observasi.
+                </p>
+
+                <pre><code>plt.figure(figsize=(8, 5))
+sns.scatterplot(data=df, x="usia", y="pendapatan")
+plt.title("Hubungan Usia dan Pendapatan")
+plt.tight_layout()
+plt.show()</code></pre>
+
+                <p>
+                    Perhatikan apakah hubungan terlihat meningkat, menurun,
+                    melengkung, membentuk kelompok, atau tidak memiliki pola
+                    yang jelas.
+                </p>
+
+                <h3>B. Numerik dengan kategorikal</h3>
+                <p>
+                    Untuk membandingkan distribusi variabel numerik pada beberapa
+                    kelompok, kita dapat menggunakan boxplot atau violin plot.
+                </p>
+
+                <pre><code>plt.figure(figsize=(8, 5))
+sns.boxplot(data=df, x="kota", y="pendapatan")
+plt.title("Distribusi Pendapatan Berdasarkan Kota")
+plt.xticks(rotation=30)
+plt.tight_layout()
+plt.show()</code></pre>
+
+                <p>
+                    Grafik tersebut dapat menunjukkan perbedaan median,
+                    penyebaran, dan kandidat outlier antarwilayah. Perbedaan
+                    visual tidak otomatis berarti perbedaan yang signifikan
+                    secara statistik.
+                </p>
+
+                <h3>C. Kategorikal dengan kategorikal</h3>
+                <p>
+                    Hubungan dua variabel kategorikal dapat dieksplorasi dengan
+                    tabel kontingensi atau grafik batang berkelompok.
+                </p>
+
+                <pre><code>tabel = pd.crosstab(
+    df["kota"],
+    df["status_pelanggan"]
+)
+
+print(tabel)
+
+tabel.plot(kind="bar", figsize=(9, 5))
+plt.title("Status Pelanggan Berdasarkan Kota")
+plt.xlabel("Kota")
+plt.ylabel("Jumlah")
+plt.xticks(rotation=30)
+plt.tight_layout()
+plt.show()</code></pre>
+
+                <p>
+                    Gunakan proporsi baris atau kolom jika ukuran kelompok
+                    berbeda jauh. Jumlah absolut saja bisa menyesatkan karena
+                    kelompok yang lebih besar cenderung memiliki jumlah kejadian
+                    lebih banyak.
+                </p>
+
+                <pre><code>proporsi = pd.crosstab(
+    df["kota"],
+    df["status_pelanggan"],
+    normalize="index"
+)
+
+print(proporsi)</code></pre>
+            </section>
+
+            <section>
+                <h2>3. Analisis Multivariabel</h2>
+                <p>
+                    Analisis multivariabel mempelajari tiga variabel atau lebih
+                    secara bersamaan. Tujuannya adalah memahami pola yang
+                    mungkin tidak terlihat ketika setiap variabel diperiksa
+                    secara terpisah.
+                </p>
+
+                <h3>A. Pair plot</h3>
+                <p>
+                    Pair plot menampilkan distribusi setiap fitur numerik dan
+                    hubungan berpasangan antarfitur.
+                </p>
+
+                <pre><code>fitur = ["usia", "pendapatan", "jumlah_transaksi"]
+
+sns.pairplot(
+    df[fitur].dropna(),
+    diag_kind="hist"
+)
+
+plt.show()</code></pre>
+
+                <p>
+                    Pair plot berguna untuk eksplorasi awal pada sejumlah kecil
+                    variabel. Jika jumlah fitur sangat banyak, grafik dapat
+                    menjadi padat dan sulit dibaca.
+                </p>
+
+                <h3>B. Analisis berdasarkan kelompok ketiga</h3>
+                <p>
+                    Hubungan dua variabel dapat terlihat berbeda pada kelompok
+                    yang berbeda. Misalnya, hubungan usia dan pendapatan dapat
+                    dibandingkan berdasarkan wilayah.
+                </p>
+
+                <pre><code>plt.figure(figsize=(8, 5))
+
+sns.scatterplot(
+    data=df,
+    x="usia",
+    y="pendapatan",
+    hue="kota",
+    style="status_pelanggan"
+)
+
+plt.title("Usia dan Pendapatan Menurut Kota dan Status")
+plt.tight_layout()
+plt.show()</code></pre>
+
+                <h3>C. Pivot table</h3>
+                <p>
+                    Pivot table merangkum data berdasarkan kombinasi beberapa
+                    variabel kategorikal dan suatu fungsi agregasi.
+                </p>
+
+                <pre><code>ringkasan = pd.pivot_table(
+    df,
+    values="pendapatan",
+    index="kota",
+    columns="status_pelanggan",
+    aggfunc="mean"
+)
+
+print(ringkasan)</code></pre>
+
+                <p>
+                    Periksa apakah terdapat nilai yang hilang pada kombinasi
+                    kategori tertentu. Nilai kosong pada tabel ringkasan dapat
+                    berarti tidak ada observasi yang memenuhi kombinasi tersebut,
+                    bukan selalu kesalahan pengolahan data.
+                </p>
+            </section>
+
+            <section>
+                <h2>4. Distribusi dan Pola Data</h2>
+                <p>
+                    Distribusi menunjukkan bagaimana nilai suatu variabel
+                    tersebar. Memahami distribusi membantu menentukan metode
+                    statistik, transformasi, dan model yang sesuai.
+                </p>
+
+                <h3>A. Distribusi simetris</h3>
+                <p>
+                    Pada distribusi yang simetris, sisi kiri dan kanan relatif
+                    seimbang di sekitar pusat. Pada distribusi simetris tertentu,
+                    mean dan median dapat memiliki nilai yang berdekatan.
+                </p>
+
+                <h3>B. Distribusi menceng ke kanan</h3>
+                <p>
+                    Distribusi menceng ke kanan memiliki ekor yang lebih panjang
+                    di sisi nilai besar. Contohnya dapat ditemukan pada data
+                    pendapatan atau nilai transaksi. Mean dapat lebih besar
+                    daripada median karena pengaruh nilai tinggi.
+                </p>
+
+                <h3>C. Distribusi menceng ke kiri</h3>
+                <p>
+                    Distribusi menceng ke kiri memiliki ekor yang lebih panjang
+                    di sisi nilai kecil. Pada kondisi tertentu, mean dapat lebih
+                    kecil daripada median.
+                </p>
+
+                <h3>D. Distribusi multimodal</h3>
+                <p>
+                    Distribusi multimodal memiliki lebih dari satu puncak.
+                    Kondisi ini dapat mengindikasikan adanya kelompok berbeda,
+                    tetapi penyebabnya perlu diperiksa lebih lanjut.
+                </p>
+
+                <h3>E. Membandingkan distribusi</h3>
+                <pre><code>fig, axes = plt.subplots(1, 2, figsize=(12, 4))
+
+sns.histplot(
+    data=df,
+    x="pendapatan",
+    kde=True,
+    ax=axes[0]
+)
+axes[0].set_title("Distribusi Pendapatan")
+
+sns.boxplot(
+    data=df,
+    x="pendapatan",
+    ax=axes[1]
+)
+axes[1].set_title("Boxplot Pendapatan")
+
+plt.tight_layout()
+plt.show()</code></pre>
+
+                <h3>F. Memeriksa kemencengan</h3>
+                <p>
+                    Skewness merupakan ukuran asimetri distribusi. Nilai positif
+                    biasanya menunjukkan kemencengan ke kanan, sedangkan nilai
+                    negatif menunjukkan kemencengan ke kiri.
+                </p>
+
+                <pre><code>print("Skewness:", df["pendapatan"].skew())
+print("Kurtosis:", df["pendapatan"].kurt())</code></pre>
+
+                <p>
+                    Skewness dan kurtosis adalah ringkasan numerik, bukan
+                    pengganti visualisasi. Nilainya perlu ditafsirkan bersama
+                    histogram, boxplot, ukuran sampel, dan konteks data.
+                </p>
+
+                <h3>G. Pola berdasarkan waktu</h3>
+                <p>
+                    Untuk data deret waktu, pola dapat berupa tren, musiman,
+                    perubahan mendadak, atau fluktuasi acak. Pastikan kolom
+                    tanggal memiliki tipe data yang benar.
+                </p>
+
+                <pre><code>df["tanggal"] = pd.to_datetime(df["tanggal"])
+
+data_waktu = (
+    df.groupby(pd.Grouper(key="tanggal", freq="ME"))["penjualan"]
+    .sum()
+    .reset_index()
+)
+
+plt.figure(figsize=(10, 5))
+sns.lineplot(data=data_waktu, x="tanggal", y="penjualan", marker="o")
+plt.title("Penjualan Bulanan")
+plt.tight_layout()
+plt.show()</code></pre>
+
+                <p>
+                    Tren pada data historis tidak selalu berlanjut ke masa depan.
+                    Jika ingin memprediksi nilai mendatang, gunakan pemisahan
+                    data berdasarkan waktu dan hindari penggunaan informasi
+                    dari periode setelah tanggal prediksi.
+                </p>
+            </section>
+
+            <section>
+                <h2>5. Analisis Korelasi</h2>
+                <p>
+                    Korelasi mengukur arah dan kekuatan hubungan statistik
+                    antara dua variabel. Untuk korelasi Pearson, koefisiennya
+                    berada pada rentang \(-1\) sampai \(1\).
+                </p>
+
+                \[
+                r =
+                \frac{\sum_{i=1}^{n}(x_i-\bar{x})(y_i-\bar{y})}
+                {\sqrt{\sum_{i=1}^{n}(x_i-\bar{x})^2}
+                \sqrt{\sum_{i=1}^{n}(y_i-\bar{y})^2}}
+                \]
+
+                <p>Interpretasi umum koefisien Pearson:</p>
+                <ul>
+                    <li>\(r\) mendekati \(1\): hubungan linear positif kuat.</li>
+                    <li>\(r\) mendekati \(-1\): hubungan linear negatif kuat.</li>
+                    <li>\(r\) mendekati \(0\): hubungan linear lemah atau tidak terlihat.</li>
+                </ul>
+
+                <p>
+                    Nilai korelasi mendekati nol tidak berarti tidak ada
+                    hubungan sama sekali. Hubungan nonlinier dapat tetap kuat
+                    meskipun korelasi Pearson rendah.
+                </p>
+
+                <h3>A. Korelasi Pearson</h3>
+                <p>
+                    Pearson mengukur hubungan linear dan sensitif terhadap
+                    outlier. Metode ini umumnya digunakan pada variabel numerik.
+                </p>
+
+                <h3>B. Korelasi Spearman</h3>
+                <p>
+                    Spearman menghitung korelasi berdasarkan peringkat. Metode
+                    ini dapat digunakan untuk mengevaluasi hubungan monotonik,
+                    termasuk ketika hubungan tidak linear tetapi cenderung
+                    meningkat atau menurun secara konsisten.
+                </p>
+
+                <pre><code>fitur_numerik = df.select_dtypes(include="number")
+
+korelasi_pearson = fitur_numerik.corr(method="pearson")
+korelasi_spearman = fitur_numerik.corr(method="spearman")
+
+print(korelasi_pearson)
+print(korelasi_spearman)</code></pre>
+
+                <h3>C. Heatmap korelasi</h3>
+                <pre><code>plt.figure(figsize=(10, 7))
+
+sns.heatmap(
+    korelasi_pearson,
+    annot=True,
+    cmap="coolwarm",
+    fmt=".2f",
+    vmin=-1,
+    vmax=1
+)
+
+plt.title("Matriks Korelasi Pearson")
+plt.tight_layout()
+plt.show()</code></pre>
+
+                <h3>D. Hal yang perlu diperhatikan</h3>
+                <ul>
+                    <li>Korelasi tidak membuktikan hubungan sebab-akibat.</li>
+                    <li>Outlier dapat mengubah besar dan arah korelasi.</li>
+                    <li>Variabel ketiga dapat memengaruhi hubungan yang terlihat.</li>
+                    <li>Hubungan yang kuat belum tentu berguna untuk prediksi.</li>
+                    <li>Korelasi fitur yang tinggi dapat menunjukkan multikolinearitas pada model tertentu.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>6. Analisis Outlier</h2>
+                <p>
+                    Outlier adalah observasi yang berbeda jauh dari pola umum
+                    data. Pada tahap EDA, tujuan utamanya adalah menemukan dan
+                    memahami nilai tersebut, bukan langsung menghapusnya.
+                </p>
+
+                <h3>A. Boxplot dan aturan IQR</h3>
+                <p>
+                    Kuartil pertama \(Q_1\) adalah persentil ke-25 dan kuartil
+                    ketiga \(Q_3\) adalah persentil ke-75. Rentang antarkuartil
+                    didefinisikan sebagai:
+                </p>
+
+                \[
+                IQR = Q_3 - Q_1
+                \]
+
+                <p>Kandidat outlier ditandai di luar batas:</p>
+
+                \[
+                Q_1 - 1.5(IQR)
+                \quad\text{dan}\quad
+                Q_3 + 1.5(IQR)
+                \]
+
+                <pre><code>Q1 = df["pendapatan"].quantile(0.25)
+Q3 = df["pendapatan"].quantile(0.75)
+IQR = Q3 - Q1
+
+bawah = Q1 - 1.5 * IQR
+atas = Q3 + 1.5 * IQR
+
+kandidat = df[
+    (df["pendapatan"] < bawah) |
+    (df["pendapatan"] > atas)
+]
+
+print(kandidat)</code></pre>
+
+                <h3>B. Membandingkan outlier berdasarkan kelompok</h3>
+                <pre><code>plt.figure(figsize=(9, 5))
+
+sns.boxplot(
+    data=df,
+    x="kota",
+    y="pendapatan"
+)
+
+plt.title("Outlier Pendapatan Berdasarkan Kota")
+plt.xticks(rotation=30)
+plt.tight_layout()
+plt.show()</code></pre>
+
+                <p>
+                    Nilai yang dianggap ekstrem pada satu kelompok belum tentu
+                    ekstrem pada kelompok lain. Karena itu, perbandingan
+                    berdasarkan kelompok dapat membantu memahami struktur data.
+                </p>
+
+                <h3>C. Memeriksa observasi ekstrem</h3>
+                <pre><code>print(
+    df.sort_values(
+        "pendapatan",
+        ascending=False
+    ).head(10)
+)</code></pre>
+
+                <p>
+                    Periksa apakah nilai ekstrem berasal dari kesalahan satuan,
+                    salah ketik, pencatatan yang tidak konsisten, atau kejadian
+                    yang memang jarang. Pertahankan data valid kecuali terdapat
+                    alasan analitis yang jelas untuk mengubahnya.
+                </p>
+            </section>
+
+            <section>
+                <h2>7. Segmentasi Data</h2>
+                <p>
+                    Segmentasi adalah proses membagi observasi ke dalam kelompok
+                    berdasarkan karakteristik tertentu. Segmentasi dapat
+                    menggunakan aturan yang ditentukan analis atau algoritma
+                    clustering.
+                </p>
+
+                <h3>A. Segmentasi berbasis aturan</h3>
+                <p>
+                    Misalnya, pelanggan dibagi menjadi kelompok berdasarkan
+                    total pengeluaran.
+                </p>
+
+                <pre><code>batas = [0, 1_000_000, 5_000_000, float("inf")]
+label = ["Rendah", "Sedang", "Tinggi"]
+
+df["segmen_pengeluaran"] = pd.cut(
+    df["total_pengeluaran"],
+    bins=batas,
+    labels=label,
+    right=False
+)
+
+print(df["segmen_pengeluaran"].value_counts(dropna=False))</code></pre>
+
+                <p>
+                    Batas segmen perlu disesuaikan dengan konteks. Nilai di luar
+                    batas yang ditentukan atau nilai negatif dapat menghasilkan
+                    kategori kosong sehingga harus diperiksa.
+                </p>
+
+                <h3>B. Segmentasi berdasarkan kuantil</h3>
+                <p>
+                    <code>qcut()</code> membagi data berdasarkan kuantil sehingga
+                    jumlah observasi per kelompok cenderung serupa apabila
+                    nilai batasnya tidak bermasalah.
+                </p>
+
+                <pre><code>df["kelompok_usia"] = pd.qcut(
+    df["usia"],
+    q=4,
+    labels=["Q1", "Q2", "Q3", "Q4"],
+    duplicates="drop"
+)
+
+print(df.groupby(
+    "kelompok_usia",
+    observed=True
+)["pendapatan"].mean())</code></pre>
+
+                <h3>C. Segmentasi menggunakan K-Means</h3>
+                <p>
+                    K-Means merupakan algoritma clustering yang mengelompokkan
+                    observasi berdasarkan kedekatannya dengan pusat cluster.
+                    Algoritma ini memerlukan jumlah cluster \(k\) yang ditentukan
+                    sebelumnya.
+                </p>
+
+                \[
+                J = \sum_{j=1}^{k}
+                \sum_{x_i \in C_j}
+                \|x_i-\mu_j\|^2
+                \]
+
+                <p>
+                    Tujuan K-Means adalah meminimalkan jumlah kuadrat jarak
+                    observasi terhadap pusat cluster masing-masing.
+                </p>
+
+                <pre><code>from sklearn.preprocessing import StandardScaler
+from sklearn.cluster import KMeans
+
+fitur = ["usia", "total_pengeluaran"]
+
+X_cluster = df[fitur].dropna()
+
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X_cluster)
+
+model_cluster = KMeans(
+    n_clusters=3,
+    random_state=42,
+    n_init=10
+)
+
+label_cluster = model_cluster.fit_predict(X_scaled)
+
+hasil_cluster = X_cluster.copy()
+hasil_cluster["cluster"] = label_cluster
+
+print(hasil_cluster.groupby("cluster")[fitur].mean())</code></pre>
+
+                <p>
+                    Standardisasi penting untuk banyak penggunaan K-Means
+                    karena algoritma ini menggunakan jarak. Fitur dengan skala
+                    besar dapat mendominasi perhitungan jarak jika tidak
+                    ditangani dengan tepat.
+                </p>
+
+                <p>
+                    Untuk menilai hasil clustering, periksa ukuran tiap kelompok,
+                    rata-rata atau median fitur, stabilitas cluster, dan
+                    interpretasi praktisnya. Cluster yang terbentuk secara
+                    matematis belum tentu merupakan segmen bisnis yang bermakna.
+                </p>
+            </section>
+
+            <section>
+                <h2>8. Perumusan Hipotesis Awal</h2>
+                <p>
+                    Selama EDA, analis dapat menyusun hipotesis awal berdasarkan
+                    pola yang ditemukan. Hipotesis tersebut menjadi pertanyaan
+                    yang dapat diperiksa lebih lanjut menggunakan analisis
+                    statistik atau eksperimen.
+                </p>
+
+                <h3>A. Hipotesis nol dan alternatif</h3>
+                <p>
+                    Dalam pengujian hipotesis, hipotesis nol biasanya
+                    menyatakan tidak adanya perbedaan atau hubungan tertentu,
+                    sedangkan hipotesis alternatif menyatakan adanya perbedaan
+                    atau hubungan sesuai pertanyaan penelitian.
+                </p>
+
+                <p>Contoh pertanyaan: apakah rata-rata pengeluaran pelanggan di dua kota berbeda?</p>
+
+                \[
+                H_0:\mu_A=\mu_B
+                \]
+
+                \[
+                H_1:\mu_A\neq\mu_B
+                \]
+
+                <p>
+                    Di sini, \(\mu_A\) dan \(\mu_B\) menyatakan rata-rata
+                    populasi pengeluaran pelanggan pada kota A dan kota B.
+                </p>
+
+                <h3>B. Contoh hipotesis awal dari EDA</h3>
+                <ul>
+                    <li>Pelanggan dengan jumlah transaksi lebih banyak cenderung memiliki total pengeluaran lebih besar.</li>
+                    <li>Distribusi pendapatan berbeda antarwilayah.</li>
+                    <li>Pelanggan baru memiliki tingkat pembelian ulang yang berbeda dari pelanggan lama.</li>
+                    <li>Penjualan mengalami pola musiman.</li>
+                    <li>Variabel tertentu berkaitan dengan kemungkinan pelanggan berhenti berlangganan.</li>
+                </ul>
+
+                <h3>C. Memilih pengujian yang sesuai</h3>
+                <p>
+                    Pemilihan metode statistik bergantung pada desain penelitian,
+                    tipe data, asumsi, dan tujuan analisis.
+                </p>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Pertanyaan</th>
+                            <th>Metode yang dapat dipertimbangkan</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Apakah dua kelompok independen memiliki rata-rata berbeda?</td>
+                            <td>Uji t independen atau alternatif nonparametrik yang sesuai</td>
+                        </tr>
+                        <tr>
+                            <td>Apakah proporsi kategori berbeda?</td>
+                            <td>Uji chi-square atau uji proporsi</td>
+                        </tr>
+                        <tr>
+                            <td>Apakah dua variabel numerik memiliki hubungan linear?</td>
+                            <td>Korelasi Pearson dengan pemeriksaan asumsi</td>
+                        </tr>
+                        <tr>
+                            <td>Apakah terdapat hubungan monotonik?</td>
+                            <td>Korelasi Spearman</td>
+                        </tr>
+                        <tr>
+                            <td>Apakah rata-rata berbeda pada lebih dari dua kelompok?</td>
+                            <td>ANOVA atau metode alternatif yang sesuai</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p>
+                    Hindari memilih hipotesis hanya karena menghasilkan
+                    nilai-p yang kecil. Jika banyak hipotesis diuji, pertimbangkan
+                    masalah pengujian berganda dan validasi temuan pada data
+                    independen.
+                </p>
+            </section>
+
+            <section>
+                <h2>9. Interpretasi Temuan</h2>
+                <p>
+                    Interpretasi adalah proses mengubah hasil tabel, statistik,
+                    dan visualisasi menjadi penjelasan yang relevan dengan
+                    pertanyaan analisis.
+                </p>
+
+                <h3>A. Bedakan observasi dan interpretasi</h3>
+                <p><strong>Observasi:</strong> median pengeluaran kelompok A lebih tinggi daripada kelompok B.</p>
+                <p><strong>Interpretasi:</strong> pada dataset yang dianalisis, pelanggan kelompok A memiliki pengeluaran tipikal yang lebih tinggi menurut median.</p>
+                <p>
+                    Pernyataan kedua lebih informatif, tetapi tetap tidak
+                    membuktikan bahwa keanggotaan dalam kelompok A menyebabkan
+                    pengeluaran meningkat.
+                </p>
+
+                <h3>B. Hindari kesimpulan berlebihan</h3>
+                <ul>
+                    <li>Korelasi tidak otomatis menunjukkan sebab-akibat.</li>
+                    <li>Perbedaan rata-rata tidak menjamin perbedaan yang bermakna secara praktis.</li>
+                    <li>Hasil sampel belum tentu mewakili populasi.</li>
+                    <li>Outlier dapat memengaruhi ringkasan statistik.</li>
+                    <li>Nilai kosong dan bias pengumpulan data dapat memengaruhi hasil.</li>
+                    <li>Ukuran sampel dan ketidakpastian perlu diperhatikan.</li>
+                </ul>
+
+                <h3>C. Menggabungkan bukti</h3>
+                <p>
+                    Interpretasi yang baik menggabungkan beberapa sumber informasi:
+                </p>
+                <ol>
+                    <li>Statistik deskriptif untuk mengetahui besarnya nilai dan penyebarannya.</li>
+                    <li>Visualisasi untuk memahami pola, kelompok, dan observasi ekstrem.</li>
+                    <li>Pengetahuan domain untuk menilai kewajaran dan relevansi temuan.</li>
+                    <li>Analisis lanjutan untuk menguji hipotesis yang muncul.</li>
+                </ol>
+
+                <h3>D. Contoh interpretasi korelasi</h3>
+                <p>
+                    Misalkan korelasi Pearson antara jumlah transaksi dan total
+                    pengeluaran adalah \(r=0.78\). Interpretasi yang tepat
+                    adalah terdapat hubungan linear positif yang relatif kuat
+                    pada data tersebut. Namun, hasil ini tidak membuktikan
+                    bahwa peningkatan jumlah transaksi menyebabkan peningkatan
+                    pengeluaran.
+                </p>
+
+                <p>
+                    Hubungan tersebut dapat dipengaruhi oleh jumlah produk yang
+                    dibeli, karakteristik pelanggan, periode pengamatan, atau
+                    faktor lain. Penelitian lebih lanjut diperlukan untuk
+                    memahami mekanismenya.
+                </p>
+            </section>
+
+            <section>
+                <h2>10. Penyusunan Laporan EDA</h2>
+                <p>
+                    Laporan EDA merangkum tujuan analisis, kondisi dataset,
+                    metode eksplorasi, temuan utama, keterbatasan, dan
+                    rekomendasi tindak lanjut. Laporan yang baik tidak hanya
+                    menampilkan grafik, tetapi juga menjelaskan alasan grafik
+                    tersebut penting.
+                </p>
+
+                <h3>A. Struktur laporan</h3>
+                <ol>
+                    <li>
+                        <strong>Judul dan tujuan:</strong> menjelaskan masalah
+                        dan pertanyaan yang ingin dijawab.
+                    </li>
+                    <li>
+                        <strong>Deskripsi dataset:</strong> sumber data, jumlah
+                        observasi, jumlah fitur, unit analisis, dan periode.
+                    </li>
+                    <li>
+                        <strong>Persiapan data:</strong> penanganan nilai kosong,
+                        duplikasi, tipe data, dan ketidakkonsistenan.
+                    </li>
+                    <li>
+                        <strong>Analisis univariat:</strong> distribusi dan
+                        statistik deskriptif setiap variabel penting.
+                    </li>
+                    <li>
+                        <strong>Analisis bivariat dan multivariabel:</strong>
+                        hubungan dan pola antarvariabel.
+                    </li>
+                    <li>
+                        <strong>Temuan utama:</strong> hasil yang relevan
+                        terhadap pertanyaan analisis.
+                    </li>
+                    <li>
+                        <strong>Keterbatasan:</strong> kualitas data, bias,
+                        ukuran sampel, dan ketidakpastian.
+                    </li>
+                    <li>
+                        <strong>Rekomendasi:</strong> langkah analisis atau
+                        pengumpulan data berikutnya.
+                    </li>
+                </ol>
+
+                <h3>B. Contoh kode untuk membuat ringkasan awal</h3>
+                <pre><code>ringkasan = pd.DataFrame({
+    "tipe_data": df.dtypes.astype(str),
+    "jumlah_kosong": df.isna().sum(),
+    "persentase_kosong": df.isna().mean() * 100,
+    "jumlah_unik": df.nunique(dropna=True)
+})
+
+print("Ukuran dataset:", df.shape)
+print("Jumlah baris duplikat:", df.duplicated().sum())
+print(ringkasan)</code></pre>
+
+                <h3>C. Template ringkasan temuan</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Komponen</th>
+                            <th>Isi yang dilaporkan</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Kondisi data</td>
+                            <td>Jumlah baris, kolom, nilai kosong, dan duplikasi</td>
+                        </tr>
+                        <tr>
+                            <td>Distribusi</td>
+                            <td>Pola umum, pusat data, penyebaran, dan kemencengan</td>
+                        </tr>
+                        <tr>
+                            <td>Hubungan</td>
+                            <td>Hubungan antarvariabel yang relevan dan kekuatannya</td>
+                        </tr>
+                        <tr>
+                            <td>Outlier</td>
+                            <td>Jumlah kandidat outlier dan hasil pemeriksaan konteks</td>
+                        </tr>
+                        <tr>
+                            <td>Hipotesis</td>
+                            <td>Pertanyaan yang perlu diuji lebih lanjut</td>
+                        </tr>
+                        <tr>
+                            <td>Keterbatasan</td>
+                            <td>Bias, ketidakpastian, dan batas generalisasi</td>
+                        </tr>
+                        <tr>
+                            <td>Tindak lanjut</td>
+                            <td>Analisis tambahan atau kebutuhan data berikutnya</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>D. Prinsip visualisasi yang baik</h3>
+                <ul>
+                    <li>Gunakan judul yang menjelaskan isi grafik.</li>
+                    <li>Beri label sumbu dan satuan pengukuran.</li>
+                    <li>Hindari terlalu banyak warna dan elemen dekoratif.</li>
+                    <li>Pilih jenis grafik sesuai tipe variabel dan tujuan analisis.</li>
+                    <li>Jangan memotong sumbu atau mengubah skala dengan cara yang menyesatkan.</li>
+                    <li>Sertakan jumlah observasi jika penting untuk interpretasi.</li>
+                    <li>Jelaskan temuan dan keterbatasan di sekitar grafik.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Proyek Mini: EDA Data Penjualan</h2>
+                <p>
+                    Pada proyek ini, kita akan mengeksplorasi dataset penjualan
+                    dengan kolom tanggal, kota, kategori produk, jumlah produk,
+                    dan total penjualan.
+                </p>
+
+                <h3>Langkah 1 — Memuat data</h3>
+                <pre><code>import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+df = pd.read_csv("penjualan.csv")
+
+df["tanggal"] = pd.to_datetime(df["tanggal"], errors="coerce")
+
+print(df.head())
+print(df.shape)
+print(df.info())
+print(df.isna().sum())</code></pre>
+
+                <h3>Langkah 2 — Statistik deskriptif</h3>
+                <pre><code>print(df[["jumlah_produk", "total_penjualan"]].describe())
+
+print(df["kota"].value_counts(dropna=False))
+print(df["kategori"].value_counts(dropna=False))</code></pre>
+
+                <h3>Langkah 3 — Distribusi penjualan</h3>
+                <pre><code>plt.figure(figsize=(8, 5))
+
+sns.histplot(
+    data=df,
+    x="total_penjualan",
+    bins=30,
+    kde=True
+)
+
+plt.title("Distribusi Total Penjualan")
+plt.xlabel("Total Penjualan")
+plt.tight_layout()
+plt.show()</code></pre>
+
+                <h3>Langkah 4 — Hubungan jumlah produk dan penjualan</h3>
+                <pre><code>plt.figure(figsize=(8, 5))
+
+sns.scatterplot(
+    data=df,
+    x="jumlah_produk",
+    y="total_penjualan",
+    hue="kategori"
+)
+
+plt.title("Jumlah Produk dan Total Penjualan")
+plt.tight_layout()
+plt.show()</code></pre>
+
+                <h3>Langkah 5 — Membandingkan kategori</h3>
+                <pre><code>ringkasan_kategori = (
+    df.groupby("kategori", dropna=False)
+    .agg(
+        jumlah_transaksi=("total_penjualan", "size"),
+        total_penjualan=("total_penjualan", "sum"),
+        rata_rata_penjualan=("total_penjualan", "mean"),
+        median_penjualan=("total_penjualan", "median")
+    )
+    .sort_values("total_penjualan", ascending=False)
+)
+
+print(ringkasan_kategori)</code></pre>
+
+                <h3>Langkah 6 — Tren bulanan</h3>
+                <pre><code>data_valid = df.dropna(subset=["tanggal"]).copy()
+
+bulanan = (
+    data_valid
+    .set_index("tanggal")
+    .resample("ME")["total_penjualan"]
+    .sum()
+)
+
+bulanan.plot(figsize=(10, 5), marker="o")
+plt.title("Tren Total Penjualan Bulanan")
+plt.xlabel("Bulan")
+plt.ylabel("Total Penjualan")
+plt.tight_layout()
+plt.show()</code></pre>
+
+                <h3>Langkah 7 — Menyusun kesimpulan</h3>
+                <p>
+                    Setelah analisis, tuliskan jawaban atas pertanyaan berikut:
+                </p>
+                <ol>
+                    <li>Kategori produk mana yang memberikan total penjualan terbesar?</li>
+                    <li>Bagaimana bentuk distribusi total penjualan?</li>
+                    <li>Apakah jumlah produk memiliki hubungan dengan total penjualan?</li>
+                    <li>Apakah terdapat perbedaan penjualan antarwilayah?</li>
+                    <li>Apakah penjualan menunjukkan pola waktu tertentu?</li>
+                    <li>Data apa yang masih perlu diperiksa sebelum membuat model prediksi?</li>
+                </ol>
+
+                <p>
+                    Jawaban harus berdasarkan hasil aktual dataset. Jangan
+                    menyimpulkan kategori atau wilayah tertentu sebagai yang
+                    terbaik sebelum melihat hasil perhitungan.
+                </p>
+            </section>
+
+            <section>
+                <h2>Latihan Mandiri</h2>
+                <ol>
+                    <li>
+                        Jelaskan perbedaan analisis univariat, bivariat, dan
+                        multivariabel beserta contohnya.
+                    </li>
+                    <li>
+                        Kapan histogram lebih tepat digunakan daripada countplot?
+                    </li>
+                    <li>
+                        Mengapa proporsi dapat lebih informatif daripada jumlah
+                        absolut ketika membandingkan kelompok dengan ukuran berbeda?
+                    </li>
+                    <li>
+                        Apakah korelasi Pearson sebesar 0 selalu menunjukkan
+                        bahwa dua variabel tidak memiliki hubungan? Jelaskan.
+                    </li>
+                    <li>
+                        Sebutkan tiga kemungkinan penyebab munculnya outlier.
+                    </li>
+                    <li>
+                        Apa perbedaan segmentasi berbasis aturan dan clustering?
+                    </li>
+                    <li>
+                        Mengapa hipotesis yang muncul selama EDA perlu diuji
+                        lebih lanjut?
+                    </li>
+                    <li>
+                        Sebutkan komponen penting dalam laporan EDA.
+                    </li>
+                    <li>
+                        Buat histogram, boxplot, dan matriks korelasi dari
+                        dataset numerik yang tersedia.
+                    </li>
+                    <li>
+                        Pilih satu dataset publik, lakukan EDA, lalu tulis
+                        minimal lima temuan dan tiga keterbatasan analisis.
+                    </li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>Ringkasan</h2>
+                <ul>
+                    <li>
+                        EDA membantu memahami kualitas, karakteristik, dan pola
+                        dataset sebelum analisis lanjutan.
+                    </li>
+                    <li>
+                        Analisis univariat mempelajari satu variabel, bivariat
+                        mempelajari dua variabel, dan analisis multivariabel
+                        mempelajari beberapa variabel secara bersamaan.
+                    </li>
+                    <li>
+                        Histogram, boxplot, scatter plot, countplot, dan heatmap
+                        memiliki kegunaan yang berbeda.
+                    </li>
+                    <li>
+                        Distribusi membantu memahami pusat, penyebaran,
+                        kemencengan, dan pola data.
+                    </li>
+                    <li>
+                        Korelasi mengukur hubungan statistik, bukan membuktikan
+                        sebab-akibat.
+                    </li>
+                    <li>
+                        Outlier perlu diselidiki berdasarkan konteks sebelum
+                        diputuskan untuk dipertahankan atau ditangani.
+                    </li>
+                    <li>
+                        Segmentasi dapat dilakukan dengan aturan maupun algoritma
+                        clustering.
+                    </li>
+                    <li>
+                        Hipotesis awal dari EDA perlu diperiksa dengan metode
+                        yang sesuai dan memperhatikan risiko pengujian berganda.
+                    </li>
+                    <li>
+                        Interpretasi harus didukung data, konteks, dan
+                        keterbatasan yang jelas.
+                    </li>
+                    <li>
+                        Laporan EDA merangkum metode, temuan utama, keterbatasan,
+                        dan rekomendasi analisis berikutnya.
+                    </li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Referensi</h2>
+                <ul>
+                    <li>
+                        <a href="https://pandas.pydata.org/docs/" target="_blank" rel="noopener noreferrer">
+                            Dokumentasi resmi Pandas
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://matplotlib.org/stable/" target="_blank" rel="noopener noreferrer">
+                            Dokumentasi resmi Matplotlib
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://seaborn.pydata.org/" target="_blank" rel="noopener noreferrer">
+                            Dokumentasi resmi Seaborn
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://scikit-learn.org/stable/" target="_blank" rel="noopener noreferrer">
+                            Dokumentasi resmi Scikit-learn
+                        </a>
+                    </li>
+                    <li>
+                        Tukey, J. W. (1977). <em>Exploratory Data Analysis</em>. Addison-Wesley.
+                    </li>
+                    <li>
+                        Bruce, P., Bruce, A., dan Gedeck, P. (2020).
+                        <em>Practical Statistics for Data Scientists</em>. Edisi ke-2. O'Reilly Media.
+                    </li>
+                </ul>
+            </section>
+        </article>
+    </main>
+
+    <footer>
+        ShadowLab — Belajar Tanpa Batas
+    </footer>
+</body>
+</html>

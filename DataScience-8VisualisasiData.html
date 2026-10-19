@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualisasi Data | Data Science</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+    MathJax = {
+        tex: {
+            inlineMath: [['\\(', '\\)']],
+            displayMath: [['\\[', '\\]']]
+        }
+    };
+    </script>
+    <script
+        id="MathJax-script"
+        async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+    </script>
+</head>
+<body>
+    <header class="navbar">
+        <a href="index.html" class="logo">ShadowLab</a>
+        <nav>
+            <a href="index.html">Beranda</a>
+            <a href="MateriDataScience.html">Materi Data Science</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <article class="article">
+            <p class="eyebrow">MATERI / DATA SCIENCE</p>
+            <h1>Bagian VIII — Visualisasi Data</h1>
+            <p class="intro">
+                Visualisasi data adalah proses menyajikan informasi dalam bentuk
+                grafik, diagram, peta, dan tampilan visual lainnya. Visualisasi
+                membantu kita memahami pola, membandingkan nilai, menemukan
+                anomali, serta mengomunikasikan hasil analisis secara lebih
+                efektif. Dalam Data Science, visualisasi digunakan mulai dari
+                eksplorasi data hingga penyajian hasil model dan pembangunan
+                dashboard interaktif.
+            </p>
+
+            <section>
+                <h2>Pengantar Visualisasi Data</h2>
+                <p>
+                    Data dalam bentuk tabel sering kali sulit dipahami ketika
+                    jumlah observasinya besar. Grafik dapat merangkum informasi
+                    sehingga pola tertentu lebih mudah terlihat.
+                </p>
+
+                <p>Beberapa tujuan visualisasi data adalah:</p>
+                <ul>
+                    <li>Membandingkan nilai antar kategori.</li>
+                    <li>Melihat perubahan variabel berdasarkan waktu.</li>
+                    <li>Memahami distribusi dan penyebaran data.</li>
+                    <li>Mengamati hubungan antara dua atau lebih variabel.</li>
+                    <li>Mendeteksi anomali dan kemungkinan kesalahan data.</li>
+                    <li>Menyampaikan hasil analisis kepada pengguna atau pengambil keputusan.</li>
+                </ul>
+
+                <p>
+                    Pemilihan grafik harus mengikuti pertanyaan analisis.
+                    Grafik yang menarik belum tentu efektif apabila tidak
+                    menunjukkan informasi yang dibutuhkan.
+                </p>
+
+                <h3>Menyiapkan dataset</h3>
+                <pre><code>import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+df = pd.read_csv("penjualan.csv")
+
+print(df.head())
+print(df.info())
+print(df.describe(include="all"))</code></pre>
+
+                <p>
+                    Sebagai contoh, kita menggunakan dataset penjualan yang
+                    memiliki kolom tanggal, kategori, kota, jumlah produk,
+                    dan total penjualan. Sesuaikan nama kolom dengan dataset
+                    yang digunakan.
+                </p>
+            </section>
+
+            <section>
+                <h2>1. Matplotlib</h2>
+                <p>
+                    <strong>Matplotlib</strong> adalah pustaka Python untuk
+                    membuat visualisasi statis, animasi, dan grafik interaktif
+                    dasar. Modul <code>matplotlib.pyplot</code> menyediakan
+                    fungsi yang umum digunakan untuk membuat dan mengatur grafik.
+                </p>
+
+                <h3>A. Grafik sederhana</h3>
+                <pre><code>import matplotlib.pyplot as plt
+
+x = [1, 2, 3, 4, 5]
+y = [10, 15, 13, 20, 25]
+
+plt.plot(x, y)
+plt.title("Contoh Grafik Garis")
+plt.xlabel("Waktu")
+plt.ylabel("Nilai")
+plt.show()</code></pre>
+
+                <p>Fungsi yang sering digunakan:</p>
+                <ul>
+                    <li><code>plot()</code>: membuat grafik garis.</li>
+                    <li><code>scatter()</code>: membuat scatter plot.</li>
+                    <li><code>bar()</code>: membuat diagram batang.</li>
+                    <li><code>hist()</code>: membuat histogram.</li>
+                    <li><code>title()</code>: memberikan judul grafik.</li>
+                    <li><code>xlabel()</code> dan <code>ylabel()</code>: memberi label sumbu.</li>
+                    <li><code>legend()</code>: menampilkan keterangan seri data.</li>
+                    <li><code>grid()</code>: menampilkan garis bantu.</li>
+                    <li><code>savefig()</code>: menyimpan grafik ke berkas.</li>
+                </ul>
+
+                <h3>B. Mengatur tampilan grafik</h3>
+                <pre><code>bulan = ["Jan", "Feb", "Mar", "Apr", "Mei"]
+penjualan = [120, 150, 135, 180, 210]
+
+plt.figure(figsize=(9, 5))
+plt.plot(
+    bulan,
+    penjualan,
+    marker="o",
+    linewidth=2,
+    label="Penjualan"
+)
+
+plt.title("Penjualan Bulanan")
+plt.xlabel("Bulan")
+plt.ylabel("Penjualan (juta rupiah)")
+plt.legend()
+plt.grid(alpha=0.3)
+plt.tight_layout()
+plt.show()</code></pre>
+
+                <p>
+                    Parameter <code>figsize</code> mengatur ukuran gambar,
+                    <code>marker</code> mengatur simbol pada titik data, dan
+                    <code>linewidth</code> mengatur ketebalan garis.
+                    <code>tight_layout()</code> membantu mencegah elemen grafik
+                    saling bertumpuk.
+                </p>
+
+                <h3>C. Menyimpan grafik</h3>
+                <pre><code>plt.figure(figsize=(8, 5))
+plt.plot(bulan, penjualan, marker="o")
+plt.title("Penjualan Bulanan")
+plt.tight_layout()
+
+plt.savefig(
+    "penjualan_bulanan.png",
+    dpi=300,
+    bbox_inches="tight"
+)
+
+plt.show()</code></pre>
+
+                <p>
+                    Gunakan resolusi yang sesuai dengan kebutuhan. Resolusi
+                    tinggi biasanya lebih bermanfaat untuk laporan atau dokumen
+                    cetak.
+                </p>
+            </section>
+
+            <section>
+                <h2>2. Seaborn</h2>
+                <p>
+                    <strong>Seaborn</strong> merupakan pustaka visualisasi
+                    statistik berbasis Matplotlib. Seaborn menyediakan antarmuka
+                    yang praktis untuk membuat grafik distribusi, hubungan
+                    antarvariabel, kategori, dan matriks korelasi.
+                </p>
+
+                <h3>A. Membuat grafik berdasarkan DataFrame</h3>
+                <pre><code>import seaborn as sns
+import matplotlib.pyplot as plt
+
+df = pd.DataFrame({
+    "kategori": ["A", "B", "A", "B", "A", "B"],
+    "penjualan": [120, 150, 135, 170, 145, 190]
+})
+
+sns.barplot(
+    data=df,
+    x="kategori",
+    y="penjualan"
+)
+
+plt.title("Rata-rata Penjualan per Kategori")
+plt.show()</code></pre>
+
+                <p>
+                    Ketika menggunakan <code>barplot()</code> dengan data
+                    observasi mentah, Seaborn secara default menghitung
+                    estimasi statistik, biasanya rata-rata, dan menampilkan
+                    interval ketidakpastian. Grafik ini berbeda dari grafik
+                    batang yang menampilkan jumlah total yang telah dihitung
+                    sebelumnya.
+                </p>
+
+                <h3>B. Mengubah tema</h3>
+                <pre><code>sns.set_theme(style="whitegrid")
+
+sns.histplot(
+    data=df,
+    x="penjualan",
+    kde=True
+)
+
+plt.title("Distribusi Penjualan")
+plt.show()</code></pre>
+
+                <p>
+                    Tema seperti <code>whitegrid</code>, <code>darkgrid</code>,
+                    dan <code>ticks</code> membantu mengatur tampilan awal.
+                    Gunakan tema yang membuat data mudah dibaca dan tidak
+                    mengalihkan perhatian.
+                </p>
+
+                <h3>C. Memanfaatkan hue</h3>
+                <pre><code>sns.scatterplot(
+    data=df,
+    x="penjualan",
+    y="penjualan",
+    hue="kategori"
+)
+
+plt.show()</code></pre>
+
+                <p>
+                    Parameter <code>hue</code> digunakan untuk membedakan
+                    kelompok melalui warna. Pada analisis nyata, pilih variabel
+                    sumbu yang berbeda dan relevan, misalnya jumlah produk
+                    pada sumbu horizontal dan total penjualan pada sumbu vertikal.
+                </p>
+
+                <p>
+                    Seaborn cocok untuk eksplorasi data statistik, sedangkan
+                    Matplotlib memberi kendali lebih rinci terhadap elemen
+                    grafik. Keduanya dapat digunakan bersamaan.
+                </p>
+            </section>
+
+            <section>
+                <h2>3. Grafik Garis dan Batang</h2>
+
+                <h3>A. Grafik garis (line chart)</h3>
+                <p>
+                    Grafik garis digunakan untuk menampilkan perubahan nilai
+                    sepanjang urutan tertentu, terutama waktu. Titik data
+                    dihubungkan oleh garis untuk membantu melihat tren,
+                    fluktuasi, dan perubahan.
+                </p>
+
+                <pre><code>bulan = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun"]
+penjualan = [100, 120, 115, 150, 170, 200]
+
+plt.figure(figsize=(9, 5))
+plt.plot(
+    bulan,
+    penjualan,
+    marker="o",
+    color="royalblue"
+)
+
+plt.title("Tren Penjualan")
+plt.xlabel("Bulan")
+plt.ylabel("Penjualan")
+plt.tight_layout()
+plt.show()</code></pre>
+
+                <p>
+                    Grafik garis tepat digunakan ketika urutan titik memiliki
+                    makna, misalnya urutan waktu. Menghubungkan kategori yang
+                    tidak memiliki urutan alami dapat menimbulkan kesan
+                    kontinuitas yang tidak tepat.
+                </p>
+
+                <h3>B. Grafik garis dengan beberapa seri</h3>
+                <pre><code>bulan = ["Jan", "Feb", "Mar", "Apr"]
+produk_a = [100, 120, 140, 160]
+produk_b = [90, 110, 105, 150]
+
+plt.figure(figsize=(9, 5))
+
+plt.plot(bulan, produk_a, marker="o", label="Produk A")
+plt.plot(bulan, produk_b, marker="s", label="Produk B")
+
+plt.title("Perbandingan Penjualan Produk")
+plt.xlabel("Bulan")
+plt.ylabel("Penjualan")
+plt.legend()
+plt.tight_layout()
+plt.show()</code></pre>
+
+                <h3>C. Diagram batang (bar chart)</h3>
+                <p>
+                    Diagram batang digunakan untuk membandingkan nilai antar
+                    kategori. Panjang batang menunjukkan besarnya nilai.
+                </p>
+
+                <pre><code>kategori = ["Laptop", "Ponsel", "Tablet", "Aksesori"]
+jumlah = [80, 120, 65, 150]
+
+plt.figure(figsize=(9, 5))
+plt.bar(kategori, jumlah)
+
+plt.title("Jumlah Produk Terjual")
+plt.xlabel("Kategori")
+plt.ylabel("Jumlah Terjual")
+plt.tight_layout()
+plt.show()</code></pre>
+
+                <h3>D. Diagram batang horizontal</h3>
+                <pre><code>kategori = ["Laptop", "Ponsel", "Tablet", "Aksesori"]
+jumlah = [80, 120, 65, 150]
+
+plt.figure(figsize=(8, 5))
+plt.barh(kategori, jumlah)
+
+plt.title("Jumlah Produk Terjual")
+plt.xlabel("Jumlah Terjual")
+plt.ylabel("Kategori")
+plt.tight_layout()
+plt.show()</code></pre>
+
+                <p>
+                    Diagram horizontal bermanfaat jika nama kategori panjang.
+                    Untuk grafik batang biasa, sumbu nilai umumnya dimulai dari
+                    nol agar panjang batang tidak menyesatkan.
+                </p>
+
+                <h3>E. Grafik batang bertumpuk</h3>
+                <pre><code>kategori = ["Laptop", "Ponsel", "Tablet"]
+online = [50, 80, 40]
+offline = [30, 40, 25]
+
+plt.figure(figsize=(8, 5))
+
+plt.bar(kategori, online, label="Online")
+plt.bar(
+    kategori,
+    offline,
+    bottom=online,
+    label="Offline"
+)
+
+plt.title("Penjualan Berdasarkan Kanal")
+plt.xlabel("Kategori")
+plt.ylabel("Jumlah")
+plt.legend()
+plt.tight_layout()
+plt.show()</code></pre>
+
+                <p>
+                    Grafik bertumpuk menunjukkan komposisi total. Jika tujuan
+                    utama adalah membandingkan setiap kelompok secara langsung,
+                    grafik batang berkelompok bisa lebih mudah dibaca.
+                </p>
+            </section>
+
+            <section>
+                <h2>4. Histogram dan Density Plot</h2>
+                <p>
+                    Histogram dan density plot digunakan untuk memahami
+                    distribusi variabel numerik. Keduanya dapat menunjukkan
+                    konsentrasi data, kemencengan, dan kemungkinan beberapa
+                    puncak distribusi.
+                </p>
+
+                <h3>A. Histogram</h3>
+                <p>
+                    Histogram membagi rentang nilai menjadi interval atau
+                    <em>bin</em>. Tinggi batang menunjukkan jumlah atau proporsi
+                    observasi dalam setiap interval, bergantung pada pengaturan
+                    histogram.
+                </p>
+
+                <pre><code>np.random.seed(42)
+nilai = np.random.normal(loc=70, scale=10, size=500)
+
+plt.figure(figsize=(8, 5))
+plt.hist(
+    nilai,
+    bins=20,
+    edgecolor="black"
+)
+
+plt.title("Distribusi Nilai Ujian")
+plt.xlabel("Nilai")
+plt.ylabel("Frekuensi")
+plt.tight_layout()
+plt.show()</code></pre>
+
+                <p>
+                    Pemilihan jumlah bin memengaruhi bentuk histogram.
+                    Terlalu sedikit bin dapat menyembunyikan pola, sedangkan
+                    terlalu banyak bin dapat membuat grafik tampak berisik.
+                </p>
+
+                <h3>B. Density plot</h3>
+                <p>
+                    Density plot memperkirakan kepadatan probabilitas suatu
+                    distribusi. Berbeda dari histogram frekuensi, sumbu
+                    vertikalnya menyatakan kepadatan. Luas total di bawah
+                    kurva kepadatan adalah 1.
+                </p>
+
+                \[
+                \int_{-\infty}^{\infty} f(x)\,dx=1
+                \]
+
+                <pre><code>plt.figure(figsize=(8, 5))
+
+sns.kdeplot(
+    data=df,
+    x="penjualan",
+    fill=True
+)
+
+plt.title("Kepadatan Distribusi Penjualan")
+plt.xlabel("Penjualan")
+plt.ylabel("Kepadatan")
+plt.tight_layout()
+plt.show()</code></pre>
+
+                <p>
+                    KDE atau <em>Kernel Density Estimation</em> memperkirakan
+                    bentuk distribusi secara halus. Bentuk kurva dipengaruhi
+                    oleh bandwidth. Kurva yang terlalu halus dapat menyembunyikan
+                    pola, sedangkan kurva yang terlalu bergelombang dapat
+                    menonjolkan variasi acak.
+                </p>
+
+                <h3>C. Histogram dan density plot sekaligus</h3>
+                <pre><code>plt.figure(figsize=(8, 5))
+
+sns.histplot(
+    data=df,
+    x="penjualan",
+    bins=20,
+    stat="density",
+    kde=True
+)
+
+plt.title("Histogram dan Kurva Kepadatan")
+plt.tight_layout()
+plt.show()</code></pre>
+
+                <p>
+                    Penggunaan <code>stat="density"</code> menyamakan skala
+                    histogram dengan kepadatan sehingga kurva KDE dapat
+                    dibandingkan secara lebih tepat.
+                </p>
+            </section>
+
+            <section>
+                <h2>5. Scatter Plot dan Bubble Chart</h2>
+
+                <h3>A. Scatter plot</h3>
+                <p>
+                    Scatter plot menampilkan hubungan dua variabel numerik.
+                    Sumbu horizontal mewakili variabel \(x\), sedangkan sumbu
+                    vertikal mewakili variabel \(y\). Setiap titik mewakili
+                    satu observasi.
+                </p>
+
+                <pre><code>np.random.seed(42)
+
+luas = np.random.uniform(30, 200, 100)
+harga = 100 + 5 * luas + np.random.normal(0, 100, 100)
+
+plt.figure(figsize=(8, 5))
+plt.scatter(luas, harga, alpha=0.7)
+
+plt.title("Hubungan Luas dan Harga Rumah")
+plt.xlabel("Luas Rumah (m²)")
+plt.ylabel("Harga (juta rupiah)")
+plt.tight_layout()
+plt.show()</code></pre>
+
+                <p>
+                    Scatter plot dapat digunakan untuk mengidentifikasi:
+                </p>
+                <ul>
+                    <li>Hubungan positif atau negatif.</li>
+                    <li>Hubungan linear atau nonlinier.</li>
+                    <li>Kelompok observasi.</li>
+                    <li>Variasi data dan kandidat outlier.</li>
+                </ul>
+
+                <h3>B. Menambahkan garis tren</h3>
+                <pre><code>sns.regplot(
+    data=df,
+    x="luas",
+    y="harga",
+    scatter_kws={"alpha": 0.6},
+    line_kws={"color": "red"}
+)
+
+plt.title("Luas dan Harga Rumah dengan Garis Tren")
+plt.tight_layout()
+plt.show()</code></pre>
+
+                <p>
+                    Garis regresi linear merangkum tren linear dalam data.
+                    Garis tersebut tidak otomatis membuktikan hubungan sebab-akibat
+                    dan dapat kurang sesuai jika pola sebenarnya nonlinier.
+                </p>
+
+                <h3>C. Bubble chart</h3>
+                <p>
+                    Bubble chart merupakan scatter plot yang menggunakan ukuran
+                    titik untuk mewakili variabel ketiga. Warna dapat digunakan
+                    untuk menunjukkan kelompok atau variabel tambahan.
+                </p>
+
+                <pre><code>data_bubble = pd.DataFrame({
+    "iklan": [10, 20, 30, 40, 50],
+    "penjualan": [100, 150, 180, 240, 300],
+    "pelanggan": [20, 35, 30, 50, 70]
+})
+
+plt.figure(figsize=(8, 5))
+
+plt.scatter(
+    data_bubble["iklan"],
+    data_bubble["penjualan"],
+    s=data_bubble["pelanggan"] * 10,
+    alpha=0.6
+)
+
+plt.title("Biaya Iklan, Penjualan, dan Pelanggan")
+plt.xlabel("Biaya Iklan")
+plt.ylabel("Penjualan")
+plt.tight_layout()
+plt.show()</code></pre>
+
+                <p>
+                    Pada contoh tersebut, posisi titik menunjukkan biaya iklan
+                    dan penjualan, sedangkan ukuran lingkaran menunjukkan jumlah
+                    pelanggan. Ukuran yang digunakan pada parameter
+                    <code>s</code> menyatakan luas marker dalam satuan
+                    visualisasi Matplotlib.
+                </p>
+
+                <p>
+                    Bubble chart sebaiknya tidak menggunakan terlalu banyak
+                    variabel visual sekaligus. Perbedaan luas lingkaran juga
+                    lebih sulit dipersepsikan daripada perbedaan posisi sehingga
+                    skala ukuran perlu dipilih dengan hati-hati.
+                </p>
+            </section>
+
+            <section>
+                <h2>6. Boxplot dan Violin Plot</h2>
+
+                <h3>A. Boxplot</h3>
+                <p>
+                    Boxplot merangkum distribusi data menggunakan kuartil,
+                    median, dan whisker. Pada pengaturan umum Seaborn, whisker
+                    mencapai nilai terjauh yang masih berada dalam rentang
+                    \(1.5 \times IQR\) dari kuartil pertama dan ketiga.
+                    Titik di luar whisker ditampilkan sebagai kandidat outlier.
+                </p>
+
+                \[
+                IQR=Q_3-Q_1
+                \]
+
+                <pre><code>plt.figure(figsize=(8, 5))
+
+sns.boxplot(
+    data=df,
+    x="kategori",
+    y="penjualan"
+)
+
+plt.title("Distribusi Penjualan per Kategori")
+plt.tight_layout()
+plt.show()</code></pre>
+
+                <p>Boxplot membantu membandingkan:</p>
+                <ul>
+                    <li>Median setiap kelompok.</li>
+                    <li>Rentang antarkuartil.</li>
+                    <li>Penyebaran dan kemencengan distribusi.</li>
+                    <li>Observasi yang jauh dari sebagian besar data.</li>
+                </ul>
+
+                <h3>B. Violin plot</h3>
+                <p>
+                    Violin plot menggabungkan informasi kepadatan distribusi
+                    dengan ringkasan seperti median dan kuartil. Lebar bentuk
+                    pada suatu nilai menunjukkan perkiraan kepadatan data
+                    di sekitar nilai tersebut.
+                </p>
+
+                <pre><code>plt.figure(figsize=(8, 5))
+
+sns.violinplot(
+    data=df,
+    x="kategori",
+    y="penjualan",
+    inner="quartile",
+    cut=0
+)
+
+plt.title("Distribusi Penjualan per Kategori")
+plt.tight_layout()
+plt.show()</code></pre>
+
+                <h3>C. Memilih boxplot atau violin plot</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Aspek</th>
+                            <th>Boxplot</th>
+                            <th>Violin plot</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Fokus</td>
+                            <td>Median, kuartil, dan penyebaran</td>
+                            <td>Bentuk dan kepadatan distribusi</td>
+                        </tr>
+                        <tr>
+                            <td>Kelebihan</td>
+                            <td>Ringkas dan mudah dibandingkan</td>
+                            <td>Memperlihatkan kemungkinan beberapa puncak</td>
+                        </tr>
+                        <tr>
+                            <td>Keterbatasan</td>
+                            <td>Tidak menunjukkan bentuk distribusi secara rinci</td>
+                            <td>Bentuk kepadatan bergantung pada estimasi KDE</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p>
+                    Jika jumlah data kecil, violin plot dapat memberikan kesan
+                    bentuk distribusi yang lebih pasti daripada yang didukung
+                    oleh data. Gunakan grafik dengan memperhatikan ukuran sampel.
+                </p>
+            </section>
+
+            <section>
+                <h2>7. Heatmap dan Correlation Matrix</h2>
+
+                <h3>A. Correlation matrix</h3>
+                <p>
+                    Matriks korelasi merangkum korelasi antara setiap pasangan
+                    variabel numerik. Untuk korelasi Pearson, nilai berada pada
+                    rentang \(-1\) sampai \(1\).
+                </p>
+
+                \[
+                -1 \leq r_{ij} \leq 1
+                \]
+
+                <p>
+                    Nilai positif menunjukkan hubungan linear positif, nilai
+                    negatif menunjukkan hubungan linear negatif, dan nilai
+                    mendekati nol menunjukkan hubungan linear yang lemah.
+                </p>
+
+                <pre><code>fitur_numerik = df.select_dtypes(include="number")
+
+corr = fitur_numerik.corr(method="pearson")
+
+print(corr)</code></pre>
+
+                <h3>B. Heatmap korelasi</h3>
+                <pre><code>plt.figure(figsize=(10, 7))
+
+sns.heatmap(
+    corr,
+    annot=True,
+    cmap="coolwarm",
+    fmt=".2f",
+    vmin=-1,
+    vmax=1,
+    center=0
+)
+
+plt.title("Correlation Matrix")
+plt.tight_layout()
+plt.show()</code></pre>
+
+                <p>
+                    Heatmap menggunakan warna untuk memperlihatkan besar dan
+                    arah korelasi. Penggunaan skala warna yang konsisten,
+                    misalnya dari \(-1\) sampai \(1\), memudahkan perbandingan
+                    antar pasangan variabel.
+                </p>
+
+                <h3>C. Korelasi tidak sama dengan sebab-akibat</h3>
+                <p>
+                    Jika dua variabel memiliki korelasi tinggi, kita tidak
+                    dapat langsung menyimpulkan bahwa salah satunya menyebabkan
+                    perubahan pada variabel lain. Hubungan tersebut dapat
+                    dipengaruhi variabel ketiga, struktur data, atau cara
+                    pengambilan sampel.
+                </p>
+
+                <p>
+                    Korelasi Pearson juga terutama mengukur hubungan linear.
+                    Untuk hubungan monotonik yang tidak harus linear, korelasi
+                    Spearman dapat menjadi alternatif.
+                </p>
+
+                <pre><code>corr_spearman = fitur_numerik.corr(method="spearman")
+
+plt.figure(figsize=(10, 7))
+sns.heatmap(
+    corr_spearman,
+    annot=True,
+    cmap="coolwarm",
+    fmt=".2f",
+    vmin=-1,
+    vmax=1,
+    center=0
+)
+
+plt.title("Correlation Matrix Spearman")
+plt.tight_layout()
+plt.show()</code></pre>
+            </section>
+
+            <section>
+                <h2>8. Visualisasi Multivariabel</h2>
+                <p>
+                    Visualisasi multivariabel menyajikan informasi dari tiga
+                    variabel atau lebih secara bersamaan. Selain posisi pada
+                    sumbu \(x\) dan \(y\), variabel tambahan dapat diwakili
+                    melalui warna, ukuran, bentuk, panel, atau facet.
+                </p>
+
+                <h3>A. Scatter plot dengan warna dan bentuk</h3>
+                <pre><code>sns.scatterplot(
+    data=df,
+    x="jumlah_produk",
+    y="total_penjualan",
+    hue="kategori",
+    style="kota",
+    size="diskon",
+    sizes=(30, 200),
+    alpha=0.7
+)
+
+plt.title("Analisis Penjualan Multivariabel")
+plt.tight_layout()
+plt.show()</code></pre>
+
+                <p>
+                    Grafik ini menunjukkan jumlah produk, total penjualan,
+                    kategori, kota, dan diskon dalam satu tampilan. Namun,
+                    semakin banyak variabel visual yang digunakan, semakin
+                    besar risiko grafik sulit dipahami.
+                </p>
+
+                <h3>B. Pair plot</h3>
+                <p>
+                    Pair plot menampilkan scatter plot untuk pasangan fitur
+                    numerik serta distribusi setiap fitur pada diagonal.
+                </p>
+
+                <pre><code>fitur = [
+    "usia",
+    "pendapatan",
+    "jumlah_transaksi",
+    "total_pengeluaran"
+]
+
+sns.pairplot(
+    df[fitur].dropna(),
+    diag_kind="hist"
+)
+
+plt.show()</code></pre>
+
+                <p>
+                    Pair plot cocok untuk eksplorasi beberapa fitur numerik.
+                    Untuk dataset dengan banyak fitur, pilih fitur yang relevan
+                    agar hasilnya tidak terlalu padat.
+                </p>
+
+                <h3>C. Facet grid</h3>
+                <p>
+                    Facet grid membagi data menjadi beberapa panel berdasarkan
+                    kategori. Metode ini berguna untuk membandingkan pola
+                    pada kelompok berbeda dengan sumbu yang serupa.
+                </p>
+
+                <pre><code>g = sns.relplot(
+    data=df,
+    x="jumlah_produk",
+    y="total_penjualan",
+    col="kota",
+    hue="kategori",
+    kind="scatter",
+    height=4,
+    aspect=1
+)
+
+g.set_axis_labels("Jumlah Produk", "Total Penjualan")
+g.set_titles("Kota: {col_name}")
+
+plt.show()</code></pre>
+
+                <h3>D. Memilih teknik multivariabel</h3>
+                <ul>
+                    <li>Gunakan warna untuk membedakan kelompok atau kategori.</li>
+                    <li>Gunakan ukuran untuk variabel numerik tambahan yang penting.</li>
+                    <li>Gunakan panel terpisah jika kelompok sulit dibandingkan dalam satu grafik.</li>
+                    <li>Gunakan heatmap untuk matriks hubungan atau data berbentuk tabel.</li>
+                    <li>Gunakan pair plot untuk eksplorasi awal beberapa fitur numerik.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>9. Prinsip Desain Visualisasi</h2>
+                <p>
+                    Visualisasi yang baik tidak hanya benar secara teknis,
+                    tetapi juga mudah dibaca, akurat, dan sesuai dengan
+                    kebutuhan audiens.
+                </p>
+
+                <h3>A. Pilih grafik berdasarkan tujuan</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tujuan</th>
+                            <th>Grafik yang dapat digunakan</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Membandingkan kategori</td>
+                            <td>Diagram batang</td>
+                        </tr>
+                        <tr>
+                            <td>Melihat tren waktu</td>
+                            <td>Grafik garis</td>
+                        </tr>
+                        <tr>
+                            <td>Memahami distribusi</td>
+                            <td>Histogram atau density plot</td>
+                        </tr>
+                        <tr>
+                            <td>Melihat hubungan dua variabel numerik</td>
+                            <td>Scatter plot</td>
+                        </tr>
+                        <tr>
+                            <td>Membandingkan distribusi antar kelompok</td>
+                            <td>Boxplot atau violin plot</td>
+                        </tr>
+                        <tr>
+                            <td>Melihat korelasi banyak variabel</td>
+                            <td>Heatmap</td>
+                        </tr>
+                        <tr>
+                            <td>Menyajikan indikator dan ringkasan interaktif</td>
+                            <td>Dashboard</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>B. Beri judul dan label yang jelas</h3>
+                <p>
+                    Judul sebaiknya menjelaskan isi atau pesan utama grafik.
+                    Label sumbu harus mencantumkan nama variabel dan satuannya
+                    jika tersedia. Hindari judul yang terlalu umum seperti
+                    "Grafik 1" atau "Hasil Analisis".
+                </p>
+
+                <h3>C. Gunakan warna secara konsisten</h3>
+                <ul>
+                    <li>Gunakan warna yang mudah dibedakan.</li>
+                    <li>Pastikan kontras antara data dan latar belakang memadai.</li>
+                    <li>Pertimbangkan pengguna dengan gangguan persepsi warna.</li>
+                    <li>Gunakan warna yang sama untuk kategori yang sama pada beberapa grafik.</li>
+                    <li>Jangan mengandalkan warna saja untuk menyampaikan informasi penting.</li>
+                </ul>
+
+                <h3>D. Hindari distorsi visual</h3>
+                <ul>
+                    <li>Hindari efek tiga dimensi yang tidak menambah informasi.</li>
+                    <li>Jangan memotong sumbu secara menyesatkan.</li>
+                    <li>Jangan menggunakan ukuran simbol yang tidak sesuai dengan data.</li>
+                    <li>Jangan menampilkan terlalu banyak kategori dalam satu grafik.</li>
+                    <li>Jangan menggabungkan terlalu banyak skala yang sulit dibandingkan.</li>
+                </ul>
+
+                <h3>E. Perhatikan konteks statistik</h3>
+                <p>
+                    Visualisasi perlu mempertimbangkan ukuran sampel,
+                    ketidakpastian, data kosong, dan metode agregasi. Rata-rata
+                    dapat menyembunyikan perbedaan antarindividu, sedangkan
+                    jumlah total dapat dipengaruhi oleh perbedaan ukuran kelompok.
+                </p>
+
+                <h3>F. Contoh grafik dengan desain yang rapi</h3>
+                <pre><code>sns.set_theme(style="whitegrid")
+
+fig, ax = plt.subplots(figsize=(9, 5))
+
+sns.barplot(
+    data=df,
+    x="kategori",
+    y="total_penjualan",
+    errorbar=None,
+    ax=ax
+)
+
+ax.set_title(
+    "Rata-rata Penjualan Berdasarkan Kategori",
+    fontsize=14
+)
+ax.set_xlabel("Kategori Produk")
+ax.set_ylabel("Rata-rata Penjualan")
+ax.tick_params(axis="x", rotation=25)
+
+fig.tight_layout()
+plt.show()</code></pre>
+
+                <p>
+                    Pada contoh ini, <code>errorbar=None</code> menyembunyikan
+                    interval ketidakpastian. Gunakan opsi tersebut hanya jika
+                    memang ingin menampilkan ringkasan tanpa interval; untuk
+                    analisis statistik, interval ketidakpastian dapat menjadi
+                    informasi penting.
+                </p>
+            </section>
+
+            <section>
+                <h2>10. Dashboard Interaktif dengan Plotly atau Streamlit</h2>
+                <p>
+                    Dashboard adalah tampilan yang menggabungkan beberapa
+                    visualisasi dan indikator untuk membantu pengguna memahami
+                    data. Dashboard interaktif memungkinkan pengguna memilih
+                    rentang waktu, kategori, wilayah, atau filter lain untuk
+                    mengeksplorasi informasi.
+                </p>
+
+                <h3>A. Plotly Express</h3>
+                <p>
+                    Plotly Express menyediakan cara ringkas untuk membuat
+                    grafik interaktif. Grafik yang dihasilkan umumnya mendukung
+                    hover, zoom, dan interaksi lainnya.
+                </p>
+
+                <pre><code>import pandas as pd
+import plotly.express as px
+
+df = pd.read_csv("penjualan.csv")
+
+fig = px.line(
+    df,
+    x="tanggal",
+    y="total_penjualan",
+    color="kategori",
+    title="Tren Penjualan Berdasarkan Kategori",
+    markers=True
+)
+
+fig.update_layout(
+    xaxis_title="Tanggal",
+    yaxis_title="Total Penjualan",
+    template="plotly_white"
+)
+
+fig.show()</code></pre>
+
+                <h3>B. Scatter plot interaktif</h3>
+                <pre><code>fig = px.scatter(
+    df,
+    x="jumlah_produk",
+    y="total_penjualan",
+    color="kategori",
+    size="diskon",
+    hover_data=["kota"],
+    title="Analisis Penjualan Interaktif"
+)
+
+fig.show()</code></pre>
+
+                <p>
+                    Kolom yang dipakai pada parameter <code>size</code> sebaiknya
+                    berisi nilai numerik yang sesuai. Periksa nilai kosong,
+                    nilai negatif, dan skala variabel sebelum membuat bubble
+                    chart.
+                </p>
+
+                <h3>C. Membuat dashboard dengan Streamlit</h3>
+                <p>
+                    Streamlit adalah framework Python untuk membangun aplikasi
+                    data interaktif. Kita dapat menggabungkan filter, metrik,
+                    tabel, dan grafik tanpa harus membangun antarmuka web dari
+                    awal.
+                </p>
+
+                <p>
+                    Instal pustaka yang diperlukan melalui terminal:
+                </p>
+                <pre><code>pip install streamlit pandas plotly</code></pre>
+
+                <h3>D. Contoh aplikasi dashboard</h3>
+                <p>
+                    Buat file bernama <code>app.py</code> dengan kode berikut.
+                    Dataset <code>penjualan.csv</code> diasumsikan memiliki
+                    kolom <code>tanggal</code>, <code>kategori</code>,
+                    <code>kota</code>, dan <code>total_penjualan</code>.
+                </p>
+
+                <pre><code>import streamlit as st
+import pandas as pd
+import plotly.express as px
+
+st.set_page_config(
+    page_title="Dashboard Penjualan",
+    page_icon="📊",
+    layout="wide"
+)
+
+st.title("Dashboard Analisis Penjualan")
+st.write(
+    "Eksplorasi penjualan berdasarkan kategori, "
+    "wilayah, dan waktu."
+)
+
+@st.cache_data
+def load_data():
+    data = pd.read_csv("penjualan.csv")
+    data["tanggal"] = pd.to_datetime(
+        data["tanggal"],
+        errors="coerce"
+    )
+    data["total_penjualan"] = pd.to_numeric(
+        data["total_penjualan"],
+        errors="coerce"
+    )
+    return data
+
+df = load_data()
+
+df = df.dropna(
+    subset=["tanggal", "total_penjualan"]
+).copy()
+
+if df.empty:
+    st.warning("Dataset tidak memiliki baris valid.")
+    st.stop()
+
+kategori_opsi = sorted(
+    df["kategori"].dropna().unique().tolist()
+)
+kota_opsi = sorted(
+    df["kota"].dropna().unique().tolist()
+)
+
+st.sidebar.header("Filter Data")
+
+kategori_pilih = st.sidebar.multiselect(
+    "Pilih kategori",
+    options=kategori_opsi,
+    default=kategori_opsi
+)
+
+kota_pilih = st.sidebar.multiselect(
+    "Pilih kota",
+    options=kota_opsi,
+    default=kota_opsi
+)
+
+data_filter = df[
+    df["kategori"].isin(kategori_pilih)
+    & df["kota"].isin(kota_pilih)
+].copy()
+
+if data_filter.empty:
+    st.info("Tidak ada data untuk filter yang dipilih.")
+    st.stop()
+
+total_penjualan = data_filter["total_penjualan"].sum()
+rata_rata = data_filter["total_penjualan"].mean()
+jumlah_transaksi = len(data_filter)
+
+kolom1, kolom2, kolom3 = st.columns(3)
+
+kolom1.metric(
+    "Total Penjualan",
+    f"{total_penjualan:,.0f}"
+)
+
+kolom2.metric(
+    "Rata-rata Transaksi",
+    f"{rata_rata:,.0f}"
+)
+
+kolom3.metric(
+    "Jumlah Observasi",
+    f"{jumlah_transaksi:,}"
+)
+
+data_waktu = (
+    data_filter
+    .groupby(
+        [
+            pd.Grouper(key="tanggal", freq="ME"),
+            "kategori"
+        ],
+        as_index=False
+    )["total_penjualan"]
+    .sum()
+)
+
+fig_garis = px.line(
+    data_waktu,
+    x="tanggal",
+    y="total_penjualan",
+    color="kategori",
+    markers=True,
+    title="Tren Penjualan Bulanan"
+)
+
+st.plotly_chart(
+    fig_garis,
+    use_container_width=True
+)
+
+data_kategori = (
+    data_filter
+    .groupby("kategori", as_index=False)
+    ["total_penjualan"]
+    .sum()
+    .sort_values("total_penjualan", ascending=False)
+)
+
+fig_batang = px.bar(
+    data_kategori,
+    x="kategori",
+    y="total_penjualan",
+    title="Total Penjualan per Kategori"
+)
+
+st.plotly_chart(
+    fig_batang,
+    use_container_width=True
+)
+
+st.subheader("Data yang Telah Difilter")
+st.dataframe(data_filter, use_container_width=True)
+
+csv = data_filter.to_csv(index=False).encode("utf-8")
+
+st.download_button(
+    label="Unduh Data Hasil Filter",
+    data=csv,
+    file_name="penjualan_terfilter.csv",
+    mime="text/csv"
+)</code></pre>
+
+                <h3>E. Menjalankan dashboard</h3>
+                <p>
+                    Buka terminal pada folder yang berisi
+                    <code>app.py</code> dan <code>penjualan.csv</code>, lalu
+                    jalankan:
+                </p>
+
+                <pre><code>streamlit run app.py</code></pre>
+
+                <p>
+                    Streamlit akan menjalankan aplikasi lokal dan menampilkan
+                    alamat yang dapat dibuka di browser. Jika kolom dataset
+                    berbeda, sesuaikan nama kolom pada kode sebelum menjalankan.
+                </p>
+
+                <h3>F. Plotly atau Streamlit?</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Aspek</th>
+                            <th>Plotly</th>
+                            <th>Streamlit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Fungsi utama</td>
+                            <td>Membuat grafik interaktif</td>
+                            <td>Membangun aplikasi data interaktif</td>
+                        </tr>
+                        <tr>
+                            <td>Interaksi</td>
+                            <td>Hover, zoom, seleksi, dan fitur grafik</td>
+                            <td>Filter, input, tombol, tabel, dan grafik</td>
+                        </tr>
+                        <tr>
+                            <td>Penggunaan</td>
+                            <td>Visualisasi mandiri atau tertanam dalam aplikasi</td>
+                            <td>Dashboard dan prototipe aplikasi analitik</td>
+                        </tr>
+                        <tr>
+                            <td>Hubungan</td>
+                            <td>Dapat digunakan di dalam Streamlit</td>
+                            <td>Dapat menampilkan grafik Plotly</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section>
+                <h2>Proyek Mini: Dashboard Penjualan Interaktif</h2>
+                <p>
+                    Bangun dashboard untuk menganalisis penjualan berdasarkan
+                    waktu, kategori produk, dan wilayah.
+                </p>
+
+                <h3>Tujuan proyek</h3>
+                <ul>
+                    <li>Menampilkan total penjualan dan jumlah observasi.</li>
+                    <li>Membandingkan total penjualan antar kategori.</li>
+                    <li>Menampilkan tren penjualan berdasarkan waktu.</li>
+                    <li>Memungkinkan pengguna memilih kota dan kategori.</li>
+                    <li>Menyediakan tabel data hasil filter.</li>
+                </ul>
+
+                <h3>Alur pengerjaan</h3>
+                <ol>
+                    <li>Siapkan dataset dan periksa nama serta tipe kolom.</li>
+                    <li>Bersihkan nilai tanggal dan penjualan yang tidak valid.</li>
+                    <li>Buat ringkasan statistik menggunakan Pandas.</li>
+                    <li>Buat grafik garis dan batang menggunakan Plotly.</li>
+                    <li>Tambahkan filter interaktif dengan Streamlit.</li>
+                    <li>Tambahkan indikator utama dan tabel hasil filter.</li>
+                    <li>Uji dashboard dengan berbagai kombinasi filter.</li>
+                    <li>Periksa apakah angka pada metrik konsisten dengan tabel dan grafik.</li>
+                </ol>
+
+                <p>
+                    Dashboard yang baik harus memberikan hasil yang konsisten.
+                    Jika pengguna mengubah filter, semua metrik dan grafik yang
+                    terkait perlu mengikuti pilihan tersebut.
+                </p>
+            </section>
+
+            <section>
+                <h2>Latihan Mandiri</h2>
+                <ol>
+                    <li>
+                        Jelaskan perbedaan Matplotlib dan Seaborn serta kondisi
+                        yang cocok untuk menggunakan masing-masing pustaka.
+                    </li>
+                    <li>
+                        Jenis grafik apa yang paling sesuai untuk menampilkan
+                        perubahan penjualan bulanan? Jelaskan alasannya.
+                    </li>
+                    <li>
+                        Buat diagram batang yang membandingkan jumlah produk
+                        terjual pada lima kategori.
+                    </li>
+                    <li>
+                        Apa perbedaan histogram dan density plot?
+                    </li>
+                    <li>
+                        Buat scatter plot untuk mengamati hubungan antara biaya
+                        iklan dan penjualan.
+                    </li>
+                    <li>
+                        Jelaskan bagaimana bubble chart menampilkan variabel
+                        ketiga dan apa kelemahannya.
+                    </li>
+                    <li>
+                        Apa perbedaan informasi yang disajikan boxplot dan
+                        violin plot?
+                    </li>
+                    <li>
+                        Buat heatmap korelasi untuk semua fitur numerik pada
+                        dataset yang dipilih.
+                    </li>
+                    <li>
+                        Sebutkan tiga prinsip desain yang dapat mencegah
+                        visualisasi menjadi menyesatkan.
+                    </li>
+                    <li>
+                        Buat dashboard Streamlit dengan minimal dua filter,
+                        tiga metrik, dua grafik, dan satu tabel.
+                    </li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>Ringkasan</h2>
+                <ul>
+                    <li>
+                        Visualisasi data membantu memahami pola dan
+                        mengomunikasikan hasil analisis.
+                    </li>
+                    <li>
+                        Matplotlib menyediakan kontrol yang fleksibel terhadap
+                        elemen grafik, sedangkan Seaborn memudahkan visualisasi
+                        statistik.
+                    </li>
+                    <li>
+                        Grafik garis sesuai untuk tren berurutan, sedangkan
+                        diagram batang sesuai untuk perbandingan kategori.
+                    </li>
+                    <li>
+                        Histogram dan density plot digunakan untuk memahami
+                        distribusi data numerik.
+                    </li>
+                    <li>
+                        Scatter plot dan bubble chart menampilkan hubungan
+                        antarvariabel numerik.
+                    </li>
+                    <li>
+                        Boxplot dan violin plot membantu membandingkan distribusi
+                        antar kelompok.
+                    </li>
+                    <li>
+                        Heatmap dapat menyajikan matriks korelasi secara ringkas,
+                        tetapi korelasi tidak membuktikan sebab-akibat.
+                    </li>
+                    <li>
+                        Visualisasi multivariabel menggunakan posisi, warna,
+                        ukuran, bentuk, atau panel untuk menyajikan informasi
+                        tambahan.
+                    </li>
+                    <li>
+                        Desain visualisasi harus jelas, akurat, konsisten, dan
+                        tidak menyesatkan.
+                    </li>
+                    <li>
+                        Plotly menyediakan grafik interaktif, sedangkan
+                        Streamlit membantu membangun dashboard berbasis Python.
+                    </li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Referensi</h2>
+                <ul>
+                    <li>
+                        <a href="https://matplotlib.org/stable/" target="_blank" rel="noopener noreferrer">
+                            Dokumentasi resmi Matplotlib
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://seaborn.pydata.org/" target="_blank" rel="noopener noreferrer">
+                            Dokumentasi resmi Seaborn
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://plotly.com/python/" target="_blank" rel="noopener noreferrer">
+                            Dokumentasi resmi Plotly Python
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://docs.streamlit.io/" target="_blank" rel="noopener noreferrer">
+                            Dokumentasi resmi Streamlit
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://pandas.pydata.org/docs/" target="_blank" rel="noopener noreferrer">
+                            Dokumentasi resmi Pandas
+                        </a>
+                    </li>
+                    <li>
+                        Knaflic, C. N. (2015). <em>Storytelling with Data: A Data Visualization Guide for Business Professionals</em>. Wiley.
+                    </li>
+                    <li>
+                        Wilke, C. O. (2019). <em>Fundamentals of Data Visualization</em>. O'Reilly Media.
+                    </li>
+                </ul>
+            </section>
+        </article>
+    </main>
+
+    <footer>
+        ShadowLab — Belajar Tanpa Batas
+    </footer>
+</body>
+</html>
